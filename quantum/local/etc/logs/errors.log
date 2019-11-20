@@ -1,0 +1,12 @@
+2018-03-28 04:24:11 - CustomerAccountFile::destroy (18) : Unable to delete file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/philips/pictures/17107b200722188690b188f0d60c77d0ed6dc357.jpg
+2018-03-28 04:28:23 - CustomerAccountFile::destroy (18) : Unable to delete file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/philips/pictures/6a231d01f80fe3617a9df88215bbd2f25f25ca31.jpg
+2018-03-28 04:29:13 - CustomerAccountFile::destroy (18) : Unable to delete file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/philips/pictures/a6f74c6ff74efd4c377ad27d458f3f11016a9f8e.jpg
+2018-03-28 04:31:38 - CustomerAccountFile::destroy (18) : Unable to delete file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/philips/pictures/1f96d9921b595b1d704014d936576132ceb21e4f.jpg
+2018-03-28 05:09:08 - CustomerAccountFile::deleteSystemFile (124) : File deleted: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/philips/logos/49e91a94d8b4d6e3f03f0a7808323ff15f32d586.jpg
+2018-09-03 13:33:22 - CustomerAccountFile::createFromUpload (141) : Unable to move uploaded file to: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/1a250f46a0bd52667304bc0dfffa7b79f4ac2f0f.
+2019-08-12 14:33:26 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'ftw'
+2019-08-12 14:34:59 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'faqua'
+2019-08-12 14:35:26 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'faqua'
+2019-08-12 14:36:52 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+[2019-10-23 11:45:44] Admin.ERROR: Quantum::callControllerFunction (540) : Que onda amigo [] []
+[2019-10-23 11:58:09] quantum.ERROR: Quantum::createControllerAndCallFunction (484) : Lorem Ipsum [] []

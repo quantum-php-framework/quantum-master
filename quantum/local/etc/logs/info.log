@@ -1,0 +1,33 @@
+2018-05-03 09:37:39 - IndexController::__post_render : post_render_called
+2018-05-03 09:38:51 - IndexController::__post_render : post_render_called
+2018-05-03 09:38:54 - IndexController::__post_render : post_render_called
+2018-05-03 09:38:58 - IndexController::__post_render : post_render_called
+2018-05-03 09:45:10 - TestsController::__post_render : ActiveController::__pre_render()
+2018-05-03 09:45:12 - TestsController::__post_render : ActiveController::__pre_render()
+2018-05-03 09:45:42 - TestsController::__post_render : ActiveController::__pre_render()
+2018-05-03 09:46:17 - TestsController::__post_render : ActiveController::__pre_render()<br/>
+2018-05-03 09:47:39 - TestsController::__post_render : ActiveController::__post_render()<br/>
+2018-05-03 09:48:10 - TestsController::__post_render : ActiveController::__post_render()<br/>
+2018-09-03 13:17:34 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/553476d9fb657459b7279c856cb5eb0d96628efa.png
+2018-09-03 13:32:36 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/a7f20fcf6ba66bab4307650e898e3a15dbe9bb96.jpg
+2018-09-03 13:33:12 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/ce07e8e0350f62861b6aeb95782a17b6a0e6f21f.jpg
+2018-09-05 15:00:25 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/2951fd304075803a144cc4ea3e1e0a5df006117f.png
+2018-09-05 15:02:00 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/a6740175740e2e761aa7f779ceac35ecceeec1fa.png
+2018-09-05 15:02:29 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/e88722138f483335b6ae5d7a68730415711e4af2.jpg
+2018-09-05 15:40:38 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/e389a46d962da6c2e4d87371406274a92d2c3d53.png
+2018-09-05 15:40:43 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/2479ed5af5097fb3b0334930b6d77cc293ee881e.png
+2018-09-05 15:40:46 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/2d536f1b3fe6077a098b0922cfb4e93f6202b2ef.png
+2018-09-05 15:50:04 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/c1791231afcfbb3fe9f46199eb5dd00d525bd0ec.png
+2018-09-05 15:50:09 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/179322de21cc217f1d5fcf8dbd610a38db61c649.png
+2018-09-05 15:50:14 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/647400067119589456b5ec8e5d1afb65f7a63551.png
+2018-09-05 15:50:18 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/micampo/pictures/63019ea40cf836442e15b17d163c724e254d610f.png
+2018-10-04 17:24:00 - CustomerAccountFile::deleteSystemFile (129) : Deleted file: /Users/carlosbarbosa 1/Documents/Sites/cstore.dev/webroot/accounts/fs/ccwest/pictures/4e5ea3a882fc36e782a38cce41afa33348eb155e.jpg
+2019-02-12 20:21:16 - CronController::import_magento_orders (120) : No new orders found at:2019-02-13 02-21-12
+2019-02-12 20:22:05 - CronController::import_magento_orders (120) : No new orders found at:2019-02-13 02-22-01
+2019-02-12 20:23:05 - CronController::import_magento_orders (120) : No new orders found from: 2019-02-13 02-17-27, to 2019-02-13 02-23-01
+2019-02-12 20:24:06 - CronController::import_magento_orders (120) : No new orders found from: 2019-02-13 02-17-27, to 2019-02-13 02-24-01
+2019-10-23 11:26:18 - Quantum\Logger::monolog (827) : this is a log
+2019-10-23 11:27:17 - Quantum\Logger::monolog (827) : this is a log
+2019-10-23 11:27:51 - Quantum\Logger::monolog (827) : this is a log
+[2019-10-23 11:58:09] quantum.INFO: Quantum::createControllerAndCallFunction (484) : Lorem Ipsum [] []
+[2019-11-05 15:58:52] quantum.INFO: TestsController::card (509) : Processing card: 4715759833141913 for 1.00 [] []

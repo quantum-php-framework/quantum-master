@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.028/cXML.dtd">
+<cXML payloadID="1572462940.67299.97856194@procurement.clubhub.localhost" timestamp="2019-10-30T14:15:40-05:00" version="1.0" xml:lang="en">
+    <Header>
+        <From>
+            <Credential domain="NetworkId">
+                <Identity>QMERCIUM</Identity>
+            </Credential>
+        </From>
+        <To>
+            <Credential domain="NetworkId">
+                <Identity>QMERCIUM</Identity>
+            </Credential>
+        </To>
+        <Sender>
+            <Credential domain="NetworkId">
+                <Identity></Identity>
+                <SharedSecret>testing</SharedSecret>
+            </Credential>
+            <UserAgent>Quantum Procurement</UserAgent>
+        </Sender>
+    </Header>
+    <Request deploymentMode="production">
+        <PunchOutSetupRequest operation="create">
+            <BuyerCookie>44f2ae89e1eaa681826c15e3ea04b212</BuyerCookie>
+            <Extrinsic name="User">Carlos Barbosa</Extrinsic>
+            <Extrinsic name="UniqueUsername">cbarbosa@clubcolors.com</Extrinsic>
+            <Extrinsic name="UniqueName">cbarbosa@clubcolors.com</Extrinsic>
+            <Extrinsic name="UserId">c730ed73-f14d-425e-bab1-61dc7277020a</Extrinsic>
+            <Extrinsic name="UserEmail">cbarbosa@clubcolors.com</Extrinsic>
+            <Extrinsic name="UserFullName">Carlos Barbosa</Extrinsic>
+            <Extrinsic name="UserPrintableName">Carlos Barbosa</Extrinsic>
+            <Extrinsic name="FirstName">Carlos</Extrinsic>
+            <Extrinsic name="LastName">Barbosa</Extrinsic>
+            <Extrinsic name="PhoneNumber"></Extrinsic>
+            <BrowserFormPost>
+                <URL>http://procurement.clubhub.localhost/procurement/punchin</URL>
+            </BrowserFormPost>
+            <SupplierSetup>
+                <URL>http://procurement.clubhub.localhost/gateway/punchout/99c29855-44fd-4d2d-98dd-bb0830832b3e</URL>
+            </SupplierSetup>
+            <ShipTo>
+                <Address addressID="CC">
+                    <Name xml:lang="en">Club Colors</Name>
+                    <PostalAddress>
+                        <DeliverTo>Club Colors</DeliverTo>
+                        <Street>420 East State Parkway</Street>
+                        <City>Schaumburg</City>
+                        <State>Illinois</State>
+                        <PostalCode>60173</PostalCode>
+                        <Country isoCountryCode="US">US</Country>
+                    </PostalAddress>
+                </Address>
+            </ShipTo>
+        </PunchOutSetupRequest>
+    </Request>
+</cXML>

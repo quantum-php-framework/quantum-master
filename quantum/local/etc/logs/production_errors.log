@@ -1,0 +1,75 @@
+2019-08-12 14:39:25 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:07:08 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:08:08 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:08:29 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:08:46 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:08:49 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:09:18 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:11:11 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:11:57 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:21:02 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:21:05 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : Uncaught Error: Call to undefined function Quantum\Middleware\Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:46
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(21): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Obj
+2019-08-12 15:21:16 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:21:18 - Quantum\Middleware\PrettyErrors::handleProductionException (21) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:46
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(21): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 15:24:52 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:24:53 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:48
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(23): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 15:42:29 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:42:30 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:48
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(23): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 15:42:31 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:42:32 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:48
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(23): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 15:42:47 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'farca'
+2019-08-12 15:46:33 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'odfda'
+2019-08-12 16:00:56 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'odfda'
+2019-08-12 16:00:58 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:48
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(23): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 16:05:24 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'odfda'
+2019-08-12 16:05:26 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:48
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(23): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 16:05:27 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'odfda'
+2019-08-12 16:05:28 - Quantum\Middleware\PrettyErrors::handleProductionException (23) : Uncaught Error: Call to undefined function Sentry\init() in /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php:48
+Stack trace:
+#0 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/quantum/kernel/system/middleware/providers/PrettyErrors.php(23): Quantum\Middleware\PrettyErrors->handleProductionException(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#1 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Handler/CallbackHandler.php(50): Quantum\Middleware\PrettyErrors->Quantum\Middleware\{closure}(Object(Whoops\Exception\ErrorException), Object(Whoops\Exception\Inspector), Object(Whoops\Run))
+#2 /Users/carlosbarbosa 1/Documents/Sites/cclub.localhost/composer/vendor/filp/whoops/src/Whoops/Run.php(272): Whoops\Handler\CallbackHandler->handle(Object(Whoops\Exception\ErrorException))
+#3 [internal function]: Whoops\Run->handleException(Object(Whoops\Exceptio
+2019-08-12 16:14:24 - Quantum\Middleware\PrettyErrors::handleProductionException (24) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'odfda'
+2019-08-12 16:16:37 - Quantum\Middleware\PrettyErrors::handleProductionException (24) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'chaka&#45;chaka'
+2019-08-12 16:18:50 - Quantum\Middleware\PrettyErrors::handleProductionException (24) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'chaka&#45;chaka'
+2019-08-12 16:22:02 - Quantum\Middleware\PrettyErrors::handleProductionException (24) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'wacha'
+2019-08-12 16:26:10 - Quantum\Middleware\PrettyErrors::handleProductionException (24) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'wacha'
+2019-08-12 16:40:24 - Quantum\Middleware\PrettyErrors::handleProductionException (25) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'wacha'
+2019-08-12 16:40:36 - Quantum\Middleware\PrettyErrors::handleProductionException (25) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'wacha'
+2019-08-12 17:07:20 - Quantum\Middleware\PrettyErrors::handleProductionException (22) : call_user_func() expects parameter 1 to be a valid callback, class 'TestsController' does not have a method 'wacha'

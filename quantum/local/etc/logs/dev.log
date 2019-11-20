@@ -1,0 +1,4 @@
+[2019-10-23 11:39:38] quantum.INFO: Quantum::callControllerFunction (540) : Que onda amigo [] []
+[2019-10-23 11:39:49] quantum.INFO: Quantum::callControllerFunction (540) : Que onda amigo [] []
+[2019-10-23 11:45:44] Admin.INFO: Quantum::callControllerFunction (540) : Que onda amigo [] []
+[2019-10-23 11:58:09] quantum.INFO: Quantum::createControllerAndCallFunction (484) : Lorem Ipsum [] []
