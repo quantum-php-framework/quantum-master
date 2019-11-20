@@ -61,13 +61,6 @@ class IndexController extends Quantum\Controller
     */
     public function index()
     {
-
-        $redis = QM::redis();
-        $redis->set('z', 18392839283928);
-
-        dd($redis->get('z'));
-        dd($redis->get('something'));
-
         qs('Welcome to Quantum')->render();
 
         $fib = Quantum\Math\Sequence\Advanced::fibonacci(360);
