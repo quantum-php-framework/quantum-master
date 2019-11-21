@@ -1004,6 +1004,7 @@ class Teleport {
         $exec = new Quantum\Exec($command);
         $pid = $exec->launchInBackground();
 
+        $this->output('Teleport Server launched with process:'.$pid);
         $this->output($exec->getOutput());
 
 
