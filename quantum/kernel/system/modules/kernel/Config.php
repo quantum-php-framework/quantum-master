@@ -84,7 +84,7 @@ class Config extends Singleton
             }
             else if (!Request::getInstance()->isCommandLine())
             {
-                throw new \Exception("Detected domain ".$current_domain." does not match any domain defined in environment.php", E_USER_ERROR);
+                $this->setEnvironment((object)$QUANTUM_ENVIRONMENTS[0]);
             }
         }
 
@@ -124,7 +124,7 @@ class Config extends Singleton
 
         if (!Request::getInstance()->isCommandLine())
         {
-            throw new \Exception("No HostedApp found in apps.php to handle: ".$subdomain_value, E_USER_ERROR);
+            $this->setAppConfig($apps[0]);
         }
 
     }

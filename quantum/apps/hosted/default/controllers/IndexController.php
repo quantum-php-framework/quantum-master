@@ -61,11 +61,16 @@ class IndexController extends Quantum\Controller
     */
     public function index()
     {
+
+        $redis = QM::redis();
+        $redis->set('z', 18392839283928);
+
+        dd($redis->get('xxx'));
+        dd($redis->get('something'));
+
         qs('Welcome to Quantum')->render();
 
-        $fib = Quantum\Math\Sequence\Advanced::fibonacci(360);
 
-        dd($fib);
       
     }
 
@@ -75,7 +80,18 @@ class IndexController extends Quantum\Controller
 
         $this->set('var', 'hello sparx');
 
+        $fib = Quantum\Math\Sequence\Advanced::fibonacci(360);
+
+        pre($fib);
+
+
        // $this->setRenderFullTemplate(false);
+    }
+
+
+    public function some_other_method()
+    {
+        Quantum\ApiException::iAmATeapot();
     }
     
         

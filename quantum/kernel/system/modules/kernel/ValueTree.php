@@ -510,10 +510,23 @@ class ValueTree implements ArrayAccess, Countable, IteratorAggregate
     /**
      * @param $params
      */
+    function merge($vt)
+    {
+        if (is_vt($vt))
+            $this->mergeValueTree($vt);
+        elseif (is_array($vt))
+            $this->mergeArray($vt);
+        else
+            throw new \RuntimeException("merge subject must be an array or a ValueTree");
+    }
+
+    /**
+     * @param $params
+     */
     function mergeArray($params)
     {
         if ($this->isUnmutable())
-            throw new \InvalidArgumentException("Impossible to merge unto unmutable valuetree");
+            throw new \InvalidArgumentException("Impossible to merge unto unmutable ValueTree");
         if ($this->isLocked())
             return;
         if (!is_array($params))
@@ -526,8 +539,7 @@ class ValueTree implements ArrayAccess, Countable, IteratorAggregate
      */
     function mergeValueTree(ValueTree $otherTree)
     {
-        $params = $otherTree->getProperties();
-        $this->replaceProperties(array_merge($this->_properties, $params));
+        $this->mergeArray($otherTree->getProperties());
     }
 
     /**

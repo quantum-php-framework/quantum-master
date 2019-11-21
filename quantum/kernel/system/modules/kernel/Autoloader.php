@@ -180,6 +180,35 @@ class Autoloader extends Singleton
         spl_autoload_register(array('self', 'handle'));
     }
 
+    private function getModuleDirectories($module_directory)
+    {
+        if (!isset($this->modules_directories))
+        {
+            $ipt = InternalPathResolver::getInstance();
+
+            $paths = new_vt();
+
+            if (isset($ipt->app_modules_root) && qs($module_directory)->isNotEmpty())
+            {
+                $app_module_dir = qf($ipt->app_modules_root.$module_directory.'/');
+
+                if ($app_module_dir->isDirectory())
+                {
+                    $paths->add($app_module_dir->getPath());
+                }
+            }
+
+            if (isset($ipt->shared_app_modules_root) && qs($module_directory)->isNotEmpty())
+            {
+                $paths->add($ipt->shared_app_modules_root.$module_directory);
+            }
+
+            $this->modules_directories = deepscan_dirs($paths->getArray());
+        }
+
+        return $this->modules_directories;
+    }
+
     /**
      * Handles a probably Module load class
      * @return Result
@@ -204,31 +233,10 @@ class Autoloader extends Singleton
 
         $module_directory = $module->get('directory');
 
-        $ipt = InternalPathResolver::getInstance();
+        $module_directories = $this->getModuleDirectories($module_directory);
 
-        $modules_path = new_vt();
-
-        if (isset($ipt->app_modules_root) && qs($module_directory)->isNotEmpty())
-        {
-            $app_module_dir = qf($ipt->app_modules_root.$module_directory.'/');
-
-            if ($app_module_dir->isDirectory())
-            {
-                $modules_path->add($app_module_dir->getPath());
-            }
-        }
-
-        if (isset($ipt->shared_app_modules_root) && qs($module_directory)->isNotEmpty())
-        {
-            $modules_path->add($ipt->shared_app_modules_root.$module_directory);
-        }
-
-        if ($modules_path->isEmpty())
-        {
+        if (empty($module_directories))
             return Result::fail();
-        }
-
-        $module_directories = deepscan_dirs($modules_path->getArray());
 
         $located_file = "";
 

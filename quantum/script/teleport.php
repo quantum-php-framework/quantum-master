@@ -244,6 +244,10 @@ class Teleport {
             case "-t":
                 $this->teleportTest();
                 break;
+
+            case "server":
+                $this->server();
+                break;
             
             default :
                 
@@ -987,6 +991,22 @@ class Teleport {
         $exec->launch();
 
         $this->output('Migration rollback!');
+    }
+
+    private function server()
+    {
+        $port = isset($this->params['port']) ? $this->params['port'] : "6890";
+
+        $command = 'php -S localhost:'.$port.' -t ../../webroot ../../webroot/index.php';
+
+        $this->output('Teleport Server started on port:'.$port);
+
+        $exec = new Quantum\Exec($command);
+        $exec->launch();
+
+        $this->output($exec->getOutput());
+
+
     }
 
 

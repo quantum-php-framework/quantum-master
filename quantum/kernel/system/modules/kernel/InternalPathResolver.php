@@ -259,6 +259,8 @@ class InternalPathResolver extends Singleton
 
         $this->script_root = $this->quantum_root."script/";
 
+        $this->app_root = '';
+
         //$this->updateAppRoot("admin");
 
         //$this->accounts_fs_root = $this->root_folder."/accounts/fs/";
@@ -289,6 +291,16 @@ class InternalPathResolver extends Singleton
 
         $this->app_config_root = $this->app_etc_root.'config/';
     }
+
+    /**
+     *
+     */
+    public function getAppRoot()
+    {
+        return $this->apps_root;
+    }
+
+
 
 
     /**

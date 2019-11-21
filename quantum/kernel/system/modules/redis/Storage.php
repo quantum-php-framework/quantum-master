@@ -26,7 +26,7 @@ class Storage extends Singleton
      */
     public function __construct()
     {
-        $config = Config::getInstance()->getActiveAppConfig();
+        $config = new_vt(Config::getInstance()->getEnvironment());
 
         if (empty($config))
             throw_exception('no active app config');
