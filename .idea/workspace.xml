@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/script/teleport.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/script/teleport.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="1006" column="39" selection-start-line="1006" selection-start-column="39" selection-end-line="1006" selection-end-column="39" />
+            <state relative-caret-position="89">
+              <caret line="256" column="35" selection-start-line="256" selection-start-column="35" selection-end-line="256" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -74,8 +76,15 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cli/Exec.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1134" />
+            <state>
+              <caret lean-forward="true" selection-end-line="1" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -96,10 +105,12 @@
       <find>mergeV</find>
       <find>&lt;?[^p]</find>
       <find>&lt;\?(?!php|xml)</find>
+      <find>.lock</find>
+      <find>&lt;?</find>
     </findStrings>
     <replaceStrings>
-      <replace>$paths</replace>
       <replace />
+      <replace>$paths</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -127,6 +138,7 @@
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" />
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" />
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/AuthController.php" />
         <option value="$PROJECT_DIR$/quantum/script/teleport.php" />
       </list>
     </option>
@@ -368,12 +380,12 @@
       <option name="presentableId" value="Default" />
       <updated>1574064249984</updated>
       <workItem from="1574064252004" duration="628000" />
-      <workItem from="1574065145762" duration="20439000" />
+      <workItem from="1574065145762" duration="22884000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21067000" />
+    <option name="totallyTimeSpent" value="23512000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1680" height="987" extended-state="6" />
@@ -392,7 +404,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18922019" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2912844" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -582,11 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cli/Exec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1134" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -622,10 +629,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cli/Exec.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="1006" column="39" selection-start-line="1006" selection-start-column="39" selection-end-line="1006" selection-end-column="39" />
+        <state relative-caret-position="89">
+          <caret line="256" column="35" selection-start-line="256" selection-start-column="35" selection-end-line="256" selection-end-column="35" />
         </state>
       </provider>
     </entry>

@@ -248,6 +248,15 @@ class Teleport {
             case "server":
                 $this->server();
                 break;
+
+            case "start-server":
+                $this->startServer();
+                break;
+
+            case "stop-server":
+                $this->stopServer();
+                break;
+
             
             default :
                 
@@ -993,21 +1002,60 @@ class Teleport {
         $this->output('Migration rollback!');
     }
 
-    private function server()
+    private function stopServer()
+    {
+        $location = $this->ipt->locks_root;
+        $name = "server.pid";
+
+        $pidFile = qf($location.$name);
+
+        if ($pidFile->existsAsFile())
+        {
+            $pid = $pidFile->loadAsString();
+
+            $exec = new Quantum\Exec("kill -9 ".$pid);
+            $exec->launch();
+
+            $this->output('Teleport Server Stopped');
+
+            $pidFile->delete();
+
+            return;
+        }
+    }
+
+    private function startServer()
     {
         $port = isset($this->params['port']) ? $this->params['port'] : "6890";
 
         $command = 'php -S localhost:'.$port.' -t ../../webroot ../../webroot/index.php';
 
-        $this->output('Teleport Server started on port:'.$port);
+        $this->output('Teleport Server started on Port: '.$port);
 
         $exec = new Quantum\Exec($command);
         $pid = $exec->launchInBackground();
 
-        $this->output('Teleport Server launched with process:'.$pid);
-        $this->output($exec->getOutput());
+        $this->output('Teleport Server ProcessID: '.$pid);
 
+        $location = $this->ipt->locks_root;
+        $name = "server.pid";
 
+        $this->createFile($location, $name, $pid);
+    }
+
+    private function server()
+    {
+        $location = $this->ipt->locks_root;
+        $name = "server.pid";
+
+        $pidFile = qf($location.$name);
+
+        if ($pidFile->existsAsFile())
+        {
+            $this->stopServer();
+        }
+
+        $this->startServer();
     }
 
 
