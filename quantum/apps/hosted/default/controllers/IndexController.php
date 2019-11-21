@@ -62,12 +62,6 @@ class IndexController extends Quantum\Controller
     public function index()
     {
 
-        $redis = QM::redis();
-        $redis->set('z', 18392839283928);
-
-        dd($redis->get('xxx'));
-        dd($redis->get('something'));
-
         qs('Welcome to Quantum')->render();
 
 

@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/redis/Storage.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/redis/Storage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/config/environment.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/config/environment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/script/teleport.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/script/teleport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,72 +24,61 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="2" lean-forward="true" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+            <state relative-caret-position="120">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php">
+        <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
-              <caret line="132" column="24" lean-forward="true" selection-start-line="132" selection-start-column="24" selection-end-line="132" selection-end-column="24" />
+            <state relative-caret-position="11955">
+              <caret line="797" column="9" selection-start-line="797" selection-start-column="9" selection-end-line="797" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webroot/.htaccess">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="29" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/quantum.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4680">
-              <caret line="281" selection-start-line="281" selection-end-line="281" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/local/config/apps.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="21" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+            <state relative-caret-position="188">
+              <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/modules.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/auth/App.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cli/Exec.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1134" />
           </provider>
         </entry>
       </file>
@@ -116,9 +97,12 @@
       <find>mixed</find>
       <find>$modules_path</find>
       <find>mergeV</find>
+      <find>&lt;?[^p]</find>
+      <find>&lt;\?(?!php|xml)</find>
     </findStrings>
     <replaceStrings>
       <replace>$paths</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -141,12 +125,12 @@
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/redis/Storage.php" />
-        <option value="$PROJECT_DIR$/quantum/script/teleport.php" />
         <option value="$PROJECT_DIR$/webroot/index.php" />
-        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
-        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" />
+        <option value="$PROJECT_DIR$/quantum/script/teleport.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
       </list>
     </option>
   </component>
@@ -387,18 +371,18 @@
       <option name="presentableId" value="Default" />
       <updated>1574064249984</updated>
       <workItem from="1574064252004" duration="628000" />
-      <workItem from="1574065145762" duration="19367000" />
+      <workItem from="1574065145762" duration="20359000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19995000" />
+    <option name="totallyTimeSpent" value="20987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1680" height="987" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -411,7 +395,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18922019" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.18922019" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -495,13 +479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/local/config/config.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -539,13 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/modules.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="6" lean-forward="true" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
@@ -570,20 +540,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="1011" lean-forward="true" selection-start-line="1011" selection-end-line="1011" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer/vendor/robmorgan/phinx/src/Phinx/Migration/Manager/Environment.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/quantum.php">
+    <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4680">
-          <caret line="281" selection-start-line="281" selection-end-line="281" />
+        <state relative-caret-position="30">
+          <caret line="2" column="21" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -594,24 +557,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/quantum.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="2" lean-forward="true" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="21" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
+        <state relative-caret-position="-4680">
+          <caret line="281" selection-start-line="281" selection-end-line="281" />
         </state>
       </provider>
     </entry>
@@ -622,6 +571,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="573">
@@ -629,10 +585,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cli/Exec.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+        <state relative-caret-position="-1134" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11955">
+          <caret line="797" column="9" selection-start-line="797" selection-start-column="9" selection-end-line="797" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/modules.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/auth/App.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
         </state>
       </provider>
     </entry>

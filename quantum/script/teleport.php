@@ -1002,7 +1002,7 @@ class Teleport {
         $this->output('Teleport Server started on port:'.$port);
 
         $exec = new Quantum\Exec($command);
-        $exec->launch();
+        $pid = $exec->launchInBackground();
 
         $this->output($exec->getOutput());
 
