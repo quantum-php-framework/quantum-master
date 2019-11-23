@@ -21,7 +21,7 @@ class Config extends Singleton
     function __construct()
     {
         $this->domainBasedAutoEnvConfig();
-        $this->domainBasedAutoAppConfig();
+        $this->appConfigMultipleHandler();
     }
 
     /**
@@ -90,22 +90,48 @@ class Config extends Singleton
 
     }
 
+    /**
+     * This will attempt to load an app thorugh multiple handlers
+     * See Quantum docs article: Single or Multiple Apps.
+     * @throws \Exception
+     */
+    private function appConfigMultipleHandler()
+    {
+        $r = $this->teleportAppConfigAttempt();
+
+        if ($r->wasOk())
+            return;
+
+        $r = $this->kernelConfigDefaultAppConfigAttempt();
+
+        if ($r->wasOk())
+            return;
+
+        $r = $this->domainBasedAutoAppConfigAttempt();
+
+        if ($r->wasOk())
+            return;
+
+        $r = $this->kernelConfigFallbackAppConfigAttempt();
+
+        if ($r->wasOk())
+            return;
+
+        $r = $this->kernelConfigCLIAppConfigAttempt();
+
+        if ($r->wasOk())
+            return;
+
+        throw_exception('No app config handler found');
+    }
 
     /**
-     *
+     * @param $uri
+     * @return bool|mixed
+     * @throws \Exception
      */
-    public function domainBasedAutoAppConfig()
+    private function findHostedAppConfig($uri)
     {
-        if (!isset($_SERVER["HTTP_HOST"]))
-            return;
-
-        $urlParts = explode('.', $_SERVER["HTTP_HOST"]);
-
-        if (empty($urlParts))
-            return;
-
-        $subdomain_value = $urlParts[0];
-
         $apps = $this->getHostedApps();
 
         if (empty($apps))
@@ -115,19 +141,126 @@ class Config extends Singleton
 
         foreach ($apps as $app)
         {
-            if ($app['uri'] == $subdomain_value)
+            if ($app['uri'] == $uri)
             {
-                $this->setAppConfig($app);
-                return;
+                return $app;
             }
         }
 
-        if (!Request::getInstance()->isCommandLine())
+        return false;
+    }
+
+
+    /**
+     *
+     */
+    public function domainBasedAutoAppConfigAttempt()
+    {
+        if (!isset($_SERVER["HTTP_HOST"]))
+            return Result::fail();
+
+        $urlParts = explode('.', $_SERVER["HTTP_HOST"]);
+
+        if (empty($urlParts))
+            return Result::fail();
+
+        $subdomain_value = $urlParts[0];
+
+        $config = $this->findHostedAppConfig($subdomain_value);
+
+        if (!empty($config))
         {
-            $this->setAppConfig($apps[0]);
+            $this->setAppConfig($config);
+            return Result::ok();
         }
 
+        return Result::fail();
     }
+
+    /**
+     * @return Result
+     */
+    private function kernelConfigDefaultAppConfigAttempt()
+    {
+        if (Request::getInstance()->isCommandLine())
+            return Result::fail();
+
+        return $this->attemptConfigBasedOnKernelConfigValue('default_app');
+    }
+
+    /**
+     * @return Result
+     */
+    private function kernelConfigFallbackAppConfigAttempt()
+    {
+        if (Request::getInstance()->isCommandLine())
+            return Result::fail();
+
+        return $this->attemptConfigBasedOnKernelConfigValue('fallback_app');
+    }
+
+    /**
+     * @return Result
+     */
+    private function kernelConfigCLIAppConfigAttempt()
+    {
+        if (!Request::getInstance()->isCommandLine())
+            return Result::fail();
+
+        return $this->attemptConfigBasedOnKernelConfigValue('cli_app');
+    }
+
+
+    /**
+     * @return Result
+     * @throws \Exception
+     */
+    private function teleportAppConfigAttempt()
+    {
+        if (!isset($_ENV["QM_TELEPORT_SERVER_APP"]))
+            return Result::fail();
+
+        $env_app = $_ENV["QM_TELEPORT_SERVER_APP"];
+
+        if (empty($env_app))
+            return Result::fail();
+
+        $config = $this->findHostedAppConfig($env_app);
+
+        if (!empty($config))
+        {
+            $this->setAppConfig($config);
+            return Result::ok();
+        }
+
+        return Result::fail();
+    }
+
+
+    /**
+     * @param $value
+     * @return Result
+     * @throws \Exception
+     */
+    private function attemptConfigBasedOnKernelConfigValue($value)
+    {
+        $kernelConfig = $this->getKernelConfig();
+
+        if (!empty($kernelConfig) && $kernelConfig->has($value))
+        {
+            $config = $this->findHostedAppConfig($kernelConfig->get($value));
+
+            if (!empty($config))
+            {
+                $this->setAppConfig($config);
+                return Result::ok();
+            }
+        }
+
+        return Result::fail();
+    }
+
+
 
     /**
      * @return ValueTree

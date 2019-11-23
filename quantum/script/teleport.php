@@ -1026,7 +1026,15 @@ class Teleport {
 
     private function startServer()
     {
+        if (isset($_ENV["QM_TELEPORT_SERVER_APP"]))
+            putenv("QM_TELEPORT_SERVER_APP");
+
         $port = isset($this->params['port']) ? $this->params['port'] : "6890";
+
+        if (isset($this->params['app']))
+        {
+            putenv("QM_TELEPORT_SERVER_APP=".$this->params['app']);
+        }
 
         $command = 'php -S localhost:'.$port.' -t ../../webroot ../../webroot/index.php';
 
