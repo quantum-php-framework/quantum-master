@@ -4,7 +4,7 @@
  * class ExampleModuleController
  */
 
-namespace ExampleModule;
+namespace ExampleModule\Controllers;
 
 
 class ExampleModuleController extends \Quantum\HMVC\ModuleController

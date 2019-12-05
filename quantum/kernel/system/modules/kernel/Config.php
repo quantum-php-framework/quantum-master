@@ -91,7 +91,7 @@ class Config extends Singleton
     }
 
     /**
-     * This will attempt to load an app thorugh multiple handlers
+     * This will attempt to load an app through multiple handlers
      * See Quantum docs article: Single or Multiple Apps.
      * @throws \Exception
      */
@@ -122,7 +122,8 @@ class Config extends Singleton
         if ($r->wasOk())
             return;
 
-        throw_exception('No app config handler found');
+        if (!Request::getInstance()->isCommandLine())
+            throw_exception('No app config handler found');
     }
 
     /**
@@ -136,7 +137,7 @@ class Config extends Singleton
 
         if (empty($apps))
         {
-            throw new \Exception("No hosted apps found", E_USER_ERROR);
+            throw_exception("No hosted apps found");
         }
 
         foreach ($apps as $app)
@@ -156,6 +157,9 @@ class Config extends Singleton
      */
     public function domainBasedAutoAppConfigAttempt()
     {
+        if (Request::getInstance()->isCommandLine())
+            return Result::fail();
+
         if (!isset($_SERVER["HTTP_HOST"]))
             return Result::fail();
 

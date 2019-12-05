@@ -180,6 +180,7 @@ class Kernel extends Singleton
      */
     static function shutdown($exit_code = "")
     {
+        //pre(get_included_files());
         exit($exit_code);
     }
 }

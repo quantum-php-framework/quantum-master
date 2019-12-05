@@ -71,6 +71,32 @@ class Validation
     }
 }
 
+class ValidationError
+{
+    public function __construct($param, $msg)
+    {
+        $this->field = $param;
+        $this->message = $msg;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+}
+
 
 /**
  * Class RequestParamValidator
@@ -105,6 +131,8 @@ class RequestParamValidator
     {
         $this->validations = new_vt();
         $this->error_messages = array();
+        $this->last_param_error_messages = array();
+        $this->errors = array();
         $this->success = false;
     }
 
@@ -335,8 +363,26 @@ class RequestParamValidator
      */
     public function getErrors()
     {
+        return $this->errors;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllErrorMessages()
+    {
         return $this->error_messages;
     }
+
+    /**
+     * @return array
+     */
+    public function getLastErrorMessageForParams()
+    {
+        return $this->last_param_error_messages;
+    }
+
+
 
     /**
      * @return QString
@@ -426,6 +472,16 @@ class RequestParamValidator
         return $this->validateGet();
     }
 
+    private function addErrorMessage($key, $error)
+    {
+        $this->error_messages[] = $error;
+
+        $this->last_param_error_messages[$key] = $error;
+
+        $error = new ValidationError($key, $error);
+        $this->errors[$key][] = $error;
+    }
+
     /**
      * @return bool
      */
@@ -454,192 +510,192 @@ class RequestParamValidator
                 case "email":
                     $success = qs($param)->isEmail();
                     if (!$success)
-                        $this->error_messages[] = "Invalid email on field: " . $paramName;
+                        $this->addErrorMessage($key, "Invalid email on field: " . $paramName);
                     break;
                 case "url":
                     $success = qs($param)->isUrl();
                     if (!$success)
-                        $this->error_messages[] = "Invalid url on field: " . $paramName;
+                        $this->addErrorMessage($key, "Invalid url on field: " . $paramName);
                     break;
                 case "number":
                     $success = qs($param)->isNumber();
                     if (!$success)
-                        $this->error_messages[] = $paramName. " must be a number";
+                        $this->addErrorMessage($key, $paramName. " must be a number");
                     break;
                 case "alpha":
                     $success = qs($param)->isAlpha();
                     if (!$success)
-                        $this->error_messages[] = "Text must be alpha numeric on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be alpha numeric on field: " . $paramName);
                     break;
                 case "alphanum":
                     $success = qs($param)->isAlphanumeric();
                     if (!$success)
-                        $this->error_messages[] = "Text must be alpha numeric on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be alpha numeric on field: " . $paramName);
                     break;
                 case "alphanumspace":
                     $success = qs($param)->isAlphaNumericWithSpaces();
                     if (!$success)
-                        $this->error_messages[] = "Text must be alpha numeric on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be alpha numeric on field: " . $paramName);
                     break;
                 case "alphanumspacedash":
                     $success = qs($param)->isAlphaNumericWithSpaceAndDash();
                     if (!$success)
-                        $this->error_messages[] = "Text must be alpha numeric on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be alpha numeric on field: " . $paramName);
                     break;
                 case "date":
                     $success = qs($param)->isDate();
                     if (!$success)
-                        $this->error_messages[] = "Invalid date on field: " . $paramName;
+                        $this->addErrorMessage($key, "Invalid date on field: " . $paramName);
                     break;
                 case "ip":
                     $success = qs($param)->isIp();
                     if (!$success)
-                        $this->error_messages[] = "Invalid IP on field: " . $paramName;
+                        $this->addErrorMessage($key, "Invalid IP on field: " . $paramName);
                     break;
                 case "ipv6":
                     $success = qs($param)->isIpV6();
                     if (!$success)
-                        $this->error_messages[] = "Invalid IPV6 on field: " . $paramName;
+                        $this->addErrorMessage($key, "Invalid IPV6 on field: " . $paramName);
                     break;
                 case "lowercase":
                     $success = qs($param)->isLowerCase();
                     if (!$success)
-                        $this->error_messages[] = "Text must be lowercase on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be lowercase on field: " . $paramName);
                     break;
                 case "uppercase":
                     $success = qs($param)->isUpperCase();
                     if (!$success)
-                        $this->error_messages[] = "Text must be uppercase on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be uppercase on field: " . $paramName);
                     break;
                 case "json":
                     $success = qs($param)->isJson();
                     if (!$success)
-                        $this->error_messages[] = "Text must be JSON on field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be JSON on field: " . $paramName);
                     break;
                 case "size":
                     $success = qs($param)->length() == $validation->getOptions()[0];
                     if (!$success)
-                        $this->error_messages[] = "Characters count should be: " . $validation->getOptions()[0] . " at field:". $paramName;;
+                        $this->addErrorMessage($key, "Characters count should be: " . $validation->getOptions()[0] . " at field:". $paramName);
                     break;
                 case "max":
                     $success = qs($param)->length() <= $validation->getOptions()[0];
                     if (!$success)
-                        $this->error_messages[] = "Characters count must be lower than " . $validation->getOptions()[0] . " at field: ". $paramName;;
+                        $this->addErrorMessage($key, "Characters count must be lower than " . $validation->getOptions()[0] . " at field: ". $paramName);
                     break;
                 case "min":
                     $success = qs($param)->length() >= $validation->getOptions()[0];
                     if (!$success)
-                        $this->error_messages[] = "Characters count must be greater than " . $validation->getOptions()[0] . " at field: ". $paramName;;
+                        $this->addErrorMessage($key, "Characters count must be greater than " . $validation->getOptions()[0] . " at field: ". $paramName);
                     break;
                 case "not_contains":
                     $success = !qs($param)->contains($validation->getOptions()[0]);
                     if (!$success)
-                        $this->error_messages[] = "Text must not contain " . $validation->getOptions()[0] . " at field: ". $paramName;;
+                        $this->addErrorMessage($key, "Text must not contain " . $validation->getOptions()[0] . " at field: ". $paramName);
                     break;
                 case "contains":
                     $success = qs($param)->contains($validation->getOptions()[0]);
                     if (!$success)
-                        $this->error_messages[] = "Text must contain " . $validation->getOptions()[0] . " at field: ". $paramName;;
+                        $this->addErrorMessage($key, "Text must contain " . $validation->getOptions()[0] . " at field: ". $paramName);
                     break;
                 case "starts_with":
                     $success = qs($param)->startsWith($validation->getOptions()[0]);
                     if (!$success)
-                        $this->error_messages[] = "Text must start with: " . $validation->getOptions()[0] . " at field: ". $paramName;
+                        $this->addErrorMessage($key, "Text must start with: " . $validation->getOptions()[0] . " at field: ". $paramName);
                     break;
                 case "ends_with":
                     $success = qs($param)->endsWith($validation->getOptions()[0]);
                     if (!$success)
-                        $this->error_messages[] = "Text must end with: " . $validation->getOptions()[0] . " at field: ". $paramName;
+                        $this->addErrorMessage($key, "Text must end with: " . $validation->getOptions()[0] . " at field: ". $paramName);
                     break;
                 case "base64":
                     $success = qs($param)->isBase64();
                     if (!$success)
-                        $this->error_messages[] = "Text must be base 64 at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be base 64 at field: " . $paramName);
                     break;
                 case "integer":
                     $success = qs($param)->isInteger();
                     if (!$success)
-                        $this->error_messages[] = "Text must be an integer at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be an integer at field: " . $paramName);
                     break;
                 case "decimal":
                     $success = qs($param)->isDecimal();
                     if (!$success)
-                        $this->error_messages[] = "Text must be decimal at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be decimal at field: " . $paramName);
                     break;
                 case "float":
                     $success = qs($param)->isFloat();
                     if (!$success)
-                        $this->error_messages[] = "Text must be decimal at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be decimal at field: " . $paramName);
                     break;
                 case "double":
                     $success = qs($param)->isDouble();
                     if (!$success)
-                        $this->error_messages[] = "Text must be a double precission float at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be a double precission float at field: " . $paramName);
                     break;
                 case "numeric":
                     $success = qs($param)->isNumeric();
                     if (!$success)
-                        $this->error_messages[] = "Text must be decimal at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be decimal at field: " . $paramName);
                     break;
                 case "equal":
                     $success = qs($param)->equals($validation->getOptions()[0]);
                     if (!$success)
-                        $this->error_messages[] = "Text must be equal to: " . $validation->getOptions()[0] . " at field:". $paramName;
+                        $this->addErrorMessage($key, "Text must be equal to: " . $validation->getOptions()[0] . " at field:". $paramName);
                     break;
                 case "hex":
                     $success = qs($param)->isHexadecimal();
                     if (!$success)
-                        $this->error_messages[] = "Text must be hex at field:" . $paramName;
+                        $this->addErrorMessage($key, "Text must be hex at field:" . $paramName);
                     break;
                 case "rgb":
                     $success = qs($param)->isRgbColor();
                     if (!$success)
-                        $this->error_messages[] = "Text must be an RGB color at field: " . $paramName;
+                        $this->addErrorMessage($key, "Text must be an RGB color at field: " . $paramName);
                     break;
                 case "accepted":
                     $success = qs($param)->toBoolean();
                     if (!$success)
-                        $this->error_messages[] = "Must accept field: " . $paramName;
+                        $this->addErrorMessage($key, "Must accept field: " . $paramName);
                     break;
                 case "empty":
                     $success = qs($param)->isEmpty();
                     if (!$success)
-                        $this->error_messages[] = "Must be empty: " . $paramName;
+                        $this->addErrorMessage($key, "Must be empty: " . $paramName);
                     break;
                 case "required":
                     $success = qs($param)->isNotEmpty();
                     if (!$success)
-                        $this->error_messages[] = "Required field: " . $paramName;
+                        $this->addErrorMessage($key, "Required field: " . $paramName);
                     break;
                 case "filled":
                     $success = qs($param)->isNotEmpty();
                     if (!$success)
-                        $this->error_messages[] = "Must filled field: " . $paramName;
+                        $this->addErrorMessage($key, "Must filled field: " . $paramName);
                     break;
                 case "password":
                     $success = PasswordPolicy::isValid($param);
                     if (!$success)
-                        $this->error_messages[] = PasswordPolicy::getPolicyDescription();
+                        $this->addErrorMessage($key, PasswordPolicy::getPolicyDescription());
                     break;
                 case "string":
                     $success = is_string($param);
                     if (!$success)
-                        $this->error_messages[] = 'Text must be a string at field: '.$paramName;
+                        $this->addErrorMessage($key, 'Text must be a string at field: '.$paramName);
                     break;
                 case "mac":
                     $success = qs($param)->isMacAddress();
                     if (!$success)
-                        $this->error_messages[] = 'Text must be a mac address at field: '.$paramName;
+                        $this->addErrorMessage($key, 'Text must be a mac address at field: '.$paramName);
                     break;
                 case "domain":
                     $success = qs($param)->isDomain();
                     if (!$success)
-                        $this->error_messages[] = 'Text must be a mac address at field: '.$paramName;
+                        $this->addErrorMessage($key, 'Text must be a mac address at field: '.$paramName);
                     break;
                 case "uuid":
                     $success = qs($param)->isUuid();
                     if (!$success)
-                        $this->error_messages[] = 'Text must be a uuid at field: '.$paramName;
+                        $this->addErrorMessage($key, 'Text must be a uuid at field: '.$paramName);
                     break;
 
                 case "unique":
@@ -658,7 +714,7 @@ class RequestParamValidator
                     $success  =  empty($previous);
 
                     if (!$success)
-                        $this->error_messages[] = "Another $modelName is already using ".$param. ' as '.qs($key)->humanize()->toLowerCase();
+                        $this->addErrorMessage($key, "Another $modelName is already using ".$param. ' as '.qs($key)->humanize()->toLowerCase());
                     break;
 
                 case "unique_but_ignore":
@@ -682,7 +738,7 @@ class RequestParamValidator
                     if (!empty($previous))
                     {
                         if ($previous->id != $ignore_id)
-                            $this->error_messages[] = "Another $modelName is already using ".$param. ' as '.qs($key)->humanize()->toLowerCase();
+                            $this->addErrorMessage($key, "Another $modelName is already using ".$param. ' as '.qs($key)->humanize()->toLowerCase());
                     }
 
                     break;

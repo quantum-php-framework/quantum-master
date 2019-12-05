@@ -27,8 +27,8 @@ $QUANTUM_APP_ROUTES = array
 
     array(
         'uri' => '/test/some/route',
-        'controller' => 'index',
-        'method' => 'test',
+        'controller' => 'ExampleModule\Controllers\ExampleModule',
+        'method' => 'index',
         'min_access_level' => 'public',
         'rate_limit' => '1000',
         'rate_limit_time' => '3600',

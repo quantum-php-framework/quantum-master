@@ -3,6 +3,7 @@
 namespace Quantum;
 
 use Quantum\HMVC\ModuleLocator;
+use Quantum\Inspections\ClassReader;
 
 require_once ("Singleton.php");
 require_once ("QString.php");
@@ -42,7 +43,7 @@ class Autoloader extends Singleton
      */
     function __construct()
     {
-        $this->moduleLocator = new \Quantum\HMVC\ModuleLocator();
+        $this->moduleLocator = new ModuleLocator();
 
         $this->initDirectories();
 
@@ -180,35 +181,6 @@ class Autoloader extends Singleton
         spl_autoload_register(array('self', 'handle'));
     }
 
-    private function getModuleDirectories($module_directory)
-    {
-        if (!isset($this->modules_directories))
-        {
-            $ipt = InternalPathResolver::getInstance();
-
-            $paths = new_vt();
-
-            if (isset($ipt->app_modules_root) && qs($module_directory)->isNotEmpty())
-            {
-                $app_module_dir = qf($ipt->app_modules_root.$module_directory.'/');
-
-                if ($app_module_dir->isDirectory())
-                {
-                    $paths->add($app_module_dir->getPath());
-                }
-            }
-
-            if (isset($ipt->shared_app_modules_root) && qs($module_directory)->isNotEmpty())
-            {
-                $paths->add($ipt->shared_app_modules_root.$module_directory);
-            }
-
-            $this->modules_directories = deepscan_dirs($paths->getArray());
-        }
-
-        return $this->modules_directories;
-    }
-
     /**
      * Handles a probably Module load class
      * @return Result
@@ -233,10 +205,31 @@ class Autoloader extends Singleton
 
         $module_directory = $module->get('directory');
 
-        $module_directories = $this->getModuleDirectories($module_directory);
+        $ipt = InternalPathResolver::getInstance();
 
-        if (empty($module_directories))
+        $modules_path = new_vt();
+
+        if (isset($ipt->app_modules_root) && qs($module_directory)->isNotEmpty())
+        {
+            $app_module_dir = qf($ipt->app_modules_root.$module_directory.'/');
+
+            if ($app_module_dir->isDirectory())
+            {
+                $modules_path->add($app_module_dir->getPath());
+            }
+        }
+
+        if (isset($ipt->shared_app_modules_root) && qs($module_directory)->isNotEmpty())
+        {
+            $modules_path->add($ipt->shared_app_modules_root.$module_directory);
+        }
+
+        if ($modules_path->isEmpty())
+        {
             return Result::fail();
+        }
+
+        $module_directories = deepscan_dirs($modules_path->getArray());
 
         $located_file = "";
 
@@ -246,8 +239,11 @@ class Autoloader extends Singleton
 
             if(\file_exists($path))
             {
-                $located_file = $path;
-                break;
+                if (ClassReader::getClassFullNameFromFile($path) === $original_class)
+                {
+                    $located_file = $path;
+                    break;
+                }
             }
         };
 
@@ -290,7 +286,7 @@ class Autoloader extends Singleton
 
 
         if (qs($className)->contains('\\'))
-                $className = QString::create($className)->fromLastOccurrenceOf("\\")->toStdString();
+            $className = QString::create($className)->fromLastOccurrenceOf("\\")->toStdString();
 
         if(@include $path.'.php'){
             //qm_profiler_stop('AutoLoad::'.$className);

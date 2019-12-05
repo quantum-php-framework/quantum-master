@@ -70,13 +70,34 @@ class IndexController extends Quantum\Controller
 
     public function test()
     {
-        $this->setTemplate('cms');
+        $this->setTemplate('default');
 
-        $this->set('var', 'hello sparx');
+        $validator = new Quantum\RequestParamValidator();
 
-        $fib = Quantum\Math\Sequence\Advanced::fibonacci(360);
+        $validator->rules([
+            'url' => 'required|string|url',
+            'description' => 'required|string',
+        ]);
 
-        pre($fib);
+        if ($this->request->isPost())
+        {
+            if($validator->validatePost())
+            {
+                pre('success');
+            }
+            else
+            {
+
+                dd($validator->getLastErrorMessageForParams());
+            }
+        }
+
+
+
+        $form = qform (new GenericFormElementsFactory());
+        $form->text('Title', 'title');
+        $form->text('Description', 'description');
+        $form->submitButton('send')->toOutput();
 
 
        // $this->setRenderFullTemplate(false);

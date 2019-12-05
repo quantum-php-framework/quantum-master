@@ -241,10 +241,6 @@ class Teleport {
             break;
 
 
-            case "-t":
-                $this->teleportTest();
-                break;
-
             case "server":
                 $this->server();
                 break;
@@ -1053,15 +1049,7 @@ class Teleport {
 
     private function server()
     {
-        $location = $this->ipt->locks_root;
-        $name = "server.pid";
-
-        $pidFile = qf($location.$name);
-
-        if ($pidFile->existsAsFile())
-        {
-            $this->stopServer();
-        }
+        $this->stopServer();
 
         $this->startServer();
     }
