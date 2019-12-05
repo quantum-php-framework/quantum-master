@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/modules.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/modules.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/templates/default/views/index/test.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/templates/default/views/index/test.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/example_module/controllers/ExampleModuleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/example_module/controllers/ExampleModuleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RequestParamValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RequestParamValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/script/cron.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/script/cron.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/script/teleport.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/script/teleport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum_dev_2019-11-20.sql" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,55 +25,85 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/inspections/ClassReader.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15765">
-              <caret line="1051" column="28" selection-start-line="1051" selection-start-column="28" selection-end-line="1051" selection-end-column="28" />
+            <state relative-caret-position="321">
+              <caret line="1060" column="5" lean-forward="true" selection-start-line="1060" selection-start-column="5" selection-end-line="1060" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/middleware/RunHandler.php">
+        <entry file="file://$PROJECT_DIR$/quantum/script/cron.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+            <state relative-caret-position="37">
+              <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+              <folding>
+                <element signature="e#7#24#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RequestParamValidator.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="306" column="19" lean-forward="true" selection-start-line="306" selection-start-column="19" selection-end-line="306" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateAppRoutes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RequestParamValidator.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="373" column="37" lean-forward="true" selection-start-line="373" selection-start-column="37" selection-end-line="373" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="90" column="50" selection-start-line="90" selection-start-column="50" selection-end-line="90" selection-end-column="50" />
+            <state relative-caret-position="356">
+              <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/templates/default/views/index/test.tpl">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateRouteHttpMethod.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
+            <state relative-caret-position="456">
+              <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="862">
+              <caret line="169" column="5" lean-forward="true" selection-start-line="169" selection-start-column="5" selection-end-line="169" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/App.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -122,6 +145,8 @@
       <find>;;</find>
       <find>getError</find>
       <find>keyed_error_messages</find>
+      <find>hasErrors</find>
+      <find>isGe</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -158,14 +183,18 @@
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ControllerFactory.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" />
         <option value="$PROJECT_DIR$/quantum/apps/shared/modules/example_module/controllers/ExampleModuleController.php" />
-        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" />
-        <option value="$PROJECT_DIR$/quantum/script/teleport.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/middleware/RunHandler.php" />
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/templates/default/views/index/test.tpl" />
         <option value="$PROJECT_DIR$/quantum/apps/shared/models/GenericFormElementsFactory.php" />
-        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
+        <option value="$PROJECT_DIR$/quantum/script/teleport.php" />
+        <option value="$PROJECT_DIR$/quantum/script/cron.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RequestParamValidator.php" />
+        <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateRouteHttpMethod.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
       </list>
     </option>
   </component>
@@ -331,15 +360,6 @@
               <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="hosted" type="462c0819:PsiDirectoryNode" />
               <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_dev" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_dev" type="462c0819:PsiDirectoryNode" />
-              <item name="quantum" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="hosted" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -375,21 +395,6 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="index" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="quantum_dev" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_dev" type="462c0819:PsiDirectoryNode" />
-              <item name="quantum" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="quantum_dev" type="b2602c69:ProjectViewProjectNode" />
-              <item name="quantum_dev" type="462c0819:PsiDirectoryNode" />
-              <item name="quantum" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -399,13 +404,14 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/apps/shared/middleware" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/apps/shared/middleware" />
       <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config" />
     </key>
   </component>
@@ -435,18 +441,18 @@
       <workItem from="1574065145762" duration="32742000" />
       <workItem from="1574577456918" duration="39000" />
       <workItem from="1574623885313" duration="11148000" />
-      <workItem from="1575467615357" duration="4090000" />
+      <workItem from="1575467615357" duration="12177000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48647000" />
+    <option name="totallyTimeSpent" value="56734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="987" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20940171" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20940171" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -459,7 +465,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.62759465" visible="true" weight="0.23394495" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.62759465" visible="true" weight="0.23394495" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.37240538" side_tool="true" visible="true" weight="0.23394495" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -472,7 +478,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/etc/mobile_detect/Mobile_Detect.php" />
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/etc/mobile_detect/MobileDetect.php" />
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/etc/mobile_detect/Mobile_Detect.json" />
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/etc/mobile_detect/MobileDetector.php">
@@ -680,13 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="29" column="55" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -705,13 +703,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15765">
-          <caret line="1051" column="28" selection-start-line="1051" selection-start-column="28" selection-end-line="1051" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -736,17 +727,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
+    <entry file="file://$PROJECT_DIR$/quantum/script/teleport.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="90" column="50" selection-start-line="90" selection-start-column="50" selection-end-line="90" selection-end-column="50" />
+        <state relative-caret-position="321">
+          <caret line="1060" column="5" lean-forward="true" selection-start-line="1060" selection-start-column="5" selection-end-line="1060" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/script/cron.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37">
+          <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="e#7#24#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RequestParamValidator.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="373" column="37" lean-forward="true" selection-start-line="373" selection-start-column="37" selection-end-line="373" selection-end-column="37" />
+        <state relative-caret-position="228">
+          <caret line="306" column="19" lean-forward="true" selection-start-line="306" selection-start-column="19" selection-end-line="306" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateRouteAccessLevel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="52" column="16" lean-forward="true" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateAppRoutesRateLimit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-79" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateAppRoutes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="862">
+          <caret line="169" column="5" lean-forward="true" selection-start-line="169" selection-start-column="5" selection-end-line="169" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/shared/middleware/ValidateRouteHttpMethod.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/App.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="63" column="8" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
         </state>
       </provider>
     </entry>

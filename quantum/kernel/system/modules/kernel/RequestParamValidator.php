@@ -71,12 +71,29 @@ class Validation
     }
 }
 
+/**
+ * Class ValidationError
+ * @package Quantum
+ */
 class ValidationError
 {
+    /**
+     * ValidationError constructor.
+     * @param $param
+     * @param $msg
+     */
     public function __construct($param, $msg)
     {
         $this->field = $param;
         $this->message = $msg;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->message;
     }
 
     /**
@@ -359,6 +376,14 @@ class RequestParamValidator
     }
 
     /**
+     * @return boolean
+     */
+    public function hasErrors()
+    {
+        return !empty($this->errors);
+    }
+
+    /**
      * @return array
      */
     public function getErrors()
@@ -380,6 +405,17 @@ class RequestParamValidator
     public function getLastErrorMessageForParams()
     {
         return $this->last_param_error_messages;
+    }
+
+    /**
+     * @return Result
+     */
+    public function getResult()
+    {
+        if (!$this->hasErrors())
+            return Result::ok();
+
+        return Result::fail('One or more errors were found');
     }
 
 
@@ -472,13 +508,17 @@ class RequestParamValidator
         return $this->validateGet();
     }
 
-    private function addErrorMessage($key, $error)
+    /**
+     * @param $key
+     * @param $error_msg
+     */
+    private function addErrorMessage($key, $error_msg)
     {
-        $this->error_messages[] = $error;
+        $this->error_messages[] = $error_msg;
 
-        $this->last_param_error_messages[$key] = $error;
+        $this->last_param_error_messages[$key] = $error_msg;
 
-        $error = new ValidationError($key, $error);
+        $error = new ValidationError($key, $error_msg);
         $this->errors[$key][] = $error;
     }
 

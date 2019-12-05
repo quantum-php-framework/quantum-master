@@ -146,6 +146,30 @@ class Request extends Singleton
     }
 
     /**
+     * @return bool
+     */
+    public function isPatch()
+    {
+        return ($_SERVER['REQUEST_METHOD'] === 'PATCH');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHead()
+    {
+        return ($_SERVER['REQUEST_METHOD'] === 'HEAD');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOptions()
+    {
+        return ($_SERVER['REQUEST_METHOD'] === 'OPTIONS');
+    }
+
+    /**
      * @return mixed
      */
     public function getMethod()

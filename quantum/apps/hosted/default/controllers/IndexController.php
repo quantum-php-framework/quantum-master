@@ -61,11 +61,7 @@ class IndexController extends Quantum\Controller
     */
     public function index()
     {
-
         qs('Welcome to Quantum')->render();
-
-
-      
     }
 
     public function test()
@@ -88,10 +84,9 @@ class IndexController extends Quantum\Controller
             else
             {
 
-                dd($validator->getLastErrorMessageForParams());
+                dd($validator->getErrors());
             }
         }
-
 
 
         $form = qform (new GenericFormElementsFactory());
@@ -99,14 +94,13 @@ class IndexController extends Quantum\Controller
         $form->text('Description', 'description');
         $form->submitButton('send')->toOutput();
 
-
-       // $this->setRenderFullTemplate(false);
     }
 
 
-    public function some_other_method()
+    public function method()
     {
-        Quantum\ApiException::iAmATeapot();
+        qs('hi')->render();
+        //Quantum\ApiException::iAmATeapot();
     }
     
         

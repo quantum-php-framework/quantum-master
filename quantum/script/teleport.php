@@ -85,8 +85,14 @@ class Teleport {
     /**
      * Teleport constructor.
      */
-    function __construct() {
+    function __construct()
+    {
 
+
+    }
+
+    function init()
+    {
         $this->autoLoader = \Quantum\Autoloader::getInstance();
         $this->ipt = \Quantum\InternalPathResolver::getInstance();
 
@@ -1059,7 +1065,9 @@ class Teleport {
 }
 
 date_default_timezone_set('UTC');
-new Teleport();
+
+$teleport = new Teleport();
+$teleport->init();
 
 
 

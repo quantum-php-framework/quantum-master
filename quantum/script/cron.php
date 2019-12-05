@@ -6,10 +6,9 @@ use Quantum\InternalPathResolver;
 require_once(__DIR__ ."/../../composer/vendor/autoload.php");
 
 require_once (__DIR__."/../kernel/quantum.php");
-
-require_once (__DIR__ . "/../kernel/system/helpers/functions.php");
-require_once (__DIR__ . "/../kernel/system/modules/kernel/InternalPathResolver.php");
-require_once (__DIR__ . "/../kernel/system/modules/kernel/Autoloader.php");
+require_once (__DIR__."/../kernel/system/helpers/functions.php");
+require_once (__DIR__."/../kernel/system/modules/kernel/InternalPathResolver.php");
+require_once (__DIR__."/../kernel/system/modules/kernel/Autoloader.php");
 
 
 /**
@@ -22,6 +21,11 @@ class QuantumCronScheduler
      * QuantumCronScheduler constructor.
      */
     public function __construct()
+    {
+
+    }
+
+    public function init()
     {
         global $argv;
         $this->argv = $argv;
@@ -79,8 +83,6 @@ class QuantumCronScheduler
             }
 
         }
-
-
     }
 
 
@@ -295,5 +297,7 @@ class QuantumCronScheduler
 }
 
 date_default_timezone_set('America/Chicago');
-new QuantumCronScheduler();
+
+$scheduler = new QuantumCronScheduler();
+$scheduler->init();
 
