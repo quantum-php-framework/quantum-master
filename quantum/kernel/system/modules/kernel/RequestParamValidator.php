@@ -392,6 +392,14 @@ class RequestParamValidator
     }
 
     /**
+     * @return ValueTree
+     */
+    public function getErrorsValueTree()
+    {
+        return new_vt($this->errors);
+    }
+
+    /**
      * @return array
      */
     public function getAllErrorMessages()
@@ -405,6 +413,14 @@ class RequestParamValidator
     public function getLastErrorMessages()
     {
         return $this->last_error_messages;
+    }
+
+    /**
+     * @return int
+     */
+    public function getErrorsCount()
+    {
+        return count($this->error_messages);
     }
 
     /**

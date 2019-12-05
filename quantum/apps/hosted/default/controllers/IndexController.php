@@ -84,7 +84,14 @@ class IndexController extends Quantum\Controller
             else
             {
 
-                dd($validator->getLastErrorMessages());
+                var_dump($validator->getErrors());
+                var_dump($validator->getAllErrorMessages());
+                var_dump($validator->getLastErrorMessages());
+
+                var_dump($validator->getErrorsValueTree());
+                var_dump($validator->getResult());
+                var_dump($validator->getErrorsCount());
+                exit();
             }
         }
 
