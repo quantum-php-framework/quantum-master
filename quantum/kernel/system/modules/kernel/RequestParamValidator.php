@@ -148,7 +148,7 @@ class RequestParamValidator
     {
         $this->validations = new_vt();
         $this->error_messages = array();
-        $this->last_param_error_messages = array();
+        $this->last_error_messages = array();
         $this->errors = array();
         $this->success = false;
     }
@@ -402,9 +402,9 @@ class RequestParamValidator
     /**
      * @return array
      */
-    public function getLastErrorMessageForParams()
+    public function getLastErrorMessages()
     {
-        return $this->last_param_error_messages;
+        return $this->last_error_messages;
     }
 
     /**
@@ -516,10 +516,9 @@ class RequestParamValidator
     {
         $this->error_messages[] = $error_msg;
 
-        $this->last_param_error_messages[$key] = $error_msg;
+        $this->last_error_messages[$key] = $error_msg;
 
-        $error = new ValidationError($key, $error_msg);
-        $this->errors[$key][] = $error;
+        $this->errors[$key][] = new ValidationError($key, $error_msg);
     }
 
     /**
