@@ -13,7 +13,7 @@ class App extends Quantum\HostedApp
 
     public function init()
     {
-
+        //$this->runMiddlewares([ValidateRouteHttpMethod::class]);
     }
 
     public function pre_controller_construct()

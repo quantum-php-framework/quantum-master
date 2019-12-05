@@ -33,7 +33,7 @@ $QUANTUM_APP_ROUTES = array
         'rate_limit' => '1000',
         'rate_limit_time' => '3600',
         'csrf_check_enabled' => '0',
-        'http_request_methods' => 'get|post'
+        'http_request_methods' => 'GET|POST'
     ),
 
     array(

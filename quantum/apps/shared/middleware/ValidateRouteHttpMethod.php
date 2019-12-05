@@ -1,7 +1,5 @@
 <?php
 
-class InvalidAccessLevelConfigException extends \Exception {};
-
 class ValidateRouteHttpMethod extends \Quantum\Middleware\Foundation\SystemMiddleware
 {
 
