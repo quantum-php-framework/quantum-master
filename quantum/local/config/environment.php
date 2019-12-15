@@ -19,7 +19,10 @@ $QUANTUM_ENVIRONMENTS = array(
         'redis_port' => '6379',
         'redis_password' => 'password',
         'redis_persistent' => '1',
-        'redis_scheme' => 'tcp'
+        'redis_scheme' => 'tcp',
+        'memcache_host' => '127.0.0.1',
+        'memcache_port' => '11211',
+
     ),
 
 

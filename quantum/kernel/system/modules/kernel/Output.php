@@ -83,8 +83,8 @@ class Output extends Singleton
         $this->smarty->allow_php_tag = true;
         $this->smarty->plugins_dir[] = $this->ipt->lib_root.'smarty/plugins';
 
-        $this->set('QM_Client', \QM::client());
-        $this->set('QM_Environment', \QM::environment());
+        $this->set('QM_Client', Client::getInstance());
+        $this->set('QM_Environment', Config::getInstance()->getEnvironment());
         
         //\Quantum::setSmarty($this->smarty);
         //var_dump($this->smarty);
@@ -674,7 +674,7 @@ class Output extends Singleton
             header('HTTP/1.0 404 Not Found');
         }
 
-        $config = \QM::config();
+        $config = Config::getInstance();
 
         $appConfig = $config->getActiveAppConfig();
 

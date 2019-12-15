@@ -392,6 +392,18 @@ class RequestParamValidator
     }
 
     /**
+     * @param $param
+     * @return bool|array
+     */
+    public function getErrorsFor($param)
+    {
+        if (!array_key_exists($param, $this->errors))
+            return false;
+
+        return $this->errors[$param];
+    }
+
+    /**
      * @return ValueTree
      */
     public function getErrorsValueTree()

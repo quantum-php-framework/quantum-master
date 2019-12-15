@@ -83,14 +83,14 @@ class IndexController extends Quantum\Controller
             }
             else
             {
+                //var_dump($validator->getErrors());
+                var_dump($validator->getErrorsFor('url'));
+                //var_dump($validator->getAllErrorMessages());
+                //var_dump($validator->getLastErrorMessages());
 
-                var_dump($validator->getErrors());
-                var_dump($validator->getAllErrorMessages());
-                var_dump($validator->getLastErrorMessages());
-
-                var_dump($validator->getErrorsValueTree());
-                var_dump($validator->getResult());
-                var_dump($validator->getErrorsCount());
+                //var_dump($validator->getErrorsValueTree());
+                //var_dump($validator->getResult());
+                //var_dump($validator->getErrorsCount());
                 exit();
             }
         }
@@ -106,8 +106,84 @@ class IndexController extends Quantum\Controller
 
     public function method()
     {
-        qs('hi')->render();
+        //qs('hi')->render();
         //Quantum\ApiException::iAmATeapot();
+        //phpinfo();
+
+        //$cache = Quantum\Cache\ServiceProvider::getInstance();
+
+        //$cache->initRedis();
+
+        //$cache->flush();
+
+        $someVar = 'var';
+
+        //Quantum\Cache::useMemcache();
+        //Quantum\Cache::useRedis();
+
+        Quantum\Cache::set($someVar, 'xxx');
+
+        var_dump(Quantum\Cache::get($someVar));
+
+        Quantum\Cache::delete($someVar);
+
+        var_dump(Quantum\Cache::get($someVar));
+
+        //$cache->initMemcache();
+
+        //$cache->flush();
+
+        Quantum\Cache::set($someVar, 'xxx');
+
+        var_dump(Quantum\Cache::get($someVar));
+
+        Quantum\Cache::increment('counterx', 1);
+
+        var_dump(Quantum\Cache::get('counterx'));
+
+
+
+        var_dump(Quantum\Cache::setDeferred('countera', function()
+        {
+            return 10;
+        }));
+
+        var_dump(Quantum\Cache::get('counterrr', function()
+        {
+            return 10;
+        }));
+
+
+        var_dump(Quantum\Cache::decrementWithCallback('counter-autoinc-c', function()
+        {
+            return 10;
+        }));
+
+        var_dump(Quantum\Cache::setWithCallback('counter-autoinc-d', function()
+        {
+            return 100;
+        }));
+
+
+
+        //$cache->setDriver('redis');
+
+        //$cache->set('xxx', 343);
+
+        //var_dump($cache->get('xxx'));
+
+        //var_dump($cache->has('xxxa'));
+
+        //$cache->flush();
+
+        //var_dump($cache->has('xxx'));
+
+        //$cache->getDelayed('xxx');
+
+
+
+        //var_dump($cache->fetchAll());
+
     }
     
         

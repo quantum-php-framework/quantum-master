@@ -255,6 +255,15 @@ class QM
     }
 
 
+    /**
+     * @return Quantum\Cache\Memcache
+     */
+    static function memcache()
+    {
+        return Quantum\Cache\Memcache::getInstance();
+    }
+
+
 
 }
 

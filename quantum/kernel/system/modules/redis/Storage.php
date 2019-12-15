@@ -62,7 +62,7 @@ class Storage extends Singleton
      */
     public function set($key, $var)
     {
-        $this->redis->set($key, $var);
+        return $this->redis->set($key, $var);
     }
 
     /**
