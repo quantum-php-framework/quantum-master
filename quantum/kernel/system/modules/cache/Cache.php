@@ -158,6 +158,22 @@ class Cache
         return self::getProvider()->initMemcache();
     }
 
+    /**
+     * @return mixed
+     */
+    public static function useFiles()
+    {
+        return self::getProvider()->initFileBased();
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function useEncryptedFiles()
+    {
+        return self::getProvider()->initEncryptedFileBased();
+    }
+
 
     /**
      * Set to either redis or memcache, defaults to redis
@@ -232,6 +248,11 @@ class Cache
     public static function getProvider()
     {
         return \Quantum\Cache\ServiceProvider::getInstance();
+    }
+
+    public static function storage($driver)
+    {
+        return self::getProvider()->storage($driver);
     }
 
 }

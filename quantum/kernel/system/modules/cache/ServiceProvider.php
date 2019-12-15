@@ -40,6 +40,10 @@ class ServiceProvider extends Singleton
             case 'redis':
                 $this->initRedis();
                 break;
+
+            case 'files':
+                $this->initFileBased();
+                break;
         }
     }
 
@@ -141,7 +145,7 @@ class ServiceProvider extends Singleton
      */
     public function initMemcache()
     {
-        $this->storage = new Memcache();
+        $this->storage = Memcache::getInstance();
         return $this->getStorage();
     }
 
@@ -150,7 +154,26 @@ class ServiceProvider extends Singleton
      */
     public function initRedis()
     {
-        $this->storage = new Redis();
+        $this->storage = Redis::getInstance();
+        return $this->getStorage();
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function initFileBased()
+    {
+        $this->storage = FilesBasedCacheStorage::getInstance();
+        return $this->getStorage();
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function initEncryptedFileBased()
+    {
+        $this->storage = EncryptedFileBasedCacheStorage::getInstance();
         return $this->getStorage();
     }
 
@@ -168,6 +191,27 @@ class ServiceProvider extends Singleton
     public function getStorage()
     {
         return $this->storage;
+    }
+
+    public function storage($driver)
+    {
+        switch ($driver)
+        {
+            case 'memcache':
+                return Memcache::getInstance();
+                break;
+
+            case 'redis':
+                return Redis::getInstance();
+                break;
+
+            case 'files':
+                return FilesBasedCacheStorage::getInstance();
+                break;
+            case 'encrypted':
+                return EncryptedFileBasedCacheStorage::getInstance();
+                break;
+        }
     }
 
 }

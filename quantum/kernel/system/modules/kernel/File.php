@@ -1301,6 +1301,55 @@ class File
     }
 
 
+    /**
+     * Writes with a LOCK_EX
+     * @param $contents
+     * @throws \Exception
+     */
+    public function writeLocked($contents)
+    {
+        $handler = fopen($this->getPath(), 'a+');
+        if (!$handler)
+            throw new \Exception('Could not write to file:'.$this->getPath());
+
+        flock($handler, LOCK_EX);
+
+        fseek($handler, 0);
+
+        ftruncate($handler, 0);
+
+        if (fwrite($handler, $contents) === false)
+            throw new \Exception('Could not write to file:'.$this->getPath());
+
+        fclose($handler);
+    }
+
+
+    /**
+     * Reads with a LOCK_SH
+     * @return bool|false|string
+     */
+    public function readLocked()
+    {
+        $filename = $this->getPath();
+
+        if (!file_exists($filename))
+            return false;
+
+        $h = fopen($filename,'r');
+
+        if (!$h)
+            return false;
+
+        flock($h, LOCK_SH);
+
+        $data = file_get_contents($filename);
+        fclose($h);
+
+        return $data;
+    }
+
+
 
 
 

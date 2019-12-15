@@ -613,6 +613,14 @@ class InternalPathResolver extends Singleton
     }
 
     /**
+     * @return string
+     */
+    public function getCacheRoot()
+    {
+        return $this->var_root.'cache';
+    }
+
+    /**
      * @return bool|string
      */
     public function getWebRoot()
