@@ -13,6 +13,15 @@ use Quantum\Singleton;
 class FilesBasedCacheStorage extends Singleton
 {
 
+    /**
+     * @var
+     */
+    private $file_extension;
+
+    /**
+     * @var
+     */
+    private $dir_name;
 
     /**
      * Storage constructor.
@@ -20,18 +29,19 @@ class FilesBasedCacheStorage extends Singleton
      */
     public function __construct()
     {
-
+        $this->setFileExtension('.cache');
+        $this->setDirName('regular');
     }
 
 
     /**
      * @param $key
      */
-    private function getFile($key)
+    public function getFile($key)
     {
-        $filename = qs($key)->sha1()->append('.cache');
+        $filename = qs($key)->sha1()->append($this->getFileExtension());
 
-        $dir = $this->getStorageDir()->getChildFile(qs($filename)->getFirstCharacter()->prepend('qcache-'));
+        $dir = $this->getStorageDir()->getChildFile(qs($filename)->getFirstCharacter()->prepend('cache-'));
 
         if (!$dir->isDirectory())
             $dir->create();
@@ -41,10 +51,13 @@ class FilesBasedCacheStorage extends Singleton
         return $file;
     }
 
-    private function getStorageDir()
+    /**
+     * @return File
+     */
+    public function getStorageDir()
     {
         $ipt = InternalPathResolver::getInstance();
-        $dir = File::newFile($ipt->getCacheRoot())->getChildFile('filebased');
+        $dir = File::newFile($ipt->getCacheRoot())->getChildFile($this->getDirName());
 
         if (!$dir->isDirectory())
             $dir->create();
@@ -61,12 +74,18 @@ class FilesBasedCacheStorage extends Singleton
      * @param int $expiration
      * @return mixed
      */
-    public function set($key, $var, $expiration = 31556952)
+    public function set($key, $var, $expiration = 0)
     {
         // Serializing along with the TTL
+
+        if ($expiration === 0)
+            $expiration = 31556952;
+
+        //dd($expiration);
+
         $data = serialize(array(time()+$expiration, $var));
 
-        $this->getFile($key)->writeLocked($data);
+        $this->getFile($key)->writeLocked($data)->compress();
 
         return $var;
 
@@ -117,7 +136,8 @@ class FilesBasedCacheStorage extends Singleton
         if (!$file->exists())
             return false;
 
-        $contents = $file->readLocked();
+        $contents = $file->getContentsDecompressed();
+
         $data = @unserialize($contents);
 
         if (!$data)
@@ -134,6 +154,7 @@ class FilesBasedCacheStorage extends Singleton
             $file->delete();
             return false;
         }
+
         return $data[1];
     }
 
@@ -210,7 +231,6 @@ class FilesBasedCacheStorage extends Singleton
             return $value;
         }
 
-        fuck();
         return $this->set($key, $this->get($key)-$offset);
     }
 
@@ -230,6 +250,39 @@ class FilesBasedCacheStorage extends Singleton
 
            $this->set($key, $value, $expiration);
         }
+    }
+
+    /**
+     * @param $extension
+     */
+    public function setFileExtension($extension)
+    {
+        $this->file_extension = $extension;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileExtension()
+    {
+        return $this->file_extension;
+    }
+
+
+    /**
+     * @param $name
+     */
+    public function setDirName($name)
+    {
+        $this->dir_name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDirName()
+    {
+        return $this->dir_name;
     }
 
 

@@ -44,6 +44,14 @@ class ServiceProvider extends Singleton
             case 'files':
                 $this->initFileBased();
                 break;
+
+            case 'encrypted':
+                $this->initEncryptedFileBased();
+                break;
+
+            case 'apc':
+                $this->initApc();
+                break;
         }
     }
 
@@ -180,6 +188,15 @@ class ServiceProvider extends Singleton
     /**
      * @return mixed
      */
+    public function initApc()
+    {
+        $this->storage = APC::getInstance();
+        return $this->getStorage();
+    }
+
+    /**
+     * @return mixed
+     */
     public function flush()
     {
         return $this->storage->flush();
@@ -193,6 +210,10 @@ class ServiceProvider extends Singleton
         return $this->storage;
     }
 
+    /**
+     * @param $driver
+     * @return mixed
+     */
     public function storage($driver)
     {
         switch ($driver)
@@ -208,8 +229,13 @@ class ServiceProvider extends Singleton
             case 'files':
                 return FilesBasedCacheStorage::getInstance();
                 break;
+
             case 'encrypted':
                 return EncryptedFileBasedCacheStorage::getInstance();
+                break;
+
+            case 'apc':
+                return APC::getInstance();
                 break;
         }
     }

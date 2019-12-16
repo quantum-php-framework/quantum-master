@@ -115,11 +115,11 @@ class IndexController extends Quantum\Controller
         //Quantum\ApiException::iAmATeapot();
         //phpinfo();
 
-        $someVar = 'varc';
-        //$someVar = qs()->random()->toStdString();
-        //$someString = qs()->random()->toStdString();
+        //$someVar = 'varc';
+        $someVar = qs()->random()->toStdString();
+        $someString = qs()->random()->toStdString();
 
-        $someString = 'lorem ipsum';
+        //$someString = 'lorem ipsum';
 
         //$cache = new \Quantum\Cache\FilesBasedCacheStorage();
 
@@ -152,18 +152,29 @@ class IndexController extends Quantum\Controller
         //var_dump(\Quantum\Cache::storage('encrypted')->set($someVar, $someString));
         //var_dump(\Quantum\Cache::storage('encrypted')->get($someVar));
 
-        //Quantum\Cache::useFiles();
+        Quantum\Cache::useEncryptedFiles();
+        //Quantum\Cache::flush();
 
         //exit();
 
-        Quantum\Cache::useEncryptedFiles();
+        //Quantum\Cache::flush();
+
+        //var_dump(\Quantum\Cache::storage('apc')->flush());
+
+       // var_dump(\Quantum\Cache::storage('apc')->set($someVar, $someString));
+        //var_dump(\Quantum\Cache::storage('apc')->get($someVar));
+        //var_dump(\Quantum\Cache::storage('apc')->has($someVar));
+
+        ///exit();
+
+        //Quantum\Cache::useEncryptedFiles();
         //Quantum\Cache::flush();
         //exit();
 
 
-        Quantum\Cache::decrement($someVar);
+        //Quantum\Cache::decrement($someVar);
 
-        var_dump(Quantum\Cache::get($someVar));
+        //var_dump(Quantum\Cache::get($someVar));
 
         //exit();
 
@@ -172,15 +183,17 @@ class IndexController extends Quantum\Controller
         //var_dump(Quantum\Cache::get($someVar));
 
 
-        exit();
+        //exit();
 
         //$cache->initMemcache();
 
         //$cache->flush();
 
-        Quantum\Cache::set($someVar, 'xxx');
+        Quantum\Cache::set($someVar, $someString);
 
         var_dump(Quantum\Cache::get($someVar));
+
+        exit();
 
         Quantum\Cache::increment('counterx', 10);
 

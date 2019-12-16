@@ -11,16 +11,31 @@ use Quantum\SystemEncryptor;
 class EncryptedFileBasedCacheStorage extends FilesBasedCacheStorage
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->setFileExtension('.enc');
+        $this->setDirName('encrypted');
+    }
+
     /**
      * @param $key
      * @param $var
      * @param int $expiration
      * @return mixed
      */
-    public function set($key, $var, $expiration = 31556952)
+    public function set($key, $var, $expiration = 0)
     {
-        $var = $this->encrypt($var);
-        return parent::set($key, $var, $expiration);
+        if ($expiration === 0)
+            $expiration = 31556952;
+
+        $data = serialize(array(time()+$expiration, $var));
+
+        $data = SystemEncryptor::encrypt($data);
+
+        $this->getFile($key)->writeLocked($data)->compress();
+
     }
 
     /**
@@ -29,12 +44,44 @@ class EncryptedFileBasedCacheStorage extends FilesBasedCacheStorage
      */
     public function get($key)
     {
-        $data = parent::get($key);
+        $file = self::getFile($key);
 
-        if (empty($data))
+        if (!$file->existsAsFile())
             return false;
 
-        return $this->decrypt($data);
+        $data = $file->getContentsDecompressed();
+
+        if (!$data)
+        {
+            $file->delete();
+            return false;
+        }
+
+        $data = SystemEncryptor::decrypt($data);
+
+        if (!$data)
+        {
+            $file->delete();
+            return false;
+        }
+
+        $data = @unserialize($data);
+
+        if (!$data)
+        {
+            $file->delete();
+            return false;
+        }
+
+        $t = time();
+
+        if ($t > $data[0])
+        {
+            $file->delete();
+            return false;
+        }
+
+        return $data[1];
     }
 
 
@@ -81,28 +128,5 @@ class EncryptedFileBasedCacheStorage extends FilesBasedCacheStorage
         {
             $this->set($key, $initial_value-$offset);
         }
-    }
-
-
-    /**
-     * @param $data
-     * @return string
-     * @throws \Defuse\Crypto\Exception\BadFormatException
-     * @throws \Defuse\Crypto\Exception\EnvironmentIsBrokenException
-     */
-    private function encrypt($data)
-    {
-        return SystemEncryptor::encrypt($data);
-    }
-
-    /**
-     * @param $data
-     * @return string
-     * @throws \Defuse\Crypto\Exception\BadFormatException
-     * @throws \Defuse\Crypto\Exception\EnvironmentIsBrokenException
-     */
-    private function decrypt($data)
-    {
-        return SystemEncryptor::decrypt($data);
     }
 }

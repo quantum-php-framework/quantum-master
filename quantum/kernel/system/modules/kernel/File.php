@@ -756,6 +756,8 @@ class File
     {
         $this->reload();
         $this->replaceContent(\Quantum\SystemEncryptor::encrypt($this->contents));
+
+        return $this;
     }
 
     /**
@@ -765,6 +767,8 @@ class File
     {
         $this->reload();
         $this->replaceContent(\Quantum\SystemEncryptor::decrypt($this->contents));
+
+        return $this;
     }
 
     /**
@@ -774,6 +778,8 @@ class File
     {
         $this->reload();
         $this->replaceContent(\Quantum\Crypto::encrypt($this->contents, $key));
+
+        return $this;
     }
 
     /**
@@ -783,6 +789,8 @@ class File
     {
         $this->reload();
         $this->replaceContent(\Quantum\Crypto::decrypt($this->contents, $key));
+
+        return $this;
     }
 
     /**
@@ -1304,6 +1312,7 @@ class File
     /**
      * Writes with a LOCK_EX
      * @param $contents
+     * @param $contents
      * @throws \Exception
      */
     public function writeLocked($contents)
@@ -1312,7 +1321,12 @@ class File
         if (!$handler)
             throw new \Exception('Could not write to file:'.$this->getPath());
 
-        flock($handler, LOCK_EX);
+        $lock = flock($handler, LOCK_EX);
+
+        if (!$lock) {
+            fclose($handler);
+            return false;
+        }
 
         fseek($handler, 0);
 
@@ -1321,7 +1335,14 @@ class File
         if (fwrite($handler, $contents) === false)
             throw new \Exception('Could not write to file:'.$this->getPath());
 
+        flock($handler, LOCK_UN);
+
         fclose($handler);
+
+        return $this;
+
+
+        //return file_put_contents($this->path, $contents, LOCK_EX);
     }
 
 
@@ -1347,6 +1368,39 @@ class File
         fclose($h);
 
         return $data;
+    }
+
+
+    /**
+     * @return string
+     * @throws \Defuse\Crypto\Exception\BadFormatException
+     * @throws \Defuse\Crypto\Exception\EnvironmentIsBrokenException
+     */
+    function getContentsEncryptedWithSystemEncryptor()
+    {
+        return SystemEncryptor::decrypt($this->readLocked());
+    }
+
+
+    /**
+     * @return $this
+     * @throws \Exception
+     */
+    function compress()
+    {
+        $contents = @gzcompress($this->readLocked());
+
+        $this->writeLocked($contents);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    function getContentsDecompressed()
+    {
+        return @gzuncompress($this->readLocked());
     }
 
 
