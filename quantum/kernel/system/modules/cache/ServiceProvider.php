@@ -6,6 +6,12 @@ use Quantum\Config;
 use Quantum\Singleton;
 
 /**
+ * Class CacheBackendInitException
+ * @package Quantum\Cache
+ */
+class CacheBackendInitException extends \Exception {};
+
+/**
  * Class ServiceProvider
  * @package Quantum\Cache
  */
@@ -30,7 +36,7 @@ class ServiceProvider extends Singleton
         $config = new_vt(Config::getInstance()->getEnvironment());
 
         if (empty($config))
-            throw new StorageSetupException('no active environment config');
+            throw new CacheBackendInitException('no active environment config');
 
         if ($config->has('cache_backend'))
             $this->setDriver($config->get('cache_backend'));
@@ -79,7 +85,7 @@ class ServiceProvider extends Singleton
                 break;
 
             default:
-                throw new StorageSetupException('Invalid Cache Backend: '.$driver);
+                throw new CacheBackendInitException('Invalid Cache Backend: '.$driver);
                 break;
         }
     }
