@@ -51,7 +51,7 @@ class Serializer
     {
         $wrapper = new SerializableClosure($closure);
 
-        $s = \serialize($wrapper);
+        $s = Native::serialize($wrapper);
 
         return $s;
     }
@@ -64,7 +64,7 @@ class Serializer
     {
         $wrapper = new SerializableClosure($closure);
 
-        $s = \unserialize($wrapper);
+        $s = Native::unserialize($wrapper);
 
         return $s;
     }

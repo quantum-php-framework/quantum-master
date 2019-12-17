@@ -24,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+            <state relative-caret-position="421">
+              <caret line="66" column="33" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -469,18 +469,18 @@
       <workItem from="1576280612131" duration="1117000" />
       <workItem from="1576285855520" duration="19220000" />
       <workItem from="1576477449486" duration="9988000" />
-      <workItem from="1576496241619" duration="22540000" />
+      <workItem from="1576496241619" duration="22605000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136828000" />
+    <option name="totallyTimeSpent" value="136893000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.72254336" visible="true" weight="0.20695971" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.72254336" visible="true" weight="0.20695971" />
       <window_info id="Structure" order="1" sideWeight="0.50067294" side_tool="true" weight="0.26556778" />
       <window_info id="Favorites" order="2" sideWeight="0.27745664" side_tool="true" weight="0.26862028" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -493,7 +493,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32894737" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.62148964" visible="true" weight="0.28947368" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.62148964" visible="true" weight="0.28947368" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.3785104" side_tool="true" weight="0.104166664" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -844,8 +844,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+        <state relative-caret-position="421">
+          <caret line="66" column="33" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
         </state>
       </provider>
     </entry>
