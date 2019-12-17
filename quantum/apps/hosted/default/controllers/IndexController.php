@@ -153,7 +153,7 @@ class IndexController extends Quantum\Controller
         //var_dump(\Quantum\Cache::storage('encrypted')->get($someVar));
 
 
-        Quantum\Cache::useMongoDB();
+        //Quantum\Cache::useMongoDB();
         //Quantum\Cache::flush();
 
         //exit();
@@ -169,8 +169,8 @@ class IndexController extends Quantum\Controller
         ///exit();
 
         //Quantum\Cache::useEncryptedFiles();
-        //Quantum\Cache::flush();
-        //exit();
+        Quantum\Cache::flush();
+        exit();
 
 
         //Quantum\Cache::decrement($someVar);

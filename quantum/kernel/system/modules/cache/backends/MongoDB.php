@@ -48,14 +48,14 @@ class MongoDB extends Backend
             throw new StorageSetupException("'mongo' extension min_version: 1.2.11");
 
         if  ($initFromEnv)
-            $this->initFromEnvironment();
+            $this->initFromEnvironmentConfig();
     }
 
 
     /**
      * @throws StorageSetupException
      */
-    private function initFromEnvironment()
+    private function initFromEnvironmentConfig()
     {
         $config = new_vt(Config::getInstance()->getEnvironment());
 

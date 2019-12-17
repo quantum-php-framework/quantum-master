@@ -2,6 +2,7 @@
 
 namespace Quantum\Cache;
 
+use Quantum\Config;
 use Quantum\Singleton;
 
 /**
@@ -21,7 +22,20 @@ class ServiceProvider extends Singleton
      */
     public function __construct()
     {
-        $this->initRedis();
+        $this->initFromEnvironmentConfig();
+    }
+
+    public function initFromEnvironmentConfig()
+    {
+        $config = new_vt(Config::getInstance()->getEnvironment());
+
+        if (empty($config))
+            throw new StorageSetupException('no active environment config');
+
+        if ($config->has('cache_backend'))
+            $this->setDriver($config->get('cache_backend'));
+        else
+            $this->initFileBased();
     }
 
     /**
@@ -62,6 +76,10 @@ class ServiceProvider extends Singleton
 
             case 'mongodb':
                 $this->initMongoDB();
+                break;
+
+            default:
+                throw new StorageSetupException('Invalid Cache Backend: '.$driver);
                 break;
         }
     }

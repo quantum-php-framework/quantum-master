@@ -27,14 +27,13 @@ class Memcache extends Backend
         $this->memcache = new \Memcached();
 
         if ($initFromEnv)
-            $this->initFromEnvironment();
-
+            $this->initFromEnvironmentConfig();
     }
 
     /**
      * @throws \Exception
      */
-    public function initFromEnvironment()
+    public function initFromEnvironmentConfig()
     {
         $config = new_vt(Config::getInstance()->getEnvironment());
 
