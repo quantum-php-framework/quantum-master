@@ -24,7 +24,6 @@ class ServiceProvider extends Singleton
         $this->initRedis();
     }
 
-
     /**
      * @param $driver
      * @throws \Exception
@@ -51,6 +50,18 @@ class ServiceProvider extends Singleton
 
             case 'apc':
                 $this->initApc();
+                break;
+
+            case 'db':
+                $this->initDatabaseStorage();
+                break;
+
+            case 'eaccelerator':
+                $this->initEaccelerator();
+                break;
+
+            case 'mongodb':
+                $this->initMongoDB();
                 break;
         }
     }
@@ -83,7 +94,6 @@ class ServiceProvider extends Singleton
     {
         return $this->storage->has($key);
     }
-
 
     /**
      * @param $key
@@ -154,7 +164,7 @@ class ServiceProvider extends Singleton
     public function initMemcache()
     {
         $this->storage = Memcache::getInstance();
-        return $this->getStorage();
+        return $this->storage;
     }
 
     /**
@@ -163,7 +173,7 @@ class ServiceProvider extends Singleton
     public function initRedis()
     {
         $this->storage = Redis::getInstance();
-        return $this->getStorage();
+        return $this->storage;
     }
 
     /**
@@ -172,7 +182,16 @@ class ServiceProvider extends Singleton
     public function initFileBased()
     {
         $this->storage = FilesBasedCacheStorage::getInstance();
-        return $this->getStorage();
+        return $this->storage;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function initDatabaseStorage()
+    {
+        $this->storage = Database::getInstance();
+        return $this->storage;
     }
 
 
@@ -182,7 +201,7 @@ class ServiceProvider extends Singleton
     public function initEncryptedFileBased()
     {
         $this->storage = EncryptedFileBasedCacheStorage::getInstance();
-        return $this->getStorage();
+        return $this->storage;
     }
 
     /**
@@ -191,7 +210,25 @@ class ServiceProvider extends Singleton
     public function initApc()
     {
         $this->storage = APC::getInstance();
-        return $this->getStorage();
+        return $this->storage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function initEaccelerator()
+    {
+        $this->storage = Eaccelerator::getInstance();
+        return $this->storage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function initMongoDB()
+    {
+        $this->storage = MongoDB::getInstance();
+        return $this->storage;
     }
 
     /**
@@ -236,6 +273,18 @@ class ServiceProvider extends Singleton
 
             case 'apc':
                 return APC::getInstance();
+                break;
+
+            case 'db':
+                return Database::getInstance();
+                break;
+
+            case 'eaccelerator':
+                return Eaccelerator::getInstance();
+                break;
+
+            case 'mongodb':
+                return MongoDB::getInstance();
                 break;
         }
     }

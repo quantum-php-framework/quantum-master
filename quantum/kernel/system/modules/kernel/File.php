@@ -49,6 +49,8 @@ class File
     public function setPath($path)
     {
         $this->path = $path;
+
+        return $this;
     }
 
     /**
@@ -57,6 +59,8 @@ class File
     public function replaceContent($contents)
     {
         $this->setContent($contents, true);
+
+        return $this;
     }
 
     /**
@@ -69,6 +73,8 @@ class File
 
         if ($save)
             $this->save();
+
+        return $this;
     }
 
     /**
@@ -113,7 +119,9 @@ class File
             $this->create();
 
         if (!$this->isDirectory())
-            file_put_contents($this->path, $this->contents);
+            file_put_contents($this->path, $this->contents, LOCK_EX);
+
+        return $this;
     }
 
     /**
@@ -378,6 +386,8 @@ class File
     public function changeMode($mode)
     {
         chmod($this->path, $mode);
+
+        return $this;
     }
 
     /**
@@ -389,6 +399,8 @@ class File
             $this->changeMode(0444);
         else
             $this->changeMode(0644);
+
+        return $this;
     }
 
     /**
@@ -397,6 +409,8 @@ class File
     public function setForPublicWriteAccess()
     {
         $this->changeMode(0666);
+
+        return $this;
     }
 
     /**
@@ -912,6 +926,8 @@ class File
     public function setLuckySevenPermissions()
     {
         $this->changeMode(0777);
+
+        return $this;
     }
 
     /**
@@ -921,6 +937,8 @@ class File
     {
         $exec = new Exec("chmod +x ".$this->path);
         $exec->launch();
+
+        return $this;
     }
 
     /**
@@ -975,6 +993,8 @@ class File
     public function pushToClient()
     {
         Output::getInstance()->pushFile($this->path);
+
+        return $this;
     }
 
     /**

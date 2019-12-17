@@ -1,36 +1,28 @@
 <?php
 
-
 namespace Quantum\Cache;
 
-use Predis\Client;
-use Quantum\Config;
 use Quantum\Singleton;
 
 /**
- * Class Storage
- * @package Quantum\Redis
+ * Class StorageSetupException
+ * @package Quantum\Cache
  */
-class APC extends Singleton
+class StorageSetupException extends \Exception {};
+
+/**
+ * Class Backend
+ * @package Quantum\Cache
+ */
+abstract class Backend extends Singleton
 {
-
     /**
-     * @var Client
+     * Backend constructor.
      */
-    public $redis;
-
-
-    /**
-     * Storage constructor.
-     * @throws \Exception
-     */
-    public function __construct($initFromEnv = true)
+    public function __construct()
     {
 
     }
-
-
-
 
     /**
      * @param $key
@@ -38,26 +30,37 @@ class APC extends Singleton
      * @param int $expiration
      * @return mixed
      */
-    public function set($key, $var, $expiration = 0)
-    {
-        $result = \apc_store($key, $var, $expiration);
+    public abstract function set($key, $var, $expiration = 0);
 
-        $this->setExpiration($key, $expiration);
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public abstract function get($key);
 
-        return $result;
-    }
+    /**
+     * @return mixed
+     */
+    public abstract function flush();
+
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public abstract function delete($key);
+
 
     /**
      * @param $items
-     * @param int $expiration
-     * @return bool
      */
     public function setParams($items)
     {
-        foreach ($items as $key => $item) {
+        foreach ($items as $key => $item)
+        {
             $this->set($key, $item);
         }
     }
+
 
     /**
      * @param $key
@@ -69,52 +72,27 @@ class APC extends Singleton
         return $this->set($key, $var);
     }
 
+
     /**
      * @param $key
      * @param $var
      * @param int $expiration
+     * @return mixed
+     */
+    public function replace($key, $var, $expiration = 0)
+    {
+        return $this->set($key, $var, $expiration);
+    }
+
+    /**
+     * @param $key
      * @return bool
-     */
-    public function replace($key, $var)
-    {
-        return $this->set($key, $var);
-    }
-
-    /**
-     * @param $key
-     * @return string
-     */
-    public function get($key)
-    {
-        return \apc_fetch($key);
-    }
-
-    /**
-     * @param $key
-     * @return int
      */
     public function has($key)
     {
-        return \apc_exists($key);
-    }
+        $data = $this->get($key);
 
-
-    /**
-     * @return bool
-     */
-    public function flush()
-    {
-        return \apc_clear_cache('user');
-    }
-
-    /**
-     * @param $key
-     * @param int $time
-     * @return bool
-     */
-    public function delete($key)
-    {
-        return \apc_delete($key);
+        return !empty($data);
     }
 
 
@@ -123,15 +101,14 @@ class APC extends Singleton
      * @param int $offset
      * @param int $initial_value
      * @param int $expiry
-     * @return int
+     * @return int|mixed
      */
     public function increment($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
         if (!$this->has($key))
         {
             $value = $initial_value+$offset;
-            $this->set($key, $value);
-            $this->setExpiration($expiry);
+            $this->set($key, $value, $expiry);
             return $value;
         }
 
@@ -144,15 +121,14 @@ class APC extends Singleton
      * @param int $offset
      * @param int $initial_value
      * @param int $expiry
-     * @return int
+     * @return int|mixed
      */
     public function decrement($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
         if (!$this->has($key))
         {
             $value = $initial_value-$offset;
-            $this->set($key, $value);
-            $this->setExpiration($expiry);
+            $this->set($key, $value, $expiry);
             return $value;
         }
 
@@ -163,15 +139,19 @@ class APC extends Singleton
     /**
      * @param $key
      * @param int $expiration
+     * @return bool
      */
     public function setExpiration ($key, $expiration = 0)
     {
         if ($expiration > 0)
         {
-            $this->redis->expire($key, $expiration);
+            if (!$this->has($key))
+                return false;
+
+            $value = $this->get($key);
+
+            $this->set($key, $value, $expiration);
         }
     }
-
-
 
 }

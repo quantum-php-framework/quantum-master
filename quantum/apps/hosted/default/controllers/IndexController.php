@@ -152,7 +152,8 @@ class IndexController extends Quantum\Controller
         //var_dump(\Quantum\Cache::storage('encrypted')->set($someVar, $someString));
         //var_dump(\Quantum\Cache::storage('encrypted')->get($someVar));
 
-        Quantum\Cache::useEncryptedFiles();
+
+        Quantum\Cache::useMongoDB();
         //Quantum\Cache::flush();
 
         //exit();
@@ -193,7 +194,7 @@ class IndexController extends Quantum\Controller
 
         var_dump(Quantum\Cache::get($someVar));
 
-        exit();
+        //exit();
 
         Quantum\Cache::increment('counterx', 10);
 
@@ -201,15 +202,19 @@ class IndexController extends Quantum\Controller
 
         //exit();
 
+        Quantum\Cache::decrement('decrement-counterx', 100);
+
+        var_dump(Quantum\Cache::get('decrement-counterx'));
+
 
         var_dump(Quantum\Cache::setDeferred('countera', function()
         {
-            return 10;
+            return 11;
         }));
 
         var_dump(Quantum\Cache::get('counterrr', function()
         {
-            return 10;
+            return 15;
         }));
 
         var_dump(Quantum\Cache::decrementWithCallback('counter-autoinc-c', function()
@@ -221,9 +226,9 @@ class IndexController extends Quantum\Controller
             return 100;
         }));
 
-        \Quantum\Cache::storage('files')->set(qs()->random(), qs()->random());
-        \Quantum\Cache::storage('redis')->set(qs()->random(), qs()->random());
-        \Quantum\Cache::storage('memcache')->set(qs()->random(), qs()->random());
+        //\Quantum\Cache::storage('files')->set(qs()->random(), qs()->random());
+       // \Quantum\Cache::storage('redis')->set(qs()->random(), qs()->random());
+        //\Quantum\Cache::storage('memcache')->set(qs()->random(), qs()->random());
 
 
 

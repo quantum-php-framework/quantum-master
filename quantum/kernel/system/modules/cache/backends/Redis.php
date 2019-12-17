@@ -1,17 +1,15 @@
 <?php
 
-
 namespace Quantum\Cache;
 
-use Predis\Client;
 use Quantum\Config;
-use Quantum\Singleton;
+use Predis\Client;
 
 /**
  * Class Storage
  * @package Quantum\Redis
  */
-class Redis extends Singleton
+class Redis extends Backend
 {
 
     /**
@@ -38,19 +36,19 @@ class Redis extends Singleton
         $config = new_vt(Config::getInstance()->getEnvironment());
 
         if (empty($config))
-            throw_exception('no active app config');
+            throw new StorageSetupException('no active app config');
 
         if (!$config->has('redis_scheme'))
-            throw_exception('redis_scheme not defined in app config');
+            throw new StorageSetupException('redis_scheme not defined in app config');
 
         if (!$config->has('redis_host'))
-            throw_exception('redis_host not defined in app config');
+            throw new StorageSetupException('redis_host not defined in app config');
 
         if (!$config->has('redis_port'))
-            throw_exception('redis_port not defined in app config');
+            throw new StorageSetupException('redis_port not defined in app config');
 
         if (!$config->has('redis_persistent'))
-            throw_exception('redis_persistent not defined in app config');
+            throw new StorageSetupException('redis_persistent not defined in app config');
 
         $redis_config = array(
             "scheme" => $config->get('redis_scheme'),
@@ -73,9 +71,9 @@ class Redis extends Singleton
      */
     public function set($key, $var, $expiration = 0)
     {
-        $result = $this->redis->set($key, $var);
+        $this->redis->set($key, $var);
         $this->setExpiration($key, $expiration);
-        return $result;
+        return $var;
     }
 
     /**
@@ -88,26 +86,6 @@ class Redis extends Singleton
         return $this->redis->mset($items);
     }
 
-    /**
-     * @param $key
-     * @param $var
-     * @return mixed
-     */
-    public function add($key, $var)
-    {
-        return $this->set($key, $var);
-    }
-
-    /**
-     * @param $key
-     * @param $var
-     * @param int $expiration
-     * @return bool
-     */
-    public function replace($key, $var)
-    {
-        return $this->set($key, $var);
-    }
 
     /**
      * @param $key
@@ -167,8 +145,7 @@ class Redis extends Singleton
         if (!$this->has($key))
         {
             $value = $initial_value+$offset;
-            $this->set($key, $value);
-            $this->setExpiration($expiry);
+            $this->set($key, $value, $expiry);
             return $value;
         }
 
@@ -188,8 +165,7 @@ class Redis extends Singleton
         if (!$this->has($key))
         {
             $value = $initial_value+$offset;
-            $this->set($key, $value);
-            $this->setExpiration($expiry);
+            $this->set($key, $value, $expiry);
             return $value;
         }
 

@@ -4,13 +4,13 @@ namespace Quantum\Cache;
 
 use Quantum\InternalPathResolver;
 use Quantum\File;
-use Quantum\Singleton;
+use Quantum\Serialize\Native;
 
 /**
  * Class Storage
  * @package Quantum\Redis
  */
-class FilesBasedCacheStorage extends Singleton
+class FilesBasedCacheStorage extends Backend
 {
 
     /**
@@ -32,7 +32,6 @@ class FilesBasedCacheStorage extends Singleton
         $this->setFileExtension('.cache');
         $this->setDirName('regular');
     }
-
 
     /**
      * @param $key
@@ -66,7 +65,6 @@ class FilesBasedCacheStorage extends Singleton
 
     }
 
-
     /**
      * Defaults to one year if no expiration is set
      * @param $key
@@ -83,7 +81,9 @@ class FilesBasedCacheStorage extends Singleton
 
         //dd($expiration);
 
-        $data = serialize(array(time()+$expiration, $var));
+        $data = array(time()+$expiration, $var);
+
+        $data = Native::serialize($data);
 
         $this->getFile($key)->writeLocked($data)->compress();
 
@@ -92,41 +92,8 @@ class FilesBasedCacheStorage extends Singleton
     }
 
     /**
-     * @param $items
-     * @param int $expiration
-     * @return bool
-     */
-    public function setParams($items)
-    {
-        foreach ($items as $key => $item)
-        {
-            $this->set($key, $item);
-        }
-    }
-
-    /**
      * @param $key
-     * @param $var
-     * @return mixed
-     */
-    public function add($key, $var)
-    {
-        return $this->set($key, $var);
-    }
-
-    /**
-     * @param $key
-     * @param $var
-     * @param int $expiration
-     * @return bool
-     */
-    public function replace($key, $var)
-    {
-        return $this->set($key, $var);
-    }
-
-    /**
-     * @param $key
+     *
      * @return string
      */
     public function get($key)
@@ -138,7 +105,9 @@ class FilesBasedCacheStorage extends Singleton
 
         $contents = $file->getContentsDecompressed();
 
-        $data = @unserialize($contents);
+        $data = Native::unserialize($contents);
+
+        //dd($data);
 
         if (!$data)
         {
@@ -167,14 +136,14 @@ class FilesBasedCacheStorage extends Singleton
         return $this->getFile($key)->existsAsFile();
     }
 
-
     /**
      * @return bool
      */
     public function flush()
     {
         $this->getStorageDir()->delete();
-        return $this->getStorageDir()->create();
+
+        return $this->getStorageDir()->create()->exists();
     }
 
     /**
@@ -190,66 +159,6 @@ class FilesBasedCacheStorage extends Singleton
             $file->delete();
 
         return $file;
-    }
-
-
-    /**
-     * @param $key
-     * @param int $offset
-     * @param int $initial_value
-     * @param int $expiry
-     * @return int
-     */
-    public function increment($key, $offset = 1, $initial_value = 0, $expiry = 0)
-    {
-        if (!$this->has($key))
-        {
-            $value = $initial_value+$offset;
-            $this->set($key, $value);
-            $this->setExpiration($expiry);
-            return $value;
-        }
-
-        return $this->set($key, $this->get($key)+$offset);
-    }
-
-
-    /**
-     * @param $key
-     * @param int $offset
-     * @param int $initial_value
-     * @param int $expiry
-     * @return int
-     */
-    public function decrement($key, $offset = 1, $initial_value = 0, $expiry = 0)
-    {
-        if (!$this->has($key))
-        {
-            $value = $initial_value-$offset;
-            $this->set($key, $value);
-            $this->setExpiration($expiry);
-            return $value;
-        }
-
-        return $this->set($key, $this->get($key)-$offset);
-    }
-
-
-    /**
-     * @param $key
-     * @param int $expiration
-     */
-    public function setExpiration ($key, $expiration = 0)
-    {
-        if ($expiration > 0)
-        {
-           if (!$this->has($key))
-               return false;
-
-           $value = $this->get($key);
-
-           $this->set($key, $value, $expiration);
-        }
     }
 
     /**
@@ -268,7 +177,6 @@ class FilesBasedCacheStorage extends Singleton
         return $this->file_extension;
     }
 
-
     /**
      * @param $name
      */
@@ -284,7 +192,5 @@ class FilesBasedCacheStorage extends Singleton
     {
         return $this->dir_name;
     }
-
-
 
 }

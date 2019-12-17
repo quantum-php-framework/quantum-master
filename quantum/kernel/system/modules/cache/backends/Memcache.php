@@ -1,16 +1,14 @@
 <?php
 
-
 namespace Quantum\Cache;
 
 use Quantum\Config;
-use Quantum\Singleton;
 
 /**
  * Class Storage
  * @package Quantum\Cache
  */
-class Memcache extends Singleton
+class Memcache extends Backend
 {
 
     /**
@@ -41,13 +39,13 @@ class Memcache extends Singleton
         $config = new_vt(Config::getInstance()->getEnvironment());
 
         if (empty($config))
-            throw_exception('no active app config');
+            throw new StorageSetupException('no active app config');
 
         if (!$config->has('memcache_host'))
-            throw_exception('memcache_host not defined in environment config');
+            throw new StorageSetupException('memcache_host not defined in environment config');
 
         if (!$config->has('memcache_port'))
-            throw_exception('memcache_port not defined in environment config');
+            throw new StorageSetupException('memcache_port not defined in environment config');
 
         $this->addServer($config->get('memcache_host'), $config->get('memcache_port'));
         $this->enableBinaryProtocol();
@@ -77,7 +75,9 @@ class Memcache extends Singleton
      */
     public function set($key, $var, $expiration = 0)
     {
-        return $this->memcache->set($key, $var, $expiration);
+         $this->memcache->set($key, $var, $expiration);
+
+         return $var;
     }
 
 
@@ -175,30 +175,6 @@ class Memcache extends Singleton
     public function delete($key, $time = 0)
     {
         return $this->memcache->delete($key, $time);
-    }
-
-    /**
-     * @param $key
-     * @param int $offset
-     * @param int $initial_value
-     * @param int $expiry
-     * @return int
-     */
-    public function increment($key, $offset = 1, $initial_value = 0, $expiry = 0)
-    {
-        return $this->memcache->increment($key, $offset, $initial_value, $expiry);
-    }
-
-    /**
-     * @param $key
-     * @param int $offset
-     * @param int $initial_value
-     * @param int $expiry
-     * @return int
-     */
-    public function decrement($key, $offset = 1, $initial_value = 0, $expiry = 0)
-    {
-        return $this->memcache->decrement($key, $offset, $initial_value, $expiry);
     }
 
     /**

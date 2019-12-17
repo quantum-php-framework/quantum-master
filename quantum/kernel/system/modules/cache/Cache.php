@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Quantum;
 
 
@@ -180,6 +179,30 @@ class Cache
     public static function useAPC()
     {
         return self::getProvider()->initApc();
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function useEaccelerator()
+    {
+        return self::getProvider()->initEaccelerator();
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function useDatabase()
+    {
+        return self::getProvider()->initDatabaseStorage();
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function useMongoDB()
+    {
+        return self::getProvider()->initMongoDB();
     }
 
 

@@ -22,6 +22,7 @@ $QUANTUM_ENVIRONMENTS = array(
         'redis_scheme' => 'tcp',
         'memcache_host' => '127.0.0.1',
         'memcache_port' => '11211',
+        'cache_storage' => 'files'
 
     ),
 

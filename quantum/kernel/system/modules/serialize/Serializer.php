@@ -18,9 +18,13 @@ class Serializer
      * @param $data
      * @return false|string
      */
-    public static function serialize($data)
+    public static function serialize($data, $asJson = true)
     {
-        $serialized = json_encode($data);
+        if ($asJson)
+            $serialized = \json_encode($data);
+        else
+            $serialized = @serialize($data);
+
         return $serialized;
     }
 
@@ -29,9 +33,14 @@ class Serializer
      * @param $data
      * @return mixed
      */
-    public static function unserialize($data)
+    public static function unserialize($data, $asJson = true)
     {
-        return json_decode($data);
+        if ($asJson)
+            $unserialized = \json_decode($data);
+        else
+            $unserialized = @unserialize($data);
+
+        return $unserialized;
     }
 
     /**
