@@ -21,9 +21,9 @@ class Serializer
     public static function serialize($data, $asJson = true)
     {
         if ($asJson)
-            $serialized = \json_encode($data);
+            $serialized = Json::serialize($data);
         else
-            $serialized = @serialize($data);
+            $serialized = Native::serialize($data);
 
         return $serialized;
     }
@@ -36,9 +36,9 @@ class Serializer
     public static function unserialize($data, $asJson = true)
     {
         if ($asJson)
-            $unserialized = \json_decode($data);
+            $unserialized = Json::unserialize($data);
         else
-            $unserialized = @unserialize($data);
+            $unserialized = Native::unserialize($data);
 
         return $unserialized;
     }
@@ -71,10 +71,3 @@ class Serializer
 
 
 }
-    
-    
-    
-   
-    
-    
-    

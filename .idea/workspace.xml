@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,98 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="172" column="10" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-              <folding>
-                <element signature="e#33#52#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/Cache.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
+        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/Backend.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="6" selection-start-line="6" selection-end-line="10" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/backends/Memcache.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/backends/MongoDB.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="50" column="44" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/backends/Redis.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-              <folding>
-                <element signature="e#33#52#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/backends/APC.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+            <state relative-caret-position="375">
+              <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -196,7 +106,6 @@
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/cache/Files.php" />
         <option value="$PROJECT_DIR$/quantum/local/var/cache/filebased/qcache-8/878ef994936f36046b7585e6dd8c2eea7e8208ef.cache" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/cache/APC.php" />
-        <option value="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/File.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Native.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Json.php" />
@@ -225,6 +134,7 @@
         <option value="$PROJECT_DIR$/quantum/local/config/environment.php" />
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" />
+        <option value="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php" />
       </list>
     </option>
   </component>
@@ -559,12 +469,12 @@
       <workItem from="1576280612131" duration="1117000" />
       <workItem from="1576285855520" duration="19220000" />
       <workItem from="1576477449486" duration="9988000" />
-      <workItem from="1576496241619" duration="22003000" />
+      <workItem from="1576496241619" duration="22540000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136291000" />
+    <option name="totallyTimeSpent" value="136828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -656,24 +566,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/File.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-600">
           <caret line="121" column="17" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Native.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
@@ -863,10 +759,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/backends/APC.php">
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/Cache.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        <state relative-caret-position="433">
+          <caret line="126" column="5" lean-forward="true" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+          <folding>
+            <element signature="e#33#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1689">
+          <caret line="172" column="10" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="44" column="3" lean-forward="true" selection-start-line="44" selection-start-column="3" selection-end-line="44" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/Backend.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" selection-start-line="6" selection-end-line="10" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -874,6 +801,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -894,48 +828,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/Backend.php">
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/backends/APC.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" selection-start-line="6" selection-end-line="10" selection-end-column="50" />
+        <state relative-caret-position="210">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php">
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Native.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#33#52#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="570">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
+    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/serialize/Serializer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="172" column="10" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/cache/Cache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+        <state relative-caret-position="375">
+          <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
         </state>
       </provider>
     </entry>
