@@ -2,8 +2,6 @@
 
 namespace Quantum\Serialize\Serializer;
 
-use Quantum\Serialize\SerializerInterface;
-
 /**
  * Class Serializer
  * @package Quantum\Serialize
