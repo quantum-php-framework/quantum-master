@@ -190,11 +190,13 @@ class IndexController extends Quantum\Controller
 
         //$cache->flush();
 
-        //Quantum\Cache::set($someVar, $someString, 5);
+        Quantum\Cache::set($someVar, $someString, 5);
 
         var_dump(Quantum\Cache::get($someVar));
 
-        exit();
+        Quantum\Cache::has($someVar);
+
+        //exit();
 
         Quantum\Cache::increment('counterx', 10);
 
@@ -226,9 +228,9 @@ class IndexController extends Quantum\Controller
             return 100;
         }));
 
-        //\Quantum\Cache::storage('files')->set(qs()->random(), qs()->random());
-       // \Quantum\Cache::storage('redis')->set(qs()->random(), qs()->random());
-        //\Quantum\Cache::storage('memcache')->set(qs()->random(), qs()->random());
+        Quantum\Cache::storage('files')->set(qs()->random(), qs()->random());
+        Quantum\Cache::storage('redis')->set(qs()->random(), qs()->random());
+        Quantum\Cache::storage('memcache')->set(qs()->random(), qs()->random());
 
 
 

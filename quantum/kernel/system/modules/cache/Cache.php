@@ -290,4 +290,13 @@ class Cache
         return self::getProvider()->storage($driver);
     }
 
+    /**
+     * @param $driver
+     * @return mixed
+     */
+    public function setBackend($driver)
+    {
+        return self::getProvider()->setDriver($driver);
+    }
+
 }
