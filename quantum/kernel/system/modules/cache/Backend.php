@@ -107,7 +107,7 @@ abstract class Backend extends Singleton
     {
         if (!$this->has($key))
         {
-            $value = $initial_value+$offset;
+            $value = $initial_value + $offset;
             $this->set($key, $value, $expiry);
             return $value;
         }
@@ -127,7 +127,7 @@ abstract class Backend extends Singleton
     {
         if (!$this->has($key))
         {
-            $value = $initial_value-$offset;
+            $value = $initial_value - $offset;
             $this->set($key, $value, $expiry);
             return $value;
         }

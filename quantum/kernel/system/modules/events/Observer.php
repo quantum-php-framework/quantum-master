@@ -2,6 +2,8 @@
 
 namespace Quantum\Events;
 
+use Quantum\Serialize\Serializer\SerializedHash;
+
 /**
  * Class Observer
  * @package Quantum\Events
@@ -132,7 +134,7 @@ class Observer
      */
     public static function createCallbackHash($callback)
     {
-        return \Quantum\Serialize\SerializedHash::hashCallable($callback);
+        return SerializedHash::hashCallable($callback);
     }
 
 }

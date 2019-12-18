@@ -236,8 +236,6 @@ class Teleport {
                 $this->genAllDocs();
                 break;
 
-
-
             case "-a":
                 $this->teleportApp();
                 break;

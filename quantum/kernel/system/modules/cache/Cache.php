@@ -146,7 +146,7 @@ class Cache
      */
     public static function useRedis()
     {
-        return self::getProvider()->initRedis();
+        return self::setDriver('redis');
     }
 
     /**
@@ -154,7 +154,7 @@ class Cache
      */
     public static function useMemcache()
     {
-        return self::getProvider()->initMemcache();
+        return self::setDriver('memcache');
     }
 
     /**
@@ -162,7 +162,7 @@ class Cache
      */
     public static function useFiles()
     {
-        return self::getProvider()->initFileBased();
+        return self::setDriver('files');
     }
 
     /**
@@ -170,7 +170,7 @@ class Cache
      */
     public static function useEncryptedFiles()
     {
-        return self::getProvider()->initEncryptedFileBased();
+        return self::setDriver('encrypted');
     }
 
     /**
@@ -178,7 +178,7 @@ class Cache
      */
     public static function useAPC()
     {
-        return self::getProvider()->initApc();
+        return self::setDriver('apc');
     }
 
     /**
@@ -186,7 +186,7 @@ class Cache
      */
     public static function useEaccelerator()
     {
-        return self::getProvider()->initEaccelerator();
+        return self::setDriver('eaccelerator');
     }
 
     /**
@@ -194,7 +194,7 @@ class Cache
      */
     public static function useDatabase()
     {
-        return self::getProvider()->initDatabaseStorage();
+        return self::setDriver('db');
     }
 
     /**
@@ -202,19 +202,19 @@ class Cache
      */
     public static function useMongoDB()
     {
-        return self::getProvider()->initMongoDB();
+        return self::setDriver('mongodb');
     }
 
 
     /**
-     * Set to either redis or memcache, defaults to redis
      * @param $driver
+     * @return mixed
      */
     public static function setDriver ($driver)
     {
         $provider = self::getProvider();
 
-        $provider->setDriver($driver);
+        return $provider->setDriver($driver);
     }
 
     /**
@@ -296,7 +296,7 @@ class Cache
      */
     public function setBackend($driver)
     {
-        return self::getProvider()->setDriver($driver);
+        return self::setDriver($driver);
     }
 
 }

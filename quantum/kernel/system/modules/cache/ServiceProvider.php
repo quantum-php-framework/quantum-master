@@ -12,6 +12,7 @@ use Quantum\Cache\Backend\MongoDB;
 use Quantum\Cache\Backend\Redis;
 use Quantum\Cache\Backend\Xcache;
 use Quantum\Config;
+use Quantum\Events\EventsManager;
 use Quantum\Singleton;
 
 /**
@@ -26,6 +27,22 @@ class CacheBackendInitException extends \Exception {};
  */
 class ServiceProvider extends Singleton
 {
+    /**
+     *
+     */
+    const EventPrefix = 'Quantum/Events/Cache/ServiceProvider/Backend/';
+    /**
+     *
+     */
+    const BackendInitEvent   = self::EventPrefix.'Init';
+    /**
+     *
+     */
+    const BackendChangeEvent = self::EventPrefix.'Change';
+    /**
+     *
+     */
+    const BackendFlushEvent  = self::EventPrefix.'Flush';
 
     /**
      * @var mixed
@@ -40,6 +57,9 @@ class ServiceProvider extends Singleton
         $this->initFromEnvironmentConfig();
     }
 
+    /**
+     * @throws CacheBackendInitException
+     */
     public function initFromEnvironmentConfig()
     {
         $config = new_vt(Config::getInstance()->getEnvironment());
@@ -48,16 +68,26 @@ class ServiceProvider extends Singleton
             throw new CacheBackendInitException('no active environment config');
 
         if ($config->has('cache_backend'))
-            $this->setDriver($config->get('cache_backend'));
+        {
+            $backend = $config->get('cache_backend');
+            $this->setDriver($backend, false);
+            EventsManager::getInstance()->dispatch(self::BackendInitEvent, $backend);
+        }
         else
+        {
             $this->initFileBased();
+        }
+
     }
+
 
     /**
      * @param $driver
-     * @throws \Exception
+     * @param bool $sendEvent
+     * @return mixed
+     * @throws CacheBackendInitException
      */
-    public function setDriver ($driver)
+    public function setDriver ($driver, $sendEvent = true)
     {
         switch ($driver)
         {
@@ -101,6 +131,11 @@ class ServiceProvider extends Singleton
                 throw new CacheBackendInitException('Invalid Cache Backend: '.$driver);
                 break;
         }
+
+        if ($sendEvent)
+            EventsManager::getInstance()->dispatch(self::BackendChangeEvent, $driver);
+
+        return $this->getStorage();
     }
 
     /**
@@ -282,7 +317,11 @@ class ServiceProvider extends Singleton
      */
     public function flush()
     {
-        return $this->storage->flush();
+        $result = $this->storage->flush();
+
+        EventsManager::getInstance()->dispatch(self::BackendFlushEvent, true);
+
+        return $result;
     }
 
     /**

@@ -169,6 +169,9 @@ class IndexController extends Quantum\Controller
         ///exit();
 
         //Quantum\Cache::useEncryptedFiles();
+        //Quantum\Cache::useFiles();
+        //Quantum\Cache::useDatabase();
+        //Quantum\Cache::useFiles();
         //Quantum\Cache::flush();
         //exit();
 
