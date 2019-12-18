@@ -1,8 +1,8 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
 
-use Quantum\Serialize\Native;
+use Quantum\Serialize\Serializer\Native;
 use Quantum\SystemEncryptor;
 
 /**
@@ -28,10 +28,10 @@ class EncryptedFileBasedCacheStorage extends FilesBasedCacheStorage
      */
     public function set($key, $var, $expiration = 0)
     {
-        if ($expiration === 0)
-            $expiration = 31556952;
+        if ($expiration > 0)
+            $expiration = time() + $expiration;
 
-        $data = array(time()+$expiration, $var);
+        $data = array($expiration, $var);
 
         $data = Native::serialize($data);
 
@@ -80,7 +80,7 @@ class EncryptedFileBasedCacheStorage extends FilesBasedCacheStorage
 
         $t = time();
 
-        if ($t > $data[0])
+        if ($data[0] > 0 && $t > $data[0])
         {
             $file->delete();
             return false;

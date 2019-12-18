@@ -1,6 +1,8 @@
 <?php
 
-namespace Quantum\Serialize;
+namespace Quantum\Serialize\Serializer;
+
+use Quantum\Serialize\Serializer;
 
 /**
  * Class SerializedHash
@@ -9,18 +11,13 @@ namespace Quantum\Serialize;
 class SerializedHash
 {
     /**
-     * SerializedHash constructor.
-     */
-    function __construct (){}
-
-    /**
      * @param $data
      * @param string $algo
      * @return string
      */
     public static function hash($data, $algo = "md5")
     {
-        $serialized = \Quantum\Serialize\Serializer::serialize($data);
+        $serialized = Native::serialize($data);
 
         return hash($algo, $serialized);
     }
@@ -32,7 +29,7 @@ class SerializedHash
      */
     public static function hashClosure($closure, $algo = "md5")
     {
-        $serialized = \Quantum\Serialize\Serializer::serializeClosure($closure);
+        $serialized = Serializer::serializeClosure($closure);
 
         return hash($algo, $serialized);
     }

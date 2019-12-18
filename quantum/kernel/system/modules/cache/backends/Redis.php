@@ -1,9 +1,11 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
 
+use Quantum\Cache\Backend;
 use Quantum\Config;
 use Predis\Client;
+use Quantum\Cache\StorageSetupException;
 
 /**
  * Class Storage

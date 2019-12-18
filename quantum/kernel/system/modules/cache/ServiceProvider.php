@@ -2,6 +2,15 @@
 
 namespace Quantum\Cache;
 
+use Quantum\Cache\Backend\APC;
+use Quantum\Cache\Backend\Database;
+use Quantum\Cache\Backend\Eaccelerator;
+use Quantum\Cache\Backend\EncryptedFileBasedCacheStorage;
+use Quantum\Cache\Backend\FilesBasedCacheStorage;
+use Quantum\Cache\Backend\Memcache;
+use Quantum\Cache\Backend\MongoDB;
+use Quantum\Cache\Backend\Redis;
+use Quantum\Cache\Backend\Xcache;
 use Quantum\Config;
 use Quantum\Singleton;
 
@@ -82,6 +91,10 @@ class ServiceProvider extends Singleton
 
             case 'mongodb':
                 $this->initMongoDB();
+                break;
+
+            case 'xcache':
+                $this->initXcache();
                 break;
 
             default:
@@ -258,6 +271,15 @@ class ServiceProvider extends Singleton
     /**
      * @return mixed
      */
+    public function initXcache()
+    {
+        $this->storage = Xcache::getInstance();
+        return $this->storage;
+    }
+
+    /**
+     * @return mixed
+     */
     public function flush()
     {
         return $this->storage->flush();
@@ -309,6 +331,10 @@ class ServiceProvider extends Singleton
 
             case 'mongodb':
                 return MongoDB::getInstance();
+                break;
+
+            case 'xcache':
+                return Xcache::getInstance();
                 break;
         }
     }

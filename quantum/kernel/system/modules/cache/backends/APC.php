@@ -1,6 +1,9 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
+
+use Quantum\Cache\Backend;
+use Quantum\Cache\StorageSetupException;
 
 /**
  * Class Storage
@@ -15,7 +18,8 @@ class APC extends Backend
      */
     public function __construct($initFromEnv = true)
     {
-
+        if (!extension_loaded('apc'))
+            throw new StorageSetupException("'apc' extension not loaded");
     }
 
 
@@ -27,7 +31,7 @@ class APC extends Backend
      */
     public function set($key, $var, $expiration = 0)
     {
-        $result = \apc_store($key, $var, $expiration);
+        \apc_store($key, $var, $expiration);
 
         return $var;
     }

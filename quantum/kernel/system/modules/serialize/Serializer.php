@@ -3,17 +3,15 @@
 namespace Quantum\Serialize;
 use Opis\Closure\SerializableClosure;
 
+use Quantum\Serialize\Serializer\Native;
+use Quantum\Serialize\Serializer\Json;
+
 /**
  * Class Serializer
  * @package Quantum\Serialize
  */
 class Serializer
 {
-    /**
-     * Serializer constructor.
-     */
-    function __construct (){}
-
     /**
      * @param $data
      * @return false|string

@@ -1,8 +1,10 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
 
-use Quantum\Serialize\Native;
+use Quantum\Cache\Backend;
+use Quantum\Serialize\Serializer\Native;
+use Quantum\Cache\StorageSetupException;
 
 /**
  * Class EncryptedFileBasedCacheStorage
@@ -17,9 +19,8 @@ class Eaccelerator extends Backend
      */
     public function __construct()
     {
-        if (!extension_loaded('eaccelerator')) {
+        if (!extension_loaded('eaccelerator'))
             throw new StorageSetupException('Eaccelerator extension must be loaded for using this cache storage');
-        }
     }
 
     /**
@@ -30,10 +31,10 @@ class Eaccelerator extends Backend
      */
     public function set($key, $var, $expiration = 0)
     {
-        if ($expiration === 0)
-            $expiration = 31556952;
+        if ($expiration > 0)
+            $expiration = time() + $expiration;
 
-        $data = array(time()+$expiration, $var);
+        $data = array($expiration, $var);
 
         $data = Native::serialize($data);
 
@@ -64,7 +65,7 @@ class Eaccelerator extends Backend
 
         $t = time();
 
-        if ($t > $data[0])
+        if ($data[0] > 0 && $t > $data[0])
         {
             $this->delete($key);
             return false;

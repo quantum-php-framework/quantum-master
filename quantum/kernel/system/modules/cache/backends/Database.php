@@ -1,8 +1,10 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
 
-use Quantum\Serialize\Native;
+use Quantum\Cache\Backend;
+use Quantum\Serialize\Serializer\Native;
+use CacheItem;
 
 /**
  * Class EncryptedFileBasedCacheStorage
@@ -27,18 +29,16 @@ class Database extends Backend
      */
     public function set($key, $var, $expiration = 0)
     {
-        if ($expiration === 0)
-            $expiration = 31556952;
-
-        $expiration = time()+$expiration;
+        if ($expiration > 0)
+            $expiration = time() + $expiration;
 
         $data = Native::serialize($var);
 
-        $item = \CacheItem::find_by_key($key);
+        $item = CacheItem::find_by_key($key);
 
         if (empty($item))
         {
-            $item = new \CacheItem();
+            $item = new CacheItem();
             $item->key = $key;
             $item->data = $data;
             $item->expiration = $expiration;
@@ -46,6 +46,7 @@ class Database extends Backend
         }
         else
         {
+            $item->expiration = $expiration;
             $item->data = $data;
             $item->save();
         }
@@ -60,7 +61,7 @@ class Database extends Backend
      */
     public function get($key)
     {
-        $item = \CacheItem::find_by_key($key);
+        $item = CacheItem::find_by_key($key);
 
         if (empty($item))
             return false;
@@ -75,7 +76,7 @@ class Database extends Backend
 
         $t = time();
 
-        if ($t > $item->expiration)
+        if ($item->expiration > 0 && $t > $item->expiration)
         {
             $item->delete();
             return false;
@@ -89,12 +90,7 @@ class Database extends Backend
      */
     public function flush()
     {
-        $items = \CacheItem::all();
-
-        foreach ($items as $item)
-        {
-            $item->delete();
-        }
+        return CacheItem::delete_all(['conditions' => ['id > 0']]);
     }
 
     /**
@@ -103,7 +99,7 @@ class Database extends Backend
      */
     public function delete($key)
     {
-        $item = \CacheItem::find_by_key($key);
+        $item = CacheItem::find_by_key($key);
 
         if (empty($item))
             return false;

@@ -115,8 +115,8 @@ class IndexController extends Quantum\Controller
         //Quantum\ApiException::iAmATeapot();
         //phpinfo();
 
-        //$someVar = 'varc';
-        $someVar = qs()->random()->toStdString();
+        $someVar = 'varc';
+        //$someVar = qs()->random()->toStdString();
         $someString = qs()->random()->toStdString();
 
         //$someString = 'lorem ipsum';
@@ -190,11 +190,11 @@ class IndexController extends Quantum\Controller
 
         //$cache->flush();
 
-        Quantum\Cache::set($someVar, $someString);
+        //Quantum\Cache::set($someVar, $someString, 5);
 
         var_dump(Quantum\Cache::get($someVar));
 
-        //exit();
+        exit();
 
         Quantum\Cache::increment('counterx', 10);
 

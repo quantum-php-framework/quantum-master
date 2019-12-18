@@ -1,5 +1,6 @@
 <?php
 
+use Quantum\Serialize\Serializer;
 use \Rollbar\Rollbar;
 use \Rollbar\Payload\Level;
 
@@ -41,7 +42,7 @@ class ExternalErrorLoggerService
     public static function normalize($data)
     {
         if (is_array($data) || is_object($data))
-            $data = \Quantum\Serialize\Serializer::serialize($data);
+            $data = Serializer::serialize($data);
 
         if (!is_string($data))
             $data = (string)$data;

@@ -1,6 +1,9 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
+
+use Quantum\Cache\Backend;
+use Quantum\Cache\StorageSetupException;
 
 /**
  * Class Storage
@@ -62,16 +65,16 @@ class MongoDB extends Backend
         if (empty($config))
             throw new StorageSetupException('no active environment config');
 
-        if (!$config->has('mongodb_db'))
-            throw new StorageSetupException('mongodb_db not defined in environment config');
+        if (!$config->has('mongo_db'))
+            throw new StorageSetupException('mongo_db not defined in environment config');
 
-        $this->_options['db'] = $config->get('mongodb_db');
+        $this->_options['db'] = $config->get('mongo_db');
 
-        if ($config->has('mongodb_connection_string'))
-            $this->_options['connection_string'] = $config->get('mongodb_connection_string');
+        if ($config->has('mongo_connection_string'))
+            $this->_options['connection_string'] = $config->get('mongo_connection_string');
 
-        if (!$config->has('mongo_options'))
-            $this->_options['mongo_options'] = $config->get('mongodb_connection_string');
+        if ($config->has('mongo_options'))
+            $this->_options['mongo_options'] = $config->get('mongo_optionss');
 
     }
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace Quantum\Cache;
+namespace Quantum\Cache\Backend;
 
+use Quantum\Cache\Backend;
 use Quantum\InternalPathResolver;
 use Quantum\File;
-use Quantum\Serialize\Native;
+use Quantum\Serialize\Serializer\Native;
 
 /**
  * Class Storage
@@ -74,14 +75,10 @@ class FilesBasedCacheStorage extends Backend
      */
     public function set($key, $var, $expiration = 0)
     {
-        // Serializing along with the TTL
+        if ($expiration > 0)
+            $expiration = time() + $expiration;
 
-        if ($expiration === 0)
-            $expiration = 31556952;
-
-        //dd($expiration);
-
-        $data = array(time()+$expiration, $var);
+        $data = array($expiration, $var);
 
         $data = Native::serialize($data);
 
@@ -118,7 +115,7 @@ class FilesBasedCacheStorage extends Backend
         $t = time();
 
         //expired time
-        if ($t > $data[0])
+        if ($data[0] > 0 && $t > $data[0])
         {
             $file->delete();
             return false;
