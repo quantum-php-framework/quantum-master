@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/Backend.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/Backend.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/Cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/Cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/config/environment.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/config/environment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/script/teleport.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/script/teleport.php" afterDir="false" />
-    </list>
+    <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/App.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="19" selection-end-column="11" />
+              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -111,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+            <state relative-caret-position="480">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
             </state>
           </provider>
         </entry>
@@ -223,10 +214,10 @@
         <option value="$PROJECT_DIR$/quantum/script/teleport.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/cache/Cache.php" />
-        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" />
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/cache/ServiceProvider.php" />
         <option value="$PROJECT_DIR$/quantum/local/config/environment.php" />
+        <option value="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" />
       </list>
     </option>
   </component>
@@ -490,18 +481,18 @@
       <workItem from="1576285855520" duration="19220000" />
       <workItem from="1576477449486" duration="9988000" />
       <workItem from="1576496241619" duration="26895000" />
-      <workItem from="1576659104161" duration="13890000" />
+      <workItem from="1576659104161" duration="14000000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155073000" />
+    <option name="totallyTimeSpent" value="155183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.72254336" visible="true" weight="0.17582418" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.72254336" visible="true" weight="0.17582418" />
       <window_info id="Structure" order="1" sideWeight="0.50067294" side_tool="true" weight="0.26556778" />
       <window_info id="Favorites" order="2" sideWeight="0.27745664" side_tool="true" weight="0.26862028" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -514,7 +505,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32894737" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.62148964" visible="true" weight="0.28947368" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.62148964" visible="true" weight="0.28947368" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.3785104" side_tool="true" weight="0.104166664" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -848,13 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/App.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="19" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="61">
@@ -874,8 +858,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quantum/local/config/environment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+        <state relative-caret-position="480">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quantum/apps/hosted/default/App.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
         </state>
       </provider>
     </entry>

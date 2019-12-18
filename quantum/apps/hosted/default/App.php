@@ -14,10 +14,7 @@ class App extends Quantum\HostedApp
     public function init()
     {
         //$this->runMiddlewares([ValidateRouteHttpMethod::class]);
-        QM::observe(\Quantum\Cache\ServiceProvider::BackendChangeEvent, function ($event)
-        {
-            qs($event->getData())->render();
-        });
+
     }
 
     public function pre_controller_construct()
