@@ -81,7 +81,7 @@ class Cache
 
             if (!is_callable($fallback) && !is_null($fallback))
             {
-                $provider->set($key, $fallback());
+                $provider->set($key, $fallback);
             }
         }
 
