@@ -730,6 +730,14 @@ class Output extends Singleton
 
         $this->smarty->display($path);
     }
+
+    /**
+     * @param $string
+     */
+    public function setHeader($string)
+    {
+        header($string);
+    }
    
     
     
