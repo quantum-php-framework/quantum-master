@@ -110,7 +110,7 @@ class IndexController extends Quantum\Controller
 
     public function options()
     {
-        dd($this->request->getMethod());
+        dd($this->request->getPort());
     }
 
 

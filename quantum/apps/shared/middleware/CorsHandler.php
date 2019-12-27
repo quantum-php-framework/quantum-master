@@ -2,9 +2,17 @@
 
 use Quantum\Request;
 
+/**
+ * Class CorsHandler
+ */
 class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
 {
 
+    /**
+     * @param Request $request
+     * @param Closure $closure
+     * @return mixed|void
+     */
     public function handle(Request $request, \Closure $closure)
     {
         if (!$this->isCorsRequest($request))
@@ -36,6 +44,9 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
 
     }
 
+    /**
+     * @param Request $request
+     */
     private function handlePreflightRequest(Request $request)
     {
         $output = $this->getOutput();
@@ -45,12 +56,19 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
         $output->response(null, 204);
     }
 
+    /**
+     * @param Request $request
+     */
     private function handleDeniedRequest(Request $request)
     {
         Quantum\ApiException::custom('Denied', $this->getDeniedResponseStatusCode(), $this->getDeniedResponseMessage());
     }
 
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
     private function isRequestAllowed(Request $request)
     {
         if (!qs($this->getAllowedMethods())->containsWholeWordIgnoreCase($request->getMethod()))
@@ -64,6 +82,10 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
         return $origins->containsWholeWordIgnoreCase($request->getHeaderIgnoreCase('Origin'));
     }
 
+
+    /**
+     * Add Cors Headers
+     */
     private function addCorsHeaders()
     {
         $response = $this->getOutput();
@@ -75,11 +97,13 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
 
         $response->setHeaderParam('Access-Control-Allow-Origin', $this->getAllowedOrigins());
         $response->setHeaderParam('Access-Control-Expose-Headers', $this->getExposeHeaders());
-
-        return $response;
     }
 
 
+    /**
+     * Add Preflight Headers
+     * @param $response
+     */
     private function addPreflightHeaders($response)
     {
         if ($this->allowCredentials())
@@ -93,12 +117,13 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
         $response->setHeaderParam('Access-Control-Max-Age', $this->getMaxAge());
         $response->setHeaderParam('Content-Length', 0);
         $response->removeHeader("Content-type");
-
-
-        return $response;
     }
 
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
     private function isCorsRequest(Request $request)
     {
         $origin = $request->getHeaderIgnoreCase('Origin');
@@ -114,46 +139,74 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
         return !$origin->equalsIgnoreCase($current_url);
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
     private function isPreflightRequest(Request $request)
     {
         return $request->isOptions() && $request->hasHeaderIgnoreCase('Access-Control-Request-Method');
     }
 
+    /**
+     * @return bool
+     */
     private function allowCredentials()
     {
         return $this->route->get('cors_allow_credentials', false) == true;
     }
 
+    /**
+     * @return mixed
+     */
     private function getAllowedMethods()
     {
         return $this->route->get('cors_allowed_methods', 'HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS');
     }
 
+    /**
+     * @return mixed
+     */
     private function getAllowedHeaders()
     {
         return $this->route->get('cors_allowed_headers', 'Content-Type, X-Auth-Token, Origin, Authorization, X-Requested-With, Accept');
     }
 
+    /**
+     * @return mixed
+     */
     private function getAllowedOrigins()
     {
         return $this->route->get('cors_allowed_origins', '*');
     }
 
+    /**
+     * @return mixed
+     */
     private function getExposeHeaders()
     {
         return $this->route->get('cors_expose_headers', 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma');
     }
 
+    /**
+     * @return mixed
+     */
     private function getDeniedResponseMessage()
     {
         return $this->route->get('cors_denied_response_message', 'Denied CORS Request');
     }
 
+    /**
+     * @return mixed
+     */
     private function getDeniedResponseStatusCode()
     {
         return $this->route->get('cors_denied_response_status_code', '403');
     }
 
+    /**
+     * @return mixed
+     */
     private function getMaxAge()
     {
         return $this->route->get('cors_max_age', 86400);

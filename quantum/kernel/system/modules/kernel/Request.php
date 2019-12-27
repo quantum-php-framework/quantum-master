@@ -568,6 +568,9 @@ class Request extends Singleton
         return $c;
     }
 
+    /**
+     * @return string
+     */
     public function getSchemeAndHttpHost()
     {
         $scheme = self::getProtocol();
@@ -579,6 +582,9 @@ class Request extends Singleton
         return $scheme.'://'.self::getDomain().':'.self::getPort();
     }
 
+    /**
+     * @return int|mixed
+     */
     public function getPort()
     {
         if (!$host = $this->getHeader('HOST')) {
