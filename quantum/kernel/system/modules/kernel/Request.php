@@ -579,7 +579,7 @@ class Request extends Singleton
             return self::getDomainWithProtocol(false);
         }
 
-        return $scheme.'://'.self::getDomain().':'.self::getPort();
+        return $scheme.'://'.self::getDomain().':'.$port;
     }
 
     /**
