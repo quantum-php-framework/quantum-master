@@ -738,6 +738,31 @@ class Output extends Singleton
     {
         header($string);
     }
+
+    public function setResponseCode($code)
+    {
+        http_response_code($code);
+    }
+
+    public function removeHeader($string)
+    {
+        header_remove($string);
+    }
+
+    public function setHeaderParam($key, $value)
+    {
+        $this->setHeader($key.': '.$value);
+    }
+
+    public function response($contents = null, $code = 200)
+    {
+        $this->setResponseCode($code);
+
+        if ($contents)
+            echo $contents;
+
+        Kernel::shutdown();
+    }
    
     
     

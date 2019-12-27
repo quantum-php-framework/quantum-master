@@ -24,6 +24,8 @@ class SetRouteCacheHeader extends \Quantum\Middleware\Foundation\SystemMiddlewar
         }
 
         $this->getOutput()->setHeader($header);
+        $this->getOutput()->removeHeader("Pragma");
+        $this->getOutput()->removeHeader("Expires");
 
     }
 }

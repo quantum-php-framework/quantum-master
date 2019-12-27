@@ -509,7 +509,7 @@ class Request extends Singleton
 
     /**
      * @param bool $addSlashes
-     * @return QString
+     * @return string
      */
     public static function getProtocol($addSlashes = false)
     {
@@ -534,7 +534,7 @@ class Request extends Singleton
 
     /**
      * @param bool $add_last_slash
-     * @return QString
+     * @return string
      */
     public static function getDomainWithProtocol($add_last_slash = true)
     {
@@ -566,6 +566,48 @@ class Request extends Singleton
         $c = $a .".". $b;
 
         return $c;
+    }
+
+    public function getSchemeAndHttpHost()
+    {
+        $scheme = self::getProtocol();
+        $port = self::getPort();
+        if (('http' == $scheme && 80 == $port) || ('https' == $scheme && 443 == $port)) {
+            return self::getDomainWithProtocol(false);
+        }
+
+        return $scheme.'://'.self::getDomain().':'.self::getPort();
+    }
+
+
+    public function getHttpHost()
+    {
+        $scheme = self::getProtocol();
+        $port = self::getPort();
+        $domain   = self::getDomain();
+
+        if (('http' == $scheme && 80 == $port) || ('https' == $scheme && 443 == $port)) {
+            return $this->getHost();
+        }
+
+        dd($domain);
+    }
+
+    public function getPort()
+    {
+        if (!$host = $this->getHeader('HOST')) {
+            return $_SERVER['SERVER_PORT'];
+        }
+        if ('[' === $host[0]) {
+            $pos = strpos($host, ':', strrpos($host, ']'));
+        } else {
+            $pos = strrpos($host, ':');
+        }
+        if (false !== $pos && $port = substr($host, $pos + 1)) {
+            return (int) $port;
+        }
+
+        return 'https' === self::getProtocol() ? 443 : 80;
     }
 
     /**
@@ -777,6 +819,56 @@ class Request extends Singleton
             return $this->_headers_tree->get($key);
 
         return $this->_headers_tree;
+    }
+
+    /**
+     * Find a header case insensitive
+     * @param $key
+     * @return bool
+     */
+    public function hasHeaderIgnoreCase($key)
+    {
+        $headers = new_vt(self::getHeaders());
+        $headers->changeKeysToLowerCase();
+
+        return $headers->has(qs($key)->toLowerCase()->toStdString());
+    }
+
+
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
+    public function getHeaderIgnoreCase($key)
+    {
+        $headers = new_vt(self::getHeaders());
+        $headers->changeKeysToLowerCase();
+
+        return $headers->get(qs($key)->toLowerCase()->toStdString(), null);
+    }
+
+    /**
+     * Find a header case sensitive
+     * @param $key
+     * @return bool
+     */
+    public function hasHeader($key)
+    {
+        $headers = new_vt(self::getHeaders());
+
+        return $headers->has($key);
+    }
+
+    /**
+     * Get a header case sensitive
+     * @param $key
+     * @return bool|mixed
+     */
+    public function getHeader($key)
+    {
+        $headers = new_vt(self::getHeaders());
+
+        return $headers->get($key, null);
     }
 
     /**

@@ -108,6 +108,11 @@ class IndexController extends Quantum\Controller
 
     }
 
+    public function options()
+    {
+        dd($this->request->getMethod());
+    }
+
 
     public function method()
     {
