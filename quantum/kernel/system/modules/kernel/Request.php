@@ -579,20 +579,6 @@ class Request extends Singleton
         return $scheme.'://'.self::getDomain().':'.self::getPort();
     }
 
-
-    public function getHttpHost()
-    {
-        $scheme = self::getProtocol();
-        $port = self::getPort();
-        $domain   = self::getDomain();
-
-        if (('http' == $scheme && 80 == $port) || ('https' == $scheme && 443 == $port)) {
-            return $this->getHost();
-        }
-
-        dd($domain);
-    }
-
     public function getPort()
     {
         if (!$host = $this->getHeader('HOST')) {

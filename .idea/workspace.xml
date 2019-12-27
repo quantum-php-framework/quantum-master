@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/middleware/SetRouteCacheHeader.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/middleware/SetRouteCacheHeader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__51c8863c54b7f8440d1622ece34adc1d1a71a771.php.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/quantum/local/var/cache/ratelimit/__77e3926bf352ed28752957c76e591734340c3f2d.php.cache" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,8 +105,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="570" column="40" selection-start-line="570" selection-start-column="20" selection-end-line="570" selection-end-column="40" />
+            <state relative-caret-position="306">
+              <caret line="579" column="5" selection-start-line="579" selection-start-column="5" selection-end-line="579" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -124,8 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>StorageSe</find>
-      <find>delete</find>
       <find>Quantum\Cache\Backends</find>
       <find>all</find>
       <find>delet</find>
@@ -154,6 +143,8 @@
       <find>getDo</find>
       <find>getDom</find>
       <find>getHeader</find>
+      <find>dd</find>
+      <find>getHttpHost</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -225,8 +216,8 @@
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" />
         <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" />
         <option value="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" />
-        <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" />
         <option value="$PROJECT_DIR$/quantum/apps/shared/middleware/CorsHandler.php" />
+        <option value="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" />
       </list>
     </option>
   </component>
@@ -509,12 +500,12 @@
       <workItem from="1576659104161" duration="17615000" />
       <workItem from="1576715310125" duration="5965000" />
       <workItem from="1577121017882" duration="13806000" />
-      <workItem from="1577457646333" duration="8656000" />
+      <workItem from="1577457646333" duration="8867000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187225000" />
+    <option name="totallyTimeSpent" value="187436000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1417" extended-state="6" />
@@ -833,8 +824,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="570" column="40" selection-start-line="570" selection-start-column="20" selection-end-line="570" selection-end-column="40" />
+        <state relative-caret-position="306">
+          <caret line="579" column="5" selection-start-line="579" selection-start-column="5" selection-end-line="579" selection-end-column="5" />
         </state>
       </provider>
     </entry>
