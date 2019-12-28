@@ -58,7 +58,8 @@ $QUANTUM_APP_ROUTES = array
         'cors_expose_headers' => 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma',
         'cors_denied_response_message' => 'Denied CORS Request',
         'cors_denied_response_status_code' => '403',
-        'cors_max_age' => 86400
+        'cors_max_age' => 86400,
+        //'middlewares' => [SetRouteCacheHeader::class, CorsHandler::class]
 
     ),
 

@@ -10,6 +10,8 @@ use Quantum\Middleware\ValidateAppStatus;
 use Quantum\Middleware\ValidateCSRF;
 use Quantum\Middleware\ValidateKernelRateLimit;
 use Quantum\Middleware\ValidatePostSize;
+use Quantum\Middleware\ExecuteAppMiddlewares;
+use Shared\Middlewares\ExecuteRouteMiddlewares;
 
 /** \mainpage Quantum Framework Api Docs
  *
@@ -118,6 +120,24 @@ class Kernel extends Singleton
         });
 
     }
+
+    /**
+     *
+     */
+    public function runAppMiddlewares()
+    {
+        $m = array(ExecuteAppMiddlewares::class,
+            ExecuteRouteMiddlewares::class);
+
+        $handler = new Middleware\Request\RunHandler($m);
+        $handler->runRequestProviders($this->request, function($request)
+        {
+            //var_dump($request);
+        });
+
+    }
+
+
 
     /**
      * @return string

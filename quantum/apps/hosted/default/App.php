@@ -13,7 +13,8 @@ class App extends Quantum\HostedApp
 
     public function init()
     {
-        $this->runMiddlewares([SetRouteCacheHeader::class, CorsHandler::class]);
+        //$this->runMiddlewares([\Shared\Middlewares\ExecuteRouteMiddlewares::class]);
+        //$this->runMiddlewares([SetRouteCacheHeader::class, CorsHandler::class]);
 
     }
 

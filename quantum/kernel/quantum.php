@@ -196,7 +196,6 @@ class Quantum
         Quantum\Profiler::enableIfProfilerFileExists();
         Quantum\Profiler::start("Quantum::__construct");
 
-
         $this->initKernel();
 
         $this->importRequiredLibraries();
@@ -210,9 +209,9 @@ class Quantum
 
         $this->registerAdditionalRoutes();
 
+        $this->kernel->runAppMiddlewares();
 
         $this->createApp();
-
 
         Quantum\Profiler::start("Quantum::runControllerDispatch");
         $this->runControllerDispatch();
@@ -222,9 +221,7 @@ class Quantum
 
         Quantum\Profiler::stop("Quantum::__construct");
 
-
         $this->shutdown();
-
     }
 
 

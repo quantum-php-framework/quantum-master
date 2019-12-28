@@ -57,7 +57,7 @@ class ValidateRouteHttpMethod extends \Quantum\Middleware\Foundation\SystemMiddl
                     break;
 
                 default:
-                    throw_exception('invalid request method:'.$method);
+                    \Quantum\ApiException::custom("invalid_request_method", '500', 'Invalid request method:'.$method);
                     break;
             }
 

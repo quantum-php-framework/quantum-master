@@ -60,6 +60,7 @@ class RunHandler extends \Quantum\Singleton
 
 
             });
+
             qm_profiler_stop('Middleware::'.$provider_name);
         }
 
