@@ -227,6 +227,38 @@ class QString implements Countable, IteratorAggregate, ArrayAccess
     }
 
     /**
+     * Returns true if the string is Html, false otherwise
+     *
+     * @return bool Whether or not $str is Html
+     */
+
+    public function isHtml()
+    {
+        if (!$this->length())
+            return false;
+
+        return $this->text != strip_tags($this->text);
+    }
+
+    /**
+     * Returns true if the string is XMl, false otherwise
+     *
+     * @return bool Whether or not $str is XML
+     */
+    public function isXml()
+    {
+        if (!$this->length())
+            return false;
+
+        $doc = @simplexml_load_string($this->text);
+        if ($doc) {
+            return true; //this is valid
+        } else {
+            return false; //this is not valid
+        }
+    }
+
+    /**
      * @return bool
      */
     public function isMultiByte()

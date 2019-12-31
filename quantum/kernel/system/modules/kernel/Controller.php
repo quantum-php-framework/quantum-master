@@ -5,6 +5,8 @@
 
 namespace Quantum;
 
+use Quantum\Psr7\ResponseFactory;
+
 /**
  * Class Controller
  * @package Quantum
@@ -394,6 +396,11 @@ class Controller
     public function isSubmoduleController()
     {
 
+    }
+
+    public function responseFactory()
+    {
+        return new \Quantum\Psr7\ResponseFactory();
     }
 
 

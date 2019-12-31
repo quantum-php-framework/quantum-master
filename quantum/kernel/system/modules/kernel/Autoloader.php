@@ -61,6 +61,7 @@ class Autoloader extends Singleton
         $this->system_directories = array();
 
         $this->system_directories = File::newFile($ipt->system_root)->getAllSubDirectories();
+        //dd($this->system_directories);
 
         $this->modules_directories = File::newFile($ipt->shared_app_modules_root)->getAllSubDirectories();;
 
@@ -253,7 +254,7 @@ class Autoloader extends Singleton
             return Result::fail();
         }
 
-        require_once $located_file;
+        $this->loadClass($original_class, $located_file);
 
         qm_profiler_stop('ModuleClassLoad::'.$className);
 
@@ -261,11 +262,24 @@ class Autoloader extends Singleton
 
     }
 
+    private function loadClass($original_class, $path)
+    {
+        if(\file_exists($path))
+        {
+            if (ClassReader::getClassFullNameFromFile($path) === $original_class)
+            {
+                require_once $path;
+            }
+        }
+    }
+
     /**
      * Thee autoloader...,  you can add more fileNameFormats, for ex: %s.class.php
      */
     private function handle($className)
     {
+        $original_class = $className;
+
         //qm_profiler_start('AutoLoad::'.$className);
 
         $r = $this->handleProbableModuleClass($className);

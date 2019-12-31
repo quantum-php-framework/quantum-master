@@ -11,7 +11,11 @@ $QUANTUM_APP_ROUTES = array
         'rate_limit' => '1000',
         'rate_limit_time' => '3600',
         'csrf_check_enabled' => '0',
-        'http_request_methods' => 'GET'
+        'http_request_methods' => 'GET',
+        'middlewares' => [SetRouteCacheHeader::class, CorsHandler::class],
+        'http_cache_maxage' => '86400',
+        'http_shared_cache_maxage' => '31536000',
+        'cors_enabled' => '1',
     ),
 
     array(

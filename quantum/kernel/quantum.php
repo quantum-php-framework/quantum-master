@@ -17,6 +17,11 @@ class Quantum
      * @var \Quantum\Config
      */
     public $config;
+
+    /**
+     * @var \Quantum\QueuedResponse
+     */
+    public $queued_response;
     /**
      * @var
      */
@@ -363,7 +368,7 @@ class Quantum
         if (isset($this->activeController))
             $this->callInternalApiControllerFunction($this->activeController, "__pre_render");
 
-        $this->output->render();
+        $this->processQueuedResponse();
 
         if (isset($this->activeController))
             $this->callInternalApiControllerFunction($this->activeController, "__post_render");
@@ -371,6 +376,22 @@ class Quantum
         $this->callAppMethod("post_render");
         Quantum\Profiler::stop("Quantum::output");
 
+    }
+
+    /**
+     *
+     */
+    private function processQueuedResponse()
+    {
+        if ($this->queued_response->isView())
+        {
+            $this->output->render();
+        }
+        else
+        {
+            $response = Quantum\Psr7\ResponseFactory::fromVariableData($this->queued_response->getResponse());
+            $response->emmit();
+        }
     }
 
 
@@ -484,6 +505,9 @@ class Quantum
         $this->createControllerAndCallFunction($name, $this->task);
     }
 
+    /**
+     * @param $task
+     */
     private function validateWildcardRequest($task)
     {
         if (qs($task)->startsWith('__'))
@@ -495,6 +519,37 @@ class Quantum
     }
 
 
+    /**
+     * @param $response
+     * @param $controllerName
+     * @param $task
+     * @param $controller
+     */
+    private function handleControllerDispatch($response, $controllerName, $task, $controller)
+    {
+        $this->queued_response = new \Quantum\QueuedResponse();
+        $this->queued_response->setResponse($response);
+
+        if (is_null($response))
+        {
+            $controller->mainView = "$controllerName/$task.tpl";
+            $this->output->setView($this->controller, $task);
+
+            $this->queued_response->setIsView(true);
+        }
+        else
+        {
+            $this->queued_response->setIsView(false);
+        }
+    }
+
+
+    /**
+     * @param $controllerName
+     * @param $controller
+     * @param $task
+     * @throws ReflectionException
+     */
     private function callControllerFunction($controllerName, $controller, $task)
     {
         $reflection = new ReflectionMethod($controller, $task);
@@ -504,19 +559,14 @@ class Quantum
             QM::output()->displayAppError('404');
         }
 
-        if ($reflection->isPublic())
+        if (!$reflection->isPublic())
         {
-            call_user_func(array($controller, $task));
-            $controller->mainView = "$controllerName/$task.tpl";
-            $this->output->setView($this->controller, $task);
+            $task = 'index';
         }
 
-        else
-        {
-            call_user_func(array($controller, 'index'));
-            $controller->mainView = "index.tpl";
-            $this->output->setView($this->controller, 'index');
-        }
+        $response = call_user_func(array($controller, $task));
+
+        $this->handleControllerDispatch($response, $controllerName, $task, $controller);
     }
 
     /**

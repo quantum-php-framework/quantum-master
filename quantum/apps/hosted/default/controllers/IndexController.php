@@ -61,7 +61,41 @@ class IndexController extends Quantum\Controller
     */
     public function index()
     {
-        qs('Welcome to Quantum')->render();
+
+        //return new \Quantum\Psr7\Response\HtmlResponse('hi');
+
+        //return  Quantum\Psr7\ResponseFactory::createResponseWithContents('hello man')->withHeader("pepe", "100");
+
+        //return \Quantum\Psr7\ResponseFactory::json(["hola" => 1]);
+
+        //return json_encode(["hola" => 1]);
+
+        //Quantum\Session::start();
+
+        //QM::cookies()->get('pepe');
+
+
+        //$this->output->setHeaderParam('pepe', '100');
+
+        return response(["hola" => 1])->withHeader('Content-Type', 'text/papitas');
+
+        //return "http://google.com";
+        //return redirect("http://google.com");
+
+        //$this->setTemplate('default');
+
+        //$response = new \Quantum\Psr7\Response\RedirectResponse('http://google.com');
+
+        //$response = new \Quantum\Psr7\Response\JsonResponse(['var' => 100]);
+
+        //$response = new \Quantum\Psr7\Response\HtmlResponse('hi');
+
+        //$response = new \Quantum\Psr7\Response\EmptyResponse();
+        //return $response;
+
+        //return ['hi' => true];
+
+        //qs('Welcome to Quantum')->render();
     }
 
     public function test()
@@ -116,10 +150,26 @@ class IndexController extends Quantum\Controller
 
     public function method()
     {
+        $this->setTemplate('default');
+
         //qs('hi')->render();
         //Quantum\ApiException::iAmATeapot();
         //phpinfo();
+        //$request = \Quantum\Psr7\ServerRequestFactory::fromGlobals();
 
+        //var_dump($request);
+
+        //$factory = new \Quantum\Psr7\JsonResponse(['var' => 100]);
+        $response = new \Quantum\Psr7\Response\JsonResponse(['var' => 100]);
+
+        return $response;
+        //dd($response);
+
+        $emitter = new \Quantum\Psr7Emitter\Emitter\SapiStreamEmitter();
+        $emitter->emit($response);
+
+
+        exit();
         $someVar = 'varc';
         //$someVar = qs()->random()->toStdString();
         $someString = qs()->random()->toStdString();

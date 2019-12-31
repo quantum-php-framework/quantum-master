@@ -5,6 +5,7 @@
 namespace Quantum;
 
 use Quantum\Middleware\ValidatePostSize;
+use Quantum\Psr7\ServerRequestFactory;
 
 require_once("Singleton.php");
 require_once ("Security.php");
@@ -1180,6 +1181,14 @@ class Request extends Singleton
     public function getUserAgent()
     {
         return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "Unknown";
+    }
+
+    /**
+     * @return Psr7\ServerRequest
+     */
+    public function toPsr7()
+    {
+        return ServerRequestFactory::fromGlobals();
     }
 
 
