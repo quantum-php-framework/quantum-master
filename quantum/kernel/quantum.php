@@ -390,7 +390,7 @@ class Quantum
         else
         {
             $response = Quantum\Psr7\ResponseFactory::fromVariableData($this->queued_response->getResponse());
-            $response->emmit();
+            $response->emit();
         }
     }
 

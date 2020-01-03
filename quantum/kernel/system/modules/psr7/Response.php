@@ -162,6 +162,58 @@ class Response implements ResponseInterface
         return $new;
     }
 
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @param int $expiresAt
+     * @param string $path
+     * @param string $domain
+     * @param bool $secure
+     * @param bool $httpOnly
+     * @param string $sameSite
+     * @return Response
+     */
+    public function withCookie(string $name,
+                               string $value,
+                               int $expiresAt = 0,
+                               string $path = '',
+                               string $domain = '',
+                               bool $secure = false,
+                               bool $httpOnly = false,
+                               string $sameSite = '') : Response
+    {
+        $new = clone $this;
+
+        $cookie = new ResponseCookie($name, $value, $expiresAt, $path, $domain, $secure, $httpOnly, $sameSite);
+
+        return $cookie->addToResponse($new);
+    }
+
+
+    /**
+     * @param string $name
+     * @param string $path
+     * @param string $domain
+     * @param bool $secure
+     * @param bool $httpOnly
+     * @param string $sameSite
+     * @return Response
+     */
+    public function withoutCookie(string $name,
+                                  string $path = '',
+                                  string $domain = '',
+                                  bool $secure = false,
+                                  bool $httpOnly = false,
+                                  string $sameSite = '')
+    {
+        $new = clone $this;
+
+        $cookie = ResponseCookie::thatDeletesCookie($name, $path, $domain, $secure, $httpOnly, $sameSite);
+
+        return $cookie->addToResponse($new);
+    }
+
     /**
      * Set a valid status code.
      *
@@ -200,21 +252,21 @@ class Response implements ResponseInterface
     }
 
 
-    public function emmit()
+    public function emit()
     {
         if ($this->hasHeader('Content-Disposition') && $this->hasHeader('Content-Range')
         ) {
-            $emmiter = new SapiStreamEmitter();
-            return $emmiter->emit($this);
+            $emiter = new SapiStreamEmitter();
+            return $emiter->emit($this);
         }
 
-        $emmiter = new SapiEmitter();
-        return $emmiter->emit($this);
+        $emiter = new SapiEmitter();
+        return $emiter->emit($this);
     }
 
     public function stream()
     {
-        $emmiter = new SapiStreamEmitter();
-        $emmiter->emit($this);
+        $emiter = new SapiStreamEmitter();
+        $emiter->emit($this);
     }
 }
