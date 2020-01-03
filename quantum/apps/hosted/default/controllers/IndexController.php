@@ -77,10 +77,12 @@ class IndexController extends Quantum\Controller
 
         //$this->output->setHeaderParam('pepe', '100');
 
-        $cookie = new \Quantum\Psr7\ResponseCookie('cass', true);
+        //$cookie = new \Quantum\Psr7\ResponseCookie('cass', true);
 
 
-        return response(["hola" => 1])->withCookie('cassandra', 'true');
+        //dd(\QM::cookies()->getDecrypted('cassandra'));
+
+        return response()->withEncryptedCookie('cassandra', 'gorgeous');
 
         //return "http://google.com";
         //return redirect("http://google.com");

@@ -34,6 +34,24 @@ class Cookies extends Singleton
         return setcookie($key, $val, $expires, $path, $domain, $secure, $httponly);
     }
 
+    /**
+     * @param $key
+     * @param $val
+     * @param int $expires
+     * @param string $path
+     * @param string $domain
+     * @param bool $secure
+     * @param bool $httponly
+     * @return bool
+     */
+    public function setEncrypted($key, $val, $expires = 0, $path = "", $domain = "", $secure = false, $httponly = false)
+    {
+        if (!empty($val))
+            $val = SystemEncryptor::encrypt($val);
+
+        return setcookie($key, $val, $expires, $path, $domain, $secure, $httponly);
+    }
+
 
     /**
      * @param $key
@@ -44,6 +62,26 @@ class Cookies extends Singleton
     {
         if ($this->has($key))
             return $_COOKIE[$key];
+
+        return $fallback;
+    }
+
+    /**
+     * @param $key
+     * @param bool $fallback
+     * @return bool|mixed
+     */
+    public function getDecrypted($key, $fallback = false)
+    {
+        if ($this->has($key))
+        {
+            $value = $_COOKIE[$key];
+
+            if (!empty($value))
+                $value = SystemEncryptor::decrypt($value);
+
+            return $value;
+        }
 
         return $fallback;
     }

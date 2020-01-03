@@ -128,7 +128,7 @@ class ResponseFactory implements ResponseFactoryInterface
      * @param $data
      * @return EmptyResponse|HtmlResponse|JsonResponse|RedirectResponse|XmlResponse
      */
-    public static function fromVariableData($data)
+    public static function fromVariableData($data = '')
     {
         if (is_psr7_response($data))
         {

@@ -899,7 +899,7 @@ if (!function_exists('response')) {
      * @param array $headers
      * @return \Quantum\Psr7\Response\EmptyResponse|\Quantum\Psr7\Response\HtmlResponse|\Quantum\Psr7\Response\JsonResponse|\Quantum\Psr7\Response\RedirectResponse|\Quantum\Psr7\Response\XmlResponse
      */
-    function response($contents, $status = 200, array $headers = [])
+    function response($contents = '', $status = 200, array $headers = [])
     {
         return \Quantum\Psr7\ResponseFactory::fromVariableData($contents, $status, $headers);
     }

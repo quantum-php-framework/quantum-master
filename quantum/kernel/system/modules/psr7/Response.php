@@ -18,6 +18,7 @@ use function is_numeric;
 use function is_scalar;
 use Quantum\Psr7Emitter\Emitter\SapiEmitter;
 use Quantum\Psr7Emitter\Emitter\SapiStreamEmitter;
+use Quantum\SystemEncryptor;
 use function sprintf;
 
 /**
@@ -172,7 +173,7 @@ class Response implements ResponseInterface
      * @param bool $secure
      * @param bool $httpOnly
      * @param string $sameSite
-     * @return Response
+     * @return ResponseInterface
      */
     public function withCookie(string $name,
                                string $value,
@@ -181,9 +182,38 @@ class Response implements ResponseInterface
                                string $domain = '',
                                bool $secure = false,
                                bool $httpOnly = false,
-                               string $sameSite = '') : Response
+                               string $sameSite = '') : ResponseInterface
     {
         $new = clone $this;
+
+        $cookie = new ResponseCookie($name, $value, $expiresAt, $path, $domain, $secure, $httpOnly, $sameSite);
+
+        return $cookie->addToResponse($new);
+    }
+
+    /**
+     * @param string $name
+     * @param string $value
+     * @param int $expiresAt
+     * @param string $path
+     * @param string $domain
+     * @param bool $secure
+     * @param bool $httpOnly
+     * @param string $sameSite
+     * @return ResponseInterface
+     */
+    public function withEncryptedCookie(string $name,
+                               string $value,
+                               int $expiresAt = 0,
+                               string $path = '',
+                               string $domain = '',
+                               bool $secure = false,
+                               bool $httpOnly = false,
+                               string $sameSite = '') : ResponseInterface
+    {
+        $new = clone $this;
+
+        $value = SystemEncryptor::encrypt($value);
 
         $cookie = new ResponseCookie($name, $value, $expiresAt, $path, $domain, $secure, $httpOnly, $sameSite);
 
@@ -198,9 +228,9 @@ class Response implements ResponseInterface
      * @param bool $secure
      * @param bool $httpOnly
      * @param string $sameSite
-     * @return Response
+     * @return ResponseInterface
      */
-    public function withoutCookie(string $name,
+    public function withExpiredCookie(string $name,
                                   string $path = '',
                                   string $domain = '',
                                   bool $secure = false,

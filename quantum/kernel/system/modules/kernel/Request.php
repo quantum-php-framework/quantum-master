@@ -231,6 +231,26 @@ class Request extends Singleton
         return $fallback;
     }
 
+    /**
+     * @param $paramName
+     * @param bool $fallback
+     * @return bool
+     */
+    public function getEncryptedCookieParam($paramName, $fallback = false)
+    {
+        if ($this->hasCookieParam($paramName))
+        {
+            $value = $this->_COOKIE[$paramName];
+
+            if (!empty($value))
+                $value = SystemEncryptor::decrypt($value);
+
+            return $value;
+        }
+
+        return $fallback;
+    }
+
 
     /**
      * @return mixed

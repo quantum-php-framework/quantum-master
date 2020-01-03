@@ -2,7 +2,7 @@
 
 namespace Quantum;
 
-use Quantum\Serialize\Serializer;
+use Quantum\Serialize\Serializer\Json;
 
 
 /**
@@ -752,7 +752,7 @@ class File
      */
     public function loadAsJson()
     {
-        return Serializer::unserialize($this->load());
+        return Json::unserialize($this->load());
     }
 
     /**
