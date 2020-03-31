@@ -68,8 +68,8 @@ $QUANTUM_APP_ROUTES = array
     ),
 
     array(
-        'uri' => '/test/some/route',
-        'controller' => 'ExampleModule\Controllers\ExampleModule',
+        'uri' => '/order_import',
+        'controller' => 'OrderImport\MagentoOrderImporterController',
         'method' => 'index',
         'min_access_level' => 'public',
         'rate_limit' => '1000',

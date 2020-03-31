@@ -51,7 +51,6 @@ class Crypto
        {
            ApiException::custom("Invalid Encrypted Data", "Invalid encrypted data", "Data Decryption failed");
        }
-
        return $text;
    }
 
@@ -105,7 +104,7 @@ class Crypto
 
 
     /**
-     * @param $data
+     * @param o
      * @return string
      * @throws \Defuse\Crypto\Exception\BadFormatException
      * @throws \Defuse\Crypto\Exception\EnvironmentIsBrokenException

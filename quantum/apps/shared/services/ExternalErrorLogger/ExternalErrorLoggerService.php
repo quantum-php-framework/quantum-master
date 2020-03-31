@@ -42,7 +42,7 @@ class ExternalErrorLoggerService
     public static function normalize($data)
     {
         if (is_array($data) || is_object($data))
-            $data = Serializer::serialize($data);
+            $data = Serializer\Json::serialize($data);
 
         if (!is_string($data))
             $data = (string)$data;

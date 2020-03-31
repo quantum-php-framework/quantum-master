@@ -5,6 +5,7 @@ use Opis\Closure\SerializableClosure;
 
 use Quantum\Serialize\Serializer\Native;
 use Quantum\Serialize\Serializer\Json;
+use Quantum\Serialize\Serializer\Closure;
 
 /**
  * Class Serializer

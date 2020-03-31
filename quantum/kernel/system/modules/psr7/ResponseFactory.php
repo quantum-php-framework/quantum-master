@@ -140,29 +140,31 @@ class ResponseFactory implements ResponseFactoryInterface
             return self::json($data);
         }
 
-        if (qs($data)->isHtml())
+        $data = qs($data);
+
+        if ($data->isHtml())
         {
-           return self::html($data);
+           return self::html($data->toStdString());
         }
 
-        if (qs($data)->isJson())
+        if ($data->isJson())
         {
-            return self::json(\json_decode($data));
+            return self::json($data->decodeJson());
         }
 
-        if (qs($data)->isXml())
+        if ($data->isXml())
         {
-            return self::xml($data);
+            return self::xml($data->toStdString());
         }
 
-        if (qs($data)->isUrl())
+        if ($data->isUrl())
         {
-            return self::redirect($data);
+            return self::redirect($data->toStdString());
         }
 
-        if (!qs($data)->isEmpty())
+        if (!$data->isEmpty())
         {
-            return self::html($data);
+            return self::html($data->toStdString());
         }
         else
         {

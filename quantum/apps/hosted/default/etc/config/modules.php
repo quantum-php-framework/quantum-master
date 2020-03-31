@@ -2,8 +2,8 @@
 
 return [
 
-    'AppModule' => [
-        'directory' => 'app_module'
+    'OrderImport' => [
+        'directory' => 'order_import'
     ]
 
 ];

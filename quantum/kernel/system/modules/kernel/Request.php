@@ -1204,6 +1204,15 @@ class Request extends Singleton
     }
 
     /**
+     * @param $filename
+     * @return bool
+     */
+    public function hasUploadedFile($filename)
+    {
+        return is_uploaded_file($_FILES[$filename]['tmp_name']);
+    }
+
+    /**
      * @return Psr7\ServerRequest
      */
     public function toPsr7()

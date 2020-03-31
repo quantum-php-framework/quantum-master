@@ -32,6 +32,8 @@
     "aws/aws-sdk-php": "3.115.0",
     "predis/predis": "v1.1.1",
     "psr/http-factory": "^1.0",
-    "psr/http-message": "^1.0"
+    "psr/http-message": "^1.0",
+    "ext-fileinfo": "*",
+    "ext-zlib": "*"
   }
 }

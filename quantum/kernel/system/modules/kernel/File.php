@@ -1424,6 +1424,13 @@ class File
     }
 
 
+    /**
+     * @return string
+     */
+    function getMimeContentType()
+    {
+        return mime_content_type($this->path);
+    }
 
 
 

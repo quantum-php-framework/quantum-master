@@ -2,8 +2,6 @@
 
 namespace Quantum\Serialize\Serializer;
 
-use Quantum\Serialize\Serializer;
-
 /**
  * Class SerializedHash
  * @package Quantum\Serialize
@@ -29,7 +27,7 @@ class SerializedHash
      */
     public static function hashClosure($closure, $algo = "md5")
     {
-        $serialized = Serializer::serializeClosure($closure);
+        $serialized = Closure::serialize($closure);
 
         return hash($algo, $serialized);
     }

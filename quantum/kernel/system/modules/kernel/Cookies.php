@@ -69,7 +69,7 @@ class Cookies extends Singleton
     /**
      * @param $key
      * @param bool $fallback
-     * @return bool|mixed
+     * @return bool|mixe
      */
     public function getDecrypted($key, $fallback = false)
     {
