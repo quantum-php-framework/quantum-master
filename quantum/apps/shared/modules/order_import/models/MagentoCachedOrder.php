@@ -22,7 +22,15 @@ class MagentoCachedOrder extends \Quantum\ActiverecordModel {
     {
         if (empty($this->full_mage_order))
         {
-            return MagentoImporter::fetchOrderData($this->magento_id, $this->server_id);
+            if ($this->server->isV1())
+            {
+                return MagentoImporter::fetchOrderData($this->magento_id, $this->server_id);
+            }
+            else
+            {
+                return MagentoImporter::fetchFullOrderDataFromMagento2Server($this->magento_id, $this->server_id);
+            }
+
         }
 
         return unserialize(\Quantum\CompressedStorage::extract($this->full_mage_order));

@@ -45,7 +45,10 @@ class ProjectFactory
             $customer->name = $cachedOrder->customer_firstname;
             $customer->lastname = $cachedOrder->customer_lastname;
             $customer->email = $cachedOrder->customer_email;
-            $customer->dob = $cachedOrder->customer_dob;
+
+            if (isset($cachedOrder->customer_dob))
+                $customer->dob = $cachedOrder->customer_dob;
+
             $customer->save();
         }
 
@@ -102,7 +105,10 @@ class ProjectFactory
                 $jobItem->internal_sku = $item['sku'];
                 $jobItem->quantity = $item['qty_ordered'];
                 $jobItem->unit_price = $item['price'];
-                $jobItem->description = $item['description'];
+
+                if (isset($item['description']))
+                    $jobItem->description = $item['description'];
+
                 $jobItem->save();
             }
 

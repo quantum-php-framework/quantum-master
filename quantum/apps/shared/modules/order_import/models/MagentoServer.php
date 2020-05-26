@@ -67,4 +67,14 @@ class MagentoServer extends \Quantum\ActiverecordModel
         file_get_contents($this->base_url.'/reindexsingle.php?id='.$productId);
     }
 
+    public function isV1()
+    {
+        return $this->version == 1;
+    }
+
+    public function isV2()
+    {
+        return $this->version == 2;
+    }
+
 }

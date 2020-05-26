@@ -5078,7 +5078,7 @@ if (!function_exists('recursive_read_dirs'))
 }
 
 
-if ( ! function_exists('child_class_dir'))
+if (!function_exists('child_class_dir'))
 {
     /**
      * Get the child class path
@@ -5090,6 +5090,68 @@ if ( ! function_exists('child_class_dir'))
     {
         $reflector = new \ReflectionClass(get_class($class));
         return dirname($reflector->getFileName());
+    }
+}
+
+if ( ! function_exists('set_simplexml_attribute'))
+{
+
+    function set_simplexml_attribute(SimpleXMLElement $node, $attributeName, $attributeValue)
+    {
+        $attributes = $node->attributes();
+        if (isset($attributes->$attributeName)) {
+            $attributes->$attributeName = $attributeValue;
+        } else {
+            $node->addAttribute($attributeName, $attributeValue);
+        }
+    }
+
+}
+
+if (!function_exists('is_countable'))
+{
+
+    function is_countable($c)
+    {
+        return is_array($c) || $c instanceof Countable;
+    }
+
+}
+
+
+if (!function_exists('to_negative'))
+{
+
+    function to_negative($num)
+    {
+        return $num <= 0 ? $num : -$num;
+    }
+
+}
+
+
+if (!function_exists('to_positive'))
+{
+
+    function to_positive($num)
+    {
+        return $num >= 0 ? $num : -$num;
+    }
+
+}
+
+
+if (!function_exists('to_object'))
+{
+    /**
+     * Convert an array into an object
+     *
+     * @param  array  $array
+     * @return object
+     */
+    function to_object($array)
+    {
+        return (object) $array;
     }
 }
 
