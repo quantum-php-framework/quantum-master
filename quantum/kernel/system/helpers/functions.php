@@ -566,6 +566,21 @@ if (!function_exists('qf'))
     }
 }
 
+if (!function_exists('qurl'))
+{
+    /**
+     * Creates a new Quantum\URL
+     *
+     * @param  string   $filePath
+     * @return Quantum\URL
+     */
+
+    function qurl($path)
+    {
+        return new Quantum\URL($path);
+    }
+}
+
 if (!function_exists('qform'))
 {
     /**
