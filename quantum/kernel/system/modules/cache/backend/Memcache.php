@@ -74,11 +74,14 @@ class Memcache extends Backend
      * @param int $expiration
      * @return bool
      */
-    public function set($key, $var, $expiration = 0)
+    public function set($key, $value, $expiration = 0)
     {
-         $this->memcache->set($key, $var, $expiration);
+        if (!empty($value))
+            $value = maybe_serialize($value);
 
-         return $var;
+         $this->memcache->set($key, $value, $expiration);
+
+         return $value;
     }
 
 
@@ -99,9 +102,12 @@ class Memcache extends Backend
      * @param int $expiration
      * @return bool
      */
-    public function add($key, $var, $expiration = 0)
+    public function add($key, $value, $expiration = 0)
     {
-        return $this->memcache->add($key, $var, $expiration);
+        if (!empty($value))
+            $value = maybe_serialize($value);
+
+        return $this->memcache->add($key, $value, $expiration);
     }
 
 
@@ -111,9 +117,12 @@ class Memcache extends Backend
      * @param int $expiration
      * @return bool
      */
-    public function replace($key, $var, $expiration = 0)
+    public function replace($key, $value, $expiration = 0)
     {
-        return $this->memcache->replace($key, $var, $expiration);
+        if (!empty($value))
+            $value = maybe_serialize($value);
+
+        return $this->memcache->replace($key, $value, $expiration);
     }
 
     /**
@@ -138,7 +147,12 @@ class Memcache extends Backend
      */
     public function get($key)
     {
-        return $this->memcache->get($key);
+        $value = $this->memcache->get($key);
+
+        if ($value)
+            $value = maybe_unserialize($value);
+
+        return $value;
     }
 
 

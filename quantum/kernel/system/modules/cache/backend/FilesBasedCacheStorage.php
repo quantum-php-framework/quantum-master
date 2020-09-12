@@ -130,7 +130,9 @@ class FilesBasedCacheStorage extends Backend
      */
     public function has($key)
     {
-        return $this->getFile($key)->existsAsFile();
+        $data = $this->get($key);
+
+        return !empty($data);
     }
 
     /**
