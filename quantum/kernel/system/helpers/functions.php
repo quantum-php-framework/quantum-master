@@ -5157,6 +5157,194 @@ if (!function_exists('to_object'))
 
 
 
+if (!function_exists('cli_echo'))
+{
+
+    /**
+     * @param $string
+     */
+    function cli_echo($string)
+    {
+        echo $string . PHP_EOL;
+    }
+}
+
+if (!function_exists('set_header'))
+{
+    /**
+     * @param $key
+     * @param $value
+     */
+    function set_header($key, $value)
+    {
+        header($key.': '.$value);
+    }
+}
+
+
+if (!function_exists('apache_request_headers'))
+{
+    /**
+     * Get all HTTP header key/values as an associative array for the current request.
+     *
+     *
+     * @return array The HTTP header key/value pairs.
+     */
+    function apache_request_headers()
+    {
+        $headers = array();
+
+        $copy_server = array(
+            'CONTENT_TYPE'   => 'Content-Type',
+            'CONTENT_LENGTH' => 'Content-Length',
+            'CONTENT_MD5'    => 'Content-Md5',
+        );
+
+        foreach ($_SERVER as $key => $value) {
+            if (substr($key, 0, 5) === 'HTTP_') {
+                $key = substr($key, 5);
+                if (!isset($copy_server[$key]) || !isset($_SERVER[$key])) {
+                    $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $key))));
+                    $headers[$key] = $value;
+                }
+            } elseif (isset($copy_server[$key])) {
+                $headers[$copy_server[$key]] = $value;
+            }
+        }
+
+        if (!isset($headers['Authorization'])) {
+            if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+                $headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+            } elseif (isset($_SERVER['PHP_AUTH_USER'])) {
+                $basic_pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+                $headers['Authorization'] = 'Basic ' . base64_encode($_SERVER['PHP_AUTH_USER'] . ':' . $basic_pass);
+            } elseif (isset($_SERVER['PHP_AUTH_DIGEST'])) {
+                $headers['Authorization'] = $_SERVER['PHP_AUTH_DIGEST'];
+            }
+        }
+
+        return $headers;
+    }
+
+}
+
+
+if (!function_exists('getallheaders')) {
+
+    /**
+     * Get all HTTP header key/values as an associative array for the current request.
+     *
+     * @return array The HTTP header key/value pairs.
+     */
+    function getallheaders()
+    {
+        return call_user_func('apache_request_headers');
+    }
+}
+
+
+
+if (!function_exists('is_serialized'))
+{
+    function is_serialized( $data, $strict = true ) {
+        // If it isn't a string, it isn't serialized.
+        if ( ! is_string( $data ) ) {
+            return false;
+        }
+        $data = trim( $data );
+        if ( 'N;' === $data ) {
+            return true;
+        }
+        if ( strlen( $data ) < 4 ) {
+            return false;
+        }
+        if ( ':' !== $data[1] ) {
+            return false;
+        }
+        if ( $strict ) {
+            $lastc = substr( $data, -1 );
+            if ( ';' !== $lastc && '}' !== $lastc ) {
+                return false;
+            }
+        } else {
+            $semicolon = strpos( $data, ';' );
+            $brace     = strpos( $data, '}' );
+            // Either ; or } must exist.
+            if ( false === $semicolon && false === $brace ) {
+                return false;
+            }
+            // But neither must be in the first X characters.
+            if ( false !== $semicolon && $semicolon < 3 ) {
+                return false;
+            }
+            if ( false !== $brace && $brace < 4 ) {
+                return false;
+            }
+        }
+        $token = $data[0];
+        switch ( $token ) {
+            case 's':
+                if ( $strict ) {
+                    if ( '"' !== substr( $data, -2, 1 ) ) {
+                        return false;
+                    }
+                } elseif ( false === strpos( $data, '"' ) ) {
+                    return false;
+                }
+            // Or else fall through.
+            case 'a':
+            case 'O':
+                return (bool) preg_match( "/^{$token}:[0-9]+:/s", $data );
+            case 'b':
+            case 'i':
+            case 'd':
+                $end = $strict ? '$' : '';
+                return (bool) preg_match( "/^{$token}:[0-9.E+-]+;$end/", $data );
+        }
+        return false;
+    }
+}
+
+if (!function_exists('maybe_serialize'))
+{
+    function maybe_serialize( $data ) {
+        if ( is_array( $data ) || is_object( $data ) ) {
+            return serialize( $data );
+        }
+
+        return $data;
+    }
+
+}
+
+if (!function_exists('maybe_unserialize'))
+{
+    function maybe_unserialize($data)
+    {
+        if (is_serialized($data)) {
+            return @unserialize(trim($data));
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('header_timestamp'))
+{
+    function header_timestamp()
+    {
+        return gmdate('D, d M Y H:i:s T');
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
