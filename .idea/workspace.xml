@@ -4,7 +4,6 @@
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/apps/shared/middleware/PageCacheMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/middleware/PageCacheMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/PageCache.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/PageCache.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +221,7 @@
       <workItem from="1597126188264" duration="617000" />
       <workItem from="1597371245045" duration="802000" />
       <workItem from="1599877292340" duration="1801000" />
-      <workItem from="1599959496640" duration="1864000" />
+      <workItem from="1599959496640" duration="1940000" />
     </task>
     <servers />
   </component>

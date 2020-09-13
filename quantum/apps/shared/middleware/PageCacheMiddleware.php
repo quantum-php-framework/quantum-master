@@ -122,6 +122,8 @@ class PageCacheMiddleware extends \Quantum\Middleware\Foundation\SystemMiddlewar
                 HeaderFactory::setCacheHitHeader('miss');
                 HeaderFactory::setContentTypeHeader($stored_data['content']);
                 HeaderFactory::setCacheContentDateHeader($stored_data['content_date']);
+
+                return $stored_data['content'];
             }
         }
 
