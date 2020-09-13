@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webroot/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/.htaccess" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -219,11 +220,23 @@
       <workItem from="1596621119506" duration="486000" />
       <workItem from="1597126188264" duration="617000" />
       <workItem from="1597371245045" duration="802000" />
-      <workItem from="1599877292340" duration="1084000" />
+      <workItem from="1599877292340" duration="1801000" />
+      <workItem from="1599959496640" duration="1430000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
