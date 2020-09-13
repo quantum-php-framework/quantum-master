@@ -76,8 +76,9 @@ class PageCacheMiddleware extends \Quantum\Middleware\Foundation\SystemMiddlewar
         if ($if_modified_since && ( strtotime( $if_modified_since ) === strtotime( $content_date )))
         {
             header( $this->getRequest()->getServerParam( 'SERVER_PROTOCOL', '' ) . ' 304 Not Modified', true, 304 );
-            header( 'Expires: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
-            header( 'Cache-Control: no-cache, must-revalidate' );
+            HeaderFactory::setExpiresHeader( gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
+            HeaderFactory::setCacheControlHeader();
+            HeaderFactory::setCacheHitHeader('revalidated');
             exit();
         }
 
@@ -86,11 +87,12 @@ class PageCacheMiddleware extends \Quantum\Middleware\Foundation\SystemMiddlewar
             header($header);
         }
 
+        HeaderFactory::setExpiresHeader($cached_response['content_expiration']);
+        HeaderFactory::setCacheControlHeader($cached_response['content_expiration']);
         HeaderFactory::setCacheHitHeader('hit');
-
-        set_header('X-QCache-Date', $cached_response['content_date']);
-
         HeaderFactory::setContentTypeHeader($content);
+        HeaderFactory::setCacheContentDateHeader($cached_response['content_date']);
+
 
         echo $content;
         exit();
@@ -114,10 +116,12 @@ class PageCacheMiddleware extends \Quantum\Middleware\Foundation\SystemMiddlewar
             if (isset($stored_data['content']))
             {
                 HeaderFactory::setLastModifiedHeader($stored_data['content_date']);
-                HeaderFactory::setCacheHitHeader('miss');
-                HeaderFactory::setCacheContentDateHeader($stored_data['content_date']);
 
-                return $stored_data['content'];
+                HeaderFactory::setExpiresHeader($stored_data['content_expiration']);
+                HeaderFactory::setCacheControlHeader($stored_data['content_expiration']);
+                HeaderFactory::setCacheHitHeader('miss');
+                HeaderFactory::setContentTypeHeader($stored_data['content']);
+                HeaderFactory::setCacheContentDateHeader($stored_data['content_date']);
             }
         }
 
@@ -153,5 +157,7 @@ class PageCacheMiddleware extends \Quantum\Middleware\Foundation\SystemMiddlewar
         if (!empty($headers))
             return isset( $headers['If-Modified-Since'] ) ? $headers['If-Modified-Since'] : '';
     }
+
+
 
 }

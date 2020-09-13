@@ -26,6 +26,7 @@ class PageCache
         $data = array();
         $data['content'] = $content;
         $data['content_date'] = $content_date;
+        $data['content_expiration'] = gmdate("D, d M Y H:i:s", strtotime($content_date) + $expiration). ' GMT';
         $data['headers'] = headers_list();
 
         Cache::set(self::getCacheKeyForUri($route_uri), $data, $expiration);
@@ -270,14 +271,37 @@ class PageCache
      */
     private static function getCacheKeyForUri($uri)
     {
-        $user_uuid = '';
-        $user = \Auth::getUserFromSession();
-        if (!empty($user))
-            $user_uuid = $user->uuid.'/';
-
         $app_config = \QM::config()->getHostedAppConfig();
         $app_uri = $app_config['uri'];
 
-        return 'CK-'.sha1($user_uuid.$app_uri.$uri);
+        $key  = 'CK-';
+        $key .= $app_uri.$uri;
+
+        $user = \Auth::getUserFromSession();
+        if (!empty($user)) {
+            $key .= '_'.$user->uuid;
+        }
+
+        return $key;
+    }
+
+    private static function clearUsersCacheForUri($uri)
+    {
+        $app_config = \QM::config()->getHostedAppConfig();
+        $app_uri = $app_config['uri'];
+
+        $key  = 'CK-';
+        $key .= $app_uri.$uri;
+
+        $users = \User::all();
+
+        foreach ($users as $user)
+        {
+            $user_key = $key .= '_'.$user->uuid;
+
+            if (Cache::has($user_key)) {
+                Cache::delete($user_key);
+            }
+        }
     }
 }
