@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/middleware/PageCacheMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/middleware/PageCacheMiddleware.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,18 +118,18 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/serializer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/local/config" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/local/config" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/serializer" />
       <recent name="$PROJECT_DIR$/quantum/apps/shared/modules/order_import/models" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/kernel" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/middleware/providers" />
-      <recent name="$PROJECT_DIR$/quantum/apps/shared/middleware" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -221,7 +223,7 @@
       <workItem from="1597126188264" duration="617000" />
       <workItem from="1597371245045" duration="802000" />
       <workItem from="1599877292340" duration="1801000" />
-      <workItem from="1599959496640" duration="1940000" />
+      <workItem from="1599959496640" duration="2765000" />
     </task>
     <servers />
   </component>

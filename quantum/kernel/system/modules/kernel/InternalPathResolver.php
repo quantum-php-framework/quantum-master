@@ -319,6 +319,18 @@ class InternalPathResolver extends Singleton
     /**
      * @return string
      */
+    public function getRouteTemplatesFile()
+    {
+        $location = $this->config_root;
+        $name = "route_templates.php";
+        $file = $location . $name;
+
+        return $file;
+    }
+
+    /**
+     * @return string
+     */
     public function getAppsRoot()
     {
         return $this->apps_root;

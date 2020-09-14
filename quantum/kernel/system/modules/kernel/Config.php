@@ -663,10 +663,38 @@ class Config extends Singleton
             if (empty($route))
                 return false;
 
+            if ($route->has('templates'))
+                $route = $this->mergeWithRouteTemplates($route);
+
             $this->current_route = $route;
         }
 
         return $this->current_route;
+    }
+
+    private function mergeWithRouteTemplates(ValueTree $route)
+    {
+        $new_route = new_vt($route->toStdArray());
+
+        $templates = new_vt(include InternalPathResolver::getInstance()->getRouteTemplatesFile());
+
+        $templates_to_apply = explode('|', $route->get('templates'));
+
+        foreach ($templates_to_apply as $template_to_apply)
+        {
+            if ($templates->has($template_to_apply))
+            {
+                $template = $templates->get($template_to_apply);
+
+                $new_route->setProperties($template);
+            }
+        }
+
+        $new_route->remove('templates');
+        $new_route->setUnmutable(true);
+        $new_route->setLocked(true);
+
+        return $new_route;
     }
 
     /**

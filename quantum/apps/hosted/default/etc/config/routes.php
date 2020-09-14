@@ -76,7 +76,14 @@ $QUANTUM_APP_ROUTES = array
         'rate_limit_time' => '3600',
         'csrf_check_enabled' => '0',
         'http_request_methods' => 'GET'
-    )
+    ),
+
+    array(
+        'uri' => '/some/route/with_templates',
+        'controller' => 'SomeController',
+        'method' => 'some_method',
+        'templates' => 'normal_rate|csrf_enabled|public_access|get_and_post|cache_enabled'
+    ),
 );
 
 
