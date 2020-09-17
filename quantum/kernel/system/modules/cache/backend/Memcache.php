@@ -26,6 +26,9 @@ class Memcache extends Backend
      */
     public function __construct($initFromEnv = true)
     {
+        if (!class_exists('Memcached'))
+            throw new StorageSetupException('Memcached class not found');
+
         $this->memcache = new \Memcached();
 
         if ($initFromEnv)
@@ -53,7 +56,6 @@ class Memcache extends Backend
 
         if ($config->has('memcache_username') && $config->has('memcache_password'))
         {
-
             $this->setSaslAuthData($config->get('memcache_username'), $config->get('memcache_password'));
         }
     }
@@ -79,9 +81,9 @@ class Memcache extends Backend
         if (!empty($value))
             $value = maybe_serialize($value);
 
-         $this->memcache->set($key, $value, $expiration);
+        $this->memcache->set($key, $value, $expiration);
 
-         return $value;
+        return $value;
     }
 
 
@@ -149,10 +151,14 @@ class Memcache extends Backend
     {
         $value = $this->memcache->get($key);
 
-        if ($value)
+        if ($this->memcache->getResultCode() === \Memcached::RES_SUCCESS)
+        {
             $value = maybe_unserialize($value);
 
-        return $value;
+            return $value;
+        }
+
+        return null;
     }
 
 
@@ -162,7 +168,9 @@ class Memcache extends Backend
      */
     public function has($key)
     {
-        return $this->memcache->get($key) !== false;
+        $val = $this->memcache->get($key);
+
+        return $this->memcache->getResultCode() === \Memcached::RES_SUCCESS;
     }
 
 

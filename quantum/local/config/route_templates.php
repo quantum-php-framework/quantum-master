@@ -60,6 +60,4 @@ return [
         'page_cache_logged_in_users' => 1
     ],
 
-
-
 ];
