@@ -2,10 +2,13 @@
 
 namespace Quantum\Cache\Backend;
 
+use Exception;
+use Quantum\Cache;
 use Quantum\Cache\Backend;
 use Quantum\Config;
 use Predis\Client;
 use Quantum\Cache\StorageSetupException;
+use Quantum\ValueTree;
 
 /**
  * Class Storage
@@ -24,6 +27,60 @@ class Redis extends Backend
      */
     const CRYPTO_SCHEME = 'shared-crypto://';
 
+    /**
+     * @var ValueTree
+     */
+    private $internal_cache;
+
+    /**
+     * Holds the diagnostics values.
+     *
+     * @var array
+     */
+    public $diagnostics = null;
+
+    /**
+     * Holds the error messages.
+     *
+     * @var array
+     */
+    public $errors = [];
+
+    /**
+     * bool
+     */
+    private $fail_gracefully;
+
+    /**
+     * Track how many requests were found in cache.
+     *
+     * @var int
+     */
+    public $cache_hits = 0;
+
+    /**
+     * Track how may requests were not cached.
+     *
+     * @var int
+     */
+    public $cache_misses = 0;
+
+    /**
+     * Track how long request took.
+     *
+     * @var int
+     */
+    public $cache_time = 0;
+
+    /**
+     * Track how may calls were made.
+     *
+     * @var int
+     */
+    public $cache_calls = 0;
+
+
+
 
     /**
      * Storage constructor.
@@ -31,6 +88,12 @@ class Redis extends Backend
      */
     public function __construct($initFromEnv = true)
     {
+        Cache::enableRuntimeCache(false);
+
+        $this->internal_cache = new ValueTree();
+
+        $this->fail_gracefully = true;
+
         if ($initFromEnv)
             $this->initFromEnvironmentConfig();
     }
@@ -58,10 +121,10 @@ class Redis extends Backend
             throw new StorageSetupException('redis_persistent not defined in app config');
 
         $this->init($config->get('redis_scheme'),
-                    $config->get('redis_host'),
-                    $config->get('redis_port'),
-                    $config->get('redis_persistent'),
-                    $config->get('redis_password'));
+            $config->get('redis_host'),
+            $config->get('redis_port'),
+            $config->get('redis_persistent'),
+            $config->get('redis_password'));
     }
 
     /**
@@ -73,18 +136,127 @@ class Redis extends Backend
      */
     public function init($scheme, $host, $port, $persistent, $password = false)
     {
+        $client = 'Predis';
+
         $redis_config = array(
-            "scheme" => $scheme,
-            "host" => $host,
-            "port" => $port,
+            'scheme' => $scheme,
+            'host' => $host,
+            'port' => $port,
+            'database' => 0,
+            'timeout' => 1,
+            'read_write_timeout' => 1,
+            'retry_interval' => null,
             'persistent' => $persistent);
 
-        if (!empty($password))
+        if (!empty($password)) {
             $redis_config['redis_password'] = $password;
+        };
 
-        $this->redis = new Client($redis_config);
+        try
+        {
+            $this->redis = new Client($redis_config);
+            $this->redis->connect();
+
+            $this->diagnostics = array_merge(
+                [ 'client' => sprintf( '%s (v%s)', $client, Client::VERSION ) ],
+                $redis_config,
+                $redis_config);
+
+            $this->diagnostics[ 'ping' ] = $this->redis->ping();
+
+            $this->fetchInfo();
+
+            $this->redis_connected = true;
+
+            $this->internal_cache->clear();
+        }
+        catch (\Exception $exception)
+        {
+            $this->handleException($exception);
+        }
+
     }
 
+
+    /**
+     * @param Exception $exception
+     * @throws Exception
+     */
+    private function handleException(\Exception $exception)
+    {
+        $this->redis_connected = false;
+
+        \ExternalErrorLoggerService::error('redis_exception', $exception->getMessage());
+
+        if (!$this->fail_gracefully) {
+            throw $exception;
+        }
+
+        $this->errors[] = $exception->getMessage();
+    }
+
+
+    /**
+     * Convert Redis responses into something meaningful
+     *
+     * @param mixed $response Response sent from the redis instance.
+     * @return mixed
+     */
+    protected function parseRedisResponse( $response ) {
+        if ( is_bool( $response ) ) {
+            return $response;
+        }
+
+        if ( is_numeric( $response ) ) {
+            return $response;
+        }
+
+        if ( is_object( $response ) && method_exists( $response, 'getPayload' ) ) {
+            return $response->getPayload() === 'OK';
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    private function addToInternalCache($key, $value)
+    {
+        if ( is_object( $value ) ) {
+            $value = clone $value;
+        }
+
+        $this->internal_cache->set($key, $value);
+    }
+
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
+    private function getFromInternalCache($key)
+    {
+        if (!$this->internal_cache->has($key)) {
+            return false;
+        }
+
+        $value = $this->internal_cache->get($key);
+
+        if (is_object( $value )) {
+            return clone $value;
+        }
+
+        return $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isConnected()
+    {
+        return $this->redis_connected;
+    }
 
     /**
      * @param $key
@@ -94,10 +266,43 @@ class Redis extends Backend
      */
     public function set($key, $value, $expiration = 0)
     {
-        $this->redis->set($key, maybe_serialize($value));
-        $this->setExpiration($key, $expiration);
+        $result = true;
+
+        $start_time = microtime( true );
+
+        if ($this->isConnected())
+        {
+            try
+            {
+                if ($expiration)
+                {
+                    $result = $this->redis->setex($key, $expiration, maybe_serialize($value));
+                }
+                else
+                {
+                    $result = $this->redis->set($key, maybe_serialize($value));
+                }
+            }
+            catch (Exception $exception)
+            {
+                $this->handleException($exception);
+                return false;
+            }
+
+            $this->cache_calls++;
+            $this->cache_time += ( microtime( true ) - $start_time );
+        }
+
+
+        // If the set was successful, or we didn't go to redis.
+        if ( $result ) {
+            $this->addToInternalCache($key, $value);
+        }
+
         return $value;
     }
+
+
 
     /**
      * @param $items
@@ -106,7 +311,31 @@ class Redis extends Backend
      */
     public function setParams($items)
     {
-        return $this->redis->mset($items);
+        $result = true;
+
+        $start_time = microtime( true );
+
+        if ($this->isConnected())
+        {
+            try {
+                $result = $this->parseRedisResponse($this->redis->mset($items));
+            } catch ( Exception $exception ) {
+                $this->handleException( $exception );
+                return false;
+            }
+
+            $this->cache_calls++;
+            $this->cache_time += ( microtime( true ) - $start_time );
+        }
+
+        if ($result)
+        {
+            foreach ($items as $key => $value){
+                $this->addToInternalCache($key, $value);
+            }
+        };
+
+        return $result;
     }
 
 
@@ -116,10 +345,42 @@ class Redis extends Backend
      */
     public function get($key)
     {
-        $value = $this->redis->get($key);
+        if ($this->internal_cache->has($key))
+        {
+            $this->cache_hits++;
+            return $this->getFromInternalCache($key);
+        }
+        elseif (!$this->isConnected())
+        {
+            $this->cache_misses++;
+            return false;
+        }
 
-        if (!empty($value))
-            $value = maybe_unserialize($value);
+        $start_time = microtime( true );
+
+        try {
+            $result = $this->redis->get($key);
+        } catch (Exception $exception) {
+            $this->handleException( $exception );
+            return false;
+        }
+
+        $execute_time = microtime( true ) - $start_time;
+
+        $this->cache_calls++;
+        $this->cache_time += $execute_time;
+
+        if ($result === null || $result === false)
+        {
+            $this->cache_misses++;
+            return false;
+        }
+        else {
+            $this->cache_hits++;
+            $value = maybe_unserialize($result);
+        }
+
+        $this->addToInternalCache($key, $value);
 
         return $value;
     }
@@ -130,7 +391,28 @@ class Redis extends Backend
      */
     public function has($key)
     {
-        return $this->redis->exists($key);
+        if ($this->internal_cache->has($key)) {
+            return true;
+        }
+        elseif (!$this->isConnected()) {
+            return false;
+        }
+
+        $start_time = microtime( true );
+
+        try {
+            $result = $this->parseRedisResponse( $this->redis->exists($key) );
+        } catch ( Exception $exception ) {
+            $this->handleException( $exception );
+            return false;
+        }
+
+        $execute_time = microtime( true ) - $start_time;
+
+        $this->cache_calls++;
+        $this->cache_time += $execute_time;
+
+        return $result;
     }
 
 
@@ -145,9 +427,34 @@ class Redis extends Backend
     /**
      * @return bool
      */
-    public function flush()
+    public function flush($delay = 0)
     {
-        return $this->redis->flushall();
+        $delay = abs(intval( $delay ));
+
+        if ($delay) {
+            sleep( $delay );
+        };
+
+        $this->internal_cache->clear();
+
+        if ($this->isConnected())
+        {
+            $start_time = microtime( true );
+
+            try {
+                $result = $this->parseRedisResponse($this->redis->flushdb());
+            } catch ( Exception $exception ) {
+                $this->handleException( $exception );
+                return false;
+            }
+
+            $execute_time = microtime( true ) - $start_time;
+
+            $this->cache_calls++;
+            $this->cache_time += $execute_time;
+        }
+
+        return (bool) $result;
     }
 
     /**
@@ -157,7 +464,32 @@ class Redis extends Backend
      */
     public function delete($key)
     {
-        return $this->redis->del((array)$key);
+        $result = false;
+
+        if ($this->internal_cache->has($key))
+        {
+            $this->internal_cache->remove($key);
+            $result = true;
+        }
+
+        $start_time = microtime( true );
+
+        if ($this->isConnected())
+        {
+            try {
+                $result = $this->parseRedisResponse( $this->redis->del( (array)$key ) );
+            } catch ( Exception $exception ) {
+                $this->handleException( $exception );
+                return false;
+            }
+        }
+
+        $execute_time = microtime( true ) - $start_time;
+
+        $this->cache_calls++;
+        $this->cache_time += $execute_time;
+
+        return (bool) $result;
     }
 
 
@@ -170,14 +502,32 @@ class Redis extends Backend
      */
     public function increment($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
-        if (!$this->has($key))
+        $offset = (int) $offset;
+
+        if (!$this->isConnected())
         {
-            $value = $initial_value+$offset;
-            $this->set($key, $value, $expiry);
+            $value = $this->getFromInternalCache($key);
+            $value += $offset;
+            $this->addToInternalCache($key, $value);
             return $value;
         }
 
-        return $this->redis->incrby($key, $offset);
+        $start_time = microtime( true );
+
+        try {
+            $result = $this->parseRedisResponse( $this->redis->incrby($key, $offset) );
+            $this->addToInternalCache($key, (int) $this->redis->get($key));
+        } catch ( Exception $exception ) {
+            $this->handleException( $exception );
+            return false;
+        }
+
+        $execute_time = microtime( true ) - $start_time;
+
+        $this->cache_calls += 2;
+        $this->cache_time += $execute_time;
+
+        return $result;
     }
 
 
@@ -190,14 +540,32 @@ class Redis extends Backend
      */
     public function decrement($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
-        if (!$this->has($key))
+        $offset = (int) $offset;
+
+        if (!$this->isConnected())
         {
-            $value = $initial_value+$offset;
-            $this->set($key, $value, $expiry);
+            $value = $this->getFromInternalCache($key);
+            $value -= $offset;
+            $this->addToInternalCache($key, $value);
             return $value;
         }
 
-        return $this->redis->decrby($key, $offset);
+        $start_time = microtime( true );
+
+        try {
+            $result = $this->parseRedisResponse( $this->redis->decrby($key, $offset) );
+            $this->addToInternalCache($key, (int) $this->redis->get($key));
+        } catch ( Exception $exception ) {
+            $this->handleException( $exception );
+            return false;
+        }
+
+        $execute_time = microtime( true ) - $start_time;
+
+        $this->cache_calls += 2;
+        $this->cache_time += $execute_time;
+
+        return $result;
     }
 
 
@@ -207,8 +575,7 @@ class Redis extends Backend
      */
     public function setExpiration ($key, $expiration = 0)
     {
-        if ($expiration > 0)
-        {
+        if ($expiration > 0) {
             $this->redis->expire($key, $expiration);
         }
     }
@@ -246,10 +613,23 @@ class Redis extends Backend
      */
     public function pushToList($queue, $item, $serialize = true)
     {
-        if ($serialize)
-            $item = serialize($item);
+        $start_time = microtime( true );
 
-        $length = $this->redis->rpush($queue, $item);
+        $length = 0;
+        if ( $this->isConnected() ) {
+            try {
+                $length = $this->redis->rpush($queue, $item);
+            } catch ( Exception $exception ) {
+                $this->handleException( $exception );
+                return false;
+            }
+        }
+
+        $execute_time = microtime( true ) - $start_time;
+
+        $this->cache_calls++;
+        $this->cache_time += $execute_time;
+
         if ($length < 1) {
             return false;
         }
@@ -291,6 +671,8 @@ class Redis extends Backend
      */
     public function popFromList($listname)
     {
+        $this->internal_cache->pop();
+
         $item = $this->redis->lpop($listname);
 
         if(!$item) {
@@ -350,6 +732,8 @@ class Redis extends Backend
      */
     public function flushList($listname)
     {
+        $this->internal_cache->clear();
+
         return $this->redis->del($listname);
     }
 
@@ -359,6 +743,93 @@ class Redis extends Backend
     public function isAvailable()
     {
         return $this->redis->ping();
+    }
+
+
+    /**
+     *
+     */
+    public function fetchInfo()
+    {
+        $options = method_exists( $this->redis, 'getOptions' )
+            ? $this->redis->getOptions()
+            : new \stdClass();
+
+        if ( isset( $options->replication ) && $options->replication ) {
+            return;
+        }
+
+        $info = $this->redis->info();
+
+        if ( isset( $info['redis_version'] ) ) {
+            $this->redis_version = $info['redis_version'];
+        } elseif ( isset( $info['Server']['redis_version'] ) ) {
+            $this->redis_version = $info['Server']['redis_version'];
+        }
+    }
+
+
+    /**
+     * @return object
+     */
+    public function info()
+    {
+        $total = $this->cache_hits + $this->cache_misses;
+
+        $bytes = array_map(
+            function ( $keys ) {
+                // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
+                return strlen( serialize( $keys ) );
+            },
+            $this->internal_cache->_properties
+        );
+
+        return (object) [
+            // Connected, Disabled, Unknown, Not connected
+            'status' => '...',
+            'hits' => $this->cache_hits,
+            'misses' => $this->cache_misses,
+            'ratio' => $total > 0 ? round( $this->cache_hits / ( $total / 100 ), 1 ) : 100,
+            'bytes' => array_sum( $bytes ),
+            'time' => $this->cache_time,
+            'calls' => $this->cache_calls,
+            'errors' => empty( $this->errors ) ? null : $this->errors,
+            'meta' => [
+                'Client' => $this->diagnostics['client'] ?: 'Unknown',
+                'Redis Version' => $this->redis_version,
+            ],
+        ];
+    }
+
+    /**
+     *
+     */
+    public function stats()
+    {
+        ?>
+        <p>
+            <strong>Redis Status:</strong>
+            <?php echo $this->isConnected() ? 'Connected' : 'Not connected'; ?>
+            <br />
+            <strong>Redis Client:</strong>
+            <?php echo $this->diagnostics['client'] ?: 'Unknown'; ?>
+            <br />
+            <strong>Cache Calls:</strong>
+            <?php echo intval( $this->cache_calls ); ?>
+            <br />
+            <strong>Cache Hits:</strong>
+            <?php echo intval( $this->cache_hits ); ?>
+            <br />
+            <strong>Cache Misses:</strong>
+            <?php echo intval( $this->cache_misses ); ?>
+            <br />
+            <strong>Cache Time:</strong>
+            <?php echo $this->cache_time; ?>
+            <br />
+            <strong>Cache Size:</strong>
+            <?php echo number_format( strlen( serialize( $this->internal_cache ) ) / 1024, 2 ); ?> kB
+        </p>
+        <?php
     }
 
 

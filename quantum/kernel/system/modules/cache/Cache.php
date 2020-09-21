@@ -2,6 +2,8 @@
 
 namespace Quantum;
 
+use Closure;
+
 
 /**
  * Class Cache
@@ -9,11 +11,25 @@ namespace Quantum;
  */
 class Cache
 {
+    public static $runtime_cache = null;
+    public static $use_runtime_cache = true;
 
+
+    public function __construct()
+    {
+
+    }
+
+    public static function enableRuntimeCache($shouldBeEnabled)
+    {
+        self::$use_runtime_cache = $shouldBeEnabled;
+    }
+
+    const DEFAULT_EXPIRATION = 300;
     /**
-     * Set a value to a key
+     * Set a value to a key\
      * @param $key
-     * @param $var
+     * @param mixed|Closure $var
      * @param int $expiration
      * @return mixed
      */
@@ -21,29 +37,24 @@ class Cache
     {
         $provider = self::getProvider();
 
-        $val = $provider->set($key, $var, $expiration);
-
-        return $val;
-    }
-
-    /**
-     * Set a key only if it is missing and a callback is provided
-     * returns the value set to the key by the callback
-     * @param $key
-     * @param $callback
-     * @return mixed
-     */
-    public static function setDeferred($key, $callback)
-    {
-        $provider = self::getProvider();
-
-        if (!$provider->has($key) && is_callable($callback))
+        if (is_closure($var))
         {
-            $provider->set($key, $callback());
+            $var = call_user_func($var);
+            $provider->set($key, $var, $expiration);
+        }
+        else
+        {
+            $provider->set($key, $var, $expiration);
         }
 
-        return $provider->get($key);
+        if (self::$use_runtime_cache)
+            self::runtime_cache()->set($key, $var);
+
+        return $var;
     }
+
+
+
 
     /**
      * Set a value to a key provided from a callback call
@@ -51,11 +62,16 @@ class Cache
      * @param $callback
      * @return mixed
      */
-    public static function setWithCallback($key, $callback)
+    public static function setWithCallback($key, $callback, $expiration = 0)
     {
         $provider = self::getProvider();
+        $var = call_user_func($callback);
+        $provider->set($key, $var, $expiration);
 
-        return $provider->set($key, $callback());
+        if (self::$use_runtime_cache)
+            self::runtime_cache()->set($key, $var);
+
+        return $var;
     }
 
 
@@ -65,27 +81,26 @@ class Cache
      * If the value is not found and the fallback var is provided
      * it will be set to it.
      * The fallback can be a callable which must return a value.
-     * @param $key
+     * @param $key, $fallback, $expiration
      * @return mixed
      */
-    public static function get($key, $fallback = null)
+    public static function get($key, $fallback = null, $expiration = null)
     {
-        $provider = self::getProvider();
-
-        if (!$provider->has($key))
+        if (self::$use_runtime_cache && self::runtime_cache()->has($key))
         {
-            if (is_callable($fallback))
-            {
-                $provider->set($key, $fallback());
-            }
-
-            if (!is_callable($fallback) && !is_null($fallback))
-            {
-                $provider->set($key, $fallback);
-            }
+            return self::runtime_cache()->get($key);
         }
 
-        return $provider->get($key);
+        $provider = self::getProvider();
+
+        if (!$provider->has($key) && $fallback != null)
+        {
+            return self::set($key, $fallback, $expiration);
+        }
+
+        $value = $provider->get($key);
+        self::runtime_cache()->set($key, $value);
+        return $value;
     }
 
     /**
@@ -95,6 +110,8 @@ class Cache
      */
     public static function replace($key, $var)
     {
+        self::runtime_cache()->set($key, $var);
+
         return self::getProvider()->replace($key, $var);
     }
 
@@ -104,6 +121,11 @@ class Cache
      */
     public static function delete($key)
     {
+        if (self::$use_runtime_cache && self::runtime_cache()->has($key))
+        {
+            self::runtime_cache()->remove($key);
+        }
+
         $provider = self::getProvider();
 
         return $provider->delete($key);
@@ -115,6 +137,11 @@ class Cache
      */
     public static function has($key)
     {
+        if (self::$use_runtime_cache && self::runtime_cache()->has($key))
+        {
+            return true;
+        }
+
         $provider = self::getProvider();
 
         return $provider->has($key);
@@ -125,6 +152,8 @@ class Cache
      */
     public static function flush()
     {
+        self::runtime_cache()->clear();
+
         $provider = self::getProvider();
 
         return $provider->flush();
@@ -136,6 +165,8 @@ class Cache
      */
     public static function setParams($items)
     {
+        self::runtime_cache()->setProperties($items);
+
         $provider = self::getProvider();
 
         return $provider->setParams($items);
@@ -238,6 +269,8 @@ class Cache
      */
     public static function increment($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
+        self::runtime_cache()->increment($key, $offset, $initial_value);
+
         return self::getProvider()->increment($key, $offset, $initial_value, $expiry);
     }
 
@@ -250,6 +283,7 @@ class Cache
      */
     public static function decrement($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
+        self::runtime_cache()->decrement($key, $offset, $initial_value);
         return self::getProvider()->decrement($key, $offset, $initial_value, $expiry);
     }
 
@@ -260,6 +294,7 @@ class Cache
      */
     public static function incrementWithCallback($key, $callback)
     {
+        self::runtime_cache()->increment($key, $callback());
         return self::getProvider()->increment($key, $callback());
     }
 
@@ -270,6 +305,7 @@ class Cache
      */
     public static function decrementWithCallback($key, $callback)
     {
+        self::runtime_cache()->decrement($key, $callback());
         return self::getProvider()->decrement($key, $callback());
     }
 
@@ -298,5 +334,31 @@ class Cache
     {
         return self::setDriver($driver);
     }
+
+    public static function addToArray($key, $data_to_add)
+    {
+        $data = new_vt(self::get($key));
+
+        $data->add($data_to_add);
+
+        self::set($key, $data->toStdArray());
+
+        return $data;
+    }
+
+    /**
+     * @return ValueTree
+     */
+    private static function runtime_cache()
+    {
+        if (self::$runtime_cache == null)
+        {
+            self::$runtime_cache = new ValueTree();
+        }
+
+        return self::$runtime_cache;
+    }
+
+
 
 }
