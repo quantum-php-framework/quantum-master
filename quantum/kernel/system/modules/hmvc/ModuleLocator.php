@@ -28,7 +28,7 @@ class ModuleLocator
 
                 if (!$app_modules->isEmpty())
                 {
-                    $this->modules->merge($app_modules);
+                    $this->modules->mergeValueTree($app_modules);
                 }
             }
         }

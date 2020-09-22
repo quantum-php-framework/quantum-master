@@ -1220,6 +1220,25 @@ class Request extends Singleton
         return ServerRequestFactory::fromGlobals();
     }
 
+    public function hasUploads()
+    {
+        return !empty($_FILES);
+    }
+
+
+    public function getVisitorFingerprint()
+    {
+        if (!isset($this->visitor_fingerprint))
+        {
+            $data = new_vt();
+            $data->set('visitor_ip', $this->getIp());
+            $data->setProperties((array)$this->getBrowser());
+
+            $this->visitor_fingerprint = $data->getHash();
+        }
+
+        return $this->visitor_fingerprint;
+    }
 
 
 

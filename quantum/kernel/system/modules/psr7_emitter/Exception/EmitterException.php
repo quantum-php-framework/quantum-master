@@ -6,7 +6,7 @@ namespace Quantum\Psr7Emitter\Exception;
 
 use RuntimeException;
 
-class EmitterException extends RuntimeException implements ExceptionInterface
+class EmitterException extends RuntimeException implements \Quantum\Psr7\Exception\ExceptionInterface
 {
     public static function forHeadersSent() : self
     {

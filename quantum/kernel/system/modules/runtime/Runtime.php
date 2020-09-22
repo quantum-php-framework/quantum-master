@@ -1,25 +1,28 @@
 <?
+namespace Quantum;
 
-require_once (__DIR__ . "/system/modules/kernel/Kernel.php");
+use InvalidArgumentException;
+use Quantum\Psr7\ResponseFactory;
+use ReflectionMethod;
+
+require_once (__DIR__ . "/../kernel/Kernel.php");
 
 /**
  * @property  query_id
  */
-class Quantum
+class Runtime
 {
-
-
     /**
-     * @var \Quantum\Kernel
+     * @var \Kernel
      */
     public $kernel;
     /**
-     * @var \Quantum\Config
+     * @var \Config
      */
     public $config;
 
     /**
-     * @var \Quantum\QueuedResponse
+     * @var \QueuedResponse
      */
     public $queued_response;
     /**
@@ -172,23 +175,23 @@ class Quantum
      */
     public $query_id;
     /**
-     * @var \Quantum\HostedApp
+     * @var \HostedApp
      */
     public $app;
     /**
-     * @var \Quantum\Request
+     * @var \Request
      */
     public $request;
     /**
-     * @var \Quantum\InternalPathResolver
+     * @var \InternalPathResolver
      */
     public $ipt;
     /**
-     * @var \Quantum\Session
+     * @var \Session
      */
     public $session;
     /**
-     * @var \Quantum\Output
+     * @var \Output
      */
     public $output;
 
@@ -198,8 +201,8 @@ class Quantum
      */
     public function __construct()
     {
-        Quantum\Profiler::enableIfProfilerFileExists();
-        Quantum\Profiler::start("Quantum::__construct");
+        Profiler::enableIfProfilerFileExists();
+        Profiler::start("Quantum\Runtime::__construct");
 
         $this->initKernel();
 
@@ -218,13 +221,13 @@ class Quantum
 
         $this->createApp();
 
-        Quantum\Profiler::start("Quantum::runControllerDispatch");
+        Profiler::start("Quantum\Runtime::runControllerDispatch");
         $this->runControllerDispatch();
-        Quantum\Profiler::stop("Quantum::runControllerDispatch");
+        Profiler::stop("Quantum\Runtime::runControllerDispatch");
 
         $this->output();
 
-        Quantum\Profiler::stop("Quantum::__construct");
+        Profiler::stop("Quantum\Runtime::__construct");
 
         $this->shutdown();
     }
@@ -235,11 +238,13 @@ class Quantum
      */
     private function initKernel()
     {
-        $this->kernel = Quantum\Kernel::getInstance();
+        $this->kernel = Kernel::getInstance();
+        $this->kernel->runCriticalMiddlewares();
+
         $this->request = $this->kernel->request;
         $this->ipt = $this->kernel->ipt;
-        $this->session = Quantum\Session::getInstance();
-        
+        $this->session = Session::getInstance();
+
         $this->setRootFolders();
 
         $this->setQuantumVars();
@@ -251,7 +256,7 @@ class Quantum
      */
     private function importRequiredLibraries()
     {
-        Quantum\Import::library('pagination/paginator_qsa.class.php');
+        Import::library('pagination/paginator_qsa.class.php');
     }
 
     /**
@@ -273,9 +278,9 @@ class Quantum
      */
     private function initActiveRecord()
     {
-        Quantum\Import::library('activerecord/ActiveRecord.php');
+        Import::library('activerecord/ActiveRecord.php');
 
-        $cfg = ActiveRecord\Config::instance();
+        $cfg = \ActiveRecord\Config::instance();
         $cfg->set_model_directory(array($this->models_root, $this->ipt->shared_app_activerecord_models_root));
 
         //dd($this->environment);
@@ -310,8 +315,8 @@ class Quantum
      */
     private function registerAdditionalRoutes()
     {
-        Quantum\RoutesRegistry::addRoutes($this->config->getGlobalRoutes());
-        Quantum\RoutesRegistry::addRoutes($this->config->getActiveAppRoutes());
+        RoutesRegistry::addRoutes($this->config->getGlobalRoutes());
+        RoutesRegistry::addRoutes($this->config->getActiveAppRoutes());
 
     }
 
@@ -321,10 +326,10 @@ class Quantum
      */
     private function createApp()
     {
-        Quantum\Profiler::start("Quantum::createApp");
-        $this->app = Quantum\HostedAppFactory::create();
+        Profiler::start("Quantum\Runtime::createApp");
+        $this->app = HostedAppFactory::create();
         $this->callAppMethod("init");
-        Quantum\Profiler::stop("Quantum::createApp");
+        Profiler::stop("Quantum\Runtime::createApp");
     }
 
     /**
@@ -350,7 +355,7 @@ class Quantum
 
         qm_profiler_html();
 
-        QM::shutdown();
+        Kernel::shutdown();
     }
 
 
@@ -359,7 +364,7 @@ class Quantum
      */
     private function output()
     {
-        Quantum\Profiler::start("Quantum::output");
+        Profiler::start("Quantum\Runtime::output");
         if (isset($this->activeController))
             $this->output->addProperties($this->activeController->registry->getProperties());
 
@@ -374,7 +379,7 @@ class Quantum
             $this->callInternalApiControllerFunction($this->activeController, "__post_render");
 
         $this->callAppMethod("post_render");
-        Quantum\Profiler::stop("Quantum::output");
+        Profiler::stop("Quantum\Runtime::output");
 
     }
 
@@ -389,7 +394,7 @@ class Quantum
         }
         else
         {
-            $response = Quantum\Psr7\ResponseFactory::fromVariableData($this->queued_response->getResponse());
+            $response = ResponseFactory::fromVariableData($this->queued_response->getResponse());
             $response->emit();
         }
     }
@@ -433,9 +438,9 @@ class Quantum
             $possible_controller = $this->request->getParam('controller');
 
             if (!is_string($possible_controller) || !qs($possible_controller)->isAlphaNumericWithSpaceAndDash())
-                Quantum\Output::getInstance()->displayAppError('500');
+                Output::getInstance()->displayAppError('500');
 
-            //$this->controller = Quantum\Security::sanitize_html_string($possible_controller);
+            //$this->controller = Security::sanitize_html_string($possible_controller);
         }
 
         if ($this->request->hasNonEmptyParam('task'))
@@ -443,9 +448,9 @@ class Quantum
             $possible_task = $this->request->getParam('task');
 
             if (!is_string($possible_task) || !qs($possible_task)->isAlphaNumericWithSpaceAndDash())
-                Quantum\Output::getInstance()->displayAppError('500');
+                Output::getInstance()->displayAppError('500');
 
-            //$this->task = Quantum\Security::sanitize_html_string($possible_task);
+            //$this->task = Security::sanitize_html_string($possible_task);
         }
 
         if ($this->request->hasNonEmptyParam('object_id'))
@@ -453,9 +458,9 @@ class Quantum
             $possible_object_id = $this->request->getParam('object_id');
 
             if (!is_string($possible_object_id) || !qs($possible_object_id)->isAlphaNumericWithSpaceAndDash())
-                Quantum\Output::getInstance()->displayAppError('500');
+                Output::getInstance()->displayAppError('500');
 
-            //$this->object_id = Quantum\Security::sanitize_html_string($possible_object_id);
+            //$this->object_id = Security::sanitize_html_string($possible_object_id);
         }
 
         if ($this->request->hasNonEmptyParam('query_id'))
@@ -463,9 +468,9 @@ class Quantum
             $possible_query_id = $this->request->getParam('query_id');
 
             if (!is_string($possible_query_id) || !qs($possible_query_id)->isAlphaNumericWithSpaceAndDash())
-                Quantum\Output::getInstance()->displayAppError('500');
+                Output::getInstance()->displayAppError('500');
 
-            //$this->query_id = Quantum\Security::sanitize_html_string($possible_query_id);
+            //$this->query_id = Security::sanitize_html_string($possible_query_id);
         }
 
     }
@@ -481,7 +486,7 @@ class Quantum
         $route = $this->config->getCurrentRoute();
 
         if (empty($route))
-            Quantum\ApiException::resourceNotFound();
+            ApiException::resourceNotFound();
 
         $this->controller = $route->get('controller');
 
@@ -491,7 +496,7 @@ class Quantum
 
             $this->validateWildcardRequest($possible_task);
 
-            $this->task = Quantum\Security::sanitize_html_string($possible_task);
+            $this->task = Security::sanitize_html_string($possible_task);
         }
         else
         {
@@ -511,10 +516,10 @@ class Quantum
     private function validateWildcardRequest($task)
     {
         if (qs($task)->startsWith('__'))
-            QM::output()->displayAppError('404');
+            Output::getInstance()->displayAppError('404');
 
         if (!is_string($task))
-            QM::output()->displayAppError('404');
+            Output::getInstance()->displayAppError('404');
 
     }
 
@@ -527,7 +532,7 @@ class Quantum
      */
     private function handleControllerDispatch($response, $controllerName, $task, $controller)
     {
-        $this->queued_response = new \Quantum\QueuedResponse();
+        $this->queued_response = new QueuedResponse();
         $this->queued_response->setResponse($response);
 
         if (is_null($response))
@@ -556,7 +561,7 @@ class Quantum
 
         if ($reflection->isProtected() || $reflection->isPrivate())
         {
-            QM::output()->displayAppError('404');
+            Output::getInstance()->displayAppError('404');
         }
 
         if (!$reflection->isPublic())
@@ -602,7 +607,7 @@ class Quantum
             }
             else
             {
-                throw new \InvalidArgumentException('Class method not found:'.$this->task);
+                throw new InvalidArgumentException('Class method not found:'.$this->task);
             }
 
         }
@@ -649,15 +654,15 @@ class Quantum
      */
     private function createController($controllerName)
     {
-        Quantum\Profiler::start("Quantum::createController");
+        Profiler::start("Quantum\Runtime::createController");
 
-        $c = Quantum\ControllerFactory::create($controllerName, $this->app);
+        $c = ControllerFactory::create($controllerName, $this->app);
 
         $this->callInternalApiControllerFunction($c, "__post_construct");
 
         $this->app->setActiveController($c);
 
-        Quantum\Profiler::stop("Quantum::createController");
+        Profiler::stop("Quantum\Runtime::createController");
 
         return $c;
     }

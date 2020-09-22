@@ -3,7 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/backend/Redis.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/backend/Redis.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/psr7_emitter/Exception/EmitterException.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/psr7_emitter/Exception/EmitterException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webroot/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -224,7 +234,7 @@
       <workItem from="1599959496640" duration="10026000" />
       <workItem from="1600404303050" duration="483000" />
       <workItem from="1600404805287" duration="3248000" />
-      <workItem from="1600634131249" duration="4222000" />
+      <workItem from="1600634131249" duration="7301000" />
     </task>
     <servers />
   </component>

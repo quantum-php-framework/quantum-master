@@ -700,4 +700,72 @@ class ValueTree implements ArrayAccess, Countable, IteratorAggregate
         $this->_properties = array_reverse($this->_properties);
     }
 
+    public function pop()
+    {
+        return array_pop($this->_properties);
+    }
+
+    public function hasEqualParam($key, $valueToCompare)
+    {
+        if ($this->has($key))
+        {
+            return $this->get($key) == $valueToCompare;
+        }
+
+        return false;
+    }
+
+    public function hasExactParam($key, $valueToCompare)
+    {
+        if ($this->has($key))
+        {
+            return $this->get($key) === $valueToCompare;
+        }
+
+        return false;
+    }
+
+
+    public function getHash()
+    {
+        $f = '';
+        foreach ($this->_properties as $key => $property)
+        {
+            if (!empty($property))
+            {
+                $f .= sha1($property);
+            }
+        }
+
+        return sha1($property);
+    }
+
+    public function increment($key, $offset = 1, $initial_value = 0)
+    {
+        if (!$this->has($key))
+        {
+            $value = $initial_value+$offset;
+            $this->set($key, $value);
+            return $value;
+        }
+
+        $value = $this->get($key) + $offset;
+        $this->set($key, $value);
+        return $value;
+    }
+
+    public function decrement($key, $offset = 1, $initial_value = 0)
+    {
+        if (!$this->has($key))
+        {
+            $value = $initial_value-$offset;
+            $this->set($key, $value);
+            return $value;
+        }
+
+        $value = $this->get($key) - $offset;
+        $this->set($key, $value);
+        return $value;
+    }
+
 }

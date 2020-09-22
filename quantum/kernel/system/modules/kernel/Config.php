@@ -830,6 +830,65 @@ class Config extends Singleton
         return $this->environment->instance === 'development';
     }
 
+    public static function getKernelSetting($key, $fallback = false)
+    {
+        $config = self::getInstance()->getKernelConfig();
+
+        if (is_vt($config)) {
+            return $config->get($key, $fallback);
+        }
+
+        return $fallback;
+    }
+
+
+    public static function getHostedAppSetting($key, $fallback = false)
+    {
+        $config = self::getInstance()->getHostedAppConfig();
+
+        if (is_vt($config)) {
+            return $config->get($key, $fallback);
+        }
+
+        return $fallback;
+    }
+
+    public static function getActiveAppSetting($key, $fallback = false)
+    {
+        $config = self::getInstance()->getActiveAppConfig();
+
+        if (is_vt($config)) {
+            return $config->get($key, $fallback);
+        }
+
+        return $fallback;
+    }
+
+
+    public static function getCurrentRouteSetting($key, $fallback = false)
+    {
+        $config = self::getInstance()->getCurrentRoute();
+
+        if (is_vt($config)) {
+            return $config->get($key, $fallback);
+        }
+
+        return $fallback;
+    }
+
+    public static function getCurrentEnvironmentSetting($key, $fallback = false)
+    {
+        $env = self::getInstance()->getEnvironment();
+
+        if (is_object($env))
+        {
+            if (isset($env->$key))
+                return $env->$key;
+        }
+
+        return $fallback;
+    }
+
 
 
 

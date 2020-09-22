@@ -98,12 +98,22 @@ class Kernel extends Singleton
         //Logger::dev($this->public_url);
     }
 
+    public function runCriticalMiddlewares()
+    {
+        $middlewares = $this->config->getKernelSetting('critical_middlewares');
+
+        if (empty($middlewares) || !is_array($middlewares))
+            return;
+
+        $this->runMiddlewares($middlewares);
+    }
+
     /**
      *
      */
     public function runRequestMiddlewares()
     {
-        $m = array(PrettyErrors::class,
+        $middlewares = array(PrettyErrors::class,
             ValidateAllowedIps::class,
             ValidateKernelRateLimit::class,
             MaintenanceMode::class,
@@ -113,12 +123,13 @@ class Kernel extends Singleton
             ValidateAppRateLimit::class,
             ValidateAllowedCountries::class);
 
-        $handler = new Middleware\Request\RunHandler($m);
-        $handler->runRequestProviders($this->request, function($request)
-        {
-            //var_dump($request);
-        });
+        $custom_middlewares = $this->config->getKernelSetting('middlewares');
 
+        if (!empty($custom_middlewares)) {
+            $middlewares = array_merge($middlewares, $custom_middlewares);
+        }
+
+        $this->runMiddlewares($middlewares);
     }
 
     /**
@@ -126,15 +137,19 @@ class Kernel extends Singleton
      */
     public function runAppMiddlewares()
     {
-        $m = array(ExecuteAppMiddlewares::class,
+        $middlewares = array(ExecuteAppMiddlewares::class,
             ExecuteRouteMiddlewares::class);
 
-        $handler = new Middleware\Request\RunHandler($m);
+        $this->runMiddlewares($middlewares);
+    }
+
+    public function runMiddlewares($middlewares)
+    {
+        $handler = new Middleware\Request\RunHandler($middlewares);
         $handler->runRequestProviders($this->request, function($request)
         {
             //var_dump($request);
         });
-
     }
 
 

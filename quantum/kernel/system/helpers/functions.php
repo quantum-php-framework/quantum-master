@@ -5354,6 +5354,472 @@ if (!function_exists('header_timestamp'))
 }
 
 
+if (!function_exists('clear_cache'))
+{
+    function clear_cache($key = null)
+    {
+        if ($key) {
+            if (Quantum\Cache::has($key)) {
+                Quantum\Cache::delete($key);
+            }
+        }
+        else {
+            Quantum\Cache::flush();
+        }
+    }
+}
+
+if (!function_exists('from_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_cache($key, $callback, $expiration = 300)
+    {
+        if (has_request_param('flush_current_objects_cache'))
+            clear_cache($key); //TODO MOVE THIS INTO A MIDDLEWARE
+
+        return Quantum\Cache::get($key, $callback, $expiration);
+    }
+}
+
+if (!function_exists('from_app_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_app_cache($key, $callback, $expiration = 300)
+    {
+        $app_config = \QM::config()->getHostedAppConfig();
+
+        if ($app_config)
+            $key = $key.'@'.$app_config['uri'];
+
+        return from_cache($key, $callback, $expiration);
+    }
+}
+
+
+if (!function_exists('from_account_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_account_cache($key, $callback, $expiration = 300)
+    {
+        $user = Auth::getUserFromSession();
+
+        if ($user)
+            $key = $key.'@Account'.$user->getAccountId();
+
+        return from_app_cache($key, $callback, $expiration);
+    }
+}
+
+if (!function_exists('from_user_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_user_cache($key, $callback, $expiration = 300)
+    {
+        $user = Auth::getUserFromSession();
+
+        if ($user)
+            $key = $key.'@User'.$user->getId();
+
+        return from_account_cache($key, $callback, $expiration);
+    }
+}
+
+if (!function_exists('from_visitor_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_visitor_cache($key, $callback, $expiration = 300)
+    {
+        $fingerprint = QM::request()->getVisitorFingerprint();
+
+        if ($fingerprint)
+            $key = $key.'@Visitor'.$fingerprint;
+
+        return from_app_cache($key, $callback, $expiration);
+    }
+}
+
+
+if (!function_exists('in_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function in_cache($key)
+    {
+        return \Quantum\Cache::has($key);
+    }
+}
+
+
+if (!function_exists('cache'))
+{
+    /**
+     * @param $key
+     * @param $data
+     * @param int $expiration
+     * @return mixed
+     */
+    function cache($key, $data, $expiration)
+    {
+        return \Quantum\Cache::set($key, $data, $expiration);
+    }
+}
+
+
+if (!function_exists('from_runtime_registry'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_runtime_registry($key, $data = null)
+    {
+        $registry = \Quantum\RuntimeRegistry::getInstance();
+
+        $stored_data = $registry->get($key, null);
+
+        if ($stored_data === null)
+        {
+            if (is_closure($data))
+            {
+                $value = call_user_func($data);
+                $registry->set($key, $value);
+                return $value;
+            }
+            elseif ($data)
+            {
+                $registry->set($key, $data);
+                return $data;
+            }
+        }
+
+        return $stored_data;
+    }
+}
+
+if (!function_exists('to_runtime_registry'))
+{
+    function to_runtime_registry($key, $data)
+    {
+        $registry = \Quantum\RuntimeRegistry::getInstance();
+
+        if (is_closure($data))
+        {
+            $value = call_user_func($data);
+            $registry->set($key, $value);
+            return $value;
+        }
+        else
+        {
+            $registry->set($key, $data);
+            return $data;
+        }
+    }
+}
+
+if (!function_exists('in_runtime_registry'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function in_runtime_registry($key)
+    {
+        return from_runtime_registry($key) != null;
+    }
+}
+
+
+
+
+if (!function_exists('from_memcache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_memcache($key, $data, $expiration = 300)
+    {
+        $provider = \Quantum\Cache\Backend\Memcache::getInstance();
+
+        $stored_data = $provider->get($key);
+
+        if ($stored_data === null)
+        {
+            if (is_closure($data))
+            {
+                $value = call_user_func($data);
+                $provider->set($key, $value, $expiration);
+                return $value;
+            }
+            else
+            {
+                $provider->set($key, $data, $expiration);
+                return $data;
+            }
+        }
+
+        return $stored_data;
+    }
+}
+
+
+if (!function_exists('to_memcache'))
+{
+    /**
+     * @param $key
+     * @param $data
+     * @param int $expiration
+     * @return mixed
+     */
+    function to_memcache($key, $data, $expiration)
+    {
+        return \Quantum\Cache\Backend\Memcache::getInstance()->set($key, $data, $expiration);
+    }
+}
+
+if (!function_exists('from_redis'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_redis($key, $data, $expiration = 300)
+    {
+        $provider = \Quantum\Cache\Backend\Redis::getInstance();
+
+        $stored_data = $provider->get($key);
+
+        if ($stored_data === null)
+        {
+            if (is_closure($data))
+            {
+                $value = call_user_func($data);
+                $provider->set($key, $value, $expiration);
+                return $value;
+            }
+            else
+            {
+                $provider->set($key, $data, $expiration);
+                return $data;
+            }
+        }
+
+        return $stored_data;
+    }
+
+}
+
+if (!function_exists('to_redis'))
+{
+    /**
+     * @param $key
+     * @param $data
+     * @param int $expiration
+     * @return mixed
+     */
+    function to_redis($key, $data, $expiration)
+    {
+        return \Quantum\Cache\Backend\Redis::getInstance()->set($key, $data, $expiration);
+    }
+}
+
+
+if (!function_exists('from_files_cache'))
+{
+    /**
+     * @param $key
+     * @param $callback
+     * @param int $expiration
+     * @return mixed
+     */
+    function from_files_cache($key, $data, $expiration = 300)
+    {
+        $provider = \Quantum\Cache\Backend\FilesBasedCacheStorage::getInstance();
+
+        $stored_data = $provider->get($key);
+
+        if ($stored_data === null)
+        {
+            if (is_closure($data))
+            {
+                $value = call_user_func($data);
+                $provider->set($key, $value, $expiration);
+                return $value;
+            }
+            else
+            {
+                $provider->set($key, $data, $expiration);
+                return $data;
+            }
+        }
+
+        return $stored_data;
+    }
+}
+
+if (!function_exists('to_files_cache'))
+{
+    /**
+     * @param $key
+     * @param $data
+     * @param int $expiration
+     * @return mixed
+     */
+    function to_files_cache($key, $data, $expiration)
+    {
+        return \Quantum\Cache\Backend\FilesBasedCacheStorage::getInstance()->set($key, $data, $expiration);
+    }
+}
+
+
+
+if (!function_exists('get_kernel_setting'))
+{
+
+    function get_kernel_setting($key, $fallback = false)
+    {
+        return \Quantum\Config::getKernelSetting($key, $fallback);
+    }
+}
+
+if (!function_exists('get_hosted_app_setting'))
+{
+
+    function get_hosted_app_setting($key, $fallback = false)
+    {
+        return \Quantum\Config::getHostedAppSetting($key, $fallback);
+    }
+}
+
+if (!function_exists('get_active_app_setting'))
+{
+
+    function get_active_app_setting($key, $fallback = false)
+    {
+        return \Quantum\Config::getActiveAppSetting($key, $fallback);
+    }
+}
+
+if (!function_exists('get_current_route_setting'))
+{
+
+    function get_current_route_setting($key, $fallback = false)
+    {
+        return \Quantum\Config::getCurrentRouteSetting($key, $fallback);
+    }
+}
+
+if (!function_exists('current_route_has'))
+{
+
+    function current_route_has($key, $fallback = false)
+    {
+        $val = \Quantum\Config::getCurrentRouteSetting($key, $fallback);
+
+        if ($val)
+            return true;
+
+        return false;
+    }
+}
+
+if (!function_exists('get_current_environment_setting'))
+{
+
+    function get_current_environment_setting($key, $fallback = false)
+    {
+        return \Quantum\Config::getCurrentEnvironmentSetting($key, $fallback);
+    }
+}
+
+if (!function_exists('get_overridable_app_setting'))
+{
+    function get_overridable_app_setting($key, $fallback = null)
+    {
+        $setting = get_active_app_setting($key);
+
+        if (!$setting)
+            $setting = get_hosted_app_setting($key);
+
+        if ($setting !== false)
+            return $setting;
+
+        return $fallback;
+    }
+}
+
+
+if (!function_exists('get_overridable_route_setting'))
+{
+    function get_overridable_route_setting($key, $fallback = null)
+    {
+        $setting = get_current_route_setting($key);
+
+        if (!$setting)
+            $setting = get_active_app_setting($key);
+
+        if (!$setting)
+            $setting = get_hosted_app_setting($key);
+
+        if (!$setting)
+            $setting = get_current_environment_setting($key);
+
+        if (!$setting)
+            $setting = get_kernel_setting($key);
+
+        if ($setting !== false)
+            return $setting;
+
+        return $fallback;
+    }
+}
+
+
+if (!function_exists('get_current_route'))
+{
+    function get_current_route()
+    {
+        return \Quantum\Config::getInstance()->getCurrentRoute();
+    }
+}
+
 
 
 
