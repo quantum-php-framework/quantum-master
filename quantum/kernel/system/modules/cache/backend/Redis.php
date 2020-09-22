@@ -435,6 +435,8 @@ class Redis extends Backend
             sleep( $delay );
         };
 
+        $result = true;
+
         $this->internal_cache->clear();
 
         if ($this->isConnected())
@@ -454,7 +456,7 @@ class Redis extends Backend
             $this->cache_time += $execute_time;
         }
 
-        return (bool) $result;
+        return $result;
     }
 
     /**

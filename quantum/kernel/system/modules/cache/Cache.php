@@ -47,8 +47,9 @@ class Cache
             $provider->set($key, $var, $expiration);
         }
 
-        if (self::$use_runtime_cache)
+        if (self::$use_runtime_cache) {
             self::runtime_cache()->set($key, $var);
+        }
 
         return $var;
     }
@@ -68,8 +69,9 @@ class Cache
         $var = call_user_func($callback);
         $provider->set($key, $var, $expiration);
 
-        if (self::$use_runtime_cache)
+        if (self::$use_runtime_cache) {
             self::runtime_cache()->set($key, $var);
+        };
 
         return $var;
     }
@@ -86,20 +88,22 @@ class Cache
      */
     public static function get($key, $fallback = null, $expiration = null)
     {
-        if (self::$use_runtime_cache && self::runtime_cache()->has($key))
-        {
+        if (self::$use_runtime_cache && self::runtime_cache()->has($key)) {
             return self::runtime_cache()->get($key);
         }
 
         $provider = self::getProvider();
 
-        if (!$provider->has($key) && $fallback != null)
-        {
+        if (!$provider->has($key) && $fallback != null) {
             return self::set($key, $fallback, $expiration);
         }
 
         $value = $provider->get($key);
-        self::runtime_cache()->set($key, $value);
+
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->set($key, $value);
+        };
+
         return $value;
     }
 
@@ -110,7 +114,9 @@ class Cache
      */
     public static function replace($key, $var)
     {
-        self::runtime_cache()->set($key, $var);
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->set($key, $var);
+        };
 
         return self::getProvider()->replace($key, $var);
     }
@@ -121,8 +127,7 @@ class Cache
      */
     public static function delete($key)
     {
-        if (self::$use_runtime_cache && self::runtime_cache()->has($key))
-        {
+        if (self::$use_runtime_cache && self::runtime_cache()->has($key)) {
             self::runtime_cache()->remove($key);
         }
 
@@ -137,8 +142,7 @@ class Cache
      */
     public static function has($key)
     {
-        if (self::$use_runtime_cache && self::runtime_cache()->has($key))
-        {
+        if (self::$use_runtime_cache && self::runtime_cache()->has($key)) {
             return true;
         }
 
@@ -152,7 +156,9 @@ class Cache
      */
     public static function flush()
     {
-        self::runtime_cache()->clear();
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->clear();
+        };
 
         $provider = self::getProvider();
 
@@ -165,7 +171,9 @@ class Cache
      */
     public static function setParams($items)
     {
-        self::runtime_cache()->setProperties($items);
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->setProperties($items);
+        };
 
         $provider = self::getProvider();
 
@@ -269,7 +277,9 @@ class Cache
      */
     public static function increment($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
-        self::runtime_cache()->increment($key, $offset, $initial_value);
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->increment($key, $offset, $initial_value);
+        };
 
         return self::getProvider()->increment($key, $offset, $initial_value, $expiry);
     }
@@ -283,7 +293,10 @@ class Cache
      */
     public static function decrement($key, $offset = 1, $initial_value = 0, $expiry = 0)
     {
-        self::runtime_cache()->decrement($key, $offset, $initial_value);
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->decrement($key, $offset, $initial_value);
+        };
+
         return self::getProvider()->decrement($key, $offset, $initial_value, $expiry);
     }
 
@@ -294,7 +307,10 @@ class Cache
      */
     public static function incrementWithCallback($key, $callback)
     {
-        self::runtime_cache()->increment($key, $callback());
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->increment($key, $callback());
+        };
+
         return self::getProvider()->increment($key, $callback());
     }
 
@@ -305,7 +321,10 @@ class Cache
      */
     public static function decrementWithCallback($key, $callback)
     {
-        self::runtime_cache()->decrement($key, $callback());
+        if (self::$use_runtime_cache) {
+            self::runtime_cache()->decrement($key, $callback());
+        };
+
         return self::getProvider()->decrement($key, $callback());
     }
 
@@ -351,8 +370,7 @@ class Cache
      */
     private static function runtime_cache()
     {
-        if (self::$runtime_cache == null)
-        {
+        if (self::$runtime_cache == null) {
             self::$runtime_cache = new ValueTree();
         }
 
