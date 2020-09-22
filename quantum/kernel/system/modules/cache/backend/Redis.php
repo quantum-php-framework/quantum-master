@@ -235,10 +235,10 @@ class Redis extends Backend
      * @param $key
      * @return bool|mixed
      */
-    private function getFromInternalCache($key)
+    private function getFromInternalCache($key, $fallback = false)
     {
         if (!$this->internal_cache->has($key)) {
-            return false;
+            return $fallback;
         }
 
         $value = $this->internal_cache->get($key);
@@ -456,7 +456,7 @@ class Redis extends Backend
             $this->cache_time += $execute_time;
         }
 
-        return $result;
+        return (bool) $result;
     }
 
     /**
@@ -508,7 +508,7 @@ class Redis extends Backend
 
         if (!$this->isConnected())
         {
-            $value = $this->getFromInternalCache($key);
+            $value = $this->getFromInternalCache($key, $initial_value);
             $value += $offset;
             $this->addToInternalCache($key, $value);
             return $value;
@@ -517,8 +517,18 @@ class Redis extends Backend
         $start_time = microtime( true );
 
         try {
-            $result = $this->parseRedisResponse( $this->redis->incrby($key, $offset) );
+
+            if ($this->has($key)) {
+                $result = $this->parseRedisResponse( $this->redis->incrby($key, $offset) );
+            } else {
+                $result = $this->parseRedisResponse( $this->redis->set($key, ($initial_value + $offset)) );
+            }
+
+            if ($expiry)
+                $this->setExpiration($key, $expiry);
+
             $this->addToInternalCache($key, (int) $this->redis->get($key));
+
         } catch ( Exception $exception ) {
             $this->handleException( $exception );
             return false;
@@ -546,7 +556,7 @@ class Redis extends Backend
 
         if (!$this->isConnected())
         {
-            $value = $this->getFromInternalCache($key);
+            $value = $this->getFromInternalCache($key, $initial_value);
             $value -= $offset;
             $this->addToInternalCache($key, $value);
             return $value;
@@ -555,7 +565,15 @@ class Redis extends Backend
         $start_time = microtime( true );
 
         try {
-            $result = $this->parseRedisResponse( $this->redis->decrby($key, $offset) );
+            if ($this->has($key)) {
+                $result = $this->parseRedisResponse( $this->redis->decrby($key, $offset) );
+            } else {
+                $result = $this->parseRedisResponse( $this->redis->set($key, ($initial_value - $offset)) );
+            }
+
+            if ($expiry)
+                $this->setExpiration($key, $expiry);
+
             $this->addToInternalCache($key, (int) $this->redis->get($key));
         } catch ( Exception $exception ) {
             $this->handleException( $exception );
