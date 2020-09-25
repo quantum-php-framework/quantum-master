@@ -15,6 +15,10 @@ class App extends Quantum\HostedApp
     {
         //$this->runMiddlewares([\Shared\Middlewares\ExecuteRouteMiddlewares::class]);
         //$this->runMiddlewares([SetRouteCacheHeader::class, CorsHandler::class]);
+        $this->runMiddlewares([ValidateAppAccess::class,
+            ValidateAppRoutes::class,
+            ValidateAppRoutesRateLimit::class,
+            ValidateRouteAccessLevel::class]);
 
     }
 

@@ -768,4 +768,28 @@ class ValueTree implements ArrayAccess, Countable, IteratorAggregate
         return $value;
     }
 
+    public function lock()
+    {
+        $this->setLocked(true);
+        return $this;
+    }
+
+    public function unlock()
+    {
+        $this->setLocked(false);
+        return $this;
+    }
+
+    public function makeUnmutable()
+    {
+        $this->setUnmutable(true);
+        return $this;
+    }
+
+    public function makeMutable()
+    {
+        $this->setUnmutable(false);
+        return $this;
+    }
+
 }

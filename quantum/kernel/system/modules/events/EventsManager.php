@@ -76,12 +76,7 @@ class EventsManager extends Singleton
         $this->addObserver($event_key, array(\Quantum\ControllerFactory::create($controllerName), $controllerMethod), $callOnlyOnce);
     }
 
-    /**
-     * @param $event_key
-     * @param null $data
-     * @param bool $failedIfNotFound
-     * @throws EventDispatchException
-     */
+
     public function dispatch($event_key, $data = null, $failedIfNotFound = false)
     {
         $event = $this->events->get($event_key, null);
@@ -94,7 +89,7 @@ class EventsManager extends Singleton
         else
         {
             qm_profiler_start("EventsManager::dispatch::".$event->getName());
-            $event->notifyListeners($data);
+            return $event->notifyListeners($data);
             qm_profiler_stop("EventsManager::dispatch::".$event->getName());
         }
 
@@ -107,13 +102,12 @@ class EventsManager extends Singleton
      */
     public function getEvent($event_key)
     {
-        $event = $this->events->get($event_key, null);
-
-        if (!$event)
-        {
-            $event = Event::create($event_key);
-            $this->events->set($event_key, $event);
+        if ($this->events->has($event_key)) {
+            return $this->events->get($event_key);
         }
+
+        $event = Event::create($event_key);
+        $this->events->set($event_key, $event);
 
         return $event;
     }

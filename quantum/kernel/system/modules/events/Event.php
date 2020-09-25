@@ -12,10 +12,6 @@ class Event
      * @var \Quantum\ValueTree
      */
     private $observers;
-    /**
-     * @var \Quantum\ValueTree
-     */
-    private $properties;
 
     /**
      * @var string
@@ -25,6 +21,8 @@ class Event
      * @var
      */
     public $data;
+
+    public $timestamp;
 
 
     /**
@@ -45,7 +43,6 @@ class Event
     public function __construct($name = "")
     {
         $this->observers  = new_vt();
-        $this->properties = new_vt();
 
         if (!empty($name))
             $this->name = $name;
@@ -59,7 +56,7 @@ class Event
     public function add($callback, $callOnlyOnce, $shouldPassEvent = true, $shouldPassData = true)
     {
         if ($this->hasCallback($callback))
-            throw_exception("Callback already added to event");
+            throw_exception("Callback already added to event:".$this->name);
 
         $this->observers->add(new Observer($callback, $callOnlyOnce, $shouldPassEvent, $shouldPassData));
     }
@@ -70,28 +67,19 @@ class Event
      */
     public  function notifyListeners($data)
     {
-        $this->data = $data;
+        $event = self::create($this->name);
+        $event->data = $data;
+        $event->observers = $this->observers->count();
+        $event->timestamp = microtime(true);
 
-        foreach ($this->observers->all() as $observer)
+        $data = null;
+        foreach ($this->observers as $observer)
         {
-            $observer->callCallback($this, $data);
+            $data = $observer->callCallback($event);
+            $event->setData($data);
         }
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getRequest()
-    {
-        return \Quantum\Request::getInstance();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOutput()
-    {
-        return \Quantum\Output::getInstance();
+        return $data;
     }
 
     /**

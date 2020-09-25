@@ -2,6 +2,7 @@
 namespace Quantum;
 
 use InvalidArgumentException;
+use Quantum\Plugins\PluginsRuntime;
 use Quantum\Psr7\ResponseFactory;
 use ReflectionMethod;
 
@@ -202,6 +203,7 @@ class Runtime
     public function __construct()
     {
         Profiler::enableIfProfilerFileExists();
+        qm_profiler_enable();
         Profiler::start("Quantum\Runtime::__construct");
 
         $this->initKernel();
@@ -214,6 +216,8 @@ class Runtime
         $this->kernel->runRequestMiddlewares();
 
         $this->initSmarty();
+
+        $this->initPluginsRuntime();
 
         $this->registerAdditionalRoutes();
 
@@ -250,6 +254,10 @@ class Runtime
         $this->setQuantumVars();
     }
 
+    private function initPluginsRuntime()
+    {
+        $this->plugins_runtime = new PluginsRuntime();
+    }
 
     /**
      *
@@ -317,6 +325,9 @@ class Runtime
     {
         RoutesRegistry::addRoutes($this->config->getGlobalRoutes());
         RoutesRegistry::addRoutes($this->config->getActiveAppRoutes());
+        RoutesRegistry::addRoutes($this->plugins_runtime->getRoutes());
+
+        //dd(RoutesRegistry::getInstance()->getRoutes());
 
     }
 
@@ -673,6 +684,8 @@ class Runtime
      */
     private function callAppMethod($method_name)
     {
+        dispatch_event($method_name);
+
         if (method_exists($this->app, $method_name))
             call_user_func(array($this->app, $method_name));
     }

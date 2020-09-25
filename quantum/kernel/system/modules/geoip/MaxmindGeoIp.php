@@ -24,11 +24,38 @@ class MaxmindGeoIp
      * @param $ip
      * @param bool $fetch
      */
-    function __construct($ip, $fetch = true)
+    function __construct($ip)
     {
-        $this->ip = $ip;
-        $this->readDb();
+        $this->db_loaded = false;
 
+        $qs_ip = qs($ip);
+
+        if ($qs_ip->isIpV4())
+        {
+            $this->ip = $ip;
+            $this->readDb();
+        }
+        elseif ($qs_ip->contains(','))
+        {
+            $ips = $qs_ip->explode(',');
+
+            if (!empty($ips))
+            {
+                $possible_ip = $ips[0];
+
+                if (qs($possible_ip)->isIpV4()) {
+                    $this->ip = $possible_ip;
+                    $this->readDb();
+                }
+            }
+        }
+
+
+    }
+
+    public function databaseLoaded()
+    {
+        return $this->db_loaded;
     }
 
     /**
@@ -39,7 +66,15 @@ class MaxmindGeoIp
     {
         $this->reader = new Reader(self::getDbFileIfNeeded());
 
-        $this->record = $this->reader->country($this->ip);
+        try {
+            $this->record = $this->reader->country($this->ip);
+            $this->db_loaded = true;
+        }
+        catch (\Exception $exception)
+        {
+            \ExternalErrorLoggerService::error('maxmind_geoip_error', ['ip' => $this->ip, 'exception' => $exception->getMessage()]);
+        }
+
     }
 
     /**
@@ -50,8 +85,9 @@ class MaxmindGeoIp
     {
         $filename = "GeoLite2-Country.tar.gz";
         $db_filename = "GeoLite2-Country.mmdb";
+        //$license_key = Config::getKernelSetting('maxmind_license_key');
 
-        $url = "https://geolite.maxmind.com/download/geoip/database/".$filename;
+        $url = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=GOji8Rgl1VGn9zef&suffix=tar.gz";
 
         $request = new CurlRequest($url);
         $request->execute();
@@ -129,9 +165,23 @@ class MaxmindGeoIp
         if (in_array($ip, Request::getLocalHostIps()))
             return "localhost";
 
+        $country = 'unkown';
+
         $geoip = new MaxmindGeoIp($ip);
 
-        return $geoip->record->country->name;
+        if (!$geoip->databaseLoaded())
+            return $country;
+
+        try {
+            $country = $geoip->record->country->name;
+        }
+        catch (\Exception $exception)
+        {
+            \ExternalErrorLoggerService::error('maxmind_geoip_error', ['ip' => $ip, 'exception' => $exception->getMessage()]);
+        }
+
+        return $country;
+
     }
 
 
@@ -144,9 +194,22 @@ class MaxmindGeoIp
         if (in_array($ip, Request::getLocalHostIps()))
             return "localhost";
 
+        $country = 'unkown';
+
         $geoip = new MaxmindGeoIp($ip);
 
-        return $geoip->record->country->isoCode;
+        if (!$geoip->databaseLoaded())
+            return $country;
+
+        try {
+            $country = $geoip->record->country->isoCode;
+        }
+        catch (\Exception $exception)
+        {
+            \ExternalErrorLoggerService::error('maxmind_geoip_error', ['ip' => $ip, 'exception' => $exception->getMessage()]);
+        }
+
+        return $country;
     }
 
 

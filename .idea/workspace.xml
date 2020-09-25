@@ -3,17 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/routes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/hmvc/ModuleLocator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/EventsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/EventsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/geoip/MaxmindGeoIp.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/geoip/MaxmindGeoIp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RoutesRegistry.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RoutesRegistry.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/psr7_emitter/Exception/EmitterException.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/psr7_emitter/Exception/EmitterException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,18 +130,18 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/kernel/system/modules/cache/backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/kernel/system/modules/plugins" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/plugins" />
+      <recent name="$PROJECT_DIR$/quantum/apps/shared/plugins/sample_plugin/etc/config" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/cache/backend" />
       <recent name="$PROJECT_DIR$/quantum/local/config" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/serialize/serializer" />
-      <recent name="$PROJECT_DIR$/quantum/apps/shared/modules/order_import/models" />
-      <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/kernel" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -234,7 +238,7 @@
       <workItem from="1599959496640" duration="10026000" />
       <workItem from="1600404303050" duration="483000" />
       <workItem from="1600404805287" duration="3248000" />
-      <workItem from="1600634131249" duration="7301000" />
+      <workItem from="1600634131249" duration="59563000" />
     </task>
     <servers />
   </component>

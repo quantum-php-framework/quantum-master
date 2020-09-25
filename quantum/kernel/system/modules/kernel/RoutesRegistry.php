@@ -11,16 +11,16 @@ namespace Quantum;
 class RoutesRegistry extends Singleton
 {
     /**
-     * @var Router
+     * @var ValueTree
      */
-    public $router;
+    public static $registry = null;
 
     /**
      * RoutesRegistry constructor.
      */
     function __construct()
     {
-        $this->router = new Router();
+
     }
 
     /**
@@ -33,39 +33,24 @@ class RoutesRegistry extends Singleton
 
         foreach ($routes->all() as $route)
         {
-            self::addControllerRoute($route->getUri(), $route->getController(), $route->getMethod());
+            self::registry()->add($route);
         }
     }
 
-    /**
-     * @param $uri
-     * @param $controllerName
-     * @param $controllerAction
-     */
-    public static function addControllerRoute($uri, $controllerName, $controllerAction)
+
+    public static function getRoutes()
     {
-        $router = self::getInstance()->router;
-        $router->addControllerRoute($uri, $controllerName, $controllerAction);
+        return self::registry()->toStdArray();
     }
 
-    /**
-     * @param $uri
-     * @return mixed
-     */
-    public static function getControllerRoute($uri)
+    public static function registry()
     {
-        $router = self::getInstance()->router;
-        $route = $router->getControllerRoute($uri);
+        if (self::$registry == null) {
+            self::$registry = new ValueTree();
+        }
 
-        return $route;
+        return self::$registry;
     }
 
-    /**
-     * @return mixed
-     */
-    public static function createInstance()
-    {
-        return self::getInstance();
-    }
 
 }

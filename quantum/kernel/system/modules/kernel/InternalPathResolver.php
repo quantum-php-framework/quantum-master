@@ -125,6 +125,10 @@ class InternalPathResolver extends Singleton
     /**
      * @var string
      */
+    public $shared_app_plugins_root;
+    /**
+     * @var string
+     */
     public $hosted_apps_root;
     /**
      * @var string
@@ -220,6 +224,7 @@ class InternalPathResolver extends Singleton
 
         $this->kernel_root = $this->quantum_root.'kernel/';
         $this->system_root = $this->kernel_root.'system/';
+        $this->system_plugins_root = $this->kernel_root.'plugins/';
         $this->system_modules_root = $this->system_root.'modules/';
         $this->system_kernel_root = $this->system_modules_root.'kernel/';
         $this->system_helpers_root = $this->system_root.'helpers/';
@@ -244,6 +249,7 @@ class InternalPathResolver extends Singleton
         $this->shared_app_controllers_root = $this->shared_app_resources_root.'controllers/';
 
         $this->shared_app_modules_root = $this->shared_app_resources_root.'modules/';
+        $this->shared_app_plugins_root = $this->shared_app_resources_root.'plugins/';
 
         $this->hosted_apps_root = $this->apps_root."hosted/";
 
@@ -286,6 +292,7 @@ class InternalPathResolver extends Singleton
         $this->helpers_root = $this->app_root.'helpers/';
         $this->templates_root = $this->app_root.'templates/';
         $this->app_modules_root = $this->app_root.'modules/';
+        $this->app_plugins_root = $this->app_root.'plugins/';
 
         $this->app_etc_root = $this->app_root.'etc/';
 
@@ -486,6 +493,14 @@ class InternalPathResolver extends Singleton
     public function getSharedAppModulesRoot()
     {
         return $this->shared_app_modules_root;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSharedAppPluginsRoot()
+    {
+        return $this->shared_app_plugins_root;
     }
 
     /**

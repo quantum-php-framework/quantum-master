@@ -306,7 +306,10 @@ class Config extends Singleton
      */
     public function getRouteForUri($uri)
     {
-        $routes = $this->getApprovedAppRoutes();
+        //$routes = $this->getApprovedAppRoutes();
+
+
+        $routes = RoutesRegistry::getInstance()->getRoutes();
 
         if (empty($routes))
             return false;

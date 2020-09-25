@@ -81,8 +81,8 @@ class IndexController extends Quantum\Controller
 
 
         //dd(\QM::cookies()->getDecrypted('cas'));
-
-        return response('hihihi')->withExpiredCookie('pepe');
+        //echo "hi";
+        //return response('hihihi')->withExpiredCookie('pepe');
 
         //return "http://google.com";
         //return redirect("http://google.com");
@@ -101,6 +101,11 @@ class IndexController extends Quantum\Controller
         //return ['hi' => true];
 
         //qs('Welcome to Quantum')->render();
+    }
+
+    function fuq()
+    {
+        qs('fuq')->render();
     }
 
     public function test()

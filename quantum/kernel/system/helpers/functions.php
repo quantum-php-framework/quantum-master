@@ -5821,6 +5821,102 @@ if (!function_exists('get_current_route'))
 }
 
 
+if (!function_exists('is_production_environment'))
+{
+    function is_production_environment()
+    {
+        return \Quantum\Config::getInstance()->isProductionEnvironment();
+    }
+}
+
+if (!function_exists('is_development_environment'))
+{
+    function is_development_environment()
+    {
+        return \Quantum\Config::getInstance()->isDevelopmentEnvironment();
+    }
+}
+
+if (!function_exists('observe_event_with_controller'))
+{
+    function observe_event_with_controller($event_key, $controllerName, $controllerMethod, $callOnlyOnce = false)
+    {
+        \Quantum\Events\EventsManager::getInstance()->addControllerObserver($event_key, $controllerName, $controllerMethod, $callOnlyOnce);
+    }
+}
+
+
+if (!function_exists('observe_event'))
+{
+    function observe_event($event_key, $callable)
+    {
+        \Quantum\Events\EventsManager::getInstance()->addObserver($event_key, $callable);
+    }
+}
+
+if (!function_exists('observe_multiple_events'))
+{
+    function observe_multiple_events($events, $callable)
+    {
+        foreach ($events as $event) {
+            \Quantum\Events\EventsManager::getInstance()->addObserver($event, $callable);
+        }
+    }
+}
+
+if (!function_exists('dispatch_event'))
+{
+    function dispatch_event($event_key, $data = null)
+    {
+        qs($event_key)->render();
+        \Quantum\Events\EventsManager::getInstance()->dispatch($event_key, $data);
+    }
+}
+
+
+
+if (!function_exists('observe'))
+{
+    function observe($event_key, $callable)
+    {
+        observe_event($event_key, $callable);
+    }
+}
+
+if (!function_exists('dispatch'))
+{
+    function dispatch($event_key, $data = null)
+    {
+        dispatch_event($event_key, $data);
+    }
+}
+
+if (!function_exists('is_event'))
+{
+    function is_event($event)
+    {
+        return (is_a($event, Quantum\Events\Event::class));
+    }
+}
+
+if (!function_exists('say_hi'))
+{
+    function say_hi()
+    {
+        qs('Hi!')->render();
+    }
+}
+
+
+if (!function_exists('call_if_exists'))
+{
+    function call_if_exists($callable)
+    {
+        qs('Hi!')->render();
+    }
+}
+
+
 
 
 

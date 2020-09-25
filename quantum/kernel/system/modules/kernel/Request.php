@@ -860,28 +860,36 @@ class Request extends Singleton
         return $headers->get(qs($key)->toLowerCase()->toStdString(), null);
     }
 
-    /**
-     * Find a header case sensitive
-     * @param $key
-     * @return bool
-     */
-    public function hasHeader($key)
+    public function getHeader($key, $fallback = false)
     {
-        $headers = new_vt(self::getHeaders());
+        if (!isset($this->normalized_headers))
+        {
+            $headers = new_vt(self::getHeaders());
 
-        return $headers->has($key);
+            $headers->changeKeysToLowerCase();
+
+            $this->normalized_headers = $headers;
+        }
+
+        $key = qs($key)->toLowerCase()->toStdString();
+
+        return $this->normalized_headers->get($key, $fallback);
     }
 
-    /**
-     * Get a header case sensitive
-     * @param $key
-     * @return bool|mixed
-     */
-    public function getHeader($key)
+    public function hasHeader($key)
     {
-        $headers = new_vt(self::getHeaders());
+        if (!isset($this->normalized_headers))
+        {
+            $headers = new_vt(self::getHeaders());
 
-        return $headers->get($key, null);
+            $headers->changeKeysToLowerCase();
+
+            $this->normalized_headers = $headers;
+        }
+
+        $key = qs($key)->toLowerCase()->toStdString();
+
+        return $this->normalized_headers->has($key);
     }
 
     /**
@@ -1037,7 +1045,17 @@ class Request extends Singleton
             }
             else
             {
-                $this->visitor_country_code = MaxmindGeoIp::getCountryCode($this->getIp());
+                $cf_country_code = $this->getHeader('CF-IPCountry');
+
+                if ($cf_country_code != false && $cf_country_code != "XX")
+                {
+                    $this->visitor_country_code = $cf_country_code;
+                }
+                else
+                {
+                    $this->visitor_country_code = MaxmindGeoIp::getCountryCode($this->getIp());
+                }
+
                 Session::set("visitor_country_code", $this->visitor_country_code);
             }
         }
@@ -1058,9 +1076,27 @@ class Request extends Singleton
             }
             else
             {
-                $this->visitor_country = MaxmindGeoIp::getCountry($this->getIp());
+                $cf_country_code = $this->getHeader('CF-IPCountry');
+
+                if ($cf_country_code != false && $cf_country_code != "XX")
+                {
+                    $country = \Country::find_by_code($cf_country_code);
+
+                    if (!empty($country)) {
+                        $this->visitor_country = $country->name;
+                    }
+                    else {
+                        $this->visitor_country = "UNKNOWN";
+                    }
+                }
+                else
+                {
+                    $this->visitor_country = MaxmindGeoIp::getCountry($this->getIp());
+                }
+
                 Session::set("visitor_country", $this->visitor_country);
             }
+
         }
 
         return $this->visitor_country;
