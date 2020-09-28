@@ -5848,9 +5848,9 @@ if (!function_exists('observe_event_with_controller'))
 
 if (!function_exists('observe_event'))
 {
-    function observe_event($event_key, $callable)
+    function observe_event($event_key, $callable, $priority = 100, $callOnlyOnce = false)
     {
-        \Quantum\Events\EventsManager::getInstance()->addObserver($event_key, $callable);
+        \Quantum\Events\EventsManager::getInstance()->addObserver($event_key, $callable, $priority, $callOnlyOnce);
     }
 }
 
@@ -5868,8 +5868,7 @@ if (!function_exists('dispatch_event'))
 {
     function dispatch_event($event_key, $data = null)
     {
-        qs($event_key)->render();
-        \Quantum\Events\EventsManager::getInstance()->dispatch($event_key, $data);
+        return \Quantum\Events\EventsManager::getInstance()->dispatch($event_key, $data);
     }
 }
 
@@ -5887,7 +5886,7 @@ if (!function_exists('dispatch'))
 {
     function dispatch($event_key, $data = null)
     {
-        dispatch_event($event_key, $data);
+        return dispatch_event($event_key, $data);
     }
 }
 
@@ -5910,9 +5909,11 @@ if (!function_exists('say_hi'))
 
 if (!function_exists('call_if_exists'))
 {
-    function call_if_exists($callable)
+    function call_if_exists($object, $method_name)
     {
-        qs('Hi!')->render();
+        if (method_exists($object, $method_name)) {
+            call_user_func(array($object, $method_name));
+        }
     }
 }
 

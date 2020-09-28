@@ -53,12 +53,12 @@ class Event
      * @param $callOnlyOnce
      * @throws EventRegisterException
      */
-    public function add($callback, $callOnlyOnce, $shouldPassEvent = true, $shouldPassData = true)
+    public function add($callback, $priority, $callOnlyOnce)
     {
         if ($this->hasCallback($callback))
             throw_exception("Callback already added to event:".$this->name);
 
-        $this->observers->add(new Observer($callback, $callOnlyOnce, $shouldPassEvent, $shouldPassData));
+        $this->observers->add(new Observer($callback, $priority, $callOnlyOnce));
     }
 
 
@@ -72,14 +72,8 @@ class Event
         $event->observers = $this->observers->count();
         $event->timestamp = microtime(true);
 
-        $data = null;
-        foreach ($this->observers as $observer)
-        {
-            $data = $observer->callCallback($event);
-            $event->setData($data);
-        }
-
-        return $data;
+        $queue = new ObserverExecutionQueue($this->observers);
+        return $queue->execute($event);
     }
 
     /**
@@ -96,6 +90,11 @@ class Event
     public function getData()
     {
         return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
     }
 
     /**

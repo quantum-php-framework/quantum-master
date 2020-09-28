@@ -50,7 +50,7 @@ class EventsManager extends Singleton
      * @param bool $shouldPassData
      * @throws EventRegisterException
      */
-    public function addObserver($event_key, $listener, $callOnlyOnce = false, $shouldPassEvent = true, $shouldPassData = true)
+    public function addObserver($event_key, $listener, $priority = 100, $callOnlyOnce = false)
     {
         if (!is_string($event_key))
             throw new EventRegisterException("Event key must be a string");
@@ -59,7 +59,7 @@ class EventsManager extends Singleton
             throw new EventRegisterException("Object to register must be a callable or an Observer ".gettype($listener). " given");
 
         $event = $this->getEvent($event_key);
-        $event->add($listener, $callOnlyOnce, $shouldPassEvent, $shouldPassData);
+        $event->add($listener, $priority, $callOnlyOnce);
     }
 
     /**

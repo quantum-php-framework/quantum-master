@@ -3,21 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/plugins/sample_plugin/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/plugins/sample_plugin/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/plugins/another_plugin/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/plugins/another_plugin/Plugin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Event.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/EventsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/EventsManager.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/events/Observer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/geoip/MaxmindGeoIp.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/geoip/MaxmindGeoIp.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/InternalPathResolver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RoutesRegistry.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RoutesRegistry.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTree.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,7 +230,9 @@
       <workItem from="1599959496640" duration="10026000" />
       <workItem from="1600404303050" duration="483000" />
       <workItem from="1600404805287" duration="3248000" />
-      <workItem from="1600634131249" duration="59563000" />
+      <workItem from="1600634131249" duration="61601000" />
+      <workItem from="1601047500858" duration="928000" />
+      <workItem from="1601205424738" duration="6303000" />
     </task>
     <servers />
   </component>

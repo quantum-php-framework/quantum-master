@@ -2,7 +2,6 @@
 
 namespace Quantum\Events;
 
-use FedEx\Reflection;
 use Quantum\Serialize\Serializer\SerializedHash;
 
 /**
@@ -30,10 +29,6 @@ class Observer
     /**
      * @var bool
      */
-    private $_shouldPassEvent;
-    /**
-     * @var bool
-     */
     private $_shouldPassData;
 
     /**
@@ -44,18 +39,17 @@ class Observer
      * @param bool $shouldPassData
      * @throws EventRegisterException
      */
-    public function __construct($callback, $callOnlyOnce = false, $shouldPassEvent = true, $shouldPassData = false)
+    public function __construct($callback, $priority = 100, $callOnlyOnce = false)
     {
         if (!is_callable($callback))
             throw new EventRegisterException("Event callback to register must be a callable ".gettype($callback). " given");
 
-
         $this->_callback = $callback;
         $this->_callOnce = $callOnlyOnce;
+        $this->_shouldPassData = true;
         $this->_hasBeenCalled = false;
         $this->_callbackHash  = self::createCallbackHash($callback);
-        $this->_shouldPassEvent = $shouldPassEvent;
-        $this->_shouldPassData = $shouldPassData;
+        $this->_priority = $priority;
     }
 
     /**
@@ -66,7 +60,17 @@ class Observer
         return $this->_callback;
     }
 
+    public function getPriority()
+    {
+        return $this->_priority;
+    }
 
+
+    /**
+     * @param $callable
+     * @return \ReflectionFunction|\ReflectionMethod
+     * @throws \ReflectionException
+     */
     private function getCallableReflection($callable)
     {
         if(is_array($callable)) {
@@ -82,6 +86,11 @@ class Observer
 
     }
 
+    /**
+     * @param null $event
+     * @return mixed
+     * @throws \ReflectionException
+     */
     private function executeCallback($event = null)
     {
         $callable = $this->_callback;
@@ -96,7 +105,15 @@ class Observer
         {
             $param_type = $reflector->getParameters()[0]->getType();
 
-            if ($param_type && $param_type->getName() === 'Quantum\Events\Event' && is_event($event)) {
+            $param_name = null;
+            if (is_a($param_type, 'ReflectionNamedType')) {
+                $param_name = $param_type->getName();
+            }
+            else {
+                $param_name = (string)$param_type;
+            }
+
+            if ($param_name === 'Quantum\Events\Event' && is_event($event)) {
                 $data = $callable($event);
             }else {
                 $data = $callable();
@@ -124,6 +141,14 @@ class Observer
         }
 
         return $this->executeCallback($clone_event);
+    }
+
+    /**
+     * @param bool $shouldPassData
+     */
+    public function setShouldPassData(bool $shouldPassData)
+    {
+        $this->_shouldPassData = $shouldPassData;
     }
 
     /**

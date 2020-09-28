@@ -40,65 +40,74 @@ class Plugin extends \Quantum\Plugins\Plugin
 
         //observe_event('init', 'phpinfo');
 
-        observe_event('waka', [$this, 'observer']);
+        observe_event('waka', [$this, 'observer'] );
 
-        observe_event('waka', function (Event $event) {
-            //dd($e->getData());
-            //dd($event);
-            qs($event->getData())->render();
-        });
+        observe_event('waka', [$this, 'observer2']);
 
-        //dispatch_event('waka', ['some_data' => 'foooo']);
 
-        dispatch_event('waka', 'choochoo');
+        dd(dispatch_event('waka', 1));
+
+        //dispatch_event('waka', 'choochoo');
 
         //dd($this->getFolder()->getPluginEntryHeaders());
     }
 
 
 
-    public function observer(\Quantum\Events\Event $i)
+    public function observer(\Quantum\Events\Event $event)
     {
+
         //var_dump($i->getData());
         //var_dump($o);
 
         //observe_event('pre_render', 'phpinfo');
-        $this->runMiddlewares([ValidateAllowedCountries::class]);
+        //$this->runMiddlewares([ValidateAllowedCountries::class]);
         //dispatch_event('pre_render');
-        $this->getOutput()->set('wome', 1);
+        //$this->getOutput()->set('wome', 1);
         qs ("SampleCompany\SamplePlugin::observer")->render();
+
+        $i = $event->getData();
+        return $i + 100;
+    }
+
+    function observer2(Event $event)
+    {
+        qs ("SampleCompany\SamplePlugin::observer2")->render();
+
+        $i = $event->getData();
+        return $i + 10;
     }
 
     
 
     public function pre_controller_construct()
     {
-        qs ("SampleCompany\SamplePlugin::pre_controller_construct")->render();
+        //qs ("SampleCompany\SamplePlugin::pre_controller_construct")->render();
     }
 
     public function pre_controller_dispatch()
     {
-        qs ("SampleCompany\SamplePlugin::pre_controller_dispatch")->render();
+        //qs ("SampleCompany\SamplePlugin::pre_controller_dispatch")->render();
     }
 
     public function post_controller_dispatch()
     {
-        qs ("SampleCompany\SamplePlugin::post_controller_dispatch")->render();
+        //qs ("SampleCompany\SamplePlugin::post_controller_dispatch")->render();
     }
 
     public function pre_render()
     {
-        qs ("SampleCompany\SamplePlugin::pre_render")->render();
+        //qs ("SampleCompany\SamplePlugin::pre_render")->render();
     }
 
     public function post_render()
     {
-        qs ("SampleCompany\SamplePlugin::post_render")->render();
+        //qs ("SampleCompany\SamplePlugin::post_render")->render();
     }
 
     public function shutdown()
     {
-        qs ("SampleCompany\SamplePlugin::shutdown")->render();
+        //qs ("SampleCompany\SamplePlugin::shutdown")->render();
     }
     
 
