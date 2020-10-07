@@ -15,19 +15,32 @@ class PluginFolder extends \Quantum\File
 
     public function getPluginEntryFile()
     {
-        return $this->getChildFile('Plugin.php')->getRealPath();
+        $files = $this->getChildFiles();
+
+        foreach ($files as $file)
+        {
+            $headers = $this->readFileHeaders($file);
+
+            if (!empty($headers['name'])) {
+
+                $this->plugin_entry_headers = $headers;
+                return $file->getRealPath();
+            }
+        }
+
+        return false;
     }
 
     public function isValid()
     {
-        $valid = qf($this->getPluginEntryFile())->existsAsFile();
+        $entry_file = $this->getPluginEntryFile();
 
-        return $valid;
+        return ($entry_file != false && qf($entry_file)->existsAsFile());
     }
 
     public function getPluginEntryHeader($key, $fallback = false)
     {
-        $headers = $this->getPluginEntryHeaders();
+        $headers = new_vt($this->getPluginEntryHeaders());
 
         return $headers->get($key, $fallback);
     }
@@ -40,6 +53,25 @@ class PluginFolder extends \Quantum\File
         }
 
         $file = $this->getPluginEntryFile();
+
+        return $this->plugin_entry_headers;
+    }
+
+    public function getScope()
+    {
+        if (qs($this->path)->contains('kernel/plugins')) {
+            return 'kernel';
+        }
+
+        if (qs($this->path)->contains('shared/plugins')) {
+            return 'shared-apps';
+        }
+
+        return 'app';
+    }
+
+    public function readFileHeaders($file)
+    {
         $default_headers = array(
             'name'        => 'Plugin Name',
             'resource_url'   => 'Plugin URI',
@@ -73,9 +105,7 @@ class PluginFolder extends \Quantum\File
             }
         }
 
-        $this->plugin_entry_headers = new_vt($all_headers);
-
-        return $this->plugin_entry_headers;
+        return $all_headers;
     }
 
     private function cleanupHeaderComment( $str )

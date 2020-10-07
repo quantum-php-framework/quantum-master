@@ -25,5 +25,16 @@ $QUANTUM_HOSTED_APPS = array(
         'rate_limit_time' => '3600'
     ),
 
+    array(
+
+        'uri' => 'qubes',
+        'dir' => 'qubes',
+        'enabled' => true,
+        'csrf_check_enabled' => '1',
+        'http_request_methods' => 'GET',
+        'rate_limit' => '1000',
+        'rate_limit_time' => '3600'
+    ),
+
 
 );

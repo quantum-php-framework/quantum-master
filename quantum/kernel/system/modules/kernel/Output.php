@@ -75,13 +75,13 @@ class Output extends Singleton
         define('SMARTY_DIR', $this->ipt->lib_root.'smarty/');
         define('SMARTY_SYSPLUGINS_DIR', $this->ipt->lib_root.'smarty/sysplugins/');
         define('SMARTY_PLUGINS_DIR', $this->ipt->lib_root.'smarty/plugins');
-        require_once ($this->ipt->lib_root.'smarty/Smarty.class.php');
+        require_once ($this->ipt->lib_root.'smarty/bootstrap.php');
         
         $this->smarty = new \Smarty();
         $this->smarty ->template_dir = $this->ipt->views_root;
         $this->smarty->compile_dir =   $this->ipt->tmp_root;
-        $this->smarty->allow_php_tag = true;
-        $this->smarty->plugins_dir[] = $this->ipt->lib_root.'smarty/plugins';
+        //$this->smarty->allow_php_tag = true;
+        //$this->smarty->plugins_dir[] = $this->ipt->lib_root.'smarty/plugins';
 
         $this->set('QM_Client', Client::getInstance());
         $this->set('QM_Environment', Config::getInstance()->getEnvironment());
@@ -290,13 +290,36 @@ class Output extends Singleton
 
             if (!empty($this->mainView))
             {
-                $this->display($this->getViewInCurrentTemplate(qs($this->mainView)->toLowerCase()->toStdString()));
+                $main_view_file = qs($this->mainView)->toLowerCase()->toStdString();
+                $view_in_template = $this->getViewInCurrentTemplate($main_view_file);
+
+                if (!$view_in_template)
+                {
+                    $route = get_current_route();
+
+                    if ($route->has('from_plugin'))
+                    {
+                        $plugin_dir = $route->get('from_plugin_dir');
+
+                        $file = qf($plugin_dir)->getChildFile('views/'.$main_view_file);
+
+                        if ($file->existsAsFile()) {
+                            $this->display($file->getRealPath());
+                        } else
+                        {
+                            throw_exception('no file:'.$file->getPath());
+                        }
+                    }
+                }
+                else
+                {
+                    $this->display($view_in_template);
+                }
             }
             elseif (!empty($this->views))
             {
                 $this->renderViews();
             }
-
 
             if ($this->activeController->renderFullTemplate)
             {
@@ -330,8 +353,34 @@ class Output extends Singleton
      *
      */
     private function renderViews() {
-        foreach($this->views as $view) {
-            $this->display($this->getViewInCurrentTemplate(qs($view)->toLowerCase()->toStdString()));
+        foreach($this->views as $view)
+        {
+            $view_file = qs($view)->toLowerCase()->toStdString();
+            $view_in_template = $this->getViewInCurrentTemplate($view_file);
+
+            if ($view_in_template && qf($view_in_template)->existsAsFile())
+            {
+                $this->display($view_in_template);
+            }
+            else
+            {
+                $route = get_current_route();
+
+                if ($route->has('from_plugin'))
+                {
+                    $plugin_dir = $route->get('from_plugin_dir');
+
+                    $file = qf($plugin_dir)->getChildFile('views/'.$view_file);
+
+                    if ($file->existsAsFile()) {
+                        $this->display($file->getRealPath());
+                    }
+                    else
+                    {
+                        throw_exception('no file:'.$file->getPath());
+                    }
+                }
+            }
         }
     }
 

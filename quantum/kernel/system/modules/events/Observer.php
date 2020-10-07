@@ -132,7 +132,7 @@ class Observer
     public function callCallback($event)
     {
         if ($this->hasBeenCalled() && $this->shouldCallOnlyOnce())
-            return;
+            return $event->getData();
 
         $clone_event = clone $event;
 

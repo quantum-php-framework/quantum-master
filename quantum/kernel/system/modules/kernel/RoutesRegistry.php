@@ -17,7 +17,7 @@ class RoutesRegistry extends Singleton
 
     /**
      * RoutesRegistry constructor.
-     a
+    a
     function __construct()
     {
 

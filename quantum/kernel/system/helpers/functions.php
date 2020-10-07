@@ -2990,10 +2990,13 @@ if (!function_exists('dd')) {
      */
     function dd()
     {
+
+
         array_map(function ($x) {
             var_dump($x);
         }, func_get_args());
 
+        var_dump(debug_backtrace());
         die(1);
     }
 }
@@ -5914,6 +5917,15 @@ if (!function_exists('call_if_exists'))
         if (method_exists($object, $method_name)) {
             call_user_func(array($object, $method_name));
         }
+    }
+}
+
+
+if (!function_exists('is_cli'))
+{
+    function is_cli()
+    {
+        return Quantum\Request::getInstance()->isCommandLine();
     }
 }
 

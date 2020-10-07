@@ -57,7 +57,7 @@ class FilesBasedCacheStorage extends Backend
     public function getStorageDir()
     {
         $ipt = InternalPathResolver::getInstance();
-        $dir = File::newFile($ipt->getCacheRoot())->getChildFile($this->getDirName());
+        $dir = File::newFile($ipt->getCacheRoot())->getChildFile($this->getDirName())->getChildFile(get_active_app_setting('name'));
 
         if (!$dir->isDirectory())
             $dir->create();

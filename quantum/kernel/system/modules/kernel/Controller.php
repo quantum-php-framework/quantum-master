@@ -199,6 +199,7 @@ class Controller
      */
     public function __construct($parentApp)
     {
+        $this->parentApp = $parentApp;
     }
 
 

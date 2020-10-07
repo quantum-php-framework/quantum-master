@@ -17,6 +17,7 @@ class PluginsRuntime
         $this->plugins_registry = new_vt();
 
         observe_multiple_events([
+            'app_init',
             'pre_controller_construct',
             'pre_controller_dispatch',
             'post_controller_dispatch',
@@ -77,6 +78,15 @@ class PluginsRuntime
     public function getRoutes()
     {
         return $this->plugins_routes;
+    }
+
+    public function setActiveApp($app)
+    {
+        $plugins = $this->scanner->getPlugins();
+
+        foreach ($plugins as $plugin) {
+            $plugin->_setActiveApp($app);
+        }
     }
 
 

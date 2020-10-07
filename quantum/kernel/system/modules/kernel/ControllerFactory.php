@@ -34,7 +34,7 @@ class ControllerFactory
         if (!class_exists($controllerName))
             \throw_exception($controllerName.' does not exist');
 
-        $c = new $controllerName();
+        $c = new $controllerName($app);
         $c->name = $controllerName;
         $c->smarty = $kernel->output->smarty;
         $c->parentApp = $app;
@@ -150,7 +150,11 @@ class ControllerFactory
             \Auth::setAccessLevel("user");
 
             $c->user = $user;
-            $c->user_account = $c->user->account;
+
+            if (is_a($user, 'User') && isset($c->user->account)) {
+                $c->user_account = $c->user->account;
+            }
+
 
             \QM::output()->set('user', $c->user);
 

@@ -65,6 +65,7 @@ class Autoloader extends Singleton
 
         $this->modules_directories = File::newFile($ipt->shared_app_modules_root)->getAllSubDirectories();;
 
+
         if (isset($ipt->app_root))
             $this->addDirectory($ipt->app_root, false);
 
@@ -79,16 +80,17 @@ class Autoloader extends Singleton
             $ipt->shared_app_models_root,
             $ipt->shared_app_controllers_root,
             $ipt->shared_app_resources_root,
-            $ipt->shared_app_services_root
+            $ipt->shared_app_services_root,
+            $ipt->getSharedAppPluginsRoot()
         ));
-
-        $this->addDirectory($ipt->lib_root, false);
 
         $this->addDirectories(array(
             $ipt->system_plugins_root,
             $ipt->app_plugins_root,
-            $ipt->getSharedAppPluginsRoot()
+            $ipt->app_modules_root
         ));
+
+        $this->addDirectory($ipt->lib_root, false);
 
         $this->removeDuplicatedDirectories();
     }
@@ -318,6 +320,7 @@ class Autoloader extends Singleton
         else
             $directories = $this->directories;
 
+        //dd($directories);
 
         foreach($directories as $directory){
             foreach($fileNameFormats as $fileNameFormat){

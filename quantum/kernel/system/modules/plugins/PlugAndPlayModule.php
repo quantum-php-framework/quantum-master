@@ -26,6 +26,11 @@ class PlugAndPlayModule extends Module
     private $_settings;
 
     /**
+     * @var
+     */
+    private $_active_app;
+
+    /**
      * @param $folder
      */
     public function _setFolder($folder)
@@ -55,6 +60,16 @@ class PlugAndPlayModule extends Module
     public function getFolder()
     {
         return $this->_folder;
+    }
+
+    public function _setActiveApp($app)
+    {
+        $this->_active_app = $app;
+    }
+
+    public function getActiveApp()
+    {
+        return $this->_active_app;
     }
 
     /**

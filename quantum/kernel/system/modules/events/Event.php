@@ -48,11 +48,7 @@ class Event
             $this->name = $name;
     }
 
-    /**
-     * @param $callback
-     * @param $callOnlyOnce
-     * @throws EventRegisterException
-     */
+
     public function add($callback, $priority, $callOnlyOnce)
     {
         if ($this->hasCallback($callback))

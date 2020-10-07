@@ -648,6 +648,14 @@ class InternalPathResolver extends Singleton
     }
 
     /**
+     * @return string
+     */
+    public function getLocalDbRoot()
+    {
+        return $this->var_root.'files-db';
+    }
+
+    /**
      * @return bool|string
      */
     public function getWebRoot()

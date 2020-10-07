@@ -28,6 +28,9 @@ class File
      */
     public function __construct($path = "")
     {
+        if (is_object($path) && is_a($path, 'Quantum\File')) {
+            $path = $path->getPath();
+        }
 
         if (!is_string($path))
             trigger_error('path must be string');

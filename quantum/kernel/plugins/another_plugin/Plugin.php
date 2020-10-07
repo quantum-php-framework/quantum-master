@@ -1,5 +1,28 @@
 <?php
 
+/**
+ * Plugin Name
+ *
+ * @package           SimplePlugin
+ * @author            Quantum Framework
+ * @copyright         2020 Quantum Framework
+ * @license           GPL-2.0-or-later
+ *
+ * @quantum-plugin
+ * Plugin Name:       Quantum Simple Plugin
+ * Plugin URI:        https://example.com/plugin-name
+ * Description:       The Main Plugins Manager.
+ * Version:           1.0.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            Carlos Barbosa
+ * Author URI:        https://example.com
+ * Text Domain:       plugin-slug
+ * Namespace:         Qubes
+ * License:           GPL v2 or later
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ */
+
 namespace AnotherSampleCompany\SamplePlugin;
 
 class Plugin extends \Quantum\Plugins\Plugin

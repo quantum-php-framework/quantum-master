@@ -36,16 +36,16 @@ class Plugin extends \Quantum\Plugins\Plugin
 
     public function init()
     {
-        qs ("SampleCompany\SamplePlugin::init")->render();
+        //qs ("SampleCompany\SamplePlugin::init")->render();
 
         //observe_event('init', 'phpinfo');
 
-        observe_event('waka', [$this, 'observer'] );
+        //observe_event('waka', [$this, 'observer'],2 );
 
-        observe_event('waka', [$this, 'observer2']);
+        //observe_event('waka', [$this, 'observer2'], 1);
 
 
-        dd(dispatch_event('waka', 1));
+        //dd(dispatch_event('waka', 1));
 
         //dispatch_event('waka', 'choochoo');
 
@@ -64,7 +64,7 @@ class Plugin extends \Quantum\Plugins\Plugin
         //$this->runMiddlewares([ValidateAllowedCountries::class]);
         //dispatch_event('pre_render');
         //$this->getOutput()->set('wome', 1);
-        qs ("SampleCompany\SamplePlugin::observer")->render();
+        //qs ("SampleCompany\SamplePlugin::observer")->render();
 
         $i = $event->getData();
         return $i + 100;
@@ -72,7 +72,7 @@ class Plugin extends \Quantum\Plugins\Plugin
 
     function observer2(Event $event)
     {
-        qs ("SampleCompany\SamplePlugin::observer2")->render();
+        //qs ("SampleCompany\SamplePlugin::observer2")->render();
 
         $i = $event->getData();
         return $i + 10;

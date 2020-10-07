@@ -338,8 +338,15 @@ class Runtime
     private function createApp()
     {
         Profiler::start("Quantum\Runtime::createApp");
+
         $this->app = HostedAppFactory::create();
+
+        $this->plugins_runtime->setActiveApp($this->app);
+
         $this->callAppMethod("init");
+
+        dispatch_event('app_init');
+
         Profiler::stop("Quantum\Runtime::createApp");
     }
 
