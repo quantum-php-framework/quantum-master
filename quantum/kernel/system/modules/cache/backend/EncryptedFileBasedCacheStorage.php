@@ -52,7 +52,7 @@ class EncryptedFileBasedCacheStorage extends FilesBasedCacheStorage
         $file = self::getFile($key);
 
         if (!$file->existsAsFile())
-            dd($key);
+            return false;
 
         $data = $file->getContentsDecompressed();
 
