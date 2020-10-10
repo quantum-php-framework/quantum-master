@@ -65,7 +65,6 @@ class Autoloader extends Singleton
 
         $this->modules_directories = File::newFile($ipt->shared_app_modules_root)->getAllSubDirectories();;
 
-
         if (isset($ipt->app_root))
             $this->addDirectory($ipt->app_root, false);
 
@@ -341,6 +340,52 @@ class Autoloader extends Singleton
         }
 
         //qm_profiler_stop('AutoLoad::'.$className);
+
+
+    }
+
+    function x()
+    {
+        session_start();
+
+        if (!isset($_SESSION['load_more_iteration'])) {
+            $_SESSION['load_more_iteration'] = 0;
+        }
+
+        $iteration = $_SESSION['load_more_iteration'];
+
+        $col_number = 0;
+
+        if ($iteration  >= 20 && $iteration < 40)
+        {
+            $col_number = 1;
+        }
+
+        if ($iteration  >= 40 && $iteration < 60)
+        {
+            $col_number = 2;
+        }
+
+        if ($iteration  >= 60)
+        {
+            $col_number = 0;
+            $iteration = 0;
+            $_SESSION['load_more_iteration'] = 0;
+        }
+
+
+        printf(
+            '<div id="column-%s" class="link-col"><div class="widget-box"><ul class="posts-list%s">',
+            $col_number,
+            wpd_get_key('wpd_display_postedlink_border') == 'yes' ? ' border' : ''
+        );
+
+        wpdrudge_display_posted_link(get_the_ID());
+
+        echo '</ul></div></div>';
+
+        $iteration++;
+        $_SESSION['load_more_iteration'] = $iteration;
 
 
     }

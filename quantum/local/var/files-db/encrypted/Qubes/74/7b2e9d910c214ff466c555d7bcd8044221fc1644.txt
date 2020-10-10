@@ -1,1 +1,0 @@
-O:10:"Qubes\User":6:{s:8:"username";s:5:"admin";s:4:"name";s:5:"admin";s:12:"access_level";s:4:"root";s:9:"is_active";s:1:"1";s:8:"password";s:71:"sha1:64000:18:pm4UCsFRkndmpIIr3FhiGyNP4+fk1rCR:KtnX6LYd2rwPkP2SzWukiYbk";s:7:"account";O:13:"Qubes\Account":2:{s:4:"name";s:7:"default";s:3:"uri";s:7:"default";}}

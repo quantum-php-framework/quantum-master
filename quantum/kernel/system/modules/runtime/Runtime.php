@@ -250,8 +250,6 @@ class Runtime
         $this->session = Session::getInstance();
 
         $this->setRootFolders();
-
-        $this->setQuantumVars();
     }
 
     private function initPluginsRuntime()
@@ -276,9 +274,6 @@ class Runtime
 
         $this->environment = $this->config->getEnvironment();
         $this->app_config = $this->config->getHostedAppConfig();
-
-        //QM::register("environment", $this->environment);
-        //QM::register("app_config", $this->app_config);
     }
 
     /**
@@ -290,8 +285,6 @@ class Runtime
 
         $cfg = \ActiveRecord\Config::instance();
         $cfg->set_model_directory(array($this->models_root, $this->ipt->shared_app_activerecord_models_root));
-
-        //dd($this->environment);
 
         $conn = array(
             $this->environment->instance => 'mysql://' . $this->environment->db_user . ':' .
@@ -312,9 +305,9 @@ class Runtime
         $this->output = $this->kernel->output;
         $this->smarty = $this->output->smarty;
 
-        if ($this->config->isProductionEnvironment())
+        if ($this->config->isProductionEnvironment()) {
             $this->output->setCompressOutput(true);
-
+        }
     }
 
 
@@ -328,7 +321,6 @@ class Runtime
         RoutesRegistry::addRoutes($this->plugins_runtime->getRoutes());
 
         //dd(RoutesRegistry::getInstance()->getRoutes());
-
     }
 
 
@@ -355,11 +347,7 @@ class Runtime
      */
     private function runControllerDispatch()
     {
-        //QM::register("quantum", $this);
-
         $this->callAppMethod("pre_controller_construct");
-
-        //$this->launcher();
 
         $this->routeBasedDispatch();
     }
@@ -383,8 +371,11 @@ class Runtime
     private function output()
     {
         Profiler::start("Quantum\Runtime::output");
-        if (isset($this->activeController))
+
+        if (isset($this->activeController)) {
             $this->output->addProperties($this->activeController->registry->getProperties());
+        }
+
 
         $this->callAppMethod("pre_render");
 
@@ -393,12 +384,13 @@ class Runtime
 
         $this->processQueuedResponse();
 
-        if (isset($this->activeController))
+        if (isset($this->activeController)) {
             $this->callInternalApiControllerFunction($this->activeController, "__post_render");
+        }
 
         $this->callAppMethod("post_render");
-        Profiler::stop("Quantum\Runtime::output");
 
+        Profiler::stop("Quantum\Runtime::output");
     }
 
     /**
@@ -449,54 +441,6 @@ class Runtime
     /**
      *
      */
-    private function setQuantumVars()
-    {
-        if ($this->request->hasNonEmptyParam('controller'))
-        {
-            $possible_controller = $this->request->getParam('controller');
-
-            if (!is_string($possible_controller) || !qs($possible_controller)->isAlphaNumericWithSpaceAndDash())
-                Output::getInstance()->displayAppError('500');
-
-            //$this->controller = Security::sanitize_html_string($possible_controller);
-        }
-
-        if ($this->request->hasNonEmptyParam('task'))
-        {
-            $possible_task = $this->request->getParam('task');
-
-            if (!is_string($possible_task) || !qs($possible_task)->isAlphaNumericWithSpaceAndDash())
-                Output::getInstance()->displayAppError('500');
-
-            //$this->task = Security::sanitize_html_string($possible_task);
-        }
-
-        if ($this->request->hasNonEmptyParam('object_id'))
-        {
-            $possible_object_id = $this->request->getParam('object_id');
-
-            if (!is_string($possible_object_id) || !qs($possible_object_id)->isAlphaNumericWithSpaceAndDash())
-                Output::getInstance()->displayAppError('500');
-
-            //$this->object_id = Security::sanitize_html_string($possible_object_id);
-        }
-
-        if ($this->request->hasNonEmptyParam('query_id'))
-        {
-            $possible_query_id = $this->request->getParam('query_id');
-
-            if (!is_string($possible_query_id) || !qs($possible_query_id)->isAlphaNumericWithSpaceAndDash())
-                Output::getInstance()->displayAppError('500');
-
-            //$this->query_id = Security::sanitize_html_string($possible_query_id);
-        }
-
-    }
-
-
-    /**
-     *
-     */
     private function routeBasedDispatch()
     {
         //$uri = $this->request->getUri();
@@ -510,7 +454,14 @@ class Runtime
 
         if ($this->config->isCurrentRouteWildcard())
         {
-            $possible_task = $this->request->getParam('task', $route->get('method'));
+            $segments = $this->request->segments();
+
+            if (isset($segments[1])) {
+                $possible_task = $segments[1];
+            }
+            else {
+                $possible_task = $route->get('method');
+            }
 
             $this->validateWildcardRequest($possible_task);
 

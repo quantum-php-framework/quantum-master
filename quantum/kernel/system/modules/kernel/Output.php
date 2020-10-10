@@ -74,7 +74,7 @@ class Output extends Singleton
 
         define('SMARTY_DIR', $this->ipt->lib_root.'smarty/');
         define('SMARTY_SYSPLUGINS_DIR', $this->ipt->lib_root.'smarty/sysplugins/');
-        define('SMARTY_PLUGINS_DIR', $this->ipt->lib_root.'smarty/plugins');
+        define('SMARTY_PLUGINS_DIR', $this->ipt->lib_root.'smarty/plugins/');
         require_once ($this->ipt->lib_root.'smarty/bootstrap.php');
         
         $this->smarty = new \Smarty();

@@ -24,7 +24,17 @@ $QUANTUM_APP_ROUTES = array
         'uri' => '/logout',
         'controller' => 'login',
         'method' => 'logout',
-        'templates' => 'public_access|normal_rate|csrf_enabled'
+        'templates' => 'public_access|normal_rate|csrf_enabled',
+        'hi' => 'dafuq'
+    ),
+
+    array(
+
+        'uri' => '/api*',
+        'controller' => 'index',
+        'method' => 'waka',
+        'templates' => 'public_access|normal_rate|csrf_enabled',
+        'hi' => 'dafuq'
     ),
 
 

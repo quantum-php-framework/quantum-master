@@ -1,12 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/backend/EncryptedFileBasedCacheStorage.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/cache/backend/EncryptedFileBasedCacheStorage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RoutesRegistry.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/RoutesRegistry.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/QubesApp.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/QubesApp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/etc/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/etc/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/models/Auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/models/Auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/templates/qubes/layout/footer.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/templates/qubes/layout/footer.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ActiveAppFileDatabase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ActiveAppFileDatabaseStorage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Autoloader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/Smarty.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/debug.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/block.php.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/block.textformat.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.counter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.cycle.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.fetch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.get_formatted_filesize.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.get_gravatar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_checkboxes.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_image.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_options.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_radios.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_select_date.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_select_time.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.html_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.mailto.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.math.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/function.pretty_format_json.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.base64.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.capitalize.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.date_format.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.debug_print_var.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.escape.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.markdown.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.nicesize.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.nicetime.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.normalcase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.regex_replace.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.replace.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.safejsvar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.sha256.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.spacify.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.timestamp.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifier.truncate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.cat.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.count_characters.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.count_paragraphs.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.count_sentences.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.count_words.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.default.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.indent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.lower.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.noprint.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.string_format.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.strip.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.strip_tags.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.upper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/modifiercompiler.wordwrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/outputfilter.compress.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/outputfilter.trimwhitespace.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/shared.escape_special_chars.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/shared.make_timestamp.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/shared.mb_str_replace.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/plugins/variablefilter.htmlspecialchars.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_cacheresource_file.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_append.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_assign.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_block.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_break.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_call.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_capture.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_config_load.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_continue.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_debug.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_eval.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_extends.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_for.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_foreach.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_function.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_if.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_include.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_include_php.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_insert.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_ldelim.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_nocache.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_block_plugin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_function_plugin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_modifier.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_object_block_function.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_object_function.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_print_expression.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_registered_block.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_registered_function.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_private_special_variable.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_rdelim.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_section.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compile_while.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_compilebase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_config_file_compiler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_configfilelexer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_configfileparser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_data.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_debug.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_filter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_filter_handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_function_call_handler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_get_include_path.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_nocache_insert.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_parsetree.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_register.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_eval.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_extends.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_file.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_php.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_registered.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_stream.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_resource_string.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_smartytemplatecompiler.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_template.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_templatecompilerbase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_templatelexer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_templateparser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_utility.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_wrapper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_internal_write_file.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty-old/sysplugins/smarty_security.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/0f/0e93392e3d3da354b15ab81915dd64e386ed861f.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/3f/35c75144582f10baec0333f46fdfa13aa14d5dcf.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/74/7b2e9d910c214ff466c555d7bcd8044221fc1644.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/de/d64a8a01e9761003962e55c6c87279a8c24ec8ae.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/fc/f08a1013de97635bae8c107a20742defd96221ec.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webroot/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/.htaccess" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,11 +153,20 @@
       <executable path="composer" />
     </execution>
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="quantum_dev" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTTP Request" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="qubes.quantumframework.localhost" id="49366ef3-5d56-47bc-bf0e-6b865fb5d117" name="http://qubes.quantumframework.localhost/" />
+    </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="MAMP PHP 7.1.12">
     <include_path>
@@ -114,13 +258,19 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/apps/hosted/qubes/templates/qubes/errors" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -134,18 +284,45 @@
       <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://qubes.quantumframework.localhost" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="JavaScript Debug.index.php">
+    <configuration name="All in home" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/quantum/home.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/quantum-master/webroot/index.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="qubes.quantumframework.localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="http://qubes.quantumframework.localhost/">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.php" />
+        <item itemvalue="HTTP Request.All in home" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -231,24 +408,133 @@
       <workItem from="1600634131249" duration="61601000" />
       <workItem from="1601047500858" duration="928000" />
       <workItem from="1601205424738" duration="16220000" />
-      <workItem from="1601911375258" duration="50806000" />
+      <workItem from="1601911375258" duration="57745000" />
+      <workItem from="1602124318423" duration="2901000" />
+      <workItem from="1602129099067" duration="1318000" />
+      <workItem from="1602156657392" duration="15000" />
+      <workItem from="1602156715083" duration="1000" />
+      <workItem from="1602156761574" duration="22000" />
+      <workItem from="1602156808820" duration="58000" />
+      <workItem from="1602157092017" duration="13000" />
+      <workItem from="1602157239543" duration="35000" />
+      <workItem from="1602157308428" duration="13000" />
+      <workItem from="1602157356527" duration="2065000" />
+      <workItem from="1602160253692" duration="83000" />
+      <workItem from="1602160430913" duration="48000" />
+      <workItem from="1602163757544" duration="9593000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="867" y="381" key="#Servers" timestamp="1602158021756">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="867" y="381" key="#Servers/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602158021756" />
+    <state x="744" y="369" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602160630810">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="744" y="369" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602160630810" />
+    <state width="2518" height="392" key="GridCell.Tab.0.bottom" timestamp="1602167615417">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="392" key="GridCell.Tab.0.bottom/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615417" />
+    <state width="2518" height="392" key="GridCell.Tab.0.center" timestamp="1602167615416">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="392" key="GridCell.Tab.0.center/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615416" />
+    <state width="2518" height="392" key="GridCell.Tab.0.left" timestamp="1602167615415">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="392" key="GridCell.Tab.0.left/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615415" />
+    <state width="2518" height="392" key="GridCell.Tab.0.right" timestamp="1602167615416">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="392" key="GridCell.Tab.0.right/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615416" />
+    <state width="2518" height="248" key="GridCell.Tab.1.bottom" timestamp="1602163742371">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.1.bottom/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
+    <state width="2518" height="248" key="GridCell.Tab.1.center" timestamp="1602163742370">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.1.center/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742370" />
+    <state width="2518" height="248" key="GridCell.Tab.1.left" timestamp="1602163742370">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.1.left/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742370" />
+    <state width="2518" height="248" key="GridCell.Tab.1.right" timestamp="1602163742371">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.1.right/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
+    <state width="2518" height="248" key="GridCell.Tab.2.bottom" timestamp="1602163742372">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.2.bottom/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742372" />
+    <state width="2518" height="248" key="GridCell.Tab.2.center" timestamp="1602163742371">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.2.center/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
+    <state width="2518" height="248" key="GridCell.Tab.2.left" timestamp="1602163742371">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.2.left/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
+    <state width="2518" height="248" key="GridCell.Tab.2.right" timestamp="1602163742372">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="2518" height="248" key="GridCell.Tab.2.right/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742372" />
+    <state width="221" height="457" key="HiddenNamespacesPopup" timestamp="1602160657409">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state width="221" height="457" key="HiddenNamespacesPopup/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602160657409" />
+    <state x="1236" y="345" key="SettingsEditor" timestamp="1602221449366">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="1236" y="345" key="SettingsEditor/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602221449366" />
+    <state x="1236" y="345" key="SettingsEditor/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167583107" />
+    <state x="829" y="443" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1602158337347">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="829" y="443" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602158337347" />
+    <state x="987" y="462" width="586" height="490" key="find.popup" timestamp="1602252946640">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="987" y="462" width="586" height="490" key="find.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602252946640" />
+    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup" timestamp="1602254847756">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602254847756" />
+    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167589376" />
+  </component>
+  <component name="WordPressConfiguration" doNotAskAgain="true" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/webroot/index.php</url>
+          <line>14</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/webroot/index.php</url>
+          <line>10</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

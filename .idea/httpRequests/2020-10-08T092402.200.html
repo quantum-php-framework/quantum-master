@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Qubes | Quantum Framework</title>
+
+    <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
+    <meta property="og:site_name" content="OneUI">
+    <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="/static/templates/qubes/assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/templates/qubes/assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/templates/qubes/assets/media/favicons/apple-touch-icon-180x180.png">
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+    <!-- Fonts and OneUI framework -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" id="css-main" href="/static/templates/qubes/assets/css/oneui.min.css">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="/static/templates/qubes/assets/css/themes/amethyst.min.css"> -->
+    <!-- END Stylesheets -->
+</head>
+<body>
+<!-- Page Container -->
+<!--
+    Available classes for #page-container:
+
+GENERIC
+
+    'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
+
+SIDEBAR & SIDE OVERLAY
+
+    'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+    'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+    'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+    'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+    'sidebar-dark'                              Dark themed sidebar
+
+    'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+    'side-overlay-o'                            Visible Side Overlay by default
+
+    'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+    'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+HEADER
+
+    ''                                          Static Header if no class is added
+    'page-header-fixed'                         Fixed Header
+
+HEADER STYLE
+
+    ''                                          Light themed Header
+    'page-header-dark'                          Dark themed Header
+
+MAIN CONTENT LAYOUT
+
+    ''                                          Full width Main Content if no class is added
+    'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+    'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+-->
+<div id="page-container">
+
+    <!-- Main Container -->
+    <main id="main-container">
+        <!-- Page Content -->
+        <div class="hero-static">
+            <div class="content">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                        <!-- Sign In Block -->
+                        <div class="block block-rounded block-themed mb-0">
+                            <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Sign In</h3>
+                                <div class="block-options">
+                                    <a class="btn-block-option font-size-sm" href="op_auth_reminder.html">Forgot Password?</a>
+                                    <a class="btn-block-option" href="op_auth_signup.html" data-toggle="tooltip" data-placement="left" title="New Account">
+                                        <i class="fa fa-user-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="block-content">
+                                <div class="p-sm-3 px-lg-4 py-lg-5">
+
+                                    <h1 class="h2 mb-1">Quantum Qubes</h1>
+                                    <p class="text-muted">
+                                    <div class="card-box">
+                                                                                
+                                    </div>
+                                    </p>
+
+                                    <!-- Sign In Form -->
+                                    <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _es6/pages/op_auth_signin.js) -->
+                                    <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                    <form class="js-validation-signin" action="" method="POST">
+                                        <input type='hidden' name='csrf' value='def5020064e0716f391bbb78167c67d80c1802d6ce1835fbc92fb97e572264b4a3928378a700d9e5ad31b584cdf923eaeb12f7d998e6867d3d83e1ea59625fd4dae3491bdb0744f24640f6b90a32fe5b203cd4a8052ba1f0ae815bba7621b7193d82b502c6104603e7af29dd582f756aa8ba5dcc5a0301b9ab357f47abef81e735b2fa9efd56404d8903c671dd19773303565229'>
+                                                                                <div class="py-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-alt form-control-lg" id="login-username" name="username" placeholder="Username">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="password" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="login-remember" name="login-remember">
+                                                    <label class="custom-control-label font-w400" for="login-remember">Remember Me</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-xl-5">
+                                                <button type="submit" class="btn btn-block btn-alt-primary">
+                                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END Sign In Form -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Sign In Block -->
+                    </div>
+                </div>
+            </div>
+            <div class="content content-full font-size-sm text-muted text-center">
+                <strong>Quantum Qubes </strong> &copy; <span data-toggle="year-copy"></span>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+</div>
+<!-- END Page Container -->
+
+<!--
+    OneUI JS Core
+
+    Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
+    to handle those dependencies through webpack. Please check out /static/templates/qubes/assets/_es6/main/bootstrap.js for more info.
+
+    If you like, you could also include them separately directly from the /static/templates/qubes/assets/js/core folder in the following
+    order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
+
+    /static/templates/qubes/assets/js/core/jquery.min.js
+    /static/templates/qubes/assets/js/core/bootstrap.bundle.min.js
+    /static/templates/qubes/assets/js/core/simplebar.min.js
+    /static/templates/qubes/assets/js/core/jquery-scrollLock.min.js
+    /static/templates/qubes/assets/js/core/jquery.appear.min.js
+    /static/templates/qubes/assets/js/core/js.cookie.min.js
+-->
+<script src="/static/templates/qubes/assets/js/oneui.core.min.js"></script>
+
+<!--
+    OneUI JS
+
+    Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+    webpack is putting everything together at /static/templates/qubes/assets/_es6/main/app.js
+-->
+<script src="/static/templates/qubes/assets/js/oneui.app.min.js"></script>
+
+<!-- Page JS Plugins -->
+<script src="/static/templates/qubes/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+
+<!-- Page JS Code -->
+<script src="/static/templates/qubes/assets/js/pages/op_auth_signin.min.js"></script>
+</body>
+</html>
+<a href="javascript:void(0)" onclick="$('profiler_section').style.display=$('profiler_section').style.display==''?'none':''">[profiler]</a><div id="profiler_section" style="background:white; display:block"><pre>Memory usage: real: 4 MB, emalloc: 6.58 MB</pre><table border="1" cellspacing="0" cellpadding="2" style="width:auto"><tr><th>Code Profiler</th><th>Time</th><th>Count</th><th>Emalloc</th><th>RealMem</th></tr><tr><td align="left">Quantum\Runtime::__construct</td><td>0.5480279922485352</td><td align="right">1</td><td align="right">2.9 MB</td><td align="right">2 MB</td></tr><tr><td align="left">Kernel::__construct</td><td>0.1163101196289062</td><td align="right">1</td><td align="right">513.49 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\PrettyErrors</td><td>0.0106160640716553</td><td align="right">1</td><td align="right">315.73 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidateAllowedIps</td><td>0.0008130073547363</td><td align="right">1</td><td align="right">7.03 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidateKernelRateLimit</td><td>0.0112159252166748</td><td align="right">1</td><td align="right">206.33 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\MaintenanceMode</td><td>0.0009729862213135</td><td align="right">1</td><td align="right">9.08 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidatePostSize</td><td>0.0020439624786377</td><td align="right">1</td><td align="right">31.68 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidateCSRF</td><td>0.0333518981933594</td><td align="right">1</td><td align="right">258.4 KB</td><td align="right">0 B</td></tr><tr><td align="left">setCSRF</td><td>0.0323259830474854</td><td align="right">1</td><td align="right">242.12 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidateAppStatus</td><td>0.0007641315460205</td><td align="right">1</td><td align="right">3.72 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidateAppRateLimit</td><td>0.0016019344329834</td><td align="right">1</td><td align="right">11.41 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ValidateAllowedCountries</td><td>0.0006840229034424</td><td align="right">1</td><td align="right">6.42 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Quantum\Middleware\ExecuteAppMiddlewares</td><td>0.0007741451263428</td><td align="right">1</td><td align="right">4.62 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::Shared\Middlewares\ExecuteRouteMiddlewares</td><td>0.0012152194976807</td><td align="right">1</td><td align="right">5.64 KB</td><td align="right">0 B</td></tr><tr><td align="left">Quantum\Runtime::createApp</td><td>0.0108211040496826</td><td align="right">1</td><td align="right">178.79 KB</td><td align="right">0 B</td></tr><tr><td align="left">HostedApp::runMiddlewares</td><td>0.0068018436431885</td><td align="right">1</td><td align="right">70.75 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::ValidateAppAccess</td><td>0.0007078647613525</td><td align="right">1</td><td align="right">10.36 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::ValidateAppRoutes</td><td>0.0009138584136963</td><td align="right">1</td><td align="right">10.6 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::ValidateAppRoutesRateLimit</td><td>0.0037028789520264</td><td align="right">1</td><td align="right">14.45 KB</td><td align="right">0 B</td></tr><tr><td align="left">Middleware::ValidateRouteAccess</td><td>0.0012609958648682</td><td align="right">1</td><td align="right">32.76 KB</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::app_init</td><td>0.2869510650634766</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr><tr><td align="left">Quantum\Runtime::runControllerDispatch</td><td>0.2817280292510986</td><td align="right">1</td><td align="right">418.04 KB</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::pre_controller_construct</td><td>0.2859199047088623</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr><tr><td align="left">Quantum\Runtime::createController</td><td>0.2594940662384033</td><td align="right">1</td><td align="right">393.53 KB</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::pre_controller_dispatch</td><td>0.0261759757995605</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::post_controller_dispatch</td><td>0.0045678615570068</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr><tr><td align="left">Quantum\Runtime::output</td><td>0.0026240348815918</td><td align="right">1</td><td align="right">71.15 KB</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::pre_render</td><td>0.0043780803680420</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::post_render</td><td>0.0020139217376709</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr><tr><td align="left">EventsManager::dispatch::shutdown</td><td>0.0018200874328613</td><td align="right">1</td><td align="right">0 B</td><td align="right">0 B</td></tr></table></div>

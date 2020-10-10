@@ -47,6 +47,10 @@ class QubesApp extends \Quantum\HostedApp
         $this->output()->setTemplate('qubes');
 
         $this->output()->set('active_menu', qs(QM::config()->getCurrentRouteUri()));
+
+        $this->output()->set('qm_version', QM_KERNEL_VERSION);
+
+        $this->output()->set('qubes_version', $this->getConfig()->get('version'));
     }
 
     public function post_controller_dispatch()

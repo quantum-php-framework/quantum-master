@@ -304,7 +304,7 @@ SetEnv TZ America/Chicago
     RewriteCond %{REQUEST_FILENAME}       !-f
     RewriteCond %{REQUEST_FILENAME}       !-d
 
-    RewriteRule ^([^/]+)/?([^/]*)/?/?([^/]*)/?([^/]*)/?([^/]*)/?([^/]*)/?([^/]*)$ index.php?controller=$1&task=$2&object_id=$3&query_id=$4 [QSA,L]
+    RewriteRule ^([^/]+)/?([^/]*)/?/?([^/]*)/?([^/]*)/?([^/]*)/?([^/]*)/?([^/]*)$ index.php [QSA,L]
 </IfModule>
 
 DirectoryIndex index.php

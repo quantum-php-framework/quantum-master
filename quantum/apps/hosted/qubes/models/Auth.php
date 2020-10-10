@@ -1,6 +1,6 @@
 <?php
 
-use Quantum\ActiveAppFileDatabase;
+use Quantum\ActiveAppKeyPairFileDb;
 use Quantum\Session;
 
 
@@ -24,7 +24,7 @@ class Auth extends Quantum\Singleton
         {
             $user_key = 'user_'.Session::get('username');
 
-            $user = ActiveAppFileDatabase::get($user_key);
+            $user = ActiveAppKeyPairFileDb::get($user_key);
 
 
             //dd($user);
@@ -83,22 +83,22 @@ class Auth extends Quantum\Singleton
         $access_level = new Qubes\AccessLevel();
         $access_level->name = 'root';
         $access_level->priority = 99999;
-        ActiveAppFileDatabase::set('access_level_root', $access_level);
+        ActiveAppKeyPairFileDb::set('access_level_root', $access_level);
 
         $access_level2 = new Qubes\AccessLevel();
         $access_level2->name = 'superadmin';
         $access_level2->priority = 9999;
-        ActiveAppFileDatabase::set('access_level_superadmin', $access_level2);
+        ActiveAppKeyPairFileDb::set('access_level_superadmin', $access_level2);
 
         $access_level3 = new Qubes\AccessLevel();
         $access_level3->name = 'admin';
         $access_level3->priority = 999;
-        ActiveAppFileDatabase::set('access_level_admin', $access_level3);
+        ActiveAppKeyPairFileDb::set('access_level_admin', $access_level3);
 
         $access_level4 = new Qubes\AccessLevel();
         $access_level4->name = 'registered';
         $access_level4->priority = 99;
-        ActiveAppFileDatabase::set('access_level_registered', $access_level4);
+        ActiveAppKeyPairFileDb::set('access_level_registered', $access_level4);
 
 
     }
@@ -120,7 +120,7 @@ class Auth extends Quantum\Singleton
         $user->password = \Quantum\PasswordStorage::create_hash('Qubes123!');
         $user->account = $acct;
 
-        return ActiveAppFileDatabase::set('user_admin', $user);
+        return \Quantum\ActiveAppKeyPairFileDb::set('user_admin', $user);
     }
 
     /**

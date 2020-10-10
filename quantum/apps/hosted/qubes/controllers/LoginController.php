@@ -64,7 +64,7 @@ class LoginController extends Quantum\Controller
 
         $user_key = 'user_'.$posted_username;
 
-        $user = \Quantum\ActiveAppFileDatabase::get($user_key);
+        $user = \Quantum\ActiveAppKeyPairFileDb::get($user_key);
 
         if (!empty($user))
         {

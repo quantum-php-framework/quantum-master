@@ -68,6 +68,13 @@ class IndexController extends Quantum\Controller
         //dd(ActiveAppFileDatabase::get('var'));
     }
 
+    function waka()
+    {
+        $this->setAutoRender(false);
+
+        say_hi();
+    }
+
 
     
         
