@@ -1,5 +1,4 @@
-<?
-
+<?php
 /**
  * A Quantum Hosted App
 */

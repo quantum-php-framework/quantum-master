@@ -106,6 +106,13 @@ function has_namespace($class_name)
 	return false;
 }
 
+function has_absolute_namespace($class_name)
+{
+	if (strpos($class_name, '\\') === 0)
+		return true;
+	return false;
+}
+
 /**
  * Returns true if all values in $haystack === $needle
  * @param $needle
@@ -184,16 +191,6 @@ class Utils
 		return $conditions;
 	}
 
-	public static function gen_uuid()
-    {
-        $bytes = random_bytes(16); //on php5 we use paragonie/random_compat
-        $bytes[6] = chr((ord($bytes[6]) & 0x0f) | 0x40);
-        $bytes[8] = chr((ord($bytes[8]) & 0x3f) | 0x80);
-        $id = str_split(bin2hex($bytes), 4);
-        return "{$id[0]}{$id[1]}-{$id[2]}-{$id[3]}-{$id[4]}-{$id[5]}{$id[6]}{$id[7]}";
-
-    }
-
 	public static function human_attribute($attr)
 	{
 		$inflector = Inflector::instance();
@@ -242,7 +239,7 @@ class Utils
         '/(bu)s$/i'                => "$1ses",
         '/(alias)$/i'              => "$1es",
         '/(octop)us$/i'            => "$1i",
-        '/(ax|test)is$/i'          => "$1es",
+        '/(cris|ax|test)is$/i'     => "$1es",
         '/(us)$/i'                 => "$1es",
         '/s$/i'                    => "s",
         '/$/'                      => "s"
@@ -365,5 +362,9 @@ class Utils
 	{
 		return preg_replace("/$char+/",$char,$string);
 	}
-};
-?>
+
+    public static function add_irregular($singular, $plural)
+    {
+        self::$irregular[$singular] = $plural;
+    }
+}

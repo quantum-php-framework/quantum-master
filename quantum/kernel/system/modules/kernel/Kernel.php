@@ -32,6 +32,7 @@ include ("InternalPathResolver.php");
 include ("Session.php");
 include ("Autoloader.php");
 include ("Output.php");
+//include ("QM.php");
 
 
 /**

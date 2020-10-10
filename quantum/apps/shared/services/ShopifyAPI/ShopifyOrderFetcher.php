@@ -1,5 +1,4 @@
-<?
-
+<?php
 class ShopifyOrderFetcher
 {
     public static function fetchOrders($from = '', $to = '')

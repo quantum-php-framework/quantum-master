@@ -73,6 +73,14 @@ class Config extends Singleton
 	private $logger;
 
 	/**
+	 * Contains the class name for the Date class to use. Must have a public format() method and a
+	 * public static createFromFormat($format, $time) method
+	 *
+	 * @var string
+	 */
+	private $date_class = 'ActiveRecord\\DateTime';
+
+	/**
 	 * The format to serialize DateTime values into.
 	 *
 	 * @var string
@@ -208,16 +216,15 @@ class Config extends Singleton
 	 */
 	public function get_model_directory()
 	{
-		if (!is_array($this->model_directory))
-		{
+        if (!is_array($this->model_directory))
+        {
             if ($this->model_directory && !file_exists($this->model_directory))
                 throw new ConfigException('Invalid or non-existent directory: '.$this->model_directory);
 
 
-		}
+        }
 
         return $this->model_directory;
-
 	}
 
 	/**
@@ -268,6 +275,28 @@ class Config extends Singleton
 		return $this->logger;
 	}
 
+	public function set_date_class($date_class)
+	{
+		try {
+			$klass = Reflections::instance()->add($date_class)->get($date_class);
+		} catch (\ReflectionException $e) {
+			throw new ConfigException("Cannot find date class");
+		}
+
+		if (!$klass->hasMethod('format') || !$klass->getMethod('format')->isPublic())
+			throw new ConfigException('Given date class must have a "public format($format = null)" method');
+
+		if (!$klass->hasMethod('createFromFormat') || !$klass->getMethod('createFromFormat')->isPublic())
+			throw new ConfigException('Given date class must have a "public static createFromFormat($format, $time)" method');
+
+		$this->date_class = $date_class;
+	}
+
+	public function get_date_class()
+	{
+		return $this->date_class;
+	}
+
 	/**
 	 * @deprecated
 	 */
@@ -306,5 +335,4 @@ class Config extends Singleton
 	{
 		Cache::initialize($url,$options);
 	}
-};
-?>
+}

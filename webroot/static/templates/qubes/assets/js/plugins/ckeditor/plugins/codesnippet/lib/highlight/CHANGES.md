@@ -695,7 +695,7 @@ bugs in he [forum][f] and by email!
 There is also a new language — XML. A custom XML formerly was detected as HTML
 and didn't highlight custom tags. In this version I tried to make custom XML to
 be detected and highlighted by its own rules. Which by the way include such
-things as CDATA sections and processing instructions (`<? ... ?>`).
+things as CDATA sections and processing instructions (`<?php... ?>`).
 
 [f]: http://softwaremaniacs.org/forum/viewforum.php?id=6
 

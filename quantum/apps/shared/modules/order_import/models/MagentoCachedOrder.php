@@ -1,5 +1,4 @@
-<?
-
+<?php
 namespace OrderImport;
 
 class MagentoCachedOrder extends \Quantum\ActiverecordModel {

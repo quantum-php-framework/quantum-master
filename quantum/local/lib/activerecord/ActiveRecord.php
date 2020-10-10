@@ -7,33 +7,35 @@ define('PHP_ACTIVERECORD_VERSION_ID','1.0');
 if (!defined('PHP_ACTIVERECORD_AUTOLOAD_PREPEND'))
 	define('PHP_ACTIVERECORD_AUTOLOAD_PREPEND',true);
 
-require 'lib/Singleton.php';
-require 'lib/Config.php';
-require 'lib/Utils.php';
-require 'lib/DateTime.php';
-require 'lib/Model.php';
-require 'lib/Table.php';
-require 'lib/ConnectionManager.php';
-require 'lib/Connection.php';
-require 'lib/SQLBuilder.php';
-require 'lib/Reflections.php';
-require 'lib/Inflector.php';
-require 'lib/CallBack.php';
-require 'lib/Exceptions.php';
-require 'lib/Cache.php';
+require __DIR__.'/lib/Singleton.php';
+require __DIR__.'/lib/Config.php';
+require __DIR__.'/lib/Utils.php';
+require __DIR__.'/lib/DateTimeInterface.php';
+require __DIR__.'/lib/DateTime.php';
+require __DIR__.'/lib/Model.php';
+require __DIR__.'/lib/Table.php';
+require __DIR__.'/lib/ConnectionManager.php';
+require __DIR__.'/lib/Connection.php';
+require __DIR__.'/lib/Serialization.php';
+require __DIR__.'/lib/SQLBuilder.php';
+require __DIR__.'/lib/Reflections.php';
+require __DIR__.'/lib/Inflector.php';
+require __DIR__.'/lib/CallBack.php';
+require __DIR__.'/lib/Exceptions.php';
+require __DIR__.'/lib/Cache.php';
 
 if (!defined('PHP_ACTIVERECORD_AUTOLOAD_DISABLE'))
 	spl_autoload_register('activerecord_autoload',false,PHP_ACTIVERECORD_AUTOLOAD_PREPEND);
 
 function activerecord_autoload($class_name)
 {
-	$path = ActiveRecord\Config::instance()->get_model_directory();
+    $path = ActiveRecord\Config::instance()->get_model_directory();
 
-	if (is_string($path))
+    if (is_string($path))
     {
         $paths = array($path);
     }
-	elseif (is_array($path))
+    elseif (is_array($path))
     {
         $paths = $path;
     }
@@ -54,7 +56,7 @@ function activerecord_autoload($class_name)
             foreach ($namespaces as $directory)
                 $directories[] = $directory;
 
-            $root .= DIRECTORY_SEPARATOR . implode($directories, DIRECTORY_SEPARATOR);
+            $root .= DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $directories);
         }
 
         $file = "$root/$class_name.php";
@@ -62,6 +64,4 @@ function activerecord_autoload($class_name)
         if (file_exists($file))
             require $file;
     }
-
-
 }

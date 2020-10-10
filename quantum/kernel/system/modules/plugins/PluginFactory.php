@@ -17,11 +17,14 @@ class PluginFactory
         $entry_file = qf($this->folder->getPluginEntryFile());
 
 
-        include $entry_file->getRealPath();
+
 
         $classes = get_declared_classes();
+        include $entry_file->getRealPath();
+        $diff = array_diff(get_declared_classes(), $classes);
+        $last_class = reset($diff);
 
-        $last_class = end($classes);
+        //$last_class = get_cl
 
         $plugin = new $last_class;
         $plugin->_setFolder($this->folder);
@@ -29,5 +32,7 @@ class PluginFactory
 
         return $plugin;
     }
+
+
 
 }

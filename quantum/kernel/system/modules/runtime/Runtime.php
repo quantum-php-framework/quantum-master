@@ -1,4 +1,4 @@
-<?
+<?php
 namespace Quantum;
 
 use InvalidArgumentException;
