@@ -14,6 +14,10 @@ class Config extends Singleton
      */
     public $environment;
 
+    public $active_kernel_plugins_list;
+
+    public $active_app_plugins_list;
+
     /**
      * Config constructor.
      * @throws \Exception
@@ -30,7 +34,7 @@ class Config extends Singleton
     public function getEnvironment() {
 
        if (!empty($this->environment)) {
-	    return $this->environment;
+           return $this->environment;
        }
 
        return false;
@@ -895,15 +899,36 @@ class Config extends Singleton
 
     public function getEnabledKernelPlugins()
     {
-        $file = $this->getEnabledKernelPluginsFile();
+        if (!isset($this->active_kernel_plugins_list))
+        {
+            $this->active_kernel_plugins_list = [];
 
-        if ($file) {
-            return $file->getList();
+            $file = $this->getEnabledKernelPluginsFile();
+
+            if ($file) {
+                $this->active_kernel_plugins_list = $file->getList();
+            }
         }
 
-        return array();
+        return $this->active_kernel_plugins_list;
     }
 
+
+    public function getEnabledActiveAppPlugins()
+    {
+        if (!isset($this->active_app_plugins_list))
+        {
+            $this->active_app_plugins_list = [];
+
+            $file = $this->getEnabledActiveAppPluginsFile();
+
+            if ($file) {
+                $this->active_app_plugins_list = $file->getList();
+            }
+        }
+
+        return $this->active_app_plugins_list;
+    }
 
     public function getEnabledKernelPluginsFile()
     {
@@ -911,23 +936,10 @@ class Config extends Singleton
         $settings_file = qf($ipt->config_root.'plugins.php');
 
         if ($settings_file->existsAsFile()) {
-            $file = new \Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
-
-            return $file;
+            return new \Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
         }
 
         return false;
-    }
-
-    public function getEnabledActiveAppPlugins()
-    {
-        $file = $this->getEnabledActiveAppPluginsFile();
-
-        if ($file) {
-            return $file->getList();
-        }
-
-        return array();
     }
 
     public function getEnabledActiveAppPluginsFile()
@@ -936,9 +948,7 @@ class Config extends Singleton
         $settings_file = qf($ipt->app_config_root.'plugins.php');
 
         if ($settings_file->existsAsFile()) {
-            $file = new \Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
-
-            return $file;
+            return new \Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
         }
 
         return false;

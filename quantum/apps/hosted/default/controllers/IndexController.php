@@ -110,7 +110,7 @@ class IndexController extends Quantum\Controller
         //$file = new Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
         //$file->removePlugin('Some\Plugin\Name');
 
-        $plugins = \QM::config()->getKernelAndAppPlugins();
+        $plugins = \QM::config()->getKernelAndActiveAppPlugins();
         dd($plugins);
 
         qs('Welcome to Quantum')->render();

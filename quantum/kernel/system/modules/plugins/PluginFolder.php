@@ -70,6 +70,46 @@ class PluginFolder extends \Quantum\File
         return 'app';
     }
 
+    public function getLoadedByStatus()
+    {
+        if ($this->canPluginBeLoadedByKernel()) {
+            return 'kernel';
+        }
+
+        if ($this->canPluginBeLoadedByActiveApp()) {
+            return 'app';
+        }
+
+        return 'disabled';
+    }
+
+    public function getEntryClassFromEntryFileHeaders()
+    {
+        return $this->getPluginEntryHeader('entry_class');
+    }
+
+    public function canPluginBeLoadedByKernel()
+    {
+        $entry_class = $this->getEntryClassFromEntryFileHeaders();
+
+        $config = \Quantum\Config::getInstance();
+
+        $enabled_plugins = new_vt($config->getEnabledKernelPlugins());
+
+        return $enabled_plugins->hasEqualParam($entry_class, 1);
+    }
+
+    public function canPluginBeLoadedByActiveApp()
+    {
+        $entry_class = $this->getEntryClassFromEntryFileHeaders();
+
+        $config = \Quantum\Config::getInstance();
+
+        $enabled_plugins = new_vt($config->getEnabledActiveAppPlugins());
+
+        return $enabled_plugins->hasEqualParam($entry_class, 1);
+    }
+
     public function readFileHeaders($file)
     {
         $default_headers = array(
@@ -113,5 +153,7 @@ class PluginFolder extends \Quantum\File
     {
         return trim( preg_replace( '/\s*(?:\*\/|\?>).*/', '', $str ) );
     }
+
+
 
 }

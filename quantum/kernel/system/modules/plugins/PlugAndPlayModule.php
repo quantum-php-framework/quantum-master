@@ -12,7 +12,7 @@ use Quantum\Request;
 class PlugAndPlayModule extends Module
 {
     /**
-     * @var
+     * @var PluginFolder
      */
     private $_folder;
 
@@ -170,13 +170,27 @@ class PlugAndPlayModule extends Module
      */
     public function includePluginFolderFile($local_path)
     {
-        $folder = $this->getFolder();
-        $file = $folder->getChildFile($local_path);
+        $file = $this->_folder->getChildFile($local_path);
 
         if ($file->existsAsFile()) {
             return include $file->getPath();
         }
 
         return false;
+    }
+
+    public function getEntryClassFromEntryFileHeaders()
+    {
+        return $this->_folder->getEntryClassFromEntryFileHeaders();
+    }
+
+    public function canBeLoadedByKernel()
+    {
+        return $this->_folder->canPluginBeLoadedByKernel();
+    }
+
+    public function canBeLoadedByActiveApp()
+    {
+        return $this->_folder->canPluginBeLoadedByActiveApp();
     }
 }

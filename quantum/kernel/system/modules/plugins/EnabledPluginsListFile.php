@@ -21,10 +21,11 @@ class EnabledPluginsListFile
 
     public function readData()
     {
-        $this->data = new_vt();
-
         if ($this->file->existsAsFile()) {
-            $this->data = new_vt(include $this->file->path);
+            $this->data = new_vt(include $this->file->getRealPath());
+        }
+        else {
+            $this->data = new_vt();
         }
     }
 

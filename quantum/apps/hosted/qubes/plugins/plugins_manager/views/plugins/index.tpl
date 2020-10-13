@@ -65,6 +65,7 @@
                         <tr>
                             <th style="width: 50%;">Plugin</th>
                             <th class="d-none d-lg-table-cell text-center" style="width: 10%;">Scope</th>
+                            <th class="d-none d-lg-table-cell text-center" style="width: 10%;">Loaded By</th>
                             <th class="d-none d-lg-table-cell text-center" style="width: 10%;">Vendor</th>
                             <th class="d-none d-lg-table-cell text-center" style="width: 10%;">Version</th>
                             <th class="text-center" style="width: 20%;">Actions</th>
@@ -80,9 +81,13 @@
                                 <p class="d-none d-sm-block text-muted">
                                     {$plugin->getPluginEntryHeader('description')}
                                 </p>
-                            </td>
+
                             <td class="d-none d-lg-table-cell text-center">
                                 <span class="badge badge-success">{$plugin->getScope()}</span>
+                            </td>
+
+                            <td class="d-none d-lg-table-cell text-center">
+                                <span class="badge badge-success">{$plugin->getLoadedByStatus()}</span>
                             </td>
                             <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{$plugin->getPluginEntryHeader('author')}</td>
                             <td class="font-size-xl text-center font-w600">{$plugin->getPluginEntryHeader('version')}</td>
