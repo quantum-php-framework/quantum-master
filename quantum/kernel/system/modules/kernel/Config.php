@@ -893,6 +893,70 @@ class Config extends Singleton
     }
 
 
+    public function getEnabledKernelPlugins()
+    {
+        $file = $this->getEnabledKernelPluginsFile();
+
+        if ($file) {
+            return $file->getList();
+        }
+
+        return array();
+    }
+
+
+    public function getEnabledKernelPluginsFile()
+    {
+        $ipt = InternalPathResolver::getInstance();
+        $settings_file = qf($ipt->config_root.'plugins.php');
+
+        if ($settings_file->existsAsFile()) {
+            $file = new \Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
+
+            return $file;
+        }
+
+        return false;
+    }
+
+    public function getEnabledActiveAppPlugins()
+    {
+        $file = $this->getEnabledActiveAppPluginsFile();
+
+        if ($file) {
+            return $file->getList();
+        }
+
+        return array();
+    }
+
+    public function getEnabledActiveAppPluginsFile()
+    {
+        $ipt = InternalPathResolver::getInstance();
+        $settings_file = qf($ipt->app_config_root.'plugins.php');
+
+        if ($settings_file->existsAsFile()) {
+            $file = new \Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
+
+            return $file;
+        }
+
+        return false;
+    }
+
+
+    public function getKernelAndActiveAppPlugins()
+    {
+        if (!isset($this->all_active_plugins_list))
+        {
+            $kernel_plugins = $this->getEnabledKernelPlugins();
+            $app_plugins = $this->getEnabledActiveAppPlugins();
+
+            $this->all_active_plugins_list = array_merge($kernel_plugins, $app_plugins);
+        }
+
+        return $this->all_active_plugins_list;
+    }
 
 
 

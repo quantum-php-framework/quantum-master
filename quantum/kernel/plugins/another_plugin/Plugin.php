@@ -11,7 +11,8 @@
  * @quantum-plugin
  * Plugin Name:       Quantum Simple Plugin
  * Plugin URI:        https://example.com/plugin-name
- * Description:       The Main Plugins Manager.
+ * Description:       Sample Plugin
+ * Entry Class:       AnotherSampleCompany\SamplePlugin\Plugin
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2

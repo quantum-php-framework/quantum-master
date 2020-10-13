@@ -84,7 +84,8 @@ class PluginFolder extends \Quantum\File
             'network'     => 'Network',
             'min_qm_version'  => 'Requires at least',
             'min_php_version' => 'Requires PHP',
-            'namespace' => 'Namespace'
+            'namespace' => 'Namespace',
+            'entry_class' => 'Entry Class'
         );
 
         $fp = fopen( $file, 'r' );

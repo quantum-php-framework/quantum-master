@@ -6,115 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/auth/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/auth/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/auth/controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/auth/controllers/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/auth/controllers/PasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/auth/controllers/PasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/auth/controllers/TestsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/auth/controllers/TestsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/controllers/AuthClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/controllers/AuthClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/UserStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/UserStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AccessLevel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AccessLevel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Account.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AddressPhoneNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AddressPhoneNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AppSetting.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AppSetting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AuthClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AuthClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AuthUserToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/AuthUserToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/CacheItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/CacheItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Contact.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ContactAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ContactAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ContactPhoneNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ContactPhoneNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ContactType.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ContactType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Country.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Country.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/CountryRegion.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/CountryRegion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/DeletedObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/DeletedObject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/NetworkTransaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/NetworkTransaction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ObjectJournal.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ObjectJournal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ObjectJournalEntry.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ObjectJournalEntry.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Organization.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/Organization.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/OrganizationAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/OrganizationAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/OrganizationPhoneNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/OrganizationPhoneNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PerformedWork.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PerformedWork.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PhoneNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PhoneNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PhoneNumberType.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PhoneNumberType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProcurementOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProcurementOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProcurementOrderItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProcurementOrderItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProcurementSupplier.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProcurementSupplier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobIssue.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobIssue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobLog.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobLog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobLogEntry.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobLogEntry.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobPriority.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobPriority.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobProductIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobProductIndex.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobType.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/ProductionJobType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PunchoutSession.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/PunchoutSession.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/StreetAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/StreetAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/StreetAddressType.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/StreetAddressType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmailDeliveryAttempt.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmailDeliveryAttempt.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmailRecipient.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmailRecipient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmailTransportServiceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/TransactionalEmailTransportServiceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/UserActivity.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/UserActivity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/WorkArea.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/WorkArea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/WorkGroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/WorkGroup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/WorkGroupAssignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/WorkGroupAssignment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/example_module/controllers/ExampleModuleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/example_module/controllers/ExampleModuleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/order_import/controllers/MagentoOrderImporterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/order_import/controllers/MagentoOrderImporterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/order_import/models/MagentoCachedOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/order_import/models/MagentoCachedOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/controllers/PaymentGatewayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/controllers/PaymentGatewayController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/Address.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/CreditCard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/Payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/Payment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/TransactionResult.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/modules/payment_gateway/models/TransactionResult.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/MagentoAPI/MagentoCachedOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/MagentoAPI/MagentoCachedOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCachedOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCachedOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCxmlReceiver.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCxmlReceiver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCxmlReceiverType.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCxmlReceiverType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCxmlTransfer.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyCxmlTransfer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyOrderFetcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/ShopifyAPI/ShopifyOrderFetcher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/cStoreApi/CstoreCachedOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/cStoreApi/CstoreCachedOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/paypal/PaypalManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/paypal/PaypalManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/waf/WafRequestParam.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/waf/WafRequestParam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/services/waf/WafSecurityException.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/services/waf/WafSecurityException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/qubes/plugins/plugins_manager/PluginsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/qubes/plugins/plugins_manager/PluginsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/plugins/sample_plugin/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/plugins/sample_plugin/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/plugins/another_plugin/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/plugins/another_plugin/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/plugins/PluginFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/plugins/PluginFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/runtime/Runtime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/ActiveRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/ActiveRecord.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/ActiveRecord.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/CallBack.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/CallBack.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Column.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Column.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Connection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/ConnectionManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/ConnectionManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/DateTime.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/DateTime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Exceptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Exceptions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Expressions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Expressions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Inflector.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Inflector.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Reflections.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Reflections.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Relationship.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Relationship.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/SQLBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/SQLBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Serialization.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Serialization.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Singleton.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Singleton.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Table.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Utils.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Validations.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/Validations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/MysqlAdapter.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/MysqlAdapter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/OciAdapter.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/OciAdapter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/PgsqlAdapter.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/PgsqlAdapter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/SqliteAdapter.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/adapters/SqliteAdapter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/cache/Memcache.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/activerecord/lib/cache/Memcache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/local/lib/smarty/plugins/modifier.markdown.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/lib/smarty/plugins/modifier.markdown.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/plugins/PluginFolder.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/plugins/PluginFolder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/0/0f/0e93392e3d3da354b15ab81915dd64e386ed861f.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/0/0f/0e93392e3d3da354b15ab81915dd64e386ed861f.qdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/3/3f/35c75144582f10baec0333f46fdfa13aa14d5dcf.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/3/3f/35c75144582f10baec0333f46fdfa13aa14d5dcf.qdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/7/74/7b2e9d910c214ff466c555d7bcd8044221fc1644.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/7/74/7b2e9d910c214ff466c555d7bcd8044221fc1644.qdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/d/de/d64a8a01e9761003962e55c6c87279a8c24ec8ae.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/d/de/d64a8a01e9761003962e55c6c87279a8c24ec8ae.qdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/f/fc/f08a1013de97635bae8c107a20742defd96221ec.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/f/fc/f08a1013de97635bae8c107a20742defd96221ec.qdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/static/templates/qubes/assets/js/plugins/ckeditor/plugins/codesnippet/lib/highlight/CHANGES.md" beforeDir="false" afterPath="$PROJECT_DIR$/webroot/static/templates/qubes/assets/js/plugins/ckeditor/plugins/codesnippet/lib/highlight/CHANGES.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +45,7 @@
   <component name="PhpServers">
     <servers>
       <server host="qubes.quantumframework.localhost" id="49366ef3-5d56-47bc-bf0e-6b865fb5d117" name="http://qubes.quantumframework.localhost/" />
+      <server host="quantum-dev.localhost" id="a5fdc80b-842a-4d15-9e0d-a35e5c553c16" name="quantum-dev.localhost" />
     </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="MAMP PHP 7.1.12">
@@ -241,7 +146,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/apps/hosted/qubes/templates/qubes/errors" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/apps/hosted/qubes/etc/config" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -249,15 +154,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/plugins/plugins_manager/views" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/etc/config" />
       <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/templates/qubes/errors" />
       <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/plugins/plugins_manager" />
       <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/models" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/kernel" />
-      <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/controllers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/plugins" />
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/plugins/plugins_manager/views" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -397,7 +303,9 @@
       <workItem from="1602157356527" duration="2065000" />
       <workItem from="1602160253692" duration="83000" />
       <workItem from="1602160430913" duration="48000" />
-      <workItem from="1602163757544" duration="12676000" />
+      <workItem from="1602163757544" duration="15086000" />
+      <workItem from="1602325259843" duration="1095000" />
+      <workItem from="1602515270007" duration="6545000" />
     </task>
     <servers />
   </component>
@@ -425,88 +333,111 @@
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state x="744" y="369" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602160630810" />
-    <state width="2518" height="248" key="GridCell.Tab.0.bottom" timestamp="1602296141058">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.0.bottom" timestamp="1602557476346">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.0.bottom/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141058" />
+    <state width="2518" height="248" key="GridCell.Tab.0.bottom/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771258" />
     <state width="2518" height="392" key="GridCell.Tab.0.bottom/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615417" />
-    <state width="2518" height="248" key="GridCell.Tab.0.center" timestamp="1602296141057">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476346" />
+    <state width="2518" height="651" key="GridCell.Tab.0.center" timestamp="1602557476345">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.0.center/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141057" />
+    <state width="2518" height="248" key="GridCell.Tab.0.center/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771257" />
     <state width="2518" height="392" key="GridCell.Tab.0.center/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615416" />
-    <state width="2518" height="248" key="GridCell.Tab.0.left" timestamp="1602296141057">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.0.center/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476345" />
+    <state width="2518" height="651" key="GridCell.Tab.0.left" timestamp="1602557476345">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.0.left/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141057" />
+    <state width="2518" height="248" key="GridCell.Tab.0.left/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771256" />
     <state width="2518" height="392" key="GridCell.Tab.0.left/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615415" />
-    <state width="2518" height="248" key="GridCell.Tab.0.right" timestamp="1602296141058">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.0.left/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476345" />
+    <state width="2518" height="651" key="GridCell.Tab.0.right" timestamp="1602557476346">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.0.right/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141058" />
+    <state width="2518" height="248" key="GridCell.Tab.0.right/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771258" />
     <state width="2518" height="392" key="GridCell.Tab.0.right/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167615416" />
-    <state width="2518" height="248" key="GridCell.Tab.1.bottom" timestamp="1602296141060">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.0.right/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476346" />
+    <state width="2518" height="651" key="GridCell.Tab.1.bottom" timestamp="1602557476348">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.1.bottom/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141060" />
+    <state width="2518" height="248" key="GridCell.Tab.1.bottom/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771260" />
     <state width="2518" height="248" key="GridCell.Tab.1.bottom/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
-    <state width="2518" height="248" key="GridCell.Tab.1.center" timestamp="1602296141059">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.1.bottom/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476348" />
+    <state width="2518" height="651" key="GridCell.Tab.1.center" timestamp="1602557476347">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.1.center/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141059" />
+    <state width="2518" height="248" key="GridCell.Tab.1.center/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771259" />
     <state width="2518" height="248" key="GridCell.Tab.1.center/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742370" />
-    <state width="2518" height="248" key="GridCell.Tab.1.left" timestamp="1602296141059">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.1.center/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476347" />
+    <state width="2518" height="651" key="GridCell.Tab.1.left" timestamp="1602557476347">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.1.left/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141059" />
+    <state width="2518" height="248" key="GridCell.Tab.1.left/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771259" />
     <state width="2518" height="248" key="GridCell.Tab.1.left/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742370" />
-    <state width="2518" height="248" key="GridCell.Tab.1.right" timestamp="1602296141059">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.1.left/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476347" />
+    <state width="2518" height="651" key="GridCell.Tab.1.right" timestamp="1602557476347">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.1.right/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141059" />
+    <state width="2518" height="248" key="GridCell.Tab.1.right/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771259" />
     <state width="2518" height="248" key="GridCell.Tab.1.right/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
-    <state width="2518" height="248" key="GridCell.Tab.2.bottom" timestamp="1602296141061">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.1.right/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476347" />
+    <state width="2518" height="651" key="GridCell.Tab.2.bottom" timestamp="1602557476349">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.2.bottom/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141061" />
+    <state width="2518" height="248" key="GridCell.Tab.2.bottom/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771261" />
     <state width="2518" height="248" key="GridCell.Tab.2.bottom/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742372" />
-    <state width="2518" height="248" key="GridCell.Tab.2.center" timestamp="1602296141060">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.2.bottom/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476349" />
+    <state width="2518" height="651" key="GridCell.Tab.2.center" timestamp="1602557476348">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.2.center/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141060" />
+    <state width="2518" height="248" key="GridCell.Tab.2.center/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771260" />
     <state width="2518" height="248" key="GridCell.Tab.2.center/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
-    <state width="2518" height="248" key="GridCell.Tab.2.left" timestamp="1602296141060">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.2.center/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476348" />
+    <state width="2518" height="651" key="GridCell.Tab.2.left" timestamp="1602557476348">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.2.left/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141060" />
+    <state width="2518" height="248" key="GridCell.Tab.2.left/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771260" />
     <state width="2518" height="248" key="GridCell.Tab.2.left/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742371" />
-    <state width="2518" height="248" key="GridCell.Tab.2.right" timestamp="1602296141061">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state width="2518" height="651" key="GridCell.Tab.2.left/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476348" />
+    <state width="2518" height="651" key="GridCell.Tab.2.right" timestamp="1602557476349">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state width="2518" height="248" key="GridCell.Tab.2.right/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296141061" />
+    <state width="2518" height="248" key="GridCell.Tab.2.right/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296771261" />
     <state width="2518" height="248" key="GridCell.Tab.2.right/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602163742372" />
+    <state width="2518" height="651" key="GridCell.Tab.2.right/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557476349" />
     <state width="221" height="457" key="HiddenNamespacesPopup" timestamp="1602160657409">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state width="221" height="457" key="HiddenNamespacesPopup/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602160657409" />
+    <state x="887" y="464" key="NewPhpClassDialog" timestamp="1602553214013">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="887" y="464" key="NewPhpClassDialog/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602553214013" />
+    <state x="1103" y="662" key="NewPhpFileDialog" timestamp="1602553803759">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1103" y="662" key="NewPhpFileDialog/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602553803759" />
     <state x="1236" y="345" key="SettingsEditor" timestamp="1602221449366">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state x="1236" y="345" key="SettingsEditor/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602221449366" />
     <state x="1236" y="345" key="SettingsEditor/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167583107" />
-    <state x="829" y="443" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1602158337347">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state x="829" y="458" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1602557487686">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
+    <state x="829" y="443" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296667503" />
     <state x="829" y="443" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602158337347" />
+    <state x="829" y="458" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557487686" />
     <state x="406" y="518" width="859" height="548" key="find.popup" timestamp="1602296443016">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state x="406" y="518" width="859" height="548" key="find.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296443016" />
-    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup" timestamp="1602296222660">
-      <screen x="0" y="23" width="2560" height="1368" />
+    <state x="945" y="347" width="670" height="701" key="search.everywhere.popup" timestamp="1602557549836">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
-    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296222660" />
+    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602317212915" />
     <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167589376" />
+    <state x="945" y="347" width="670" height="701" key="search.everywhere.popup/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602557549836" />
   </component>
   <component name="WordPressConfiguration" doNotAskAgain="true" />
 </project>

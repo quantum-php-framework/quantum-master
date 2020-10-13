@@ -11,6 +11,7 @@
  * Plugin Name:       Quantum Plugins Manager
  * Plugin URI:        https://example.com/plugin-name
  * Description:       The Main Plugins Manager.
+ * Entry Class:       Qubes\PluginsManager\PluginsManager
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2

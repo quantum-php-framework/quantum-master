@@ -24,6 +24,7 @@ use Shared\Middlewares\ExecuteRouteMiddlewares;
 
 include(__DIR__ . "/../../helpers/functions.php");
 
+include ("QM.php");
 include ("ValueTree.php");
 include ("Profiler.php");
 include ("Request.php");
@@ -32,7 +33,7 @@ include ("InternalPathResolver.php");
 include ("Session.php");
 include ("Autoloader.php");
 include ("Output.php");
-//include ("QM.php");
+
 
 
 /**

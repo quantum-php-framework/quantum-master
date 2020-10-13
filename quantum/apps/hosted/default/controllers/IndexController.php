@@ -100,7 +100,21 @@ class IndexController extends Quantum\Controller
 
         //return ['hi' => true];
 
-        //qs('Welcome to Quantum')->render();
+        //$settings_file = qf(QM::ipt()->config_root.'plugins.php');
+
+
+
+
+        //dd($settings_file->existsAsFile());
+
+        //$file = new Quantum\Plugins\EnabledPluginsListFile($settings_file->getRealPath());
+        //$file->removePlugin('Some\Plugin\Name');
+
+        $plugins = \QM::config()->getKernelAndAppPlugins();
+        dd($plugins);
+
+        qs('Welcome to Quantum')->render();
+        $this->setAutoRender(false);
     }
 
     function fuq()

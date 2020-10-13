@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Quantum\Plugins;
-
 
 class PluginFactory
 {
@@ -16,21 +14,27 @@ class PluginFactory
     {
         $entry_file = qf($this->folder->getPluginEntryFile());
 
+        $entry_class = $this->folder->getPluginEntryHeader('entry_class');
 
+        if (empty($entry_class)) {
+            throw_exception('Entry Class not found for: '.$entry_file->getRealPath());
+        }
 
+        $enabled_plugins = new_vt(\Quantum\Config::getInstance()->getKernelAndActiveAppPlugins());
 
-        $classes = get_declared_classes();
-        include $entry_file->getRealPath();
-        $diff = array_diff(get_declared_classes(), $classes);
-        $last_class = reset($diff);
+        if ($enabled_plugins->hasEqualParam($entry_class, 1))
+        {
+            include $entry_file->getRealPath();
 
-        //$last_class = get_cl
+            $plugin = new $entry_class;
+            $plugin->_setFolder($this->folder);
+            $plugin->_setEntryClassName($entry_class);
 
-        $plugin = new $last_class;
-        $plugin->_setFolder($this->folder);
-        $plugin->_setEntryClassName($last_class);
+            return $plugin;
+        }
 
-        return $plugin;
+        return null;
+
     }
 
 
