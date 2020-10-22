@@ -6,7 +6,7 @@ $QUANTUM_ENVIRONMENTS = array(
     array(
     	
 		'domain' => 'quantum-dev.localhost',
-        'db_host' => 'localhost',
+        'db_host' => '127.0.0.1',
         'db_name' => 'quantum_dev',
         'db_user' => 'root',
         'db_password' => 'root',

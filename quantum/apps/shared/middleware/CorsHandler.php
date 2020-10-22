@@ -79,7 +79,7 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
         if ($origins->contains("*"))
             return true;
 
-        return $origins->containsWholeWordIgnoreCase($request->getHeaderIgnoreCase('Origin'));
+        return $origins->containsWholeWordIgnoreCase($request->getHeader('Origin'));
     }
 
 
@@ -126,7 +126,7 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
      */
     private function isCorsRequest(Request $request)
     {
-        $origin = $request->getHeaderIgnoreCase('Origin');
+        $origin = $request->getHeader('Origin');
 
         if (!$origin)
         {
@@ -145,7 +145,7 @@ class CorsHandler extends \Quantum\Middleware\Foundation\SystemMiddleware
      */
     private function isPreflightRequest(Request $request)
     {
-        return $request->isOptions() && $request->hasHeaderIgnoreCase('Access-Control-Request-Method');
+        return $request->isOptions() && $request->hasHeader('Access-Control-Request-Method');
     }
 
     /**

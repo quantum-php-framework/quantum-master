@@ -30,6 +30,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" id="css-main" href="/static/templates/qubes/assets/css/oneui.min.css">
 
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="/static/templates/qubes/assets/js/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="/static/templates/qubes/assets/js/plugins/simplemde/simplemde.min.css">
+
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="/static/templates/qubes/assets/css/themes/amethyst.min.css"> -->
     <!-- END Stylesheets -->

@@ -25,8 +25,7 @@
 
 namespace Qubes\PluginsManager;
 
-use Quantum\Events\Event;
-use Quantum\Middleware\ValidateAllowedCountries;
+
 
 class PluginsManager extends \Quantum\Plugins\Plugin
 {

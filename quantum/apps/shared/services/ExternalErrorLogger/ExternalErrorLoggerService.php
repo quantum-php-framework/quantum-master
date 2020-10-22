@@ -38,6 +38,11 @@ class ExternalErrorLoggerService
         );
     }
 
+    public static function initRollbarAutomaticErrorHandler()
+    {
+        Rollbar::init(self::getRollbarConfig());
+    }
+
 
     public static function normalize($data)
     {

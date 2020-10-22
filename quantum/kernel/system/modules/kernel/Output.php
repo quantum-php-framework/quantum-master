@@ -83,8 +83,8 @@ class Output extends Singleton
         //$this->smarty->allow_php_tag = true;
         //$this->smarty->plugins_dir[] = $this->ipt->lib_root.'smarty/plugins';
 
-        $this->set('QM_Client', Client::getInstance());
-        $this->set('QM_Environment', Config::getInstance()->getEnvironment());
+        //$this->set('QM_Client', Client::getInstance());
+        //$this->set('QM_Environment', Config::getInstance()->getEnvironment());
         
         //\Quantum::setSmarty($this->smarty);
         //var_dump($this->smarty);
@@ -581,6 +581,12 @@ class Output extends Singleton
      */
     public static function outputJson($json)
     {
+        if (is_array($json))
+            $json = json_encode($json);
+
+        if (is_vt($json))
+            $json = $json->toJson();
+
         header("Content-Type: application/json");
         header("Cache-Control: no-store");
         header("Pragma: no-cache");
@@ -674,7 +680,7 @@ class Output extends Singleton
     /**
      * @param $type
      */
-    public function displaySystemError($type)
+    public function displaySystemError($type, $additional_message = '')
     {
         if ($type == '404')
         {
@@ -682,8 +688,17 @@ class Output extends Singleton
             header('HTTP/1.0 404 Not Found');
         }
 
-        if (Config::getInstance()->isProductionEnvironment())
-            \ExternalErrorLoggerService::info($type, ['url' => Request::getPublicURL(), 'request' => json_encode($_REQUEST), 'post' => json_encode($_POST)]);
+        $e = new \Exception;
+        $error_msg = $e->getTraceAsString();
+
+        if (Config::getInstance()->isProductionEnvironment()) {
+            \ExternalErrorLoggerService::info($type, [
+                'url' => Request::getPublicURL(),
+                'request' => json_encode($_REQUEST),
+                'post' => json_encode($_POST),
+                'msg' => $error_msg,
+                'data' => $additional_message]);
+        }
 
         $e = new \Exception;
         $error_msg = $e->getTraceAsString();

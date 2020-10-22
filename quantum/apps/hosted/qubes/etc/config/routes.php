@@ -37,6 +37,12 @@ $QUANTUM_APP_ROUTES = array
         'hi' => 'dafuq'
     ),
 
+    array(
+        'uri' => '/info',
+        'controller' => 'index',
+        'method' => 'info',
+        'templates' => 'normal_rate|csrf_enabled|public_access|get_and_post|cache_enabled'
+    ),
 
 
 

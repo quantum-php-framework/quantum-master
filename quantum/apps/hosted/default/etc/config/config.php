@@ -9,7 +9,8 @@ $QUANTUM_APP_CONFIG = array(
     'admin_email' => 'support@nyrvsystems.com',
     "encryption_key" => 'def00000df0a41a9f131a957f6f913d048dfa45f2d700f356444849cf1245876fde7df271011bf46033c02ba19c35a147b7ce37278d8dfe99f021024460d3c9393b4e29c',
     'class_name' => 'App',
-    //'middlewares' => [SetRouteCacheHeader::class, CorsHandler::class]
+    'qontent_frontend' => 'enabled',
+    'full_page_cache' => '1'
 
 
 );

@@ -118,6 +118,17 @@ abstract class HostedApp
         return Request::getInstance();
     }
 
+    function getQubitQueue()
+    {
+        if (!isset($this->_qubit_queue))
+        {
+            $config = \QM::config()->getHostedAppConfig();
+            $this->_qubit_queue = new \Quantum\Qubit\QubitAppQueue($config->get('uri'));
+        }
+
+        return $this->_qubit_queue;
+    }
+
 
     /**
      * @param $middlewares
@@ -176,5 +187,35 @@ abstract class HostedApp
         $this->executeMiddlewares();
         qm_profiler_stop('HostedApp::runMiddlewares');
     }
+
+    public function executeMigrations()
+    {
+        $ipt = InternalPathResolver::getInstance();
+        $app_root = $ipt->app_root;
+
+        $m = new PhinxMigrationRunner($app_root.'migrations');
+        $m->executeMigrations();
+    }
+
+    public function executeSeeds()
+    {
+        $ipt = InternalPathResolver::getInstance();
+        $app_root = $ipt->app_root;
+
+        $m = new PhinxMigrationRunner($app_root.'migrations');
+        $m->executeSeeds();
+    }
+
+    public function rollbackMigrations()
+    {
+        $ipt = InternalPathResolver::getInstance();
+        $app_root = $ipt->app_root;
+
+        $m = new PhinxMigrationRunner($app_root.'migrations');
+        $m->rollbackMigrations();
+    }
+
+
+
 
 }

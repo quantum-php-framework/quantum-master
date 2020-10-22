@@ -1,0 +1,5 @@
+#!/bin/bash
+
+exec php -q $PWD/qubit.launcher.php "$@"
+
+exit;

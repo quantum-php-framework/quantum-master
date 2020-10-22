@@ -307,5 +307,7 @@ SetEnv TZ America/Chicago
     RewriteRule ^([^/]+)/?([^/]*)/?/?([^/]*)/?([^/]*)/?([^/]*)/?([^/]*)/?([^/]*)$ index.php [QSA,L]
 </IfModule>
 
+
+
 DirectoryIndex index.php
 # End Quantum Core

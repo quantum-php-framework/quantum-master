@@ -122,5 +122,15 @@
 
 <!-- Page JS Helpers (jQuery Sparkline Plugins) -->
 <script>jQuery(function () { One.helpers(['sparkline']); });</script>
+
+<!-- Page JS Plugins -->
+<script src="/static/templates/qubes/assets/js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="/static/templates/qubes/assets/js/plugins/ckeditor/ckeditor.js"></script>
+<script src="/static/templates/qubes/assets/js/plugins/simplemde/simplemde.min.js"></script>
+
+<!-- Page JS Helpers (Summernote + CKEditor + SimpleMDE plugins) -->
+<script>jQuery(function () { One.helpers(['summernote', 'ckeditor', 'simplemde']); });</script>
+
+
 </body>
 </html>

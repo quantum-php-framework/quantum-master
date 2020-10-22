@@ -73,9 +73,9 @@ class QubesApp extends \Quantum\HostedApp
 
     }
 
-    public function addPluginMenuItem($visible_name, $uri, $icon_class = null)
+    public function addPluginMenuItem($visible_name, $uri, $icon_class = null, $priority = 100)
     {
-        $this->template_manager->addMenuItem($visible_name, $uri, $icon_class);
+        $this->template_manager->addMenuItem($visible_name, $uri, $icon_class, $priority);
     }
 
     public function addSubMenuItem($parent, $visible_name, $uri)

@@ -90,6 +90,10 @@ class Profiler
      */
     public static function start($timerName)
     {
+        if (!self::$_enabled) {
+            return;
+        }
+
         self::resume($timerName);
     }
 
@@ -122,6 +126,10 @@ class Profiler
      */
     public static function stop($timerName)
     {
+        if (!self::$_enabled) {
+            return;
+        }
+
         self::pause($timerName);
     }
 
@@ -251,7 +259,6 @@ class Profiler
         $out .= '</pre>';
         */
         $out .= '</div>';
-        //$out .= '<pre>'.var_dump(get_included_files()).'</pre>';
         return $out;
     }
 }

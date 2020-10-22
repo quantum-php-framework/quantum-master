@@ -58,7 +58,7 @@ class Xml
      *
      * $http = new Client();
      * $response = $http->get('http://example.com/example.xml');
-     * $xml = Xml::build($response->body());
+     * $xml = Xml::build($response->getStringBody());
      * ```
      *
      * Building from an array:
@@ -95,7 +95,7 @@ class Xml
      *
      * If using array as input, you can pass `options` from Xml::fromArray.
      *
-     * @param string|array $input XML string, a path to a file, a URL or an array
+     * @param string|array|object $input XML string, a path to a file, a URL or an array
      * @param array $options The options to use
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
@@ -123,7 +123,12 @@ class Xml
         }
 
         if (!is_string($input)) {
-            throw new XmlException('Invalid input.');
+            $type = gettype($input);
+            throw new XmlException("Invalid input. {$type} cannot be parsed as XML.");
+        }
+
+        if (strpos($input, '<') !== false) {
+            return static::_loadXml($input, $options);
         }
 
         throw new XmlException('XML cannot be read.');
@@ -246,8 +251,8 @@ class Xml
      *
      * `<root><tag id="1" value="defect">description</tag></root>`
      *
-     * @param array|\Cake\Collection\Collection $input Array with data or a collection instance.
-     * @param string|array $options The options to use or a string to use as format.
+     * @param array|object $input Array with data or a collection instance.
+     * @param array $options The options to use.
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
@@ -294,7 +299,7 @@ class Xml
      * Recursive method to create childs from array
      *
      * @param \DOMDocument $dom Handler to DOMDocument
-     * @param \DOMElement $node Handler to DOMElement (child)
+     * @param \DOMDocument|\DOMElement $node Handler to DOMElement (child)
      * @param array $data Array of data to append to the $node.
      * @param string $format Either 'attributes' or 'tags'. This determines where nested keys go.
      * @return void
@@ -319,7 +324,7 @@ class Xml
                     }
                     $isNamespace = strpos($key, 'xmlns:');
                     if ($isNamespace !== false) {
-                        $node->setAttributeNS('http://www.w3.org/2000/xmlns/', $key, $value);
+                        $node->setAttributeNS('http://www.w3.org/2000/xmlns/', $key, (string)$value);
                         continue;
                     }
                     if ($key[0] !== '@' && $format === 'tags') {
@@ -328,7 +333,7 @@ class Xml
                             // https://www.w3.org/TR/REC-xml/#syntax
                             // https://bugs.php.net/bug.php?id=36795
                             $child = $dom->createElement($key, '');
-                            $child->appendChild(new DOMText($value));
+                            $child->appendChild(new DOMText((string)$value));
                         } else {
                             $child = $dom->createElement($key, $value);
                         }
@@ -338,7 +343,7 @@ class Xml
                             $key = substr($key, 1);
                         }
                         $attribute = $dom->createAttribute($key);
-                        $attribute->appendChild($dom->createTextNode($value));
+                        $attribute->appendChild($dom->createTextNode((string)$value));
                         $node->appendChild($attribute);
                     }
                 } else {

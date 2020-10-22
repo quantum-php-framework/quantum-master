@@ -11,12 +11,13 @@ class MenuItem
     var $subitems;
     var $icon_class;
 
-    public function __construct($name, $uri, $icon_class = null)
+    public function __construct($name, $uri, $icon_class = null, $priority = 100)
     {
         $this->name = $name;
         $this->uri = $uri;
         $this->icon_class = $icon_class;
         $this->subitems = new_vt();
+        $this->priority = $priority;
     }
 
     public function addSubItem($name, $uri)
@@ -58,9 +59,9 @@ class TemplateManager extends Module
         observe('pre_render', [$this, 'add_plugin_menus_to_output']);
     }
 
-    public function addMenuItem($visible_name, $uri, $icon_class = null)
+    public function addMenuItem($visible_name, $uri, $icon_class = null, $priority = 100)
     {
-        $this->menu_items->set($visible_name, new MenuItem($visible_name, $uri, $icon_class));
+        $this->menu_items->set($visible_name, new MenuItem($visible_name, $uri, $icon_class, $priority));
     }
 
     public function addSubMenuItem($parent, $visible_name, $uri)
@@ -76,7 +77,13 @@ class TemplateManager extends Module
 
     public function add_plugin_menus_to_output()
     {
-        $this->getOutput()->set('plugin_menus', $this->menu_items->toStdArray());
+        $items = $this->menu_items->toStdArray();
+
+        usort($items, function($first, $second){
+            return $first->priority > $second->priority;
+        });
+
+        $this->getOutput()->set('plugin_menus', $items);
     }
 
 

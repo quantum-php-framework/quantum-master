@@ -84,12 +84,25 @@
       <path value="$PROJECT_DIR$/composer/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/composer/vendor/predis/predis" />
       <path value="$PROJECT_DIR$/composer/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/composer/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/composer/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/composer/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/composer/vendor/doctrine/collections" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$PROJECT_DIR$/composer/vendor/autoload.php" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/composer/vendor/autoload.php" />
     </phpunit_settings>
   </component>
 </project>

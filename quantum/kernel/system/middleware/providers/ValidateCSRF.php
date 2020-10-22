@@ -8,27 +8,6 @@ use Quantum\Request;
 use Closure;
 
 /**
- * Class ValidateCSRFException
- * @package Quantum\Middleware
- */
-class ValidateCSRFException extends \Quantum\HttpException
-{
-    /**
-     * PostTooLargeException constructor.
-     *
-     * @param  string|null  $message
-     * @param  \Exception|null  $previous
-     * @param  array  $headers
-     * @param  int  $code
-     * @return void
-     */
-    public function __construct($message = null, Exception $previous = null, array $headers = array())
-    {
-        parent::__construct(413, $message, $headers);
-    }
-}
-
-/**
  * Class ValidateCSRF
  * @package Quantum\Middleware
  */
@@ -65,16 +44,11 @@ class ValidateCSRF extends Foundation\SystemMiddleware
         if (!$request->isPost())
             return;
 
+        if (!current_route_has('csrf_check_enabled'))
+            return;
+
         if (!$request->hasPostParam("csrf"))
         {
-            $route = \QM::config()->getCurrentRoute();
-
-            if (!empty($route))
-            {
-                if ($route['csrf_check_enabled'] == false)
-                    return;
-            }
-
             \ExternalErrorLoggerService::error("missing_csrf", "Missing CSRF Token from POST Request, URI :".$request->getUri());
 
             \Quantum\ApiException::custom("missing_csrf", "400 Bad Request", "Missing CSRF Token from POST Request, URI :".$request->getUri());

@@ -75,6 +75,11 @@ class IndexController extends Quantum\Controller
         say_hi();
     }
 
+    function info()
+    {
+        $this->setAutoRender(false);
+        phpinfo();
+    }
 
     
         

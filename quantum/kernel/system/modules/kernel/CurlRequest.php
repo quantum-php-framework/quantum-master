@@ -71,7 +71,7 @@ class CurlRequest
     /**
      * Set the address for the request.
      *
-     * @param QString $address
+     * @param string $address
      *   The URI or IP address to request.
      */
     public function setAddress($address)
@@ -82,9 +82,9 @@ class CurlRequest
     /**
      * Set the username and password for HTTP basic authentication.
      *
-     * @param QString $username
+     * @param string $username
      *   Username for basic authentication.
-     * @param QString $password
+     * @param string $password
      *   Password for basic authentication.
      */
     public function setBasicAuthCredentials($username, $password)
@@ -95,7 +95,7 @@ class CurlRequest
     /**
      * Enable cookies.
      *
-     * @param QString $cookie_path
+     * @param string $cookie_path
      *   Absolute path to a txt file where cookie information will be stored.
      */
     public function enableCookies($cookie_path)
@@ -198,7 +198,7 @@ class CurlRequest
     /**
      * Get the response body.
      *
-     * @return QString
+     * @return string
      *   Response body.
      */
     public function getResponse()
@@ -209,7 +209,7 @@ class CurlRequest
     /**
      * Get the response header.
      *
-     * @return QString
+     * @return string
      *   Response header.
      */
     public function getHeader()
@@ -244,7 +244,7 @@ class CurlRequest
     /**
      * Get any cURL errors generated during the execution of the request.
      *
-     * @return QString
+     * @return string
      *   An error message, if any error was given. Otherwise, empty.
      */
     public function getError()
@@ -258,8 +258,8 @@ class CurlRequest
      * This method should not be called until after execute(), and will only check
      * for the content if the response code is 200 OK.
      *
-     * @param QString $content
-     *   QString for which the response will be checked.
+     * @param string $content
+     *   string for which the response will be checked.
      *
      * @return bool
      *   TRUE if $content was found in the response, FALSE otherwise.
@@ -324,17 +324,6 @@ class CurlRequest
         // Output the header in the response.
         curl_setopt($ch, CURLOPT_HEADER, TRUE);
 
-        if (class_exists('NetworkTransaction')) //For Unit Testing (CurlRequestTest)
-        {
-            $transaction = new \NetworkTransaction();
-            $transaction->url = $this->address;
-            $transaction->request = serialize($this);
-            $transaction->post_params = $this->postFields;
-            $transaction->method = empty($this->requestType) ? "GET" : $this->requestType;
-            $transaction->start_timestamp = microtime(true);
-            $transaction->save();
-        }
-
         $response = curl_exec($ch);
 
         $error = curl_error($ch);
@@ -351,22 +340,6 @@ class CurlRequest
 
         // Convert the latency to ms.
         $this->latency = round($time * 1000);
-
-        if (class_exists('NetworkTransaction'))
-        {
-            $transaction->response = $this->responseBody;
-            $transaction->headers = $this->responseHeader;
-            $transaction->error = $this->error;
-            $transaction->http_code = $this->httpCode;
-            $transaction->end_timestamp = microtime(true);
-            $transaction->recorded_time = $time;
-            $transaction->latency = $this->latency;
-            $transaction->save();
-
-            $this->transaction = $transaction;
-        }
-
-
     }
 
     function getTransaction ()

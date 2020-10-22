@@ -71,7 +71,7 @@ class Observer
      * @return \ReflectionFunction|\ReflectionMethod
      * @throws \ReflectionException
      */
-    private function getCallableReflection($callable)
+    public function getCallableReflection($callable)
     {
         if(is_array($callable)) {
             $reflector = new \ReflectionMethod($callable[0], $callable[1]);
@@ -181,6 +181,12 @@ class Observer
     public function  getCallbackHash()
     {
         return $this->_callbackHash;
+    }
+
+    public function getNumCallableArguments()
+    {
+        $reflector = $this->getCallableReflection($this->_callback);
+        return $reflector->getNumberOfParameters();
     }
 
     /**

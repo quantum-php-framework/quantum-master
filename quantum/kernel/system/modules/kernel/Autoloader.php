@@ -52,6 +52,9 @@ class Autoloader extends Singleton
     }
 
 
+    /**
+     *
+     */
     public function initDirectories()
     {
         $ipt = InternalPathResolver::getInstance();
@@ -61,21 +64,10 @@ class Autoloader extends Singleton
         $this->system_directories = array();
 
         $this->system_directories = File::newFile($ipt->system_root)->getAllSubDirectories();
-        //dd($this->system_directories);
 
-        $this->modules_directories = File::newFile($ipt->shared_app_modules_root)->getAllSubDirectories();;
+        $this->modules_directories = File::newFile($ipt->shared_app_modules_root)->getAllSubDirectories();
 
         $this->addDirectory($ipt->lib_root, false);
-
-        $this->addAppDirectories();
-    }
-
-    public function addAppDirectories()
-    {
-        $ipt = InternalPathResolver::getInstance();
-
-        if (isset($ipt->app_root))
-            $this->addDirectory($ipt->app_root, false);
 
         $this->addDirectories(array(
             $ipt->shared_app_models_root,
@@ -88,6 +80,18 @@ class Autoloader extends Singleton
             $ipt->system_plugins_root,
             $ipt->getSharedAppPluginsRoot()
         ));
+
+    }
+
+    /**
+     *
+     */
+    public function addAppDirectories()
+    {
+        $ipt = InternalPathResolver::getInstance();
+
+        if (isset($ipt->app_root))
+            $this->addDirectory($ipt->app_root, false);
 
         if (isset($ipt->app_plugins_root)) {
             $this->addDirectory($ipt->app_plugins_root);
@@ -165,6 +169,14 @@ class Autoloader extends Singleton
     }
 
 
+    /**
+     * @return array
+     */
+    public function getDirectories()
+    {
+        return $this->directories;
+    }
+
 
     /**
      * @param $classname
@@ -197,19 +209,21 @@ class Autoloader extends Singleton
      */
     private function handleProbableModuleClass($className)
     {
-        if (!qs($className)->contains('\\'))
+        $class_name_qs = qs($className);
+
+        if (!$class_name_qs->contains('\\')) {
             return Result::fail();
+        }
 
         $original_class = $className;
 
-        $namespace = QString::create($className)->upToFirstOccurrenceOf("\\")->toStdString();
+        $namespace = $class_name_qs->upToFirstOccurrenceOf("\\")->toStdString();
 
-        if (!$this->moduleLocator->hasModuleForNamespace($namespace))
+        if (!$this->moduleLocator->hasModuleForNamespace($namespace)) {
             return Result::fail();
+        }
 
-        qm_profiler_start('ModuleClassLoad::'.$className);
-
-        $className = QString::create($className)->fromLastOccurrenceOf("\\")->toStdString();
+        $className = $class_name_qs->fromLastOccurrenceOf("\\")->toStdString();
 
         $module = $this->moduleLocator->getModule($namespace);
 
@@ -229,19 +243,15 @@ class Autoloader extends Singleton
             }
         }
 
-        if (isset($ipt->shared_app_modules_root) && qs($module_directory)->isNotEmpty())
-        {
+        if (isset($ipt->shared_app_modules_root) && qs($module_directory)->isNotEmpty()) {
             $modules_path->add($ipt->shared_app_modules_root.$module_directory);
         }
 
-        if ($modules_path->isEmpty())
-        {
+        if ($modules_path->isEmpty()) {
             return Result::fail();
         }
 
         $module_directories = deepscan_dirs($modules_path->getArray());
-
-        $located_file = "";
 
         foreach($module_directories as $directory)
         {
@@ -249,146 +259,73 @@ class Autoloader extends Singleton
 
             if(\file_exists($path))
             {
-                if (ClassReader::getClassFullNameFromFile($path) === $original_class)
-                {
-                    $located_file = $path;
-                    break;
+                require_once $path;
+
+                if (class_exists($original_class)) {
+                    return Result::ok();
                 }
             }
+
         };
 
-        if (empty($located_file))
-        {
-            trigger_error("Module Class not found: ".$original_class);
-            return Result::fail();
-        }
-
-        $this->loadClass($original_class, $located_file);
-
-        qm_profiler_stop('ModuleClassLoad::'.$className);
-
-        return Result::ok();
-
+        return Result::fail();
     }
 
-    private function loadClass($original_class, $path)
-    {
-        if(\file_exists($path))
-        {
-            if (ClassReader::getClassFullNameFromFile($path) === $original_class)
-            {
-                require_once $path;
-            }
-        }
-    }
 
     /**
-     * Thee autoloader...,  you can add more fileNameFormats, for ex: %s.class.php
+     * @param $className
      */
     private function handle($className)
     {
-        $original_class = $className;
+        $className = qs($className);
 
-        //qm_profiler_start('AutoLoad::'.$className);
-
-        $r = $this->handleProbableModuleClass($className);
-
-        if ($r->wasOk())
-            return;
-
-        $fileNameFormats = array(
-            '%s.php',
-        );
-
-        if (qs($className)->contains('Quantum\\'))
-            $system_class = true;
+        if ($className->contains('Quantum\\'))
+        {
+            $directories = $this->system_directories;
+        }
         else
-            $system_class = false;
+        {
+            $r = $this->handleProbableModuleClass($className->toStdString());
 
-        $path = str_ireplace('_', '/', $className);
+            if ($r->wasOk()) {
+                return;
+            }
 
-
-        if (qs($className)->contains('\\'))
-            $className = QString::create($className)->fromLastOccurrenceOf("\\")->toStdString();
-
-        if(@include $path.'.php'){
-            //qm_profiler_stop('AutoLoad::'.$className);
-            return;
+            $directories = $this->directories;
         }
 
-        if ($system_class)
-            $directories = $this->system_directories;
-        else
-            $directories = $this->directories;
+        $path = str_ireplace('_', '/', $className->toStdString());
 
-        //dd($directories);
+        if ($className->contains('\\')) {
+            $classFileName = $className->fromLastOccurrenceOf("\\")->toStdString();
+        }
+        else {
+            $classFileName = $className->toStdString();
+        }
 
-        foreach($directories as $directory){
-            foreach($fileNameFormats as $fileNameFormat){
+        $file_in_current_dir = $path.'.php';
+        if(file_exists($file_in_current_dir) && @include $file_in_current_dir)
+        {
+            require_once $path;
 
-                $path = $directory.sprintf($fileNameFormat, $className);
-                if(\file_exists($path)){
-                    //echo ('loading: '.$path."<br/>");
-                    //echo ('className: '.$className."<br/><br/>");
-                    //qm_profiler_start('Required::'.$path);
+            if (class_exists($className->toStdString())) {
+                return;
+            }
+        }
 
-                    require_once $path;
-                    //qm_profiler_stop('Required::'.$path);
+        foreach($directories as $directory)
+        {
+            $path = $directory.sprintf('%s.php', $classFileName);
 
-                    //qm_profiler_stop('AutoLoad::'.$className);
+            if(\file_exists($path))
+            {
+                require_once $path;
+
+                if (class_exists($className->toStdString())) {
                     return;
                 }
             }
         }
-
-        //qm_profiler_stop('AutoLoad::'.$className);
-
-
-    }
-
-    function x()
-    {
-        session_start();
-
-        if (!isset($_SESSION['load_more_iteration'])) {
-            $_SESSION['load_more_iteration'] = 0;
-        }
-
-        $iteration = $_SESSION['load_more_iteration'];
-
-        $col_number = 0;
-
-        if ($iteration  >= 20 && $iteration < 40)
-        {
-            $col_number = 1;
-        }
-
-        if ($iteration  >= 40 && $iteration < 60)
-        {
-            $col_number = 2;
-        }
-
-        if ($iteration  >= 60)
-        {
-            $col_number = 0;
-            $iteration = 0;
-            $_SESSION['load_more_iteration'] = 0;
-        }
-
-
-        printf(
-            '<div id="column-%s" class="link-col"><div class="widget-box"><ul class="posts-list%s">',
-            $col_number,
-            wpd_get_key('wpd_display_postedlink_border') == 'yes' ? ' border' : ''
-        );
-
-        wpdrudge_display_posted_link(get_the_ID());
-
-        echo '</ul></div></div>';
-
-        $iteration++;
-        $_SESSION['load_more_iteration'] = $iteration;
-
 
     }
 

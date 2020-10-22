@@ -73,26 +73,26 @@
                         </thead>
                         <tbody>
                         {foreach from=$plugins item=plugin}
-                        <tr>
-                            <td>
-                                <h4 class="h5 mt-3 mb-2">
-                                    <a href="javascript:void(0)">{$plugin->getPluginEntryHeader('name')}</a>
-                                </h4>
-                                <p class="d-none d-sm-block text-muted">
-                                    {$plugin->getPluginEntryHeader('description')}
-                                </p>
+                            <tr>
+                                <td>
+                                    <h4 class="h5 mt-3 mb-2">
+                                        <a href="javascript:void(0)">{$plugin->getPluginEntryHeader('name')}</a>
+                                    </h4>
+                                    <p class="d-none d-sm-block text-muted">
+                                        {$plugin->getPluginEntryHeader('description')}
+                                    </p>
 
-                            <td class="d-none d-lg-table-cell text-center">
-                                <span class="badge badge-success">{$plugin->getScope()}</span>
-                            </td>
+                                <td class="d-none d-lg-table-cell text-center">
+                                    <span class="badge badge-success">{$plugin->getScope()}</span>
+                                </td>
 
-                            <td class="d-none d-lg-table-cell text-center">
-                                <span class="badge badge-success">{$plugin->getLoadedByStatus()}</span>
-                            </td>
-                            <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{$plugin->getPluginEntryHeader('author')}</td>
-                            <td class="font-size-xl text-center font-w600">{$plugin->getPluginEntryHeader('version')}</td>
-                            <td class="font-size-xl text-center font-w600">$ 35,287</td>
-                        </tr>
+                                <td class="d-none d-lg-table-cell text-center">
+                                    <span class="badge badge-success">{$plugin->getLoadedByStatus()}</span>
+                                </td>
+                                <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{$plugin->getPluginEntryHeader('author')}</td>
+                                <td class="font-size-xl text-center font-w600">{$plugin->getPluginEntryHeader('version')}</td>
+                                <td class="font-size-xl text-center font-w600">$ 35,287</td>
+                            </tr>
                         {/foreach}
 
                         </tbody>

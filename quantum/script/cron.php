@@ -5,10 +5,11 @@ use Quantum\InternalPathResolver;
 
 require_once(__DIR__ ."/../../composer/vendor/autoload.php");
 
-require_once (__DIR__."/../kernel/quantum.php");
-require_once (__DIR__."/../kernel/system/helpers/functions.php");
-require_once (__DIR__."/../kernel/system/modules/kernel/InternalPathResolver.php");
-require_once (__DIR__."/../kernel/system/modules/kernel/Autoloader.php");
+require_once (__DIR__."/../kernel/system/modules/runtime/Runtime.php");
+
+require_once (__DIR__ . "/../kernel/system/helpers/functions.php");
+require_once (__DIR__ . "/../kernel/system/modules/kernel/InternalPathResolver.php");
+require_once (__DIR__ . "/../kernel/system/modules/kernel/Autoloader.php");
 
 
 /**
@@ -22,11 +23,10 @@ class QuantumCronScheduler
      */
     public function __construct()
     {
+        cli_echo('Quantum Cron');
 
-    }
+        $start_time = microtime(true);
 
-    public function init()
-    {
         global $argv;
         $this->argv = $argv;
 
@@ -36,6 +36,8 @@ class QuantumCronScheduler
             $this->environment_instance = 'development';
 
         $this->autoloader = Quantum\Autoloader::getInstance();
+
+        ExternalErrorLoggerService::initRollbarAutomaticErrorHandler();
 
         $this->ipt = Quantum\InternalPathResolver::getInstance();
 
@@ -56,6 +58,8 @@ class QuantumCronScheduler
         $hosted_apps_dir = qf($this->ipt->hosted_apps_root);
         foreach ($apps as $app)
         {
+            cli_echo('running tasks for app:'.$app['uri']);
+
             $app_dir = $hosted_apps_dir->getChildFile($app['dir']);
             $config_dir = $app_dir->getChildFile('etc/config');
 
@@ -69,6 +73,7 @@ class QuantumCronScheduler
                 {
                     Quantum\Config::getInstance()->setAppConfig($app);
                     Quantum\Autoloader::getInstance()->initDirectories();
+                    Quantum\Autoloader::getInstance()->addAppDirectories();
 
                     $this->initEnvironment($app);
                     $this->initActiveRecord($app);
@@ -83,6 +88,15 @@ class QuantumCronScheduler
             }
 
         }
+
+
+
+        $endtime = microtime(true);
+
+        cli_echo('seems all tasks completed');
+        cli_echo('total run time: '.($endtime - $start_time).' sec');
+
+
     }
 
 
@@ -94,12 +108,17 @@ class QuantumCronScheduler
         if (!isset($app_crontab_list))
             return;
 
+        $this->app = Quantum\HostedAppFactory::create();
+
+        $this->callAppMethod('cli_init');
+
         $tasks = new_vt($app_crontab_list);
 
         foreach ($tasks as $task)
         {
             if ($task['enabled'] == true)
             {
+                cli_echo('processing task: '.$task['class'].'->'.$task['method']);
                 $period = $task['expression'];
                 $className = $task['class'];
                 $method = $task['method'];
@@ -115,6 +134,8 @@ class QuantumCronScheduler
                 }
             }
         }
+
+        $this->callAppMethod("cli_shutdown");
     }
 
     /**
@@ -125,10 +146,6 @@ class QuantumCronScheduler
      */
     public function scheduleControllerMethod($controllerName, $method, $period, $allow_overlap)
     {
-        $this->app = Quantum\HostedAppFactory::create();
-
-        $this->callAppMethod('cli_init');
-
         $this->callAppMethod("cli_pre_controller_dispatch");
 
         $controller = Quantum\ControllerFactory::create($controllerName, $this->app);
@@ -162,8 +179,6 @@ class QuantumCronScheduler
         }
 
         $this->callAppMethod("cli_post_controller_dispatch");
-
-        $this->callAppMethod("cli_shutdown");
     }
 
     /**
@@ -296,8 +311,14 @@ class QuantumCronScheduler
 
 }
 
+error_reporting(E_ALL);
+
+set_time_limit(0);
+
+ini_set('memory_limit','-1');
+
 date_default_timezone_set('America/Chicago');
 
-$scheduler = new QuantumCronScheduler();
-$scheduler->init();
+
+new QuantumCronScheduler();
 

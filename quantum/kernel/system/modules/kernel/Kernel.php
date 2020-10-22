@@ -24,7 +24,7 @@ use Shared\Middlewares\ExecuteRouteMiddlewares;
 
 include(__DIR__ . "/../../helpers/functions.php");
 
-include ("QM.php");
+
 include ("ValueTree.php");
 include ("Profiler.php");
 include ("Request.php");
@@ -33,6 +33,7 @@ include ("InternalPathResolver.php");
 include ("Session.php");
 include ("Autoloader.php");
 include ("Output.php");
+include ("QM.php");
 
 
 
@@ -40,7 +41,7 @@ include ("Output.php");
  * The Quantum Kernel
  * Format: Maj.Min.Min.Rev
  */
-define("QM_KERNEL_VERSION", "2.4.6.4");
+define("QM_KERNEL_VERSION", "2.7.1.0");
 
 
 /**
@@ -159,7 +160,7 @@ class Kernel extends Singleton
     /**
      * @return string
      */
-    function getVersion()
+    public static function getVersion()
     {
         return QM_KERNEL_VERSION;
     }

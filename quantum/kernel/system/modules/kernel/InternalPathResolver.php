@@ -2,6 +2,8 @@
 
 namespace Quantum;
 
+use Quantum\Plugins\PluginsRuntime;
+
 require_once ("Singleton.php");
 
 /**
@@ -266,10 +268,7 @@ class InternalPathResolver extends Singleton
         $this->script_root = $this->quantum_root."script/";
 
         $this->app_root = '';
-
-        //$this->updateAppRoot("admin");
-
-        //$this->accounts_fs_root = $this->root_folder."/accounts/fs/";
+        $this->accounts_fs_root = $this->web_root."/static/accounts/fs/";
 
     }
 
@@ -282,7 +281,7 @@ class InternalPathResolver extends Singleton
         $this->app_root = $this->hosted_apps_root.$dir.'/';
 
         if (!is_dir($this->app_root))
-           throw new \Exception ("App Root Folder not found: ".$this->app_root);
+            throw new \Exception ("App Root Folder not found: ".$this->app_root);
 
         $this->controllers_root = $this->app_root.'controllers/';
         $this->store_controllers_root = $this->app_root.'controllers/store/';
@@ -307,9 +306,6 @@ class InternalPathResolver extends Singleton
         return $this->apps_root;
     }
 
-
-
-
     /**
      * @return string
      */
@@ -322,6 +318,17 @@ class InternalPathResolver extends Singleton
         return $file;
     }
 
+    /**
+     * @return string
+     */
+    public function getQubitConfigFile()
+    {
+        $location = $this->config_root;
+        $name = "qubit.conf.php";
+        $file = $location . $name;
+
+        return $file;
+    }
 
     /**
      * @return string
@@ -334,6 +341,7 @@ class InternalPathResolver extends Singleton
 
         return $file;
     }
+
 
     /**
      * @return string
@@ -661,6 +669,30 @@ class InternalPathResolver extends Singleton
     public function getWebRoot()
     {
         return $this->web_root;
+    }
+
+    public function getAllEntitiesPaths()
+    {
+        $app_entities_root = $this->app_root.'entities';
+        $shared_entities_root = $this->shared_app_resources_root.'entities';
+
+        $dirs = new_vt([$app_entities_root, $shared_entities_root]);
+
+        $plugins_runtime = PluginsRuntime::getInstance();
+        $plugins = $plugins_runtime->plugins_registry;
+
+        foreach ($plugins as $plugin_meta)
+        {
+            $folder = $plugin_meta->get('folder');
+
+            $entities_folder = qf($folder)->getChildFile('entities');
+
+            if ($entities_folder->exists()) {
+                $dirs->add($entities_folder->getPath());
+            }
+        }
+
+        return $dirs->toStdArray();
     }
 
 }

@@ -69,7 +69,7 @@ class URL
      */
     public function toString($includeGetParameters = true)
     {
-        if ($includeGetParameters)
+        if ($includeGetParameters && !empty($this->parameters))
             return $this->url->append($this->getQueryString())->toStdString();
 
         return $this->url->toStdString();
@@ -265,6 +265,18 @@ class URL
     }
 
     /**
+     * Appends a path to the current url
+     * @param $path
+     * @return URL
+     */
+    public function withPath($path)
+    {
+        $c = clone $this;
+        $c->url = $c->url->append($path);
+        return $c;
+    }
+
+    /**
      * @param $newPort
      * @return URL
      */
@@ -283,6 +295,18 @@ class URL
     {
         $c = clone $this;
         $c->postData = $data;
+        return $c;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return URL
+     */
+    public function withPostParameter ($key, $value)
+    {
+        $c = clone $this;
+        $c->postData[$key] = $value;
         return $c;
     }
 
@@ -330,7 +354,7 @@ class URL
      */
     public function createCurlRequest($timeOut = 30, $connectTimeOut = 30)
     {
-        $r = new CurlRequest($this);
+        $r = new CurlRequest($this->toString());
         $r->setTimeout($timeOut);
         $r->setConnectTimeout($connectTimeOut);
 
@@ -376,13 +400,13 @@ class URL
     /**
      * @return false|string
      */
-    public function getFileContents()
+    public function getContents($usePostCommand = true)
     {
         $contextConfig = array('http' =>
             array(
-                'method'  => !empty($this->postData) ? 'POST': 'GET',
+                'method'  => !empty($usePostCommand) ? 'POST': 'GET',
                 'header'  => 'Content-Type: application/x-www-form-urlencoded',
-                'content' => $this->postData
+                'content' => $this->getQueryString()
             )
         );
 

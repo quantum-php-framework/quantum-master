@@ -3,8 +3,9 @@
 namespace Quantum\Plugins;
 
 use Quantum\Events\Event;
+use Quantum\Singleton;
 
-class PluginsRuntime
+class PluginsRuntime extends Singleton
 {
     /**
      * @var PluginScanner
@@ -31,6 +32,7 @@ class PluginsRuntime
 
     private function scanPlugins()
     {
+        qm_profiler_start('PluginsRuntime::scanPlugins');
         $this->scanner = new PluginScanner();
 
         $plugins = $this->scanner->getPlugins();
@@ -38,10 +40,13 @@ class PluginsRuntime
         foreach ($plugins as $plugin) {
             $this->initPlugin($plugin);
         }
+        qm_profiler_stop('PluginsRuntime::scanPlugins');
     }
 
     private function initPlugin(Plugin $plugin)
     {
+        qm_profiler_start('PluginsRuntime::initPlugin');
+
         $plugin->init();
 
         $routes = $plugin->getRoutes();
@@ -73,6 +78,8 @@ class PluginsRuntime
         $meta->lock();
 
         $this->plugins_registry->set($plugin_name, $meta);
+
+        qm_profiler_stop('PluginsRuntime::initPlugin');
     }
 
     public function getRoutes()

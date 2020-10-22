@@ -9,6 +9,7 @@ class App extends Quantum\HostedApp
     function __construct()
     {
         parent::__construct();
+        //$this->rollbackMigrations();
     }
 
     public function init()
@@ -18,7 +19,8 @@ class App extends Quantum\HostedApp
         $this->runMiddlewares([ValidateAppAccess::class,
             ValidateAppRoutes::class,
             ValidateAppRoutesRateLimit::class,
-            ValidateRouteAccessLevel::class]);
+            ValidateRouteAccessLevel::class,
+            PageCacheMiddleware::class]);
 
     }
 
