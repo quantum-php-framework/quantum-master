@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace Quantum;
 
 /**
@@ -60,7 +58,7 @@ class Output extends Singleton
     {
         $this->smarty = $smarty;
         $this->views = array();
-        
+
     }
 
     /**
@@ -76,7 +74,7 @@ class Output extends Singleton
         define('SMARTY_SYSPLUGINS_DIR', $this->ipt->lib_root.'smarty/sysplugins/');
         define('SMARTY_PLUGINS_DIR', $this->ipt->lib_root.'smarty/plugins/');
         require_once ($this->ipt->lib_root.'smarty/bootstrap.php');
-        
+
         $this->smarty = new \Smarty();
         $this->smarty ->template_dir = $this->ipt->views_root;
         $this->smarty->compile_dir =   $this->ipt->tmp_root;
@@ -85,7 +83,7 @@ class Output extends Singleton
 
         //$this->set('QM_Client', Client::getInstance());
         //$this->set('QM_Environment', Config::getInstance()->getEnvironment());
-        
+
         //\Quantum::setSmarty($this->smarty);
         //var_dump($this->smarty);
         //var_dump($this);
@@ -96,7 +94,7 @@ class Output extends Singleton
      * @param $view
      */
     public function renderView($view) {
-        
+
        $this->display($this->ipt->views_root.$view);
     }
 
@@ -121,14 +119,14 @@ class Output extends Singleton
      * @param $task
      */
     public function setMainView($controller, $task) {
-        
+
         if (empty($controller)) {
-            
+
             $controller = 'index';
         }
-       
+
         $this->mainView = "$controller/$task.tpl";
-     
+
     }
 
     /**
@@ -177,14 +175,14 @@ class Output extends Singleton
      * @return bool
      */
     public function setTemplate($layout_directory_name) {
-        
+
         if ($layout_directory_name) {
             $this->template = $layout_directory_name;
             return true;
         }
-        
+
             return false;
-        
+
     }
 
     /**
@@ -193,7 +191,7 @@ class Output extends Singleton
      * @return bool
      */
     public function setView($controller, $task) {
-        
+
         if (empty($controller)) {
             $controller = 'index';
         }
@@ -201,13 +199,13 @@ class Output extends Singleton
         if (!isset($this->views)) {
             $this->views = array();
         }
-        
+
         $view = "$controller/$task.tpl";
-        
-        
+
+
         array_push($this->views, $view);
-        
-       
+
+
         return true;
 
     }
@@ -225,9 +223,9 @@ class Output extends Singleton
      *
      */
     public function renderTemplateNow() {
-        
-        
-        
+
+
+
     }
 
     /**
@@ -274,7 +272,7 @@ class Output extends Singleton
         {
             $this->smarty->assign('current_views_dir', $this->getViewDirInCurrentTemplate()."/".$this->activeController->controller."/");
             $this->smarty->assign('cvd', $this->getViewDirInCurrentTemplate()."/".$this->activeController->controller."/");
-            
+
             $header = $this->activeController->template."/layout/header.tpl";
             $footer = $this->activeController->template."/layout/footer.tpl";
 
@@ -330,14 +328,14 @@ class Output extends Singleton
                 }
 
             }
-            
+
         }
-        
+
         elseif (!empty($this->mainView))
         {
             $this->display($this->getViewInCurrentTemplate($this->mainView));
         }
-        
+
         elseif (!empty($this->views))
         {
             foreach($this->views as $view)
@@ -346,7 +344,7 @@ class Output extends Singleton
                 $this->display($this->getViewInCurrentTemplate($view));
             }
         }
-        
+
     }
 
     /**
@@ -388,21 +386,21 @@ class Output extends Singleton
      *
      */
     public function render() {
-        
+
        if ($this->activeController->autoRender == true) {
            $this->renderFullTemplate();
         }
-      
-        
+
+
     }
 
     /**
      * @param $view
      */
     public function overrideMainView($view) {
-        
+
         $this->mainView = $view;
-        
+
     }
 
     /**
@@ -827,8 +825,20 @@ class Output extends Singleton
 
         Kernel::shutdown();
     }
-   
-    
-    
-    
+
+    public static function renderCriticalError($error)
+    {
+        $ipt = InternalPathResolver::getInstance();
+
+        $file = qf($ipt->system_error_templates_root.$error.'.tpl');
+
+        if ($file->exists()) {
+            echo $file->getContents();
+            exit();
+        }
+    }
+
+
+
+
 }
