@@ -150,6 +150,7 @@ class ApiException {
      */
     public static function  invalidParameters() {
 
+        dd('fuq');
         header('HTTP/1.0 400 Bad Request');
         $error = array(
             "error" => "invalid_parameters",

@@ -847,43 +847,28 @@ class Request extends Singleton
      */
     public static function getHeaders()
     {
-        $headers = '';
+        $headers = array();
 
-        if (function_exists("apache_request_headers"))
-        {
-            $headers = apache_request_headers();
-        }
-        else
-        {
-            $headers = array();
+        // CONTENT_* headers are not prefixed with HTTP_.
+        $additional = array(
+            'CONTENT_LENGTH' => true,
+            'CONTENT_MD5'    => true,
+            'CONTENT_TYPE'   => true,
+        );
 
-            $copy_server = array(
-                'CONTENT_TYPE'   => 'Content-Type',
-                'CONTENT_LENGTH' => 'Content-Length',
-                'CONTENT_MD5'    => 'Content-Md5',
-            );
+        $server = stripslashes_deep($_SERVER);
 
-            foreach ($_SERVER as $key => $value) {
-                if (substr($key, 0, 5) === 'HTTP_') {
-                    $key = substr($key, 5);
-                    if (!isset($copy_server[$key]) || !isset($_SERVER[$key])) {
-                        $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $key))));
-                        $headers[$key] = $value;
-                    }
-                } elseif (isset($copy_server[$key])) {
-                    $headers[$copy_server[$key]] = $value;
-                }
-            }
-
-            if (!isset($headers['Authorization'])) {
-                if (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
-                    $headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
-                } elseif (isset($_SERVER['PHP_AUTH_USER'])) {
-                    $basic_pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
-                    $headers['Authorization'] = 'Basic ' . base64_encode($_SERVER['PHP_AUTH_USER'] . ':' . $basic_pass);
-                } elseif (isset($_SERVER['PHP_AUTH_DIGEST'])) {
-                    $headers['Authorization'] = $_SERVER['PHP_AUTH_DIGEST'];
-                }
+        foreach ( $server as $key => $value ) {
+            if ( strpos( $key, 'HTTP_' ) === 0 ) {
+                $headers[ substr( $key, 5 ) ] = $value;
+            } elseif ( 'REDIRECT_HTTP_AUTHORIZATION' === $key && empty( $server['HTTP_AUTHORIZATION'] ) ) {
+                /*
+                 * In some server configurations, the authorization header is passed in this alternate location.
+                 * Since it would not be passed in in both places we do not check for both headers and resolve.
+                 */
+                $headers['AUTHORIZATION'] = $value;
+            } elseif ( isset( $additional[ $key ] ) ) {
+                $headers[ $key ] = $value;
             }
         }
 

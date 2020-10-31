@@ -6,7 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer/vendor/jeremy-dunn/php-fedex-api-wrapper/examples/dangerous-goods-data-service.php" beforeDir="false" afterPath="$PROJECT_DIR$/composer/vendor/jeremy-dunn/php-fedex-api-wrapper/examples/dangerous-goods-data-service.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/plugins.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config/plugins.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/shared/models/activerecord/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/abstract/apps/HostedApp.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/abstract/apps/HostedApp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/helpers/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiException.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiOutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ArrayToXml.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ArrayToXml.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ControllerFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ControllerFactory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/QString.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/QString.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTreeToXml.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ValueTreeToXml.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/etc/logs/all_production_errors.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/0/0f/0e93392e3d3da354b15ab81915dd64e386ed861f.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/0/0f/0e93392e3d3da354b15ab81915dd64e386ed861f.qdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/3/3f/35c75144582f10baec0333f46fdfa13aa14d5dcf.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/3/3f/35c75144582f10baec0333f46fdfa13aa14d5dcf.qdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/7/74/7b2e9d910c214ff466c555d7bcd8044221fc1644.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/7/74/7b2e9d910c214ff466c555d7bcd8044221fc1644.qdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/d/de/d64a8a01e9761003962e55c6c87279a8c24ec8ae.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/d/de/d64a8a01e9761003962e55c6c87279a8c24ec8ae.qdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/f/fc/f08a1013de97635bae8c107a20742defd96221ec.qdb" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/local/var/files-db/encrypted/Qubes/f/fc/f08a1013de97635bae8c107a20742defd96221ec.qdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +48,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/quantum/kernel/system" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpServers">
     <servers>
@@ -171,7 +192,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/kernel/system/modules/doctrine" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/middlewares" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -179,17 +200,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/middlewares" />
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers" />
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/etc/config/versions" />
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/etc/config" />
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/etc/config/versions" />
+      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/etc/config" />
       <recent name="$PROJECT_DIR$/quantum/apps/shared/plugins/qontent/migrations" />
       <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/plugins" />
       <recent name="$PROJECT_DIR$/quantum/apps/hosted/qubes/plugins/plugins_manager/views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/quantum/kernel/system/modules/doctrine" />
-      <recent name="$PROJECT_DIR$/quantum/kernel/plugins" />
-      <recent name="$PROJECT_DIR$/quantum/apps/shared/plugins/qontent/controllers/backend" />
-      <recent name="$PROJECT_DIR$/quantum/apps/shared/plugins/qontent/controllers" />
-      <recent name="$PROJECT_DIR$/quantum/apps/hosted/default/etc/config" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -333,7 +356,7 @@
       <workItem from="1602325259843" duration="1095000" />
       <workItem from="1602515270007" duration="113929000" />
       <workItem from="1602897273165" duration="77830000" />
-      <workItem from="1603436294618" duration="16958000" />
+      <workItem from="1603436294618" duration="76130000" />
     </task>
     <servers />
   </component>
@@ -370,18 +393,20 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="1014" y="540" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602672236121" />
-    <state x="1093" y="439" key="#com.intellij.ide.util.MemberChooser" timestamp="1603329264136">
+    <state x="1093" y="439" key="#com.intellij.ide.util.MemberChooser" timestamp="1604131273125">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
+    <state x="1093" y="439" key="#com.intellij.ide.util.MemberChooser/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604131273125" />
     <state x="1093" y="454" key="#com.intellij.ide.util.MemberChooser/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602674440630" />
     <state x="1093" y="439" key="#com.intellij.ide.util.MemberChooser/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1603329264136" />
     <state x="927" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603283283803">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="927" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2560.23.1920.1008/-1792.23.1792.1097/0.23.2560.1417@0.23.2560.1417" timestamp="1603283283803" />
-    <state x="1018" y="469" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603328461651">
+    <state x="1018" y="469" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604130311464">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
+    <state x="1018" y="469" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604130311464" />
     <state x="1018" y="469" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1603328461651" />
     <state x="1049" y="596" width="461" height="249" key="ComposerInitDialogKey" timestamp="1603274194291">
       <screen x="0" y="23" width="2560" height="1368" />
@@ -475,14 +500,16 @@
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state width="221" height="457" key="HiddenNamespacesPopup/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602160657409" />
-    <state x="887" y="449" key="NewPhpClassDialog" timestamp="1603275281517">
+    <state x="887" y="449" key="NewPhpClassDialog" timestamp="1604092661610">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
+    <state x="887" y="449" key="NewPhpClassDialog/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604092661610" />
     <state x="887" y="464" key="NewPhpClassDialog/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602672748790" />
     <state x="887" y="449" key="NewPhpClassDialog/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1603275281517" />
-    <state x="1103" y="640" key="NewPhpFileDialog" timestamp="1603272908662">
+    <state x="1103" y="640" key="NewPhpFileDialog" timestamp="1604154848698">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
+    <state x="1103" y="640" key="NewPhpFileDialog/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604154848698" />
     <state x="1103" y="662" key="NewPhpFileDialog/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602553803759" />
     <state x="1103" y="640" key="NewPhpFileDialog/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1603272908662" />
     <state x="1236" y="345" key="SettingsEditor" timestamp="1603274270516">
@@ -495,6 +522,10 @@
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state x="1133" y="627" width="353" height="159" key="VCS.ChangelistChooser/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1602846687142" />
+    <state x="100" y="123" width="2360" height="1168" key="VCS.FileHistoryDialog" timestamp="1604081020724">
+      <screen x="0" y="23" width="2560" height="1368" />
+    </state>
+    <state x="100" y="123" width="2360" height="1168" key="VCS.FileHistoryDialog/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604081020724" />
     <state x="829" y="458" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1602687020481">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
@@ -506,10 +537,10 @@
     </state>
     <state x="505" y="23" width="1309" height="1047" key="dock-window-1/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1603712779169" />
     <state x="849" y="81" width="1853" height="1057" key="dock-window-1/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1602857284857" />
-    <state x="406" y="518" width="859" height="549" key="find.popup" timestamp="1603300673480">
+    <state x="406" y="518" width="859" height="548" key="find.popup" timestamp="1604161117280">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
-    <state x="406" y="518" width="859" height="548" key="find.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1602296443016" />
+    <state x="406" y="518" width="859" height="548" key="find.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604161117280" />
     <state x="406" y="536" width="859" height="568" key="find.popup/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602666295876" />
     <state x="406" y="518" width="859" height="549" key="find.popup/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1603300673480" />
     <state x="2865" y="405" width="645" height="490" key="find.popup/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@2560.23.1920.1057" timestamp="1602801102653" />
@@ -521,10 +552,10 @@
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
     <state x="945" y="333" key="run.anything.popup/2560.23.1920.1057/-1792.23.1792.1097/0.23.2560.1368@0.23.2560.1368" timestamp="1602896173985" />
-    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup" timestamp="1603971637240">
+    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup" timestamp="1604162531285">
       <screen x="0" y="23" width="2560" height="1368" />
     </state>
-    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1603971637240" />
+    <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1368" timestamp="1604162531285" />
     <state x="945" y="336" width="670" height="676" key="search.everywhere.popup/0.23.2560.1368/2560.23.1920.1057@0.23.2560.1368" timestamp="1602167589376" />
     <state x="945" y="347" width="670" height="701" key="search.everywhere.popup/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@0.23.2560.1417" timestamp="1602698229225" />
     <state x="3269" y="265" width="670" height="523" key="search.everywhere.popup/0.23.2560.1417/2560.23.1920.1057/-1792.23.1792.1097@2560.23.1920.1057" timestamp="1602659882241" />

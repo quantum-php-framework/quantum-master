@@ -612,7 +612,7 @@ class Output extends Singleton
         header("Pragma: no-cache");
 
         echo $json;
-        exit();
+        Kernel::shutdown();
     }
 
     /**
@@ -621,6 +621,14 @@ class Output extends Singleton
     public function json($json)
     {
         self::outputJson($json);
+    }
+
+    public function adaptable($data)
+    {
+        if (is_vt($data))
+            $data = $data->toStdArray();
+
+        ApiOutput::adaptableOutput($data);
     }
 
     /**

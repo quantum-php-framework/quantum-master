@@ -2850,6 +2850,14 @@ class QString implements Countable, IteratorAggregate, ArrayAccess
         return json_decode($this->text);
     }
 
+    /**
+     * @return \StdObject
+     */
+    public function decodeBase64()
+    {
+        return static::create(base64_decode($this->text));
+    }
+
         /**
      * @return array
      */
