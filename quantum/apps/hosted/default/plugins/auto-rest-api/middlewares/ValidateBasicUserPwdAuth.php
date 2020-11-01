@@ -4,8 +4,9 @@ namespace AutoRestApi;
 
 use Quantum\ApiException;
 use Quantum\PasswordStorage;
+use Quantum\Middleware\Foundation\SystemMiddleware;
 
-class ValidateBasicUserPwdAuth extends \Quantum\Middleware\Foundation\SystemMiddleware
+class ValidateBasicUserPwdAuth extends SystemMiddleware
 {
     public function __construct()
     {

@@ -3,8 +3,10 @@
 namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ModelDescription;
+use Quantum\ApiException;
+use Quantum\Controller;
 
-class ListController extends \Quantum\Controller
+class ListController extends Controller
 {
     /**
      * Create a controller, no dependency injection has happened.
@@ -47,18 +49,30 @@ class ListController extends \Quantum\Controller
 
         $criteria = array_merge($criteria, $params);
 
-        return $criteria;
+        return apply_filter('auto_rest_api_filter_search_criteria', $criteria);
     }
 
     public function execute(ModelDescription $modelDescription)
     {
         $ipp = $this->request->getParam('limit', 25);
-        $offset = $this->request->getParam('page', 0);
-        $order = $this->request->getParam('order', 'desc');
 
-        $order = $order == 'asc' ? 'asc' : 'desc';
+        if (!qs($ipp)->isNumber()) {
+            ApiException::invalidParameters();
+        }
+
+        $offset = $this->request->getParam('page', 0);
+
+        if (!qs($offset)->isNumber()) {
+            ApiException::invalidParameters();
+        }
+
+        $order = $this->request->getParam('order', null) == 'asc' ? 'asc' : 'desc';
 
         $className = $modelDescription->getClassName();
+
+        if (!class_exists($className)) {
+            ApiException::custom('invalid_model', '404 Model not found', 'Class not found:'.$className);
+        }
 
         $search_criteria = $this->getSearchCriteria($modelDescription);
 
@@ -136,7 +150,10 @@ class ListController extends \Quantum\Controller
             $response->set('previous_page', $prev_page_url->toString());
         }
 
-        $response->set($modelDescription->getPluralForm(), $data->toStdArray());
+        $data = apply_filter('auto_rest_api_filter_models_list', $data->toStdArray());
+
+        $response->set($modelDescription->getPluralForm(), $data);
+
         $this->output->adaptable($response);
     }
 

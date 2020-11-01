@@ -4,8 +4,9 @@ namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
+use Quantum\Controller;
 
-class ViewController extends \Quantum\Controller
+class ViewController extends Controller
 {
 
     /**

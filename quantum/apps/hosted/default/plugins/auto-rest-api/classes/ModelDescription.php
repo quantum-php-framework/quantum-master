@@ -1,14 +1,6 @@
 <?php
 
-
 namespace AutoRestApi;
-
-/*
- * 'plural_form' => 'users',
-        'visible_attributes'  => 'name,lastname,username',
-        'editable_attributes' => 'name,lastname,username',
-        'features' => 'list,create,update,delete'
- */
 
 class ModelDescription
 {

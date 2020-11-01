@@ -30,13 +30,14 @@ use Quantum\ApiException;
 class AutoRestApi extends \Quantum\Plugins\Plugin
 {
     /**
-     * @var RouteGenerator
-     */
-    private $route_generator;
-    /**
      * @var VersionsManager
      */
     private $versions_manager;
+
+    /**
+     * @var RequestDecoder
+     */
+    private $request_decoder;
 
     public function __construct()
     {
@@ -47,6 +48,8 @@ class AutoRestApi extends \Quantum\Plugins\Plugin
     {
         $versions_file = $this->getFolder()->getChildFile('etc/config/versions.php');
         $this->versions_manager = new VersionsManager($versions_file, $this->getFolder());
+
+        dispatch_event('auto_rest_api_init', $this->versions_manager);
     }
 
 
@@ -113,9 +116,13 @@ class AutoRestApi extends \Quantum\Plugins\Plugin
 
     private function validateAccess()
     {
+        dispatch_event('auto_rest_api_before_access_validation', $this->request_decoder->getVersion());
+
         $middleware = new ValidateAutoRestApiAccess($this->request_decoder->getVersion());
 
         $middleware->handle(qm_request(), function() {});
+
+        dispatch_event('auto_rest_api_after_access_validation', $this->request_decoder->getVersion());
     }
 
 

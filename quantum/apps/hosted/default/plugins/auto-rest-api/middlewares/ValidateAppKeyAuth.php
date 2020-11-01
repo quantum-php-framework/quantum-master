@@ -3,8 +3,9 @@
 namespace AutoRestApi;
 
 use Quantum\ApiException;
+use Quantum\Middleware\Foundation\SystemMiddleware;
 
-class ValidateAppKeyAuth extends \Quantum\Middleware\Foundation\SystemMiddleware
+class ValidateAppKeyAuth extends SystemMiddleware
 {
     public function __construct()
     {

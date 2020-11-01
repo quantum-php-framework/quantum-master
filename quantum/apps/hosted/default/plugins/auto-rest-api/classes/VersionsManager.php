@@ -1,8 +1,6 @@
 <?php
 
-
 namespace AutoRestApi;
-
 
 use Quantum\ValueTree;
 

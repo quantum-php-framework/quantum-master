@@ -130,7 +130,7 @@ class QString implements Countable, IteratorAggregate, ArrayAccess
     }
 
     /**
-     * Returns true if the string contains a single precission floating number
+     * Returns true if the string contains a single precision floating number
      * otherwise.
      *
      * @return bool s
@@ -141,7 +141,7 @@ class QString implements Countable, IteratorAggregate, ArrayAccess
     }
 
     /**
-     * Returns true if the string contains a double precission number
+     * Returns true if the string contains a double precision number
      * otherwise.
      *
      * @return bool s

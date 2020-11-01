@@ -4,9 +4,10 @@ namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
+use Quantum\Controller;
 use Quantum\ControllerFactory;
 
-class UpdateController extends \Quantum\Controller
+class UpdateController extends Controller
 {
 
 
@@ -25,12 +26,10 @@ class UpdateController extends \Quantum\Controller
 
         $modelName = $modelDescription->getClassName();
 
-        if (qs($id)->isUuid())
-        {
+        if (qs($id)->isUuid()) {
             $model = $modelName::find(array('conditions' => array("uuid = ?", $id)));
         }
-        elseif (qs($id)->isNumber())
-        {
+        elseif (qs($id)->isNumber()) {
             $model = $modelName::find(array('conditions' => array("id = ?", $id)));
         }
 
@@ -45,7 +44,11 @@ class UpdateController extends \Quantum\Controller
             $model->$attribute_name = $this->request->getParam($request_param_key);
         }
 
+        dispatch_event('auto_rest_api_before_model_update', $model);
+
         $model->save();
+
+        dispatch_event('auto_rest_api_after_model_update', $model);
 
         $controller = ControllerFactory::create('AutoRestApi\Controllers\ViewController');
         $controller->displayModel($model, $modelDescription);

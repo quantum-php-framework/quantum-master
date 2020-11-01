@@ -1,13 +1,12 @@
 <?php
 
 /*
- * class IndexController
+ * class FrontendController
  */
 namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ApiVersion;
 use AutoRestApi\ModelDescription;
-use AutoRestApi\RequestDecoder;
 use Quantum\ApiException;
 use Quantum\ControllerFactory;
 
@@ -74,7 +73,7 @@ class FrontendController extends \Quantum\Controller
 
     public function setModelDescription(ModelDescription $model_description)
     {
-        $this->model_description = $model_description;
+        $this->model_description = apply_filter('auto_rest_api_filter_model_description', $model_description);
     }
 
     public function setApiRoutes($routes)
@@ -107,7 +106,7 @@ class FrontendController extends \Quantum\Controller
         }
         else
         {
-            ApiException::invalidParameters();
+            ApiException::invalidRequest();
         }
 
         $controller->execute($this->model_description);
@@ -139,6 +138,10 @@ class FrontendController extends \Quantum\Controller
             }
 
             $controller = ControllerFactory::create('AutoRestApi\Controllers\DeleteController');
+        }
+        else
+        {
+            ApiException::invalidRequest();
         }
 
         $controller->execute($this->model_description);

@@ -52,7 +52,7 @@ class RouteGenerator
             }
         }
 
-        return $routes;
+        return apply_filter('auto_rest_api_filter_generated_routes', $routes);
     }
 
     private function prepareRoute($route)

@@ -2,7 +2,6 @@
 
 namespace AutoRestApi;
 
-
 class RequestDecoder
 {
     private $version;

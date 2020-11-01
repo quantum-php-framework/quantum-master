@@ -4,8 +4,9 @@ namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
+use Quantum\Controller;
 
-class DeleteController extends \Quantum\Controller
+class DeleteController extends Controller
 {
 
 
@@ -21,12 +22,10 @@ class DeleteController extends \Quantum\Controller
 
         $modelName = $modelDescription->getClassName();
 
-        if (qs($id)->isUuid())
-        {
+        if (qs($id)->isUuid()) {
             $model = $modelName::find(array('conditions' => array("uuid = ?", $id)));
         }
-        elseif (qs($id)->isNumber())
-        {
+        elseif (qs($id)->isNumber()) {
             $model = $modelName::find(array('conditions' => array("id = ?", $id)));
         }
 
@@ -34,7 +33,11 @@ class DeleteController extends \Quantum\Controller
             ApiException::resourceNotFound();
         }
 
+        dispatch_event('auto_rest_api_before_model_delete', $model);
+
         $model->delete();
+
+        dispatch_event('auto_rest_api_after_model_delete', $model);
 
         $this->output->adaptable(['status' => 'ok']);
     }

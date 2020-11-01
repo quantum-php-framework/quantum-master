@@ -3,9 +3,10 @@
 namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ApiVersion;
+use Quantum\Controller;
 
 
-class IndexController extends \Quantum\Controller
+class IndexController extends Controller
 {
 
 
@@ -44,7 +45,9 @@ class IndexController extends \Quantum\Controller
             $paths->add($datum->toStdArray());
         }
 
-        $response->set('paths', $paths->toStdArray());
+        $paths = apply_filter('auto_rest_api_filter_apis_list', $paths->toStdArray());
+
+        $response->set('paths', $paths);
 
         $this->output->adaptable($response);
     }

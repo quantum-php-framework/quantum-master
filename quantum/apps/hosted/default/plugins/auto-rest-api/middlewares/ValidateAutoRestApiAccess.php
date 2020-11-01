@@ -1,8 +1,9 @@
 <?php
 
 namespace AutoRestApi;
+use Quantum\Middleware\Foundation\SystemMiddleware;
 
-class ValidateAutoRestApiAccess extends \Quantum\Middleware\Foundation\SystemMiddleware
+class ValidateAutoRestApiAccess extends SystemMiddleware
 {
     public function __construct(ApiVersion $version)
     {

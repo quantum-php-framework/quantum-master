@@ -12,8 +12,8 @@ return [
             'full_name' => 'getFullName()',
             'email' => 'email'],
         'editable_attributes'  => [
-            'first_name' => 'first_name',
-            'last_name' => 'last_name',
+            'name' => 'first_name',
+            'lastname' => 'last_name',
             'email' => 'email',
             ],
         'searchable_attributes'  => [

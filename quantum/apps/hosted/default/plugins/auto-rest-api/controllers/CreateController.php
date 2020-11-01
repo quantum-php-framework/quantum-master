@@ -3,9 +3,10 @@
 namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ModelDescription;
+use Quantum\Controller;
 use Quantum\ControllerFactory;
 
-class CreateController extends \Quantum\Controller
+class CreateController extends Controller
 {
 
 
@@ -32,7 +33,11 @@ class CreateController extends \Quantum\Controller
             $object->$attribute_name = $this->request->getParam($request_param_key);
         }
 
+        dispatch_event('auto_rest_api_before_model_create', $object);
+
         $object->save();
+
+        dispatch_event('auto_rest_api_after_model_create', $object);
 
         $controller = ControllerFactory::create('AutoRestApi\Controllers\ViewController');
         $controller->displayModel($object, $modelDescription);
