@@ -59,6 +59,11 @@ class ModelDescription
         return $this->desc->get('id_attribute', 'id');
     }
 
+    public function getOrderAttributeKey()
+    {
+        return $this->desc->get('order_attribute', 'id');
+    }
+
     public function isOperatorAllowed($operator)
     {
         return in_array($operator, $this->getOperators());
