@@ -16,11 +16,18 @@ class RequestDecoder
     {
         if (!isset($this->version))
         {
-            $uri = $this->request->getUriWithoutQueryString();
+            $uri = get_current_route_setting('uri');
 
-            $api_version = qs($uri)->fromFirstOccurrenceOf('api/v')->upToFirstOccurrenceOf('/');
+            foreach ($this->version_manager->getVersions() as $version)
+            {
+                $generator = $version->getRouteGenerator();
 
-            $this->version = $this->version_manager->getVersion($api_version);
+                $route = $generator->findRouteByUri($uri);
+
+                if ($route) {
+                    $this->version = $version;
+                }
+            }
         }
 
         return $this->version;
@@ -28,40 +35,13 @@ class RequestDecoder
 
     public function getModelDescription()
     {
-        $version = $this->getVersion();
+        $route = get_current_route();
 
-        $api_prefix = $version->getRouteGenerator()->api_prefix;
-
-        $uri = $this->request->getUriWithoutQueryString();
-
-        $model_path = qs($uri)->fromFirstOccurrenceOf($api_prefix.'/')->upToFirstOccurrenceOf('/')->toStdString();
-
-        $models = $version->getModelsManager()->getModels();
-
-        foreach ($models as $model)
-        {
-            if ($model['plural_form'] == $model_path) {
-                return new ModelDescription($model);
-            }
+        if ($route) {
+            return $route['model_description'];
         }
 
-       return null;
+        return null;
     }
 
-    public function isIndex()
-    {
-        $version = $this->getVersion();
-
-        if (!$version) {
-            return false;
-        }
-
-        $api_prefix = $version->getRouteGenerator()->api_prefix;
-
-        $uri = $this->request->getUriWithoutQueryString();
-
-        $model_path = qs($uri)->fromFirstOccurrenceOf($api_prefix.'/')->upToFirstOccurrenceOf('/');
-
-        return $model_path->equalsIgnoreCase('index');
-    }
 }

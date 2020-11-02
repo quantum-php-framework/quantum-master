@@ -3,6 +3,7 @@
 namespace AutoRestApi;
 
 use Quantum\ValueTree;
+use Quantum\File;
 
 class VersionsManager
 {
@@ -11,22 +12,23 @@ class VersionsManager
      */
     private $versions;
 
-    public function __construct($versions_file, $plugin_folder)
+    public function __construct(File $versions_folder)
     {
-        $declared_versions = include $versions_file->getRealPath();
+        $version_files = $versions_folder->getChildFiles();
+
+        if (empty($version_files)) {
+            throw_exception('no api version files found at:'.$versions_folder->getPath());
+        }
 
         $this->versions = new_vt();
-        foreach ($declared_versions as $declared_version)
+
+        foreach ($version_files as $version_file)
         {
-            $models_file_name = qs($declared_version['models_file'])->ensureRight('.php')->toStdString();
-            $models_file = $plugin_folder->getChildFile('etc/config/versions/'.$models_file_name);
+            $declared_version = include $version_file->getRealPath();
 
-            if (!$models_file->existsAsFile()) {
-                throw_exception('api version models file not found at:'.$models_file->getPath());
-            }
-
-            $this->versions->set('version'.$declared_version['version'], new ApiVersion($declared_version, $models_file));
+            $this->versions->set('version'.$declared_version['version'], new ApiVersion($declared_version));
         }
+
     }
 
     public function getVersions()

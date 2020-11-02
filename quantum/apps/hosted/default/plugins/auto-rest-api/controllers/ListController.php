@@ -16,8 +16,11 @@ class ListController extends Controller
 
     }
 
-    private function getSearchCriteria(ModelDescription $modelDescription)
+    private function buildSearchCriteria(ModelDescription $modelDescription)
     {
+        if (!$modelDescription->allowSearch()) {
+            return [];
+        }
         $searchable_attributes = $modelDescription->getSearchableAttributes();
 
         $attributes = [];
@@ -43,6 +46,20 @@ class ListController extends Controller
             }
          }
 
+        if ($this->request->hasParam('operator'))
+        {
+            $glue = $this->request->getParam('operator');
+            if (!is_string($glue)) {
+                ApiException::invalidParameters();
+            }
+
+            $glue = qs($glue)->toUpperCase()->toStdString();
+
+            if (!in_array($glue, $modelDescription->getOperators())) {
+                ApiException::invalidParameters();
+            }
+        }
+
         $left = new_vt($attributes)->implode(" $glue ");
 
         $criteria[] = $left;
@@ -60,21 +77,32 @@ class ListController extends Controller
             ApiException::invalidParameters();
         }
 
+        $ipp = min($ipp, 1000);
+
         $offset = $this->request->getParam('page', 0);
 
         if (!qs($offset)->isNumber()) {
             ApiException::invalidParameters();
         }
 
-        $order = $this->request->getParam('order', null) == 'asc' ? 'asc' : 'desc';
+        $order = $this->request->getParam('order', 'DESC');
+        if (!is_string($order)) {
+            ApiException::invalidParameters();
+        }
+
+        $order = qs($order)->toUpperCase()->toStdString();
+
+        if (!in_array($order, ['DESC', 'ASC'])) {
+            ApiException::invalidParameters();
+        }
 
         $className = $modelDescription->getClassName();
 
         if (!class_exists($className)) {
-            ApiException::custom('invalid_model', '404 Model not found', 'Class not found:'.$className);
+            ApiException::custom('invalid_model', '404 Model not found', 'Model Class not found:'.$className);
         }
 
-        $search_criteria = $this->getSearchCriteria($modelDescription);
+        $search_criteria = $this->buildSearchCriteria($modelDescription);
 
         $total_objects_count = $className::count();
         $results_count = $className::count(['conditions' => $search_criteria]);

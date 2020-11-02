@@ -4,9 +4,9 @@ namespace AutoRestApi;
 
 class ModelsManager
 {
-    public function __construct($models_file)
+    public function __construct($models)
     {
-        $this->models = include $models_file->getRealPath();
+        $this->models = $models;
     }
 
     public function getModels()

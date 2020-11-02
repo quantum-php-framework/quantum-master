@@ -9,36 +9,65 @@ class ApiVersion
      */
     private $route_generator;
 
-    public function __construct($config, $models_file)
+    public function __construct($config)
     {
-        $this->config = $config;
+        $this->config = new_vt($config);
 
-        $api_prefix = 'api/v'.$this->getVersion();
+        $api_prefix = $this->getPrefix();
 
-        $this->route_generator = new RouteGenerator(new ModelsManager($models_file), $api_prefix);
+        $this->route_generator = new RouteGenerator(new ModelsManager($this->config['models']), $api_prefix);
 
     }
 
     public function getVersion()
     {
-        return $this->config['version'];
+        return $this->config->get('version');
     }
 
     public function getAuthorizationMiddleware()
     {
-        return $this->config['autorization_middleware'];
+        return $this->config->get('autorization_middleware');
+    }
+
+    public function getDescription()
+    {
+        return $this->config->get('description', 'REST API for '.get_current_environment_setting('domain'));
+    }
+
+    public function getTitle()
+    {
+        return $this->config->get('title', 'REST API');
+    }
+
+    public function getTermsOfService()
+    {
+        return $this->config->get('terms_of_service', '');
+    }
+
+    public function getContactEmail()
+    {
+        return $this->config->get('contact_email', 'site@example.com');
+    }
+
+    public function getLicenseName()
+    {
+        return $this->config->get('license_name', 'Apache 2.0');
+    }
+
+    public function getLicenseUrl()
+    {
+        return $this->config->get('license_url', 'Apache 2.0');
     }
 
     public function getAuthorizations()
     {
-        return qs($this->config['authorizations'])->explode(',');
-    }
+        $authorization_methods = $this->config->get('authorizations', '');
 
-    public function getModelsFileName()
-    {
-        return qs($this->config['models_file'])->ensureRight('.php')->toStdString();
-    }
+        if (!empty($authorization_methods))
+            return qs($authorization_methods)->stripWhitespace()->explode(',');
 
+        return [];
+    }
 
     public function getRouteGenerator()
     {
@@ -48,5 +77,10 @@ class ApiVersion
     public function getModelsManager()
     {
         return $this->route_generator->models_manager;
+    }
+
+    public function getPrefix()
+    {
+        return $this->config->get('prefix', '').$this->getVersion();
     }
 }

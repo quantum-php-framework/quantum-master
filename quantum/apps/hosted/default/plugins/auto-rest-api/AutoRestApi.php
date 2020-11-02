@@ -25,9 +25,9 @@
 
 namespace AutoRestApi;
 
-use Quantum\ApiException;
+use Quantum\Plugins\Plugin;
 
-class AutoRestApi extends \Quantum\Plugins\Plugin
+class AutoRestApi extends Plugin
 {
     /**
      * @var VersionsManager
@@ -46,12 +46,12 @@ class AutoRestApi extends \Quantum\Plugins\Plugin
 
     public function init()
     {
-        $versions_file = $this->getFolder()->getChildFile('etc/config/versions.php');
-        $this->versions_manager = new VersionsManager($versions_file, $this->getFolder());
+        $versions_folder = $this->getVersionsDir();
+
+        $this->versions_manager = new VersionsManager($versions_folder);
 
         dispatch_event('auto_rest_api_init', $this->versions_manager);
     }
-
 
     /**
      * @return bool|mixed
@@ -95,17 +95,13 @@ class AutoRestApi extends \Quantum\Plugins\Plugin
 
         $model_description = $this->request_decoder->getModelDescription();
 
-        if (!$model_description && !$this->request_decoder->isIndex()) {
-            ApiException::invalidParameters();
-        }
-
         $this->validateAccess();
 
         $api_routes = $this->getRoutes();
 
         $active_controller = $this->getActiveApp()->getActiveController();
 
-        if ($model_description) {
+        if (instance_of($model_description, ModelDescription::class)) {
             $active_controller->setModelDescription($model_description);
         }
 
@@ -123,6 +119,22 @@ class AutoRestApi extends \Quantum\Plugins\Plugin
         $middleware->handle(qm_request(), function() {});
 
         dispatch_event('auto_rest_api_after_access_validation', $this->request_decoder->getVersion());
+    }
+
+    private function getVersionsDir()
+    {
+        $ipt = \QM::ipt();
+
+        $app_config_dir = qf($ipt->app_config_root);
+        $api_versions_dirname = get_active_app_setting('auto_rest_api_versions_dir', 'api_versions');
+
+        $api_versions_dir = $app_config_dir->getChildFile($api_versions_dirname);
+
+        if (!$api_versions_dir->exists()) {
+            throw_exception('Api versions dir not found at '.$api_versions_dir->getPath());
+        }
+
+        return $api_versions_dir;
     }
 
 
