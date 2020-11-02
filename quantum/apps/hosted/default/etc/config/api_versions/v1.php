@@ -14,6 +14,7 @@ return [
             'features' => 'list,create,search,view,update,delete',
             'unique_attributes' => 'email',
             'id_attribute' => 'id',
+            'order_attribute' => 'id',
             'visible_attributes'  => [
                 'id' => 'id',
                 'name' => 'name',
