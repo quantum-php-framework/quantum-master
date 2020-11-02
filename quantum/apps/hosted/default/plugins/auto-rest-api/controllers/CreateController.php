@@ -28,9 +28,9 @@ class CreateController extends Controller
         $object = new $className();
 
         $unique_attributes = $modelDescription->getUniqueAttributes();
-        $editable_attributes = $modelDescription->getEditableAttributes();
+        $creatable_attributes = $modelDescription->getCreatableAttributes();
 
-        foreach ($editable_attributes as $attribute_name => $request_param_key)
+        foreach ($creatable_attributes as $attribute_name => $request_param_key)
         {
             if ($this->request->isMissingParam($request_param_key)) {
                 continue;

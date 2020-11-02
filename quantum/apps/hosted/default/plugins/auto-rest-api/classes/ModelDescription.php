@@ -39,6 +39,17 @@ class ModelDescription
         return $this->desc->get('searchable_attributes');
     }
 
+    public function getCreatableAttributes()
+    {
+        $attributes = $this->desc->get('creatable_attributes', []);
+
+        if (!empty($attributes)) {
+            return $attributes;
+        }
+
+        return $this->getEditableAttributes();
+    }
+
     public function getFeatures()
     {
         return qs($this->desc->get('features'))->stripWhitespace()->explode(',');
