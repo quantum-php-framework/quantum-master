@@ -54,9 +54,9 @@ class ModelDescription
         return qs($this->desc->get('unique_attributes', ''))->stripWhitespace()->explode(',');
     }
 
-    public function getPrimaryIndexAttributeKey()
+    public function getIdAttributeKey()
     {
-        return $this->desc->get('primary_index_attribute_key', 'id');
+        return $this->desc->get('id_attribute', 'id');
     }
 
     public function isOperatorAllowed($operator)

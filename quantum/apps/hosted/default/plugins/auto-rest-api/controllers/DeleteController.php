@@ -22,12 +22,8 @@ class DeleteController extends Controller
 
         $modelName = $modelDescription->getClassName();
 
-        if (qs($id)->isUuid()) {
-            $model = $modelName::find(array('conditions' => array("uuid = ?", $id)));
-        }
-        elseif (qs($id)->isNumber()) {
-            $model = $modelName::find(array('conditions' => array("id = ?", $id)));
-        }
+        $id_attribute = $modelDescription->getIdAttributeKey();
+        $model = $modelName::find(array('conditions' => array("$id_attribute = ?", $id)));
 
         if (empty($model)) {
             ApiException::resourceNotFound();

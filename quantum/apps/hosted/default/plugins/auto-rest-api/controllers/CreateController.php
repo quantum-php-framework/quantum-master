@@ -54,8 +54,7 @@ class CreateController extends Controller
 
         dispatch_event('auto_rest_api_after_model_create', $object);
 
-        $controller = ControllerFactory::create('AutoRestApi\Controllers\ViewController');
-        $controller->displayModel($object, $modelDescription);
+        ViewController::displayModel($object, $modelDescription);
 
     }
 

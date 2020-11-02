@@ -5,7 +5,6 @@ namespace AutoRestApi\Controllers;
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
 use Quantum\Controller;
-use Quantum\ControllerFactory;
 
 class UpdateController extends Controller
 {
@@ -26,12 +25,8 @@ class UpdateController extends Controller
 
         $modelName = $modelDescription->getClassName();
 
-        if (qs($id)->isUuid()) {
-            $model = $modelName::find(array('conditions' => array("uuid = ?", $id)));
-        }
-        elseif (qs($id)->isNumber()) {
-            $model = $modelName::find(array('conditions' => array("id = ?", $id)));
-        }
+        $id_attribute = $modelDescription->getIdAttributeKey();
+        $model = $modelName::find(array('conditions' => array("$id_attribute = ?", $id)));
 
         if (empty($model)) {
             ApiException::resourceNotFound();
@@ -52,7 +47,7 @@ class UpdateController extends Controller
             {
                 $previous_object = $modelName::find(array('conditions' => ["$attribute_name = ?", $this->request->getParam($request_param_key)]));
 
-                if (!empty($previous_object) && $previous_object->$primary_model_key != $model->$primary_model_key) {
+                if (!empty($previous_object) && $previous_object->$id_attribute != $model->$id_attribute) {
                     ApiException::custom('duplicate_entry', '400 Invalid', 'Duplicate object attribute found for '.$attribute_name);
                 }
             }
@@ -66,8 +61,7 @@ class UpdateController extends Controller
 
         dispatch_event('auto_rest_api_after_model_update', $model);
 
-        $controller = ControllerFactory::create('AutoRestApi\Controllers\ViewController');
-        $controller->displayModel($model, $modelDescription);
+        ViewController::displayModel($model, $modelDescription);
     }
 
 

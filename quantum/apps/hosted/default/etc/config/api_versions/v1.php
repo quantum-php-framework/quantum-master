@@ -13,7 +13,7 @@ return [
             'singular_form' => 'user',
             'features' => 'list,create,search,view,update,delete',
             'unique_attributes' => 'email',
-            //'primary_index_attribute_key' => 'ida',
+            'id_attribute' => 'id',
             'visible_attributes'  => [
                 'id' => 'id',
                 'name' => 'name',
