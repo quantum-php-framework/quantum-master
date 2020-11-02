@@ -21,11 +21,12 @@ class ListController extends Controller
         if (!$modelDescription->allowSearch()) {
             return [];
         }
-        $searchable_attributes = $modelDescription->getSearchableAttributes();
 
         $attributes = [];
         $params = [];
         $glue = '';
+
+        $searchable_attributes = $modelDescription->getSearchableAttributes();
 
         foreach ($searchable_attributes as $attribute_name => $param_name)
         {
@@ -55,7 +56,7 @@ class ListController extends Controller
 
             $glue = qs($glue)->toUpperCase()->toStdString();
 
-            if (!in_array($glue, $modelDescription->getOperators())) {
+            if (!in_array($glue, $modelDescription->getAllowedOperators())) {
                 ApiException::invalidParameters();
             }
         }
@@ -71,13 +72,13 @@ class ListController extends Controller
 
     public function execute(ModelDescription $modelDescription)
     {
-        $ipp = $this->request->getParam('limit', 25);
+        $ipp = $this->request->getParam('limit', $modelDescription->getDefaultLimit());
 
         if (!qs($ipp)->isNumber()) {
             ApiException::invalidParameters();
         }
 
-        $ipp = min($ipp, 1000);
+        $ipp = min($ipp, $modelDescription->getMaxLimit());
 
         $offset = $this->request->getParam('page', 0);
 
@@ -85,14 +86,14 @@ class ListController extends Controller
             ApiException::invalidParameters();
         }
 
-        $order = $this->request->getParam('order', 'DESC');
+        $order = $this->request->getParam('order', $modelDescription->getDefaultOrder());
         if (!is_string($order)) {
             ApiException::invalidParameters();
         }
 
         $order = qs($order)->toUpperCase()->toStdString();
 
-        if (!in_array($order, ['DESC', 'ASC'])) {
+        if (!in_array($order, $modelDescription->getAllowedOrders())) {
             ApiException::invalidParameters();
         }
 

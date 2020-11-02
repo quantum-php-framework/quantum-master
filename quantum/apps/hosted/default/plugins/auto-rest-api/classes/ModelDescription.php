@@ -55,9 +55,14 @@ class ModelDescription
         return qs($this->desc->get('features'))->stripWhitespace()->explode(',');
     }
 
-    public function getOperators()
+    public function getAllowedOperators()
     {
-        return qs($this->desc->get('operators', 'OR,AND'))->stripWhitespace()->explode(',');
+        return qs($this->desc->get('allowed_operators', 'OR,AND'))->stripWhitespace()->explode(',');
+    }
+
+    public function getAllowedOrders()
+    {
+        return qs($this->desc->get('allowed_orders', 'DESC,ASC'))->stripWhitespace()->explode(',');
     }
 
     public function getUniqueAttributes()
@@ -75,9 +80,24 @@ class ModelDescription
         return $this->desc->get('order_attribute', 'id');
     }
 
+    public function getDefaultOrder()
+    {
+        return $this->desc->get('default_order', 'DESC');
+    }
+
+    public function getDefaultLimit()
+    {
+        return $this->desc->get('default_limit', 25);
+    }
+
+    public function getMaxLimit()
+    {
+        return $this->desc->get('max_limit', 1000);
+    }
+
     public function isOperatorAllowed($operator)
     {
-        return in_array($operator, $this->getOperators());
+        return in_array($operator, $this->getAllowedOperators());
     }
 
     public function allowList()
