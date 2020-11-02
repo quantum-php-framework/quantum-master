@@ -16,7 +16,6 @@ class ApiVersion
         $api_prefix = $this->getPrefix();
 
         $this->route_generator = new RouteGenerator(new ModelsManager($this->config['models']), $api_prefix);
-
     }
 
     public function getVersion()
