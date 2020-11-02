@@ -32,8 +32,6 @@ class UpdateController extends Controller
             ApiException::resourceNotFound();
         }
 
-        $primary_model_key = $modelDescription->getPrimaryIndexAttributeKey();
-
         $unique_attributes = $modelDescription->getUniqueAttributes();
         $editable_attributes = $modelDescription->getEditableAttributes();
 
