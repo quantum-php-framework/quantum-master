@@ -15,7 +15,7 @@ return [
             'unique_attributes' => 'email',
             'id_attribute' => 'id',
             'order_attribute' => 'id',
-            //'default_order' => 'DESC',
+            'default_order' => 'DESC',
             'default_limit' => 10,
             'max_limit' => 500,
             'visible_attributes'  => [
