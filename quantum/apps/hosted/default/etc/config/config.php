@@ -11,18 +11,22 @@ $QUANTUM_APP_CONFIG = array(
     'class_name' => 'App',
     'qontent_frontend' => 'enabled',
     'full_page_cache' => '1',
+
+    //enable or diable the api
     'auto_rest_api' => 'enabled',
 
-    //appkey
-    'auto_rest_api_app_keys' => 'ZrkHmjSMbEa17WcqR8S9xW9kbGf8dMab6g0LKO6E',
+    //if using the built in authorizations you need to define some of the following:
 
-    //basic
+    //appkey auto rest api auth
+    'auto_rest_api_app_keys' => 'ZrkHmjSMbEa17WcqR8S9xW9kbGf8dMab6g0LKO6E',
+    'auto_rest_api_app_key_param_name' => 'appkey',
+
+    //basic auto rest api auth
     'auto_rest_api_username_attribute' => 'username',
     'auto_rest_api_password_attribute' => 'password',
 
-    //userkey
+    //userkey auto rest api auth
     'auto_rest_api_user_key_attribute_name' => 'api_key',
     'auto_rest_api_user_key_param_name' => 'userkey'
-    //'auto_rest_api_app_key_param_name' => 'appkey'
 
 );

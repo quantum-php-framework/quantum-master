@@ -21,9 +21,6 @@ class RouteGenerator
 
     public function genRoutes()
     {
-        $models = $this->models_manager->getModels();
-
-
         $routes [] = $this->prepareRoute([
             'uri' => '/'.$this->api_prefix.'/index',
             'controller' => 'AutoRestApi\Controllers\Frontend',
@@ -31,6 +28,7 @@ class RouteGenerator
             'model_description' => 'index'
         ]);
 
+        $models = $this->models_manager->getModels();
 
         foreach ($models as $model)
         {
@@ -57,8 +55,7 @@ class RouteGenerator
             }
         }
 
-        $this->routes = $routes;
-        return apply_filter('auto_rest_api_filter_generated_routes', $this->routes);
+        return apply_filter('auto_rest_api_filter_generated_routes', $routes);
     }
 
     private function prepareRoute($route)
