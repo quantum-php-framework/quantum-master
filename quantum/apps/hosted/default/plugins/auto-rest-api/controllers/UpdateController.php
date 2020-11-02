@@ -5,6 +5,7 @@ namespace AutoRestApi\Controllers;
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
 use Quantum\Controller;
+use Quantum\RequestParamValidator;
 
 class UpdateController extends Controller
 {
@@ -30,6 +31,30 @@ class UpdateController extends Controller
 
         if (empty($model)) {
             ApiException::resourceNotFound();
+        }
+
+        $validator_rules = $modelDescription->getUpdateValidatorRules();
+
+        if (!empty($validator_rules))
+        {
+            if ($this->request->isPost())
+            {
+                $validator = new RequestParamValidator();
+                $validator->rules($validator_rules);
+
+                if (!$validator->validatePost()) {
+                    ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                }
+            }
+            elseif ($this->request->isPut())
+            {
+                $validator = new RequestParamValidator();
+                $validator->rules($validator_rules);
+
+                if (!$validator->processValidations($this->request->getRawInputParams())) {
+                    ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                }
+            }
         }
 
         $unique_attributes = $modelDescription->getUniqueAttributes();

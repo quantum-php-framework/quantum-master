@@ -75,6 +75,16 @@ class ModelDescription
         return $this->desc->get('id_attribute', 'id');
     }
 
+    public function getCreateValidatorRules()
+    {
+        return $this->desc->get('create_validator_rules', []);
+    }
+
+    public function getUpdateValidatorRules()
+    {
+        return $this->desc->get('update_validator_rules', []);
+    }
+
     public function getOrderAttributeKey()
     {
         return $this->desc->get('order_attribute', 'id');

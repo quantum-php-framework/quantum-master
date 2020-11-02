@@ -6,6 +6,7 @@ use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
 use Quantum\Controller;
 use Quantum\ControllerFactory;
+use Quantum\RequestParamValidator;
 
 class CreateController extends Controller
 {
@@ -23,6 +24,19 @@ class CreateController extends Controller
 
     public function execute(ModelDescription $modelDescription)
     {
+        $validator_rules = $modelDescription->getCreateValidatorRules();
+
+        if (!empty($validator_rules))
+        {
+            $validator = new RequestParamValidator();
+            $validator->rules($validator_rules);
+
+            if (!$validator->validatePost()) {
+                ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+            }
+        }
+
+
         $className = $modelDescription->getClassName();
 
         $object = new $className();

@@ -33,6 +33,15 @@ return [
                 'name' => 'name',
                 'email' => 'email',
             ],
+            'create_validator_rules'=> [
+                'name' => 'required|string',
+                'lastname' => 'required|string'
+            ],
+            'update_validator_rules'=> [
+                'name' => 'required|string',
+                'lastname' => 'required|string'
+            ]
+
         ),
 
 
