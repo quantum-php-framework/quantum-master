@@ -106,12 +106,11 @@ class ListController extends Controller
 
         $total_objects_count = $className::count();
         $results_count = $className::count(['conditions' => $search_criteria]);
-        $order_attribute = $modelDescription->getOrderAttributeKey();
 
         $objects =  $className::find('all', array(
             'limit' => $ipp,
             'offset' => $offset,
-            'order' => $order_attribute.' '.$order,
+            'order' => $modelDescription->getOrderAttributeKey().' '.$order,
             'conditions' => $search_criteria));
 
         $total_pages = round($results_count/$ipp);
