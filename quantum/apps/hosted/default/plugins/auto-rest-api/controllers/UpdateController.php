@@ -37,20 +37,17 @@ class UpdateController extends Controller
 
         if (!empty($validator_rules))
         {
+            $validator = new RequestParamValidator();
+            $validator->rules($validator_rules);
+
             if ($this->request->isPost())
             {
-                $validator = new RequestParamValidator();
-                $validator->rules($validator_rules);
-
                 if (!$validator->validatePost()) {
                     ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
                 }
             }
             elseif ($this->request->isPut())
             {
-                $validator = new RequestParamValidator();
-                $validator->rules($validator_rules);
-
                 if (!$validator->processValidations($this->request->getRawInputParams())) {
                     ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
                 }
