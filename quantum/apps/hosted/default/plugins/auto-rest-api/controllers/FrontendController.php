@@ -102,6 +102,8 @@ class FrontendController extends \Quantum\Controller
 
                 $data = $controller->execute($this->model_description);
 
+                $data['cache'] = 'off';
+
                 $this->output->adaptable($data);
             }
             else
@@ -117,7 +119,7 @@ class FrontendController extends \Quantum\Controller
                     return $controller->execute($this->model_description);
                 }, $ttl);
 
-                $data['cache'] = $cache_hit ? 'HIT' : 'MISS';
+                $data['cache'] = $cache_hit ? 'hit' : 'miss';
 
                 $this->output->adaptable($data);
             }
