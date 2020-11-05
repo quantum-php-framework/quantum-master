@@ -3,7 +3,7 @@
 return [
     'version'  => '1',
     'prefix' => 'api/v',//mandatory if your version is an integer or a uuid
-    'authorizations' => 'custom', // 'appkey,basic,userkey,custom',
+    'authorizations' => 'custom',// 'appkey,basic,userkey,custom',
     'autorization_middleware' => 'CustomMiddleware',
     'models' => array(
 
@@ -16,8 +16,10 @@ return [
             'id_attribute' => 'id',
             'order_attribute' => 'id',
             'default_order' => 'DESC',
+            //'allowed_orders' => '',
             'default_limit' => 10,
             'max_limit' => 500,
+            'cache_ttl' => 300,
             'visible_attributes'  => [
                 'id' => 'id',
                 'name' => 'name',
@@ -28,7 +30,7 @@ return [
                 'name' => 'name',
                 'lastname' => 'lastname',
                 'email' => 'email',
-                ],
+            ],
             'searchable_attributes'  => [
                 'name' => 'name',
                 'email' => 'email',
@@ -43,6 +45,8 @@ return [
             ]
 
         ),
+
+
 
 
 
