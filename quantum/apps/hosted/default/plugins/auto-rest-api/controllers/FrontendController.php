@@ -110,10 +110,14 @@ class FrontendController extends \Quantum\Controller
 
                 $cache_key = new_vt($this->request->getGetParams())->getHash();
 
-                $data = from_cache($cache_key , function () {
+                $cache_hit = true;
+                $data = from_cache($cache_key , function () use (&$cache_hit) {
+                    $cache_hit = false;
                     $controller = ControllerFactory::create('AutoRestApi\Controllers\ListController');
                     return $controller->execute($this->model_description);
                 }, $ttl);
+
+                $data['cache'] = $cache_hit ? 'HIT' : 'MISS';
 
                 $this->output->adaptable($data);
             }
