@@ -183,7 +183,9 @@ class ListController extends Controller
 
         $response->set($modelDescription->getPluralForm(), $data);
 
-        $this->output->adaptable($response);
+        return $response->toStdArray();
+
+        //$this->output->adaptable($response);
     }
 
 

@@ -9,6 +9,7 @@ use AutoRestApi\ApiVersion;
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
 use Quantum\ControllerFactory;
+use function foo\func;
 
 class FrontendController extends \Quantum\Controller
 {
@@ -95,7 +96,28 @@ class FrontendController extends \Quantum\Controller
 
         if ($this->request->isGet())
         {
-            $controller = ControllerFactory::create('AutoRestApi\Controllers\ListController');
+            if (!$this->model_description->isCacheEnabled())
+            {
+                $controller = ControllerFactory::create('AutoRestApi\Controllers\ListController');
+
+                $data = $controller->execute($this->model_description);
+
+                $this->output->adaptable($data);
+            }
+            else
+            {
+                $ttl = (int)$this->model_description->getCacheTimeToLive();
+
+                $cache_key = new_vt($this->request->getGetParams())->getHash();
+
+                $data = from_cache($cache_key , function () {
+                    $controller = ControllerFactory::create('AutoRestApi\Controllers\ListController');
+                    return $controller->execute($this->model_description);
+                }, $ttl);
+
+                $this->output->adaptable($data);
+            }
+
         }
         elseif ($this->request->isPost())
         {
@@ -103,13 +125,14 @@ class FrontendController extends \Quantum\Controller
                 ApiException::invalidParameters();
             }
             $controller = ControllerFactory::create('AutoRestApi\Controllers\CreateController');
+            $controller->execute($this->model_description);
         }
         else
         {
             ApiException::invalidRequest();
         }
 
-        $controller->execute($this->model_description);
+
     }
 
 

@@ -105,6 +105,16 @@ class ModelDescription
         return $this->desc->get('max_limit', 1000);
     }
 
+    public function getCacheTimeToLive()
+    {
+        return $this->desc->get('cache_ttl', false);
+    }
+
+    public function isCacheEnabled()
+    {
+        return $this->getCacheTimeToLive() != false;
+    }
+
     public function isOperatorAllowed($operator)
     {
         return in_array($operator, $this->getAllowedOperators());
