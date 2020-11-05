@@ -108,7 +108,7 @@ class FrontendController extends \Quantum\Controller
             {
                 $ttl = (int)$this->model_description->getCacheTimeToLive();
 
-                $cache_key = new_vt($this->request->getGetParams())->getHash();
+                $cache_key = qs($this->request->getUriWithQueryString())->sha1();
 
                 $cache_hit = true;
                 $data = from_cache($cache_key , function () use (&$cache_hit) {
