@@ -183,7 +183,7 @@ class IndexController extends Controller
                         ->set('type', 'string')
                         ->set('format', 'string')
                         ->set('required', false)
-                        ->set('in', 'query');
+                        ->set('in', 'formData');
                     $params->add($param->toStdArray());
                 }
 

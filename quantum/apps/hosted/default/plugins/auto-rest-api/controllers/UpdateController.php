@@ -76,10 +76,12 @@ class UpdateController extends Controller
         }
 
         dispatch_event('auto_rest_api_before_model_update', $model);
+        dispatch_event('auto_rest_api_before_'.$modelDescription->getSingularForm().'_update', $model);
 
         $model->save();
 
         dispatch_event('auto_rest_api_after_model_update', $model);
+        dispatch_event('auto_rest_api_after_'.$modelDescription->getSingularForm().'_update', $model);
 
         ViewController::displayModel($model, $modelDescription);
     }
