@@ -82,4 +82,9 @@ class ApiVersion
     {
         return $this->config->get('prefix', '').$this->getVersion();
     }
+
+    public function getExtraData()
+    {
+        return $this->config->get('extra_data', []);
+    }
 }

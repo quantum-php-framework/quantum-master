@@ -87,6 +87,20 @@ class FrontendController extends \Quantum\Controller
         $this->api_version = $version;
     }
 
+    private function addExtraData($data)
+    {
+        $extra_data =  $this->api_version->getExtraData();
+        if (!empty($extra_data))
+        {
+            foreach ($extra_data as $key => $extra_datum)
+            {
+                $data[$key] = $extra_datum;
+            }
+        }
+
+        return $data;
+    }
+
 
     public function list()
     {
@@ -104,7 +118,7 @@ class FrontendController extends \Quantum\Controller
 
                 $data['cache'] = 'off';
 
-                $this->output->adaptable($data);
+                $this->outputData($data);
             }
             else
             {
@@ -121,7 +135,7 @@ class FrontendController extends \Quantum\Controller
 
                 $data['cache'] = $cache_hit ? 'hit' : 'miss';
 
-                $this->output->adaptable($data);
+                $this->outputData($data);
             }
 
         }
@@ -131,7 +145,10 @@ class FrontendController extends \Quantum\Controller
                 ApiException::invalidParameters();
             }
             $controller = ControllerFactory::create('AutoRestApi\Controllers\CreateController');
-            $controller->execute($this->model_description);
+
+            $data = $controller->execute($this->model_description);
+
+            $this->outputData($data);
         }
         else
         {
@@ -173,7 +190,10 @@ class FrontendController extends \Quantum\Controller
             ApiException::invalidRequest();
         }
 
-        $controller->execute($this->model_description);
+        $data = $controller->execute($this->model_description);
+
+        $this->outputData($data);
+
     }
 
 
@@ -184,6 +204,12 @@ class FrontendController extends \Quantum\Controller
         $controller->setApiVersion($this->api_version);
 
         $controller->execute();
+    }
+
+    private function outputData($data)
+    {
+        $data = $this->addExtraData($data);
+        $this->output->adaptable($data);
     }
 
 

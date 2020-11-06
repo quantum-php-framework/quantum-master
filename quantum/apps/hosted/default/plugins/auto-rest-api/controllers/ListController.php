@@ -136,8 +136,21 @@ class ListController extends Controller
                 $datum->set($attribute_name, $value);
             }
 
+            $extra_data = $modelDescription->getExtraData();
+            if (!empty($extra_data))
+            {
+                foreach ($extra_data as $key => $extra_datum)
+                {
+                    $datum->set($key, $extra_datum);
+                }
+            }
+
             $data->add($datum->toStdArray());
         }
+
+
+
+
 
         $response = new_vt();
         $response->set('total_count', $total_objects_count);
@@ -147,6 +160,9 @@ class ListController extends Controller
         $response->set('order', $order);
         $response->set('page', $offset);
         $response->set('total_pages', $total_pages);
+
+
+
 
         $next_page_index = $offset+1;
         $current_page_index = $offset;
@@ -178,6 +194,8 @@ class ListController extends Controller
                 ->withParameter('order', $order);
             $response->set('previous_page', $prev_page_url->toString());
         }
+
+
 
         $data = apply_filter('auto_rest_api_filter_models_list', $data->toStdArray());
 

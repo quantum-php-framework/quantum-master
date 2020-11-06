@@ -70,7 +70,7 @@ class CreateController extends Controller
         dispatch_event('auto_rest_api_after_model_create', $object);
         dispatch_event('auto_rest_api_after_'.$modelDescription->getSingularForm().'_create', $object);
 
-        ViewController::displayModel($object, $modelDescription);
+        return ViewController::genVisibleData($object, $modelDescription);
 
     }
 

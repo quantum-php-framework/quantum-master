@@ -37,7 +37,7 @@ class DeleteController extends Controller
         dispatch_event('auto_rest_api_after_model_delete', $model);
         dispatch_event('auto_rest_api_after_'.$modelDescription->getSingularForm().'_delete', $model);
 
-        $this->output->adaptable(['status' => 'ok']);
+        return ['status' => 'ok'];
     }
 
 }

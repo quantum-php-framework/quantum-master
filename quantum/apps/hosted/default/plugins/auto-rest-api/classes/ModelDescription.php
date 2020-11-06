@@ -85,6 +85,11 @@ class ModelDescription
         return $this->desc->get('update_validator_rules', []);
     }
 
+    public function getExtraData()
+    {
+        return $this->desc->get('extra_data', []);
+    }
+
     public function getOrderAttributeKey()
     {
         return $this->desc->get('order_attribute', 'id');

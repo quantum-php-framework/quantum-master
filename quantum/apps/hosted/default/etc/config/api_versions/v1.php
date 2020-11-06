@@ -5,6 +5,14 @@ return [
     'prefix' => 'api/v',//mandatory if your version is an integer or a uuid
     'authorizations' => 'custom',// 'appkey,basic,userkey,custom',
     'autorization_middleware' => 'CustomMiddleware',
+    'extra_data' => [
+        'heading' => [
+            'name' => '#ID',
+            'heading-type' => 'General Information',
+            'ngModel' => 'group_id',
+            'enabled' => '0'
+        ]
+    ],
     'models' => array(
 
         array(
@@ -19,7 +27,7 @@ return [
             //'allowed_orders' => '',
             'default_limit' => 10,
             'max_limit' => 500,
-            'cache_ttl' => 300,
+            //'cache_ttl' => 300,
             'visible_attributes'  => [
                 'id' => 'id',
                 'name' => 'name',
@@ -42,7 +50,11 @@ return [
             'update_validator_rules'=> [
                 'name' => 'required|string',
                 'lastname' => 'required|string'
-            ]
+            ],
+            'extra_data' => [
+                'player' => 'yes'
+            ],
+
 
         ),
 

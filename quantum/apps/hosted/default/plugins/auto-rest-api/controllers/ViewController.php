@@ -31,10 +31,10 @@ class ViewController extends Controller
             ApiException::resourceNotFound();
         }
 
-        self::displayModel($model, $modelDescription);
+        self::genVisibleData($model, $modelDescription);
     }
 
-    public static function displayModel($model, ModelDescription $modelDescription)
+    public static function genVisibleData($model, ModelDescription $modelDescription)
     {
         $visible_attributes = $modelDescription->getVisibleAttributes();
 
@@ -52,7 +52,16 @@ class ViewController extends Controller
             $datum->set($attribute_name, $value);
         }
 
-        \QM::output()->adaptable($datum);
+        $extra_data = $modelDescription->getExtraData();
+        if (!empty($extra_data))
+        {
+            foreach ($extra_data as $key => $extra_datum)
+            {
+                $datum->set($key, $extra_datum);
+            }
+        }
+
+        return $datum;
     }
 
 
