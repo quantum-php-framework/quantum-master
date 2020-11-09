@@ -53,6 +53,24 @@ class RouteGenerator
                     'model_description' => $description
                 ]);
             }
+
+            $extra_routes = $description->getExtraRoutes();
+            foreach ($extra_routes as $extra_route)
+            {
+                $extra_route['uri'] = '/' . $this->api_prefix. '/' . $model['plural_form'] .$extra_route['uri'];
+
+                $extra_route['real_controller'] = $extra_route['controller'];
+                $extra_route['real_method'] = $extra_route['method'];
+
+                $extra_route['controller'] = 'AutoRestApi\Controllers\Frontend';
+                $extra_route['method'] =  'custom_route';
+
+
+                $extra_route['model_description'] = $description;
+                $extra_route = $this->prepareRoute($extra_route);
+
+                $routes [] = $extra_route;
+            }
         }
 
         return apply_filter('auto_rest_api_filter_generated_routes', $routes);

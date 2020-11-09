@@ -9,6 +9,7 @@ use AutoRestApi\ApiVersion;
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
 use Quantum\ControllerFactory;
+use Quantum\Output;
 use function foo\func;
 
 class FrontendController extends \Quantum\Controller
@@ -196,6 +197,39 @@ class FrontendController extends \Quantum\Controller
 
     }
 
+    public function custom_route()
+    {
+        $route = get_current_route();
+
+        $real_controller = $route->get('real_controller');
+        $real_method = $route->get('real_method');
+
+        $request_methods = qs($route->get('http_request_methods', 'GET'))->explode('|');
+
+        $is_request_allowed = false;
+
+        foreach ($request_methods as $request_method)
+        {
+            if (qs($this->request->getMethod())->equalsIgnoreCase($request_method)) {
+                $is_request_allowed = true;
+            }
+        }
+
+        if (!$is_request_allowed) {
+            ApiException::invalidRequest();
+        }
+
+        $controller_name = qs($real_controller)->toTitleCase()->ensureRight("Controller")->toStdString();
+        $controller = ControllerFactory::create($controller_name);
+
+        $reflection = new \ReflectionMethod($controller, $real_method);
+        if ($reflection->isProtected() || $reflection->isPrivate()) {
+            ApiException::resourceNotFound();
+        }
+
+        $data = call_user_func_array([$controller, $real_method], [$this->model_description]);
+        $this->outputData($data);
+    }
 
     public function index()
     {

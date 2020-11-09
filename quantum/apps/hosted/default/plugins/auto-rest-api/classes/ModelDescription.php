@@ -90,6 +90,11 @@ class ModelDescription
         return $this->desc->get('extra_data', []);
     }
 
+    public function getExtraRoutes()
+    {
+        return $this->desc->get('extra_routes', []);
+    }
+
     public function getOrderAttributeKey()
     {
         return $this->desc->get('order_attribute', 'id');

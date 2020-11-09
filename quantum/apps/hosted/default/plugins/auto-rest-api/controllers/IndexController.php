@@ -282,6 +282,34 @@ class IndexController extends Controller
                 $paths->set('/'.$model_description->getPluralForm().'/{id}', $path->toStdArray());
             }
 
+            foreach ($model_description->getExtraRoutes() as $extra_route)
+            {
+                $path = new_vt();
+
+                $allowed_methods = qs($extra_route['http_request_methods'])->explode('|');
+
+                foreach ($allowed_methods as $allowed_method)
+                {
+                    $path_desc = new_vt();
+
+                    if (isset($extra_route['summary'])) {
+                        $path_desc['summary'] = $extra_route['summary'];
+                    }
+                    else {
+                        $path_desc['summary'] = 'CUSTOM ROUTE';
+                    }
+
+                    $path_desc['parameters'] = $extra_route['parameters'];
+
+                    $path->set(qs($allowed_method)->toLowerCase()->toStdString(), $path_desc->toStdArray());
+                }
+
+
+                $paths->set('/'.$model_description->getPluralForm().$extra_route['uri'], $path->toStdArray());
+
+                //dd($extra_route);
+            }
+
         }
 
         $paths = apply_filter('auto_rest_api_filter_apis_list', $paths->toStdArray());

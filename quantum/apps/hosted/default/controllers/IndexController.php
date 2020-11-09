@@ -55,6 +55,15 @@ class IndexController extends Quantum\Controller
 
 	}
 
+	public function test()
+    {
+        $data = new_vt();
+        $data->set('missiles_launched' , 1);
+        $data->set('missile_name' , $this->request->getParam('name'));
+
+        return $data->toStdArray();
+    }
+
 
 	/**
      * Public: index
