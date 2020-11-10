@@ -48,7 +48,7 @@ class UpdateController extends Controller
             }
             elseif ($this->request->isPut())
             {
-                if (!$validator->processValidations($this->request->getRawInputParams())) {
+                if (!$validator->validatePut()) {
                     ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
                 }
             }

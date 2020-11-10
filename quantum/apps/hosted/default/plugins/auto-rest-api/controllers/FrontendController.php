@@ -231,6 +231,13 @@ class FrontendController extends \Quantum\Controller
                         ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
                     }
                 }
+
+                if (qs($request_method)->equalsIgnoreCase('PUT'))
+                {
+                    if (!$validator->validatePut()) {
+                        ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                    }
+                }
             }
 
             if (qs($this->request->getMethod())->equalsIgnoreCase($request_method)) {
