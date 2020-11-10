@@ -59,17 +59,21 @@ return [
                     'uri' => '/test',
                     'controller' => 'index',
                     'method' => 'test',
-                    'http_request_methods' => 'GET',
+                    'http_request_methods' => 'POST',
                     'summary' => 'Test Custom Route',
                     'parameters' => [
                         array(
                             'name' => 'name',
                             'type' => 'string',
                             'format' => 'string',
-                            'required' => 'false',
-                            'in' => 'query'
+                            'required' => 0,
+                            'in' => 'formData'
                         )
-                    ]
+                    ],
+                    'validator_rules'=> [
+                        'name' => 'required|string'
+                    ],
+
                 ),
             ]
 

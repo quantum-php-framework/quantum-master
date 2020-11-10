@@ -10,6 +10,7 @@ use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
 use Quantum\ControllerFactory;
 use Quantum\Output;
+use Quantum\RequestParamValidator;
 use function foo\func;
 
 class FrontendController extends \Quantum\Controller
@@ -208,12 +209,35 @@ class FrontendController extends \Quantum\Controller
 
         $is_request_allowed = false;
 
+        $validator_rules = $route->get('validator_rules', []);
+
         foreach ($request_methods as $request_method)
         {
+            if (!empty($validator_rules))
+            {
+                $validator = new RequestParamValidator();
+                $validator->rules($validator_rules);
+
+                if (qs($request_method)->equalsIgnoreCase('POST'))
+                {
+                    if (!$validator->validatePost()) {
+                        ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                    }
+                }
+
+                if (qs($request_method)->equalsIgnoreCase('GET'))
+                {
+                    if (!$validator->validateGet()) {
+                        ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                    }
+                }
+            }
+
             if (qs($this->request->getMethod())->equalsIgnoreCase($request_method)) {
                 $is_request_allowed = true;
             }
         }
+
 
         if (!$is_request_allowed) {
             ApiException::invalidRequest();
