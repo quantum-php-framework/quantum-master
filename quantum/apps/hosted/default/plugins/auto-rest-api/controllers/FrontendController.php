@@ -198,10 +198,8 @@ class FrontendController extends \Quantum\Controller
 
     }
 
-    public function custom_route()
+    private function getCustomRouteData($route)
     {
-        $route = get_current_route();
-
         $real_controller = $route->get('real_controller');
         $real_method = $route->get('real_method');
 
@@ -215,28 +213,39 @@ class FrontendController extends \Quantum\Controller
         {
             if (!empty($validator_rules))
             {
-                $validator = new RequestParamValidator();
-                $validator->rules($validator_rules);
+                $request_method = qs($request_method)->toUpperCase()->toStdString();
 
-                if (qs($request_method)->equalsIgnoreCase('POST'))
+                switch ($request_method)
                 {
-                    if (!$validator->validatePost()) {
-                        ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
-                    }
-                }
+                    case 'GET':
 
-                if (qs($request_method)->equalsIgnoreCase('GET'))
-                {
-                    if (!$validator->validateGet()) {
-                        ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
-                    }
-                }
+                        $validator = new RequestParamValidator();
+                        $validator->rules($validator_rules);
 
-                if (qs($request_method)->equalsIgnoreCase('PUT'))
-                {
-                    if (!$validator->validatePut()) {
-                        ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
-                    }
+                        if (!$validator->validateGet()) {
+                            ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                        }
+                        break;
+
+                    case 'POST':
+
+                        $validator = new RequestParamValidator();
+                        $validator->rules($validator_rules);
+
+                        if (!$validator->validatePost()) {
+                            ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                        }
+                        break;
+
+                    case 'PUT':
+
+                        $validator = new RequestParamValidator();
+                        $validator->rules($validator_rules);
+
+                        if (!$validator->validatePut()) {
+                            ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                        }
+                        break;
                 }
             }
 
@@ -244,7 +253,6 @@ class FrontendController extends \Quantum\Controller
                 $is_request_allowed = true;
             }
         }
-
 
         if (!$is_request_allowed) {
             ApiException::invalidRequest();
@@ -259,6 +267,35 @@ class FrontendController extends \Quantum\Controller
         }
 
         $data = call_user_func_array([$controller, $real_method], [$this->model_description]);
+
+        return $data;
+    }
+
+    public function custom_route()
+    {
+        $route = get_current_route();
+
+        $ttl = $route->get('cache_ttl', 0);
+        $cache_key = qs($this->request->getUriWithQueryString())->sha1()->toStdString();
+
+        if ($ttl > 0 && $this->request->isGet())
+        {
+            $cache_hit = true;
+
+            $data = from_cache($cache_key, function () use (&$route, &$cache_hit) {
+                $cache_hit = false;
+                return $this->getCustomRouteData($route);
+            }, $ttl);
+
+            $data['cache'] = $cache_hit ? 'hit' : 'miss';
+        }
+        else
+        {
+            $data = $this->getCustomRouteData($route);
+
+            $data['cache'] = 'off';
+        }
+
         $this->outputData($data);
     }
 

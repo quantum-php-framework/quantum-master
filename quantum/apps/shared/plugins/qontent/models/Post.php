@@ -1,6 +1,6 @@
 <?php
 
-namespace Qontent;
+namespace Qontent\Models;
 
 class Post extends \Quantum\ActiverecordModel
 {

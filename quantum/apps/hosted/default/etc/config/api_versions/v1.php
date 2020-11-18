@@ -59,8 +59,9 @@ return [
                     'uri' => '/test',
                     'controller' => 'index',
                     'method' => 'test',
-                    'http_request_methods' => 'POST',
+                    'http_request_methods' => 'GET',
                     'summary' => 'Test Custom Route',
+                    'cache_ttl' => '300',
                     'parameters' => [
                         array(
                             'name' => 'name',

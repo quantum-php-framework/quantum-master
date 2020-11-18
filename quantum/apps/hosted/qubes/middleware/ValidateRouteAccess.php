@@ -23,7 +23,6 @@ class ValidateRouteAccess extends \Quantum\Middleware\Foundation\SystemMiddlewar
         }
 
         $user = \Auth::getUserFromSession();
-        //dd($user);
 
         if ($route->has('min_access_level'))
         {
@@ -33,33 +32,22 @@ class ValidateRouteAccess extends \Quantum\Middleware\Foundation\SystemMiddlewar
                 return;
 
             if (empty($user))
-                $request->redirect('/login');
+                $request->redirect($this->getLoginUrl($request));
 
             $maxAccessLevel = qs(\QM::config()->getCurrentRouteMaxAccessLevel());
 
             if ($maxAccessLevel->isEmpty())
                 $maxAccessLevel = 'root';
 
-            if ($user->access_level === 'root')
+            if ($user->isRoot())
                 return;
 
-            if (!$user->is_active)
+            if (!$user->isActive())
                 $this->getOutput()->displaySystemError('invalid_access_permissions');
 
             $userLevel = $user->getAccessLevel();
-
-            $access_levels = \Quantum\ActiveAppFileDatabase::get('access_levels');
-
-            foreach ($access_levels as $access_level)
-            {
-                if ($access_level->name == $minAccessLevel) {
-                    $minLevel = $access_level;
-                }
-
-                if ($access_level->name == $maxAccessLevel) {
-                    $maxLevel = $access_level;
-                }
-            }
+            $minLevel = \AccessLevel::find_by_uri($minAccessLevel);
+            $maxLevel = \AccessLevel::find_by_uri($maxAccessLevel);
 
             $userPriority = $userLevel->priority;
             $minPriority  = $minLevel->priority;
@@ -83,17 +71,21 @@ class ValidateRouteAccess extends \Quantum\Middleware\Foundation\SystemMiddlewar
                 return;
 
             if (empty($user))
-                $request->redirect('/login');
+                $request->redirect($this->getLoginUrl($request));
 
-            if ($user->access_level === 'root')
+            if ($user->isRoot())
                 return;
 
-            if (!$user->is_active)
+            if (!$user->isActive())
                 $this->getOutput()->displaySystemError('invalid_access_permissions');
 
             foreach ($levels as $level)
             {
-                if ($level->name === $user->access_level)
+                $accessLevel = \AccessLevel::find_by_uri($level);
+                if (empty($accessLevel))
+                    throw new InvalidAccessLevelConfigException('Access level not not found:'.$level);
+
+                if ($accessLevel->uri === $user->getAccessLevelUri())
                     return;
             }
 
@@ -101,6 +93,13 @@ class ValidateRouteAccess extends \Quantum\Middleware\Foundation\SystemMiddlewar
             $this->getOutput()->displaySystemError('invalid_access_permissions');
         }
 
+    }
+
+    private function getLoginUrl(\Quantum\Request $request)
+    {
+        $redirect_uri = qs($request->getPublicUrl())->remove('/login');
+
+        return '/login?redirect_uri='.base64_url_encode($redirect_uri);
     }
 
 }

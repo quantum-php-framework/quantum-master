@@ -128,6 +128,7 @@ MAIN CONTENT LAYOUT
                                         {if isset($wlf)}
                                             <input type="hidden" name="wlf" value="{$wlf}">
                                         {/if}
+                                        <input type="hidden" name="recaptcha_response" id="recaptcha_response">
                                         <div class="py-3">
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-alt form-control-lg" id="login-username" name="username" placeholder="Username">
@@ -144,7 +145,7 @@ MAIN CONTENT LAYOUT
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6 col-xl-5">
-                                                <button type="submit" class="btn btn-block btn-alt-primary">
+                                                <button type="submit" class="btn btn-block btn-alt-primary ga-recaptcha" data-sitekey="{$recaptcha_key}" data-callback='onSubmit'>
                                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                                                 </button>
                                             </div>
@@ -199,5 +200,13 @@ MAIN CONTENT LAYOUT
 
 <!-- Page JS Code -->
 <script src="/static/templates/qubes/assets/js/pages/op_auth_signin.min.js"></script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        document.getElementById("recaptcha_response").value = token;
+        document.getElementById("login_form").submit();
+    };
+</script>
 </body>
 </html>

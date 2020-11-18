@@ -1,5 +1,5 @@
 <?php
  return array (
-     'Qontent\Qontent' => '0',
+     'Qontent\Qontent' => '1',
      'AutoRestApi\AutoRestApi' => '1'
 );

@@ -75,16 +75,14 @@ class PostsController extends \Quantum\Controller
         //\Quantum\Doctrine::truncate('Qontent\Entities\Post');
 
         $results = \Quantum\Doctrine::executeQuery("SELECT p FROM Qontent\Entities\Post p");
-        dd($results);
-
+        //dd($results);
+        //dd($this->user);
 
         //$manager = \Quantum\Doctrine\Doctrine::getEntityManager();
 
         //$post = $manager->getRepository('\Qontent\Entities\Post')->findOneBy(['id' => 1]);
 
-        $post = Post::findById(20);
-        $post->setContent('hidfdfdfddf'.quuid());
-        $post->save();
+
 
 
 

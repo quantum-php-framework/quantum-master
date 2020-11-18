@@ -2,6 +2,8 @@
 
 namespace Qontent\Backend;
 
+use Qubes\FormElementsFactory;
+
 class PostsController extends \Quantum\Controller
 {
 
@@ -74,6 +76,14 @@ class PostsController extends \Quantum\Controller
 
     public function new_post()
     {
+        dd($this->user);
+
+        $this->set('create_link', '/create/some/crap');
+        $form = qform(new FormElementsFactory());
+        $form->text('hi', 'title')
+            ->textarea('body', 'body')->submitButton('send')->toOutput();
+
+        //$this->setGenericFormView('waka');
         $this->output->setMainView('posts', 'new_post');
     }
 

@@ -1,8 +1,13 @@
 <?php
 
-/**
- * Class Auth
- */
+use Quantum\Crypto;
+use Quantum\Session;
+use Quantum\RSACrypto;
+use Quantum\ApiException;
+use Quantum\PasswordStorage;
+use Quantum\RuntimeRegistry;
+use Quantum\Request;
+
 class Auth extends Quantum\Singleton
 {
     /**
@@ -54,18 +59,22 @@ class Auth extends Quantum\Singleton
      */
     public static function getUserFromSession()
     {
-        Quantum\Session::start();
+        return from_runtime_registry('active_user_from_session', function() {
 
-        if (Quantum\Session::hasParam("user_id") && Quantum\Session::hasParam('user_hash'))
-        {
-            $user = User::find_by_id_and_hash(Quantum\Session::get('user_id'), Quantum\Session::get('user_hash'));
+            Session::start();
 
-            if (!empty($user))
-                return $user;
-        }
+            if (Session::hasParam("user_id") && Session::hasParam('user_hash'))
+            {
+                $user = User::find_by_id_and_hash(Session::get('user_id'), Session::get('user_hash'));
 
-        return false;
+                if (!empty($user)) {
+                    return $user;
+                }
+            }
 
+            return false;
+
+        });
     }
 
     /**
@@ -74,10 +83,12 @@ class Auth extends Quantum\Singleton
      */
     public static function getUserFromRememberMeCookie()
     {
-        if (QM::request()->cookies()->has("RememberMeToken"))
+        $request = Request::getInstance();
+
+        if ($request->cookies()->has("RememberMeToken"))
         {
-            $token = QM::request()->cookies()->get("RememberMeToken");
-            $token = Quantum\Crypto::decryptWithLocalKey($token);
+            $token = $request->cookies()->get("RememberMeToken");
+            $token = Crypto::decryptWithLocalKey($token);
 
             $user = User::find_by_auto_login_token($token);
 
@@ -96,38 +107,38 @@ class Auth extends Quantum\Singleton
      */
     public static function getUserFromExternalAuthToken($auth_client_key_string)
     {
-        if (QM::request()->isPost() &&
-            QM::request()->hasPostParam("auth_client_token") &&
-            QM::request()->hasPostParam("auth_signature")&&
-            QM::request()->hasPostParam("state"))
+        $request = Request::getInstance();
+
+        if ($request->isPost() &&
+            $request->hasPostParam("auth_client_token") &&
+            $request->hasPostParam("auth_signature")&&
+            $request->hasPostParam("state"))
         {
-            $token = QM::request()->getPostParam('auth_client_token');
-            $token = Quantum\RSACrypto::base64Decrypt($token, $auth_client_key_string);
+            $token = $request->getPostParam('auth_client_token');
+            $token = RSACrypto::base64Decrypt($token, $auth_client_key_string);
             $token = AuthUserToken::find_by_token($token);
 
-            if (empty($token))
-            {
-                Quantum\ApiException::custom("Error 0x00AUTH01", "Invalid token", "Token not found");
+            if (empty($token)) {
+                ApiException::custom("Error 0x00AUTH01", "Invalid token", "Token not found");
             }
 
-            $signature = QM::request()->getPostParam('auth_signature');
-            $signature = Quantum\RSACrypto::base64Decrypt($signature, $auth_client_key_string);
+            $signature = $request->getPostParam('auth_signature');
+            $signature = RSACrypto::base64Decrypt($signature, $auth_client_key_string);
 
-            if (!Quantum\PasswordStorage::verify_password($signature, $token->signature))
-            {
-                Quantum\ApiException::custom("Error 0x00AUTH02", "Invalid token signature", "Invalid token signature");
+            if (!PasswordStorage::verify_password($signature, $token->signature)) {
+                ApiException::custom("Error 0x00AUTH02", "Invalid token signature", "Invalid token signature");
             }
 
-            if (Quantum\Session::hasParam("XAuthStateToken") && QM::request()->hasPostParam("state"))
+            if (Session::hasParam("XAuthStateToken") && $request->hasPostParam("state"))
             {
-                $state = QM::request()->getPostParam('state');
-                $state = Quantum\RSACrypto::base64Decrypt($state, $auth_client_key_string);
+                $state = $request->getPostParam('state');
+                $state = RSACrypto::base64Decrypt($state, $auth_client_key_string);
 
-                $saved_state = Quantum\Session::get("XAuthStateToken");
+                $saved_state = Session::get("XAuthStateToken");
 
-                if (!hash_equals($saved_state, $state))
-                    Quantum\ApiException::custom("Error 0x00AUTH03", "Invalid token state", "Invalid token state");
-
+                if (!hash_equals($saved_state, $state)) {
+                    ApiException::custom("Error 0x00AUTH03", "Invalid token state", "Invalid token state");
+                }
             }
 
             $user = User::find_by_id($token->user_id);
@@ -152,7 +163,7 @@ class Auth extends Quantum\Singleton
      */
     public static function isPasswordCorrect($user, $password)
     {
-        return Quantum\PasswordStorage::verify_password($password, $user->password);
+        return PasswordStorage::verify_password($password, $user->password);
     }
 
     /**
@@ -185,26 +196,9 @@ class Auth extends Quantum\Singleton
      */
     public static function logout($uri = null)
     {
+        RuntimeRegistry::remove('active_user_from_session');
 
-
-
-
-        /*
-
-        $user = self::getUserFromSession();
-
-        if ($user != false)
-            $user->deleteRememberMeToken();
-
-        if (Quantum\Cookies::getInstance()->has("auto_login_token"))
-        {
-            Quantum\Cookies::getInstance()->markForDeletion("auto_login_token");
-        }
-
-        */
-
-
-        Quantum\Session::destroy();
+        Session::destroy();
 
         if ($uri != null)
             redirect_to($uri);
@@ -215,11 +209,11 @@ class Auth extends Quantum\Singleton
      */
     public static function initUserSession($user)
     {
-        Quantum\Session::set('user_id', $user->id);
-        Quantum\Session::set('user_hash', $user->hash);
-        Quantum\Session::set('login_attempts', 0);
-        Quantum\Session::set('recaptcha_enabled', 0);
-        //Quantum\Session::set('QUANTUM_ENVIRONMENT', \QM::environment());
+        Session::set('user_id', $user->id);
+        Session::set('user_hash', $user->hash);
+        Session::set('login_attempts', 0);
+        Session::set('recaptcha_enabled', 0);
+        //Session::set('QUANTUM_ENVIRONMENT', \QM::environment());
 
         $user->updateLastLogin();
 
@@ -247,10 +241,12 @@ class Auth extends Quantum\Singleton
      */
     public static function isRecaptchaValid()
     {
+        $request = Request::getInstance();
+
         $recaptcha = new \ReCaptcha\ReCaptcha("6LcWAYEUAAAAAAwdL12Ky9EOwG0gGFW9c9hxaNC7");
 
         $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
-            ->verify(QM::request()->getPostParam('g-recaptcha-response'), $_SERVER['REMOTE_ADDR']);
+            ->verify($request->getPostParam('g-recaptcha-response'), $_SERVER['REMOTE_ADDR']);
 
         return $resp->isSuccess();
     }
@@ -272,16 +268,9 @@ class Auth extends Quantum\Singleton
     public static function createRememberMeCookie($user)
     {
         $login_token = $user->createRememberMeToken();
-        $login_token = Quantum\Crypto::encryptWithLocalKey($login_token);
+        $login_token = Crypto::encryptWithLocalKey($login_token);
 
         QM::cookies()->set('RememberMeToken', $login_token, strtotime("+30 Days"), "/");
     }
 
-
-
-
-
 }
-
-
-?>

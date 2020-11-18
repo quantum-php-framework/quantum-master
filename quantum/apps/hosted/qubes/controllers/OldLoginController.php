@@ -6,19 +6,19 @@
 class LoginController extends Quantum\Controller
 {
     var $user;
+    var $pubKey;
+    var $privKey;
+
 
     function __construct()
     {
-        Quantum\Session::start();
-    }
+        Auth::createDefaultUsers();
+        //exit();
 
-    /**
-     * Called after calling the main controller action, before calling Quantum\Output::render
-     */
-    protected function __pre_render()
-    {
-        $this->setRenderFullTemplate(false);
-        //$this->setTemplate('marketplaces');
+        Quantum\Session::start();
+
+        $this->pubKey = "6LdDAdwSAAAAANNF91dn5mAx7wRNruArsYcglwDt";
+        $this->privKey = "6LdDAdwSAAAAANn4E3XD2hAJLiUbVUG_BnFRg7br";
     }
 
 
@@ -27,9 +27,9 @@ class LoginController extends Quantum\Controller
      */
     public function index() {
 
-        $this->rememberMeCookieCheck();
+        $this->hooks()->post('login_check_hook', ['username', 'password']);
 
-        $this->hooks()->post('login_check_hook', ['username', 'password', "csrf"]);
+        $this->renderFullTemplate = false;
 
         if (Quantum\Session::hasParam('admin_id'))
             redirect_to('/');
@@ -37,8 +37,9 @@ class LoginController extends Quantum\Controller
         if (Quantum\Session::isMissingParam('login_attempts'))
             Quantum\Session::set('login_attempts', 0);
 
-        if (!empty($this->getData['redirect_uri'])) {
-            $this->set('redirect_uri', $this->getData['redirect_uri']);
+        if (!empty($this->getData['wlf'])) {
+
+            $this->set('wlf', $this->getData['wlf']);
         }
 
     }
@@ -49,99 +50,71 @@ class LoginController extends Quantum\Controller
     }
 
 
-    private function rememberMeCookieCheck()
-    {
-        $user = Auth::getUserFromRememberMeCookie();
 
-        if ($user != false) {
-            $this->set("username", $user->username);
-        }
-    }
+    private function login_check_hook() {
 
-    private function isReCaptchaValid()
-    {
-        //return in_runtime_registry('recaptchav3_validated');
-        return true;
-    }
-
-    private function login_check_hook()
-    {
-        if (!$this->isReCaptchaValid())
+        if (Quantum\Session::hasParam('max_login_attempts_reached'))
         {
-            $this->loginFailed("Recaptcha Test Failed!");
+            $this->set('error', "Too many failed attempts, please close your browser and try again.");
             return;
         }
 
-        $posted_username = $this->postData['username'];
-        $posted_password = $this->postData['password'];
+        $posted_username = $this->request->getPostParam('username');
 
-        if (empty($posted_username) || empty($posted_password))
+        $user_key = 'user_'.$posted_username;
+
+        $user = \Quantum\ActiveAppKeyPairFileDb::get($user_key);
+
+        if (!empty($user))
         {
-            $this->loginFailed('Empty username or password');
-            return;
-        }
+            if (!Quantum\PasswordStorage::verify_password($this->postData['password'], $user->password))
+            {
+                $this->loginFailed();
+                return;
+            }
 
-        $user = Auth::getUserByUsername($posted_username);
+            Quantum\Session::set('admin_id', $user->username);
+            Quantum\Session::set('username', $user->username);
 
-        if ($user === false || !Auth::isPasswordCorrect($user, $posted_password))
-        {
-            $this->loginFailed();
-            return;
-        }
+            Quantum\Session::set('login_attempts', 0);
+            Quantum\Session::set('using_recaptcha', 0);
+            Quantum\Session::set('QUANTUM_ENVIRONMENT', $this->environment);
 
-        if (!$user->isActive())
-        {
-            $this->loginFailed("Account disabled.");
-            return;
-        }
+            if(!empty($this->postData['wlf']))
+            {
+                $wlf = Quantum\Utilities::base64_url_decode($this->postData['wlf']);
+                redirect_to( $wlf);
+            }
+            else {
+                redirect_to('/');
+            }
 
-        $this->initUserSession($user);
-
-    }
-
-    private function loginFailed($error = "Sign in failed!")
-    {
-        $this->set('login_failed', 1);
-
-        if (!empty($error))
-            $this->set('error', $error);
-
-        Quantum\Session::increaseCounter("login_attempts");
-    }
-
-
-    private function initUserSession($user)
-    {
-        Auth::initUserSession($user);
-
-        if ($this->request->hasParam("remember_me"))
-        {
-            Auth::createRememberMeCookie($user);
         }
         else
         {
-            if (QM::cookies()->has("RememberMeToken"))
-                QM::cookies()->markForDeletion("RememberMeToken");
+            $this->loginFailed();
         }
 
-        if($this->request->hasParam('redirect_uri'))
-        {
-            $redirect_url = base64_url_decode($this->request->getParam('redirect_uri'));
-            redirect_to($redirect_url);
-        }
-
-        redirect_to('/');
     }
 
+    private function loginFailed()
+    {
+        $this->set('error', 'Invalid username or password');
 
-    ///pass recovery
+        $_SESSION['login_attempts'] += 1;
+
+        if ($_SESSION['login_attempts'] > 50)
+        {
+            $_SESSION['max_login_attempts_reached'] = 1;
+        }
+    }
 
     public function recover_password()
     {
         $this->renderFullTemplate = false;
 
         $this->passRecoveryHook();
-        $this->set('title_for_layout', 'Marketplaces -- Recover Password');
+        $this->set('title_for_layout', 'My NyrvSystems -- Recover Password');
     }
 
     public function change_password()
@@ -160,6 +133,7 @@ class LoginController extends Quantum\Controller
         $this->set('user', $this->user);
 
         $this->set('title_for_layout', 'My NyrvSystems -- Change your password');
+
 
     }
 

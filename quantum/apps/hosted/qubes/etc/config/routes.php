@@ -16,7 +16,8 @@ $QUANTUM_APP_ROUTES = array
         'uri' => '/login',
         'controller' => 'login',
         'method' => 'index',
-        'templates' => 'public_access|normal_rate|csrf_enabled'
+        'templates' => 'public_access|normal_rate|csrf_enabled',
+        'middlewares' => [RecaptchaV3Middleware::class]
     ),
 
     array(
