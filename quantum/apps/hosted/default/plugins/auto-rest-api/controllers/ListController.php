@@ -170,12 +170,12 @@ class ListController extends Controller
 
         $link_header_text = '<'.$first_page_url->toString().'>; rel="first", ';
 
-        if (isset($next_page_url)) {
-            $link_header_text .= '<'.$next_page_url->toString().'>; rel="next", ';
-        }
-
         if (isset($prev_page_url)) {
             $link_header_text .= '<'.$prev_page_url->toString().'>; rel="prev", ';
+        }
+
+        if (isset($next_page_url)) {
+            $link_header_text .= '<'.$next_page_url->toString().'>; rel="next", ';
         }
 
         $link_header_text .= '<'.$last_page_url->toString().'>; rel="last"';
