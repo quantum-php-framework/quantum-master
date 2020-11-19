@@ -54,6 +54,8 @@ class Request extends Singleton
 
     private $normalized_headers;
 
+    private $json_body_params;
+
 
     /**
      * Request constructor.
@@ -602,18 +604,82 @@ class Request extends Singleton
         return false;
     }
 
+    public function getRawInput()
+    {
+        return file_get_contents("php://input");
+    }
 
     public function getRawInputParams()
     {
-        parse_str(file_get_contents("php://input"), $_PUT);
+        parse_str($this->getRawInput(), $params);
 
-        foreach ($_PUT as $key => $value)
+        foreach ($params as $key => $value)
         {
-
-            $_PUT[qs($key)->remove('amp;')->remove("'")->toStdString()] = $value;
+            $params[qs($key)->remove('amp;')->remove("'")->toStdString()] = $value;
         }
 
-        return $_PUT;
+        return $params;
+    }
+
+    public function hasRawInputParam($key)
+    {
+        $params = $this->getRawInputParams();
+
+        if (!empty($params)) {
+            return new_vt($params)->has($key);
+        }
+
+        return false;
+    }
+
+    public function getJsonBodyParams()
+    {
+        if (!isset($this->json_body_params))
+        {
+            $possible_json = $this->getRawInput();
+
+            if (is_string($possible_json))
+            {
+                $possible_json = qs($possible_json);
+
+                if ($possible_json->isJson())
+                {
+                    $this->json_body_params = $possible_json->decodeJson(true);
+                    return $this->json_body_params;
+                }
+            }
+
+            $this->json_body_params = [];
+        }
+
+        return $this->json_body_params;
+    }
+
+    public function hasJsonBodyParam($key)
+    {
+        $params = $this->getJsonBodyParams();
+
+        if (!empty($params)) {
+            return new_vt($params)->has($key);
+        }
+
+        return false;
+    }
+
+    public function getJsonBodyParam($key, $fallback = false)
+    {
+        $params = $this->getJsonBodyParams();
+
+        if (!empty($params))
+        {
+            $params = new_vt($params);
+
+            if ($params->has($key)) {
+                return $params->get($key);
+            }
+        }
+
+        return $fallback;
     }
 
     /**

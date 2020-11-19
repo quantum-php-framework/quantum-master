@@ -39,6 +39,41 @@ class ModelDescription
         return $this->desc->get('searchable_attributes');
     }
 
+    public function getIncomingParametersLocation()
+    {
+        return $this->desc->get('incoming_params_location', 'form-data');
+    }
+
+    public function getCreateParametersLocation()
+    {
+        return $this->desc->get('create_params_location', $this->getIncomingParametersLocation());
+    }
+
+    public function getUpdateParametersLocation()
+    {
+        return $this->desc->get('update_params_location', $this->getCreateParametersLocation());
+    }
+
+    public function incomingCreateParametersAreInJsonBody()
+    {
+        return $this->getCreateParametersLocation() === 'json-body';
+    }
+
+    public function incomingCreateParametersAreInFormData()
+    {
+        return $this->getCreateParametersLocation() === 'form-data';
+    }
+
+    public function incomingUpdateParametersAreInJsonBody()
+    {
+        return $this->getUpdateParametersLocation() === 'json-body';
+    }
+
+    public function incomingUpdateParametersAreInFormData()
+    {
+        return $this->getUpdateParametersLocation() === 'form-data';
+    }
+
     public function getCreatableAttributes()
     {
         $attributes = $this->desc->get('creatable_attributes', []);

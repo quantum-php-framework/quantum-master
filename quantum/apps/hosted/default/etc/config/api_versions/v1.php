@@ -28,6 +28,8 @@ return [
             'default_limit' => 10,
             'max_limit' => 500,
             //'cache_ttl' => 300,
+            'create_params_location' => 'json-body',
+            'update_params_location' => 'json-body',
             'visible_attributes'  => [
                 'id' => 'id',
                 'name' => 'name',

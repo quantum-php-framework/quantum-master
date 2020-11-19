@@ -10,17 +10,10 @@ use Quantum\RequestParamValidator;
 
 class CreateController extends Controller
 {
-
-
-    /**
-     * Create a controller, no dependency injection has happened.
-     */
     function __construct()
     {
 
     }
-
-
 
     public function execute(ModelDescription $modelDescription)
     {
@@ -31,11 +24,19 @@ class CreateController extends Controller
             $validator = new RequestParamValidator();
             $validator->rules($validator_rules);
 
-            if (!$validator->validatePost()) {
-                ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+            if ($modelDescription->incomingCreateParametersAreInFormData())
+            {
+                if (!$validator->validatePost()) {
+                    ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                }
+            }
+            elseif ($modelDescription->incomingCreateParametersAreInJsonBody())
+            {
+                if (!$validator->validateJsonBodyParams('POST')) {
+                    ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                }
             }
         }
-
 
         $className = $modelDescription->getClassName();
 
@@ -46,20 +47,40 @@ class CreateController extends Controller
 
         foreach ($creatable_attributes as $attribute_name => $request_param_key)
         {
-            if ($this->request->isMissingParam($request_param_key)) {
-                continue;
-            }
-
-            if (in_array($attribute_name, $unique_attributes))
+            if ($modelDescription->incomingCreateParametersAreInFormData())
             {
-                $previous_object = $className::find(array('conditions' => ["$attribute_name = ?", $this->request->getParam($request_param_key)]));
-
-                if (!empty($previous_object)) {
-                    ApiException::custom('duplicate_entry', '400 Invalid', 'Duplicate object attribute found for '.$attribute_name);
+                if ($this->request->isMissingParam($request_param_key)) {
+                    continue;
                 }
-            }
 
-            $object->$attribute_name = $this->request->getParam($request_param_key);
+                if (in_array($attribute_name, $unique_attributes))
+                {
+                    $previous_object = $className::find(array('conditions' => ["$attribute_name = ?", $this->request->getParam($request_param_key)]));
+
+                    if (!empty($previous_object)) {
+                        ApiException::custom('duplicate_entry', '400 Invalid', 'Duplicate object attribute found for '.$attribute_name);
+                    }
+                }
+
+                $object->$attribute_name = $this->request->getParam($request_param_key);
+            }
+            elseif ($modelDescription->incomingCreateParametersAreInJsonBody())
+            {
+                if (!$this->request->hasJsonBodyParam($request_param_key)) {
+                    continue;
+                }
+
+                if (in_array($attribute_name, $unique_attributes))
+                {
+                    $previous_object = $className::find(array('conditions' => ["$attribute_name = ?", $this->request->getJsonBodyParam($request_param_key)]));
+
+                    if (!empty($previous_object)) {
+                        ApiException::custom('duplicate_entry', '400 Invalid', 'Duplicate object attribute found for '.$attribute_name);
+                    }
+                }
+
+                $object->$attribute_name = $this->request->getJsonBodyParam($request_param_key);
+            }
         }
 
         dispatch_event('auto_rest_api_before_model_create', $object);

@@ -2845,9 +2845,9 @@ class QString implements Countable, IteratorAggregate, ArrayAccess
     /**
      * @return \StdObject
      */
-    public function decodeJson()
+    public function decodeJson($as_associative_array = false)
     {
-        return json_decode($this->text);
+        return json_decode($this->text, $as_associative_array);
     }
 
     /**

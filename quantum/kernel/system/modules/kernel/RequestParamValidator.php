@@ -294,6 +294,36 @@ class RequestParamValidator
     }
 
     /**
+     * @return bool
+     */
+    public function validateJsonBodyParams($request_method = 'POST', $add_invalid_method_error = false)
+    {
+        $request = Request::getInstance();
+
+        if ($request_method === 'POST' && !$request->isPost())
+        {
+            $this->success = false;
+
+            if ($add_invalid_method_error)
+                $this->addErrorMessage('request_method', 'Invalid Request Method');
+
+            return $this->success;
+        }
+
+        if ($request_method === 'PUT' && !$request->isPut())
+        {
+            $this->success = false;
+
+            if ($add_invalid_method_error)
+                $this->addErrorMessage('request_method', 'Invalid Request Method');
+
+            return $this->success;
+        }
+
+        return $this->processValidations($request->getJsonBodyParams());
+    }
+
+    /**
      * @param $data
      * @return bool
      */
