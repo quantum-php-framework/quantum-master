@@ -88,6 +88,11 @@ class ApiVersion
         return $this->config->get('extra_data', []);
     }
 
+    public function getHttpRequestMethodHeaderKeyOverride()
+    {
+        return $this->config->get('http_method_header_override_key', null);
+    }
+
     public function shouldPrettyPrintJson()
     {
         return $this->config->get('pretty_print_json', true);

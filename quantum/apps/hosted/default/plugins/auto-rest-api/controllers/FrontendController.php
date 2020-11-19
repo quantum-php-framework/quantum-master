@@ -88,6 +88,21 @@ class FrontendController extends \Quantum\Controller
     public function setApiVersion(ApiVersion $version)
     {
         $this->api_version = $version;
+        $this->setHttpHeaderOverrideKeyIfNeeded();
+    }
+
+    private function setHttpHeaderOverrideKeyIfNeeded()
+    {
+        $http_method_header_override_key = $this->api_version->getHttpRequestMethodHeaderKeyOverride();
+
+        if (!empty($http_method_header_override_key) && is_string($http_method_header_override_key)) {
+
+            $http_method_header_override_key = qs($http_method_header_override_key)->toUpperCase()->replace('-', '_')->toStdString();
+
+            if ($this->request->hasHeader($http_method_header_override_key)) {
+                $_SERVER['REQUEST_METHOD'] = $this->request->getHeader($http_method_header_override_key);
+            }
+        }
     }
 
     private function addExtraData($data)
