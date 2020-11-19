@@ -14,7 +14,7 @@ return [
         ]
     ],
     'pretty_print_json' => true,
-    //'http_method_header_override_key' => 'x-http-method-override', //set this header to any http method to override it
+    'http_method_header_override_key' => 'x-http-method-override', //set this header to any http method to override it
     'models' => array(
 
         array(

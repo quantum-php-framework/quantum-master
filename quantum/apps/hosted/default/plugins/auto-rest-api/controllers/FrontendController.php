@@ -93,6 +93,10 @@ class FrontendController extends \Quantum\Controller
 
     private function setHttpHeaderOverrideKeyIfNeeded()
     {
+        if (!$this->request->isPost()) {
+            return;
+        }
+
         $http_method_header_override_key = $this->api_version->getHttpRequestMethodHeaderKeyOverride();
 
         if (!empty($http_method_header_override_key) && is_string($http_method_header_override_key)) {
