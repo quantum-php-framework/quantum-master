@@ -107,47 +107,20 @@ class ListController extends Controller
 
         $total_objects_count = $className::count();
         $results_count = $className::count(['conditions' => $search_criteria]);
+        $total_pages = round($results_count/$ipp);
 
-        $objects =  $className::find('all', array(
+        $models =  $className::find('all', array(
             'limit' => $ipp,
             'offset' => $offset,
             'order' => $modelDescription->getOrderAttributeKey().' '.$order,
             'conditions' => $search_criteria));
 
-        $total_pages = round($results_count/$ipp);
-
-        $visible_attributes = $modelDescription->getVisibleAttributes();
-
         $data = new_vt();
 
-        foreach ($objects as $object)
+        foreach ($models as $model)
         {
-            $datum = new_vt();
-
-            foreach ($visible_attributes as $attribute_name => $value)
-            {
-                if (qs($value)->contains('()')) {
-                    $value = call_user_func([$object, qs($value)->removeCharacters('()')->toStdString()]);
-                }
-                else {
-                    $value = $object->$value;
-                }
-
-                $datum->set($attribute_name, $value);
-            }
-
-            $extra_data = $modelDescription->getExtraData();
-            if (!empty($extra_data))
-            {
-                foreach ($extra_data as $key => $extra_datum)
-                {
-                    $datum->set($key, $extra_datum);
-                }
-            }
-
-            $data->add($datum->toStdArray());
+            $data->add(ViewController::genVisibleData($model, $modelDescription));
         }
-
 
         $response = new_vt();
         $response->set('total_count', $total_objects_count);
@@ -214,8 +187,6 @@ class ListController extends Controller
         $response->set($modelDescription->getPluralForm(), $data);
 
         return $response->toStdArray();
-
-        //$this->output->adaptable($response);
     }
 
 

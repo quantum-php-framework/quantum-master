@@ -39,6 +39,11 @@ class ModelDescription
         return $this->desc->get('searchable_attributes');
     }
 
+    public function getFilteredAttributesParamKey()
+    {
+        return $this->desc->get('filtered_attributes_param_key', 'fields');
+    }
+
     public function getIncomingParametersLocation()
     {
         return $this->desc->get('incoming_params_location', 'form-data');

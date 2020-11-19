@@ -38,10 +38,19 @@ class ViewController extends Controller
     {
         $visible_attributes = $modelDescription->getVisibleAttributes();
 
+        $requested_attributes = get_request_param($modelDescription->getFilteredAttributesParamKey(), null);
+        if ($requested_attributes) {
+            $requested_attributes = qs($requested_attributes)->explode(',');
+        }
+
         $datum = new_vt();
 
         foreach ($visible_attributes as $attribute_name => $value)
         {
+            if ( !empty($requested_attributes) && is_array($requested_attributes) && !in_array($attribute_name, $requested_attributes) ) {
+                continue;
+            }
+
             if (qs($value)->contains('()')) {
                 $value = call_user_func([$model, qs($value)->removeCharacters('()')->toStdString()]);
             }
@@ -61,8 +70,10 @@ class ViewController extends Controller
             }
         }
 
-        return $datum;
+        return $datum->toStdArray();
     }
+
+
 
 
 }
