@@ -184,6 +184,7 @@ class IndexController extends Controller
                         ->set('format', 'string')
                         ->set('required', false)
                         ->set('in', 'formData');
+
                     $params->add($param->toStdArray());
                 }
 

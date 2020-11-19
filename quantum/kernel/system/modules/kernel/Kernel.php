@@ -216,7 +216,7 @@ class Kernel extends Singleton
     /**
      * @param string $exit_code
      */
-    static function shutdown($exit_code = "")
+    static function shutdown($exit_code = 0)
     {
         //pre(get_included_files());
         exit($exit_code);

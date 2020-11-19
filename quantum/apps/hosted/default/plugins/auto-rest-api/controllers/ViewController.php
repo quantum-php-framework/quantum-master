@@ -31,7 +31,7 @@ class ViewController extends Controller
             ApiException::resourceNotFound();
         }
 
-        self::genVisibleData($model, $modelDescription);
+        return self::genVisibleData($model, $modelDescription);
     }
 
     public static function genVisibleData($model, ModelDescription $modelDescription)
