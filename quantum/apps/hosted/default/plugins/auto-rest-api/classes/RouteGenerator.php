@@ -68,7 +68,7 @@ class RouteGenerator
             }
         }
 
-        return dd(apply_filter('auto_rest_api_filter_generated_routes', $routes));
+        return apply_filter('auto_rest_api_filter_generated_routes', $routes);
     }
 
     private function prepareRoute($model_description, $route)
