@@ -21,11 +21,10 @@ class RouteGenerator
 
     public function genRoutes()
     {
-        $routes [] = $this->prepareRoute([
+        $routes [] = $this->prepareRoute('index', [
             'uri' => '/'.$this->api_prefix.'/index',
             'controller' => 'AutoRestApi\Controllers\Frontend',
-            'method' => 'index',
-            'model_description' => 'index'
+            'method' => 'index'
         ]);
 
         $models = $this->models_manager->getModels();
@@ -36,21 +35,19 @@ class RouteGenerator
 
             if ($description->allowList())
             {
-                $routes [] = $this->prepareRoute([
+                $routes [] = $this->prepareRoute($description, [
                     'uri' => '/'.$this->api_prefix.'/'.$model['plural_form'],
                     'controller' => 'AutoRestApi\Controllers\Frontend',
-                    'method' => 'list',
-                    'model_description' => $description
+                    'method' => 'list'
                 ]);
             }
 
             if ($description->allowView())
             {
-                $routes [] = $this->prepareRoute([
+                $routes [] = $this->prepareRoute($description, [
                     'uri' => '/' . $this->api_prefix . '/' . $model['plural_form'] . '/{id}',
                     'controller' => 'AutoRestApi\Controllers\Frontend',
-                    'method' => 'view',
-                    'model_description' => $description
+                    'method' => 'view'
                 ]);
             }
 
@@ -65,21 +62,26 @@ class RouteGenerator
                 $extra_route['controller'] = 'AutoRestApi\Controllers\Frontend';
                 $extra_route['method'] =  'custom_route';
 
-
-                $extra_route['model_description'] = $description;
-                $extra_route = $this->prepareRoute($extra_route);
+                $extra_route = $this->prepareRoute($description, $extra_route);
 
                 $routes [] = $extra_route;
             }
         }
 
-        return apply_filter('auto_rest_api_filter_generated_routes', $routes);
+        return dd(apply_filter('auto_rest_api_filter_generated_routes', $routes));
     }
 
-    private function prepareRoute($route)
+    private function prepareRoute($model_description, $route)
     {
-        $route['templates']  = 'public_access|csrf_disabled';
-        $route['page_cache'] = 0;
+        if (!isset($route['templates'])) {
+            $route['templates']  = 'public_access|csrf_disabled';
+        }
+
+        if (!isset($route['page_cache'])) {
+            $route['page_cache'] = 0;
+        }
+
+        $route['model_description'] = $model_description;
 
         return $route;
     }
