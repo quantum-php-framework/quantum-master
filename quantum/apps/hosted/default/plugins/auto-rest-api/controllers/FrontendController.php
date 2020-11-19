@@ -8,6 +8,7 @@ namespace AutoRestApi\Controllers;
 use AutoRestApi\ApiVersion;
 use AutoRestApi\ModelDescription;
 use Quantum\ApiException;
+use Quantum\ApiOutput;
 use Quantum\ControllerFactory;
 use Quantum\Output;
 use Quantum\RequestParamValidator;
@@ -311,7 +312,13 @@ class FrontendController extends \Quantum\Controller
     private function outputData($data)
     {
         $data = $this->addExtraData($data);
-        $this->output->adaptable($data);
+
+        if (is_vt($data))
+            $data = $data->toStdArray();
+
+        $pretty_print = $this->api_version->shouldPrettyPrintJson();
+
+        ApiOutput::adaptableOutput($data, false, $pretty_print);
     }
 
 

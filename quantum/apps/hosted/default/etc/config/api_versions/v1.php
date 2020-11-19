@@ -13,6 +13,7 @@ return [
             'enabled' => '0'
         ]
     ],
+    'pretty_print_json' => true,
     'models' => array(
 
         array(

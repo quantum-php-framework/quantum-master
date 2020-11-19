@@ -125,13 +125,23 @@ class ApiOutput
     /**
      * @param $data
      */
-    public static function adaptableOutput($data)
+    public static function adaptableOutput($data, $shutdown = true, $pretty_print_json = false)
     {
         if (!isset($_REQUEST['format']) || $_REQUEST['format'] == 'json') {
 
             self::send_json_headers();
-            echo json_encode($data);
-            exit(0);
+
+            if ($pretty_print_json) {
+                echo json_encode($data,JSON_PRETTY_PRINT);
+            }
+            else {
+                echo json_encode($data);
+            }
+
+            if ($shutdown)
+                Kernel::shutdown();
+
+            return;
         }
 
         if (isset($_REQUEST['callback']))
@@ -139,7 +149,11 @@ class ApiOutput
             $cb = preg_replace("/[^][.\\'\\\"_A-Za-z0-9]/", '', $_GET['callback']);
             self::send_js_headers();
             print sprintf('%s(%s);', $cb, json_encode($data));
-            exit(0);
+
+            if ($shutdown)
+                Kernel::shutdown();
+
+            return;
         }
 
         $format = $_REQUEST['format'];
@@ -150,32 +164,52 @@ class ApiOutput
                 self::send_xml_headers();
                 $data = ArrayToXml::convert($data);
                 echo $data;
-                exit();
+
+                if ($shutdown)
+                    Kernel::shutdown();
+
+                return;
                 break;
 
             case 'serialized':
                 self::send_text_headers();
                 echo serialize($data);
-                exit(0);
+
+                if ($shutdown)
+                    Kernel::shutdown();
+
+                return;
                 break;
 
             case 'text':
                 self::send_text_headers();
                 echo print_r($data);
-                exit(0);
+
+                if ($shutdown)
+                    Kernel::shutdown();
+
+                return;
                 break;
 
             case 'yaml':
                 self::send_text_headers();
                 $yaml =  \yaml_emit($data);
                 echo $yaml;
-                exit(0);
+
+                if ($shutdown)
+                    Kernel::shutdown();
+
+                return;
                 break;
 
             case 'dbug':
                 self::send_text_headers();
                 var_dump($data);
-                exit(0);
+
+                if ($shutdown)
+                    Kernel::shutdown();
+
+                return;
 
                 break;
         }

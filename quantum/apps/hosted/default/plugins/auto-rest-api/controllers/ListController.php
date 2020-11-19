@@ -149,9 +149,6 @@ class ListController extends Controller
         }
 
 
-
-
-
         $response = new_vt();
         $response->set('total_count', $total_objects_count);
         $response->set('results_count', $results_count);
@@ -162,19 +159,25 @@ class ListController extends Controller
         $response->set('total_pages', $total_pages);
 
 
-
-
         $next_page_index = $offset+1;
         $current_page_index = $offset;
 
         $base_url = \QM::buildURL(qs($_SERVER['REQUEST_URI'])->dropFirstCharacters(1)->toStdString());
 
+        $first_page_url = qurl($base_url)
+            ->withParameter('limit', $ipp)
+            ->withParameter('page', 0)
+            ->withParameter('order', $order);
+
+        $response->set('fist_page', $first_page_url->toString());
+
+        $last_page_url = $first_page_url->withParameter('page', $total_pages);
+
+        $response->set('last_page', $last_page_url->toString());
+
         if ($next_page_index <= $total_pages)
         {
-            $next_page_url = qurl($base_url)
-                ->withParameter('limit', $ipp)
-                ->withParameter('page', $next_page_index)
-                ->withParameter('order', $order);
+            $next_page_url = $first_page_url->withParameter('page', $next_page_index);
             $response->set('next_page', $next_page_url->toString());
         }
         else
@@ -188,14 +191,23 @@ class ListController extends Controller
         }
         else
         {
-            $prev_page_url = qurl($base_url)
-                ->withParameter('limit', $ipp)
-                ->withParameter('page', $current_page_index-1)
-                ->withParameter('order', $order);
-            $response->set('previous_page', $prev_page_url->toString());
+            $prev_page_url = $first_page_url->withParameter('page', $current_page_index-1);
+            $response->set('prev_page', $prev_page_url->toString());
         }
 
+        $link_header_text = '<'.$first_page_url->toString().'>; rel="first", ';
 
+        if (isset($next_page_url)) {
+            $link_header_text .= '<'.$next_page_url->toString().'>; rel="next", ';
+        }
+
+        if (isset($prev_page_url)) {
+            $link_header_text .= '<'.$prev_page_url->toString().'>; rel="prev", ';
+        }
+
+        $link_header_text .= '<'.$last_page_url->toString().'>; rel="last"';
+
+        set_header('Link', $link_header_text);
 
         $data = apply_filter('auto_rest_api_filter_models_list', $data->toStdArray());
 

@@ -87,4 +87,9 @@ class ApiVersion
     {
         return $this->config->get('extra_data', []);
     }
+
+    public function shouldPrettyPrintJson()
+    {
+        return $this->config->get('pretty_print_json', true);
+    }
 }
