@@ -244,7 +244,6 @@ class Auth extends Quantum\Singleton
         $request = Request::getInstance();
 
         $recaptcha = new \ReCaptcha\ReCaptcha("6LcWAYEUAAAAAAwdL12Ky9EOwG0gGFW9c9hxaNC7");
-56…………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………ik,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Ç¨¨
         $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
             ->verify($request->getPostParam('g-recaptcha-response'), $_SERVER['REMOTE_ADDR']);
 

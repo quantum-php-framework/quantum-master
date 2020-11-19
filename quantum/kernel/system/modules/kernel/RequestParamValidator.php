@@ -236,14 +236,17 @@ class RequestParamValidator
     /**
      * @return bool
      */
-    public function validatePost()
+    public function validatePost($add_invalid_method_error = false)
     {
         $request = Request::getInstance();
 
         if (!$request->isPost())
         {
             $this->success = false;
-            $this->addErrorMessage('request_method', 'Invalid Request Method');
+
+            if ($add_invalid_method_error)
+                $this->addErrorMessage('request_method', 'Invalid Request Method');
+
             return $this->success;
         }
 
@@ -253,14 +256,17 @@ class RequestParamValidator
     /**
      * @return bool
      */
-    public function validateGet()
+    public function validateGet($add_invalid_method_error = false)
     {
         $request = Request::getInstance();
 
         if (!$request->isGet())
         {
             $this->success = false;
-            $this->addErrorMessage('request_method', 'Invalid Request Method');
+
+            if ($add_invalid_method_error)
+                $this->addErrorMessage('request_method', 'Invalid Request Method');
+
             return $this->success;
         }
 
@@ -270,14 +276,17 @@ class RequestParamValidator
     /**
      * @return bool
      */
-    public function validatePut()
+    public function validatePut($add_invalid_method_error = false)
     {
         $request = Request::getInstance();
 
         if (!$request->isPut())
         {
             $this->success = false;
-            $this->addErrorMessage('request_method', 'Invalid Request Method');
+
+            if ($add_invalid_method_error)
+                $this->addErrorMessage('request_method', 'Invalid Request Method');
+
             return $this->success;
         }
 
