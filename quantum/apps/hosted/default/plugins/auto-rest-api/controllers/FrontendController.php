@@ -7,12 +7,11 @@ namespace AutoRestApi\Controllers;
 
 use AutoRestApi\ApiVersion;
 use AutoRestApi\ModelDescription;
+use AutoRestApi\ValidateRateLimit;
 use Quantum\ApiException;
 use Quantum\ApiOutput;
 use Quantum\ControllerFactory;
-use Quantum\Output;
 use Quantum\RequestParamValidator;
-use function foo\func;
 
 class FrontendController extends \Quantum\Controller
 {
@@ -88,7 +87,6 @@ class FrontendController extends \Quantum\Controller
     public function setApiVersion(ApiVersion $version)
     {
         $this->api_version = $version;
-        $this->setHttpHeaderOverrideKeyIfNeeded();
     }
 
     private function setHttpHeaderOverrideKeyIfNeeded()
@@ -129,6 +127,8 @@ class FrontendController extends \Quantum\Controller
         if(!$this->model_description->allowList()) {
             ApiException::resourceNotFound();
         }
+
+        $this->validateRateLimit();
 
         if ($this->request->isGet())
         {
@@ -187,6 +187,8 @@ class FrontendController extends \Quantum\Controller
             ApiException::resourceNotFound();
         }
 
+        $this->validateRateLimit();
+
         if ($this->request->isGet())
         {
             $controller = ControllerFactory::create('AutoRestApi\Controllers\ViewController');
@@ -243,7 +245,7 @@ class FrontendController extends \Quantum\Controller
                         $validator->rules($validator_rules);
 
                         if (!$validator->validateGet()) {
-                            ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                            ApiException::custom('validation_errors', '400', json_encode($validator->getErrors()));
                         }
                         break;
 
@@ -253,7 +255,7 @@ class FrontendController extends \Quantum\Controller
                         $validator->rules($validator_rules);
 
                         if (!$validator->validatePost()) {
-                            ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                            ApiException::custom('validation_errors', '400', json_encode($validator->getErrors()));
                         }
                         break;
 
@@ -263,7 +265,7 @@ class FrontendController extends \Quantum\Controller
                         $validator->rules($validator_rules);
 
                         if (!$validator->validatePut()) {
-                            ApiException::custom('validation_errors', '200', json_encode($validator->getErrors()));
+                            ApiException::custom('validation_errors', '400', json_encode($validator->getErrors()));
                         }
                         break;
                 }
@@ -338,6 +340,21 @@ class FrontendController extends \Quantum\Controller
         $pretty_print = $this->api_version->shouldPrettyPrintJson();
 
         ApiOutput::adaptableOutput($data, false, $pretty_print);
+    }
+
+    private function validateRateLimit()
+    {
+        $rate_limit = $this->model_description->getRateLimit();
+        $rate_limit_time = $this->model_description->getRateLimitTime();
+
+        if (!empty($rate_limit) && !empty($rate_limit_time))
+        {
+            $route = get_current_route();
+            $current_uri = strtoupper($route->get('uri'))."@".\QM::session()->getId();
+
+            $middleware = new ValidateRateLimit($rate_limit, $rate_limit_time, $current_uri);
+            $middleware->handle(qm_request(), function() { });
+        }
     }
 
 

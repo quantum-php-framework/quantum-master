@@ -97,4 +97,14 @@ class ApiVersion
     {
         return $this->config->get('pretty_print_json', true);
     }
+
+    public function getRateLimit()
+    {
+        return $this->config->get('rate_limit', null);
+    }
+
+    public function getRateLimitTime()
+    {
+        return $this->config->get('rate_limit_time', null);
+    }
 }

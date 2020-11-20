@@ -14,7 +14,9 @@ return [
         ]
     ],
     'pretty_print_json' => true,
-    'http_method_header_override_key' => 'x-http-method-override', //set this header to any http method to override it
+    //'http_method_header_override_key' => 'x-http-method-override', //set this header to any http method to override it
+    //'rate_limit' => '3',
+    //'rate_limit_time' => '3600',
     'models' => array(
 
         array(
@@ -32,6 +34,8 @@ return [
             //'cache_ttl' => 300,
             'create_params_location' => 'json-body',
             'update_params_location' => 'json-body',
+            'rate_limit' => '5000',
+            'rate_limit_time' => '3600',
             'visible_attributes'  => [
                 'id' => 'id',
                 'name' => 'name',
@@ -65,7 +69,7 @@ return [
                     'method' => 'test',
                     'http_request_methods' => 'GET',
                     'summary' => 'Test Custom Route',
-                    'cache_ttl' => '300',
+                    //'cache_ttl' => '300',
                     'parameters' => [
                         array(
                             'name' => 'name',
@@ -78,6 +82,8 @@ return [
                     'validator_rules'=> [
                         'name' => 'required|string'
                     ],
+                    //'session_rate_limit' => '3',
+                    //'session_rate_limit_time' => '3600',
 
                 ),
             ]

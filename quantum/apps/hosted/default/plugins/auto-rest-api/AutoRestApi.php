@@ -96,6 +96,7 @@ class AutoRestApi extends Plugin
         $model_description = $this->request_decoder->getModelDescription();
 
         $this->validateAccess();
+        $this->validateVersionRateLimit();
 
         $api_routes = $this->getRoutes();
 
@@ -119,6 +120,21 @@ class AutoRestApi extends Plugin
         $middleware->handle(qm_request(), function() {});
 
         dispatch_event('auto_rest_api_after_access_validation', $this->request_decoder->getVersion());
+    }
+
+    private function validateVersionRateLimit()
+    {
+        $version = $this->request_decoder->getVersion();
+        $rate_limit = $version->getRateLimit();
+        $rate_limit_time = $version->getRateLimitTime();
+
+        if (!empty($rate_limit) && !empty($rate_limit_time))
+        {
+            $current_uri = strtoupper($version->getPrefix())."@".\QM::session()->getId();
+
+            $middleware = new ValidateRateLimit($rate_limit, $rate_limit_time, $current_uri);
+            $middleware->handle(qm_request(), function() { });
+        }
     }
 
     private function getVersionsDir()

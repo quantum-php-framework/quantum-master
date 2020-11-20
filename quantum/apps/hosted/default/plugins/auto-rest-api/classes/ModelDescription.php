@@ -207,4 +207,14 @@ class ModelDescription
         return in_array($name, $features);
     }
 
+    public function getRateLimit()
+    {
+        return $this->desc->get('rate_limit', null);
+    }
+
+    public function getRateLimitTime()
+    {
+        return $this->desc->get('rate_limit_time', null);
+    }
+
 }
