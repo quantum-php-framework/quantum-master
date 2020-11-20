@@ -34,7 +34,7 @@ return [
             //'cache_ttl' => 300,
             'create_params_location' => 'json-body',
             'update_params_location' => 'json-body',
-            'rate_limit' => '5000',
+            'rate_limit' => '5000', //per session
             'rate_limit_time' => '3600',
             'visible_attributes'  => [
                 'id' => 'id',
