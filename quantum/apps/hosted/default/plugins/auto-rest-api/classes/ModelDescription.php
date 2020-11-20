@@ -24,6 +24,11 @@ class ModelDescription
         return $this->desc->get('singular_form');
     }
 
+    public function getSearchableAttributes()
+    {
+        return $this->desc->get('searchable_attributes', []);
+    }
+
     public function getVisibleAttributes()
     {
         return $this->desc->get('visible_attributes', []);
@@ -37,11 +42,6 @@ class ModelDescription
     public function getCreatableAttributes()
     {
         return $this->desc->get('creatable_attributes', $this->getEditableAttributes());
-    }
-
-    public function getSearchableAttributes()
-    {
-        return $this->desc->get('searchable_attributes', []);
     }
 
     public function getFilteredAttributesParamKey()
