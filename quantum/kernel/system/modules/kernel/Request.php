@@ -402,7 +402,8 @@ class Request extends Singleton
         if ($this->hasPostParam($key) ||
             $this->hasGetParam($key)  ||
             $this->hasRequestParam($key) ||
-            $this->hasPutParam($key))
+            $this->hasPutParam($key) ||
+            $this->hasJsonBodyParam($key))
             return true;
 
         return false;

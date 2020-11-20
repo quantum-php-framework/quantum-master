@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/AutoRestApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/AutoRestApi.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiOutput.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/QString.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/QString.php" afterDir="false" />
@@ -346,7 +344,7 @@
       <workItem from="1605342526727" duration="3365000" />
       <workItem from="1605647716980" duration="1164000" />
       <workItem from="1605719197850" duration="39568000" />
-      <workItem from="1605873113714" duration="1296000" />
+      <workItem from="1605873113714" duration="1452000" />
     </task>
     <servers />
   </component>
