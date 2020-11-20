@@ -376,6 +376,9 @@ class Request extends Singleton
             $p = $this->getPutParam($paramName);
 
         if (empty($p))
+            $p = $this->getJsonBodyParam($paramName);
+
+        if (empty($p))
             $p = $fallback;
 
         return $p;

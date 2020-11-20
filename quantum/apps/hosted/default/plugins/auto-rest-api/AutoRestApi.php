@@ -130,11 +130,12 @@ class AutoRestApi extends Plugin
 
         if (!empty($rate_limit) && !empty($rate_limit_time))
         {
-            $current_uri = strtoupper($version->getPrefix())."@".\QM::session()->getId();
+            $cache_key = strtoupper($version->getPrefix())."@".\QM::session()->getId();
 
             dispatch_event('auto_rest_api_before_rate_limit_validation', $version);
 
-            $middleware = new ValidateRateLimit($rate_limit, $rate_limit_time, $current_uri);
+            $middleware = new ValidateRateLimit($rate_limit, $rate_limit_time, $cache_key);
+
             $middleware->handle(qm_request(), function() { });
 
             dispatch_event('auto_rest_api_after_rate_limit_validation', $version);
