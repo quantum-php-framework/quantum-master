@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a64521bb-9637-4447-83b5-aaa10945c42e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/AutoRestApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/AutoRestApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers/FrontendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers/FrontendController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiOutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/ApiOutput.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/QString.php" beforeDir="false" afterPath="$PROJECT_DIR$/quantum/kernel/system/modules/kernel/QString.php" afterDir="false" />
@@ -345,7 +346,7 @@
       <workItem from="1604324933369" duration="65063000" />
       <workItem from="1605342526727" duration="3365000" />
       <workItem from="1605647716980" duration="1164000" />
-      <workItem from="1605719197850" duration="36433000" />
+      <workItem from="1605719197850" duration="37285000" />
     </task>
     <servers />
   </component>
@@ -568,13 +569,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers/FrontendController.php</url>
-          <line>192</line>
+          <line>167</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/quantum/apps/hosted/default/plugins/auto-rest-api/controllers/FrontendController.php</url>
-          <line>320</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

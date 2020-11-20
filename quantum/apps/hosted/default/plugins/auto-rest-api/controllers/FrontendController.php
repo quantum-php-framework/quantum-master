@@ -89,38 +89,14 @@ class FrontendController extends \Quantum\Controller
         $this->api_version = $version;
     }
 
-    private function setHttpHeaderOverrideKeyIfNeeded()
+    public function index()
     {
-        if (!$this->request->isPost()) {
-            return;
-        }
+        $controller = ControllerFactory::create('AutoRestApi\Controllers\IndexController');
+        $controller->setApiRoutes($this->api_routes);
+        $controller->setApiVersion($this->api_version);
 
-        $http_method_header_override_key = $this->api_version->getHttpRequestMethodHeaderKeyOverride();
-
-        if (!empty($http_method_header_override_key) && is_string($http_method_header_override_key)) {
-
-            $http_method_header_override_key = qs($http_method_header_override_key)->toUpperCase()->replace('-', '_')->toStdString();
-
-            if ($this->request->hasHeader($http_method_header_override_key)) {
-                $_SERVER['REQUEST_METHOD'] = $this->request->getHeader($http_method_header_override_key);
-            }
-        }
+        $controller->execute();
     }
-
-    private function addExtraData($data)
-    {
-        $extra_data =  $this->api_version->getExtraData();
-        if (!empty($extra_data))
-        {
-            foreach ($extra_data as $key => $extra_datum)
-            {
-                $data[$key] = $extra_datum;
-            }
-        }
-
-        return $data;
-    }
-
 
     public function list()
     {
@@ -180,7 +156,6 @@ class FrontendController extends \Quantum\Controller
 
     }
 
-
     public function view()
     {
         if(!$this->model_description->allowView()) {
@@ -218,6 +193,34 @@ class FrontendController extends \Quantum\Controller
 
         $this->outputData($data);
 
+    }
+
+    public function custom_route()
+    {
+        $route = get_current_route();
+
+        $ttl = $route->get('cache_ttl', 0);
+        $cache_key = qs($this->request->getUriWithQueryString())->sha1()->toStdString();
+
+        if ($ttl > 0 && $this->request->isGet())
+        {
+            $cache_hit = true;
+
+            $data = from_cache($cache_key, function () use (&$route, &$cache_hit) {
+                $cache_hit = false;
+                return $this->getCustomRouteData($route);
+            }, $ttl);
+
+            $data['cache'] = $cache_hit ? 'hit' : 'miss';
+        }
+        else
+        {
+            $data = $this->getCustomRouteData($route);
+
+            $data['cache'] = 'off';
+        }
+
+        $this->outputData($data);
     }
 
     private function getCustomRouteData($route)
@@ -293,43 +296,6 @@ class FrontendController extends \Quantum\Controller
         return $data;
     }
 
-    public function custom_route()
-    {
-        $route = get_current_route();
-
-        $ttl = $route->get('cache_ttl', 0);
-        $cache_key = qs($this->request->getUriWithQueryString())->sha1()->toStdString();
-
-        if ($ttl > 0 && $this->request->isGet())
-        {
-            $cache_hit = true;
-
-            $data = from_cache($cache_key, function () use (&$route, &$cache_hit) {
-                $cache_hit = false;
-                return $this->getCustomRouteData($route);
-            }, $ttl);
-
-            $data['cache'] = $cache_hit ? 'hit' : 'miss';
-        }
-        else
-        {
-            $data = $this->getCustomRouteData($route);
-
-            $data['cache'] = 'off';
-        }
-
-        $this->outputData($data);
-    }
-
-    public function index()
-    {
-        $controller = ControllerFactory::create('AutoRestApi\Controllers\IndexController');
-        $controller->setApiRoutes($this->api_routes);
-        $controller->setApiVersion($this->api_version);
-
-        $controller->execute();
-    }
-
     private function outputData($data)
     {
         $data = $this->addExtraData($data);
@@ -355,6 +321,38 @@ class FrontendController extends \Quantum\Controller
             $middleware = new ValidateRateLimit($rate_limit, $rate_limit_time, $current_uri);
             $middleware->handle(qm_request(), function() { });
         }
+    }
+
+    private function setHttpHeaderOverrideKeyIfNeeded()
+    {
+        if (!$this->request->isPost()) {
+            return;
+        }
+
+        $http_method_header_override_key = $this->api_version->getHttpRequestMethodHeaderKeyOverride();
+
+        if (!empty($http_method_header_override_key) && is_string($http_method_header_override_key)) {
+
+            $http_method_header_override_key = qs($http_method_header_override_key)->toUpperCase()->replace('-', '_')->toStdString();
+
+            if ($this->request->hasHeader($http_method_header_override_key)) {
+                $_SERVER['REQUEST_METHOD'] = $this->request->getHeader($http_method_header_override_key);
+            }
+        }
+    }
+
+    private function addExtraData($data)
+    {
+        $extra_data =  $this->api_version->getExtraData();
+        if (!empty($extra_data))
+        {
+            foreach ($extra_data as $key => $extra_datum)
+            {
+                $data[$key] = $extra_datum;
+            }
+        }
+
+        return $data;
     }
 
 
