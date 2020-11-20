@@ -26,17 +26,22 @@ class ModelDescription
 
     public function getVisibleAttributes()
     {
-        return $this->desc->get('visible_attributes');
+        return $this->desc->get('visible_attributes', []);
     }
 
     public function getEditableAttributes()
     {
-        return $this->desc->get('editable_attributes');
+        return $this->desc->get('editable_attributes', []);
+    }
+
+    public function getCreatableAttributes()
+    {
+        return $this->desc->get('creatable_attributes', $this->getEditableAttributes());
     }
 
     public function getSearchableAttributes()
     {
-        return $this->desc->get('searchable_attributes');
+        return $this->desc->get('searchable_attributes', []);
     }
 
     public function getFilteredAttributesParamKey()
@@ -77,17 +82,6 @@ class ModelDescription
     public function incomingUpdateParametersAreInFormData()
     {
         return $this->getUpdateParametersLocation() === 'form-data';
-    }
-
-    public function getCreatableAttributes()
-    {
-        $attributes = $this->desc->get('creatable_attributes', []);
-
-        if (!empty($attributes)) {
-            return $attributes;
-        }
-
-        return $this->getEditableAttributes();
     }
 
     public function getFeatures()
