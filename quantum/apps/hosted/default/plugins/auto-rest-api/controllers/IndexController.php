@@ -60,15 +60,10 @@ class IndexController extends Controller
 
         $response->set('schemes', $this->request->isSSL() ? ['https', 'http'] : ['http']);
 
-
-
         $paths = new_vt();
-
-
 
         foreach ($this->api_routes as $api_route)
         {
-
             $model_description = $api_route['model_description'];
 
             if ($model_description == 'index') {
@@ -76,7 +71,6 @@ class IndexController extends Controller
             }
 
             $path = new_vt();
-
 
             $searchable_attributes = $model_description->getSearchableAttributes();
 
