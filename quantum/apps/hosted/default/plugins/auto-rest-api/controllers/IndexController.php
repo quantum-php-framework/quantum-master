@@ -161,6 +161,14 @@ class IndexController extends Controller
                     $params->add($param->toStdArray());
                 }
 
+                $param = new_vt();
+                $param->set('name', $model_description->getFilteredAttributesParamKey())
+                    ->set('type', 'string')
+                    ->set('format', 'string')
+                    ->set('required', false)
+                    ->set('in', 'query');
+                $params->add($param->toStdArray());
+
                 $list_path->set('parameters', $params->toStdArray());
 
                 $path->set('get', $list_path->toStdArray());
@@ -213,7 +221,14 @@ class IndexController extends Controller
                     ->set('format', 'string')
                     ->set('required', false)
                     ->set('in', 'path');
+                $params->add($param->toStdArray());
 
+                $param = new_vt();
+                $param->set('name', $model_description->getFilteredAttributesParamKey())
+                    ->set('type', 'string')
+                    ->set('format', 'string')
+                    ->set('required', false)
+                    ->set('in', 'query');
                 $params->add($param->toStdArray());
 
                 $list_path->set('parameters', $params->toStdArray());
